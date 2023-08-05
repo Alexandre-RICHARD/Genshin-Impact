@@ -1,0 +1,1388 @@
+[
+    {
+        "name_eng": "Amos' Bow",
+        "name": "Arc d'Amos",
+        "type": "bow",
+        "rarity": 5,
+        "atk": 608,
+        "stat_type": "atk_purcent",
+        "stat_value": 49.6
+    },
+    {
+        "name_eng": "Hamayumi",
+        "name": "Arc d'exorcisme",
+        "type": "bow",
+        "rarity": 4,
+        "atk": 454,
+        "stat_type": "atk_purcent",
+        "stat_value": 55.1
+    },
+    {
+        "name_eng": "Rust",
+        "name": "Arc rouillé",
+        "type": "bow",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "atk_purcent",
+        "stat_value": 41.3
+    },
+    {
+        "name_eng": "Royal Bow",
+        "name": "Arc royal",
+        "type": "bow",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "atk_purcent",
+        "stat_value": 41.3
+    },
+    {
+        "name_eng": "King's Squire",
+        "name": "Le valet du roi",
+        "type": "bow",
+        "rarity": 4,
+        "atk": 454,
+        "stat_type": "atk_purcent",
+        "stat_value": 55.1
+    },
+    {
+        "name_eng": "Mouun's Moon",
+        "name": "Lune de Mouun",
+        "type": "bow",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "atk_purcent",
+        "stat_value": 27.6
+    },
+    {
+        "name_eng": "Prototype Crescent",
+        "name": "Lune paisible (prototype)",
+        "type": "bow",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "atk_purcent",
+        "stat_value": 41.3
+    },
+    {
+        "name_eng": "Predator",
+        "name": "Predator",
+        "type": "bow",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "atk_purcent",
+        "stat_value": 41.3
+    },
+    {
+        "name_eng": "Alley Hunter",
+        "name": "Traqueur des impasses",
+        "type": "bow",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "atk_purcent",
+        "stat_value": 27.6
+    },
+    {
+        "name_eng": "Skyward Atlas",
+        "name": "Atlas de la Voûte d'Azur",
+        "type": "catalyst",
+        "rarity": 5,
+        "atk": 674,
+        "stat_type": "atk_purcent",
+        "stat_value": 33.1
+    },
+    {
+        "name_eng": "Memory of Dust",
+        "name": "Chaînes mortelles",
+        "type": "catalyst",
+        "rarity": 5,
+        "atk": 608,
+        "stat_type": "atk_purcent",
+        "stat_value": 49.6
+    },
+    {
+        "name_eng": "Dodoco Tales",
+        "name": "Contes de Dodoco",
+        "type": "catalyst",
+        "rarity": 4,
+        "atk": 454,
+        "stat_type": "atk_purcent",
+        "stat_value": 55.1
+    },
+    {
+        "name_eng": "Frostbearer",
+        "name": "Fruit du permafrost",
+        "type": "catalyst",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "atk_purcent",
+        "stat_value": 41.3
+    },
+    {
+        "name_eng": "Royal Grimoire",
+        "name": "Grimoire royal",
+        "type": "catalyst",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "atk_purcent",
+        "stat_value": 27.6
+    },
+    {
+        "name_eng": "Oathsworn Eye",
+        "name": "Œil d'assermentation",
+        "type": "catalyst",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "atk_purcent",
+        "stat_value": 27.6
+    },
+    {
+        "name_eng": "Eye of Perception",
+        "name": "Œil de la perception",
+        "type": "catalyst",
+        "rarity": 4,
+        "atk": 454,
+        "stat_type": "atk_purcent",
+        "stat_value": 55.1
+    },
+    {
+        "name_eng": "The Unforged",
+        "name": "Lame brute",
+        "type": "claymore",
+        "rarity": 5,
+        "atk": 608,
+        "stat_type": "atk_purcent",
+        "stat_value": 49.6
+    },
+    {
+        "name_eng": "Wolf's Gravestone",
+        "name": "Mort-du-loup",
+        "type": "claymore",
+        "rarity": 5,
+        "atk": 608,
+        "stat_type": "atk_purcent",
+        "stat_value": 49.6
+    },
+    {
+        "name_eng": "Akuoumaru",
+        "name": "Akuoumaru",
+        "type": "claymore",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "atk_purcent",
+        "stat_value": 41.3
+    },
+    {
+        "name_eng": "Lithic Blade",
+        "name": "Épée antique des Millelithes",
+        "type": "claymore",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "atk_purcent",
+        "stat_value": 41.3
+    },
+    {
+        "name_eng": "Prototype Archaic",
+        "name": "Espadon (prototype)",
+        "type": "claymore",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "atk_purcent",
+        "stat_value": 27.6
+    },
+    {
+        "name_eng": "Royal Greatsword",
+        "name": "Espadon royal",
+        "type": "claymore",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "atk_purcent",
+        "stat_value": 27.6
+    },
+    {
+        "name_eng": "Luxurious Sea-Lord",
+        "name": "Illustre seigneur des mers",
+        "type": "claymore",
+        "rarity": 4,
+        "atk": 454,
+        "stat_type": "atk_purcent",
+        "stat_value": 55.1
+    },
+    {
+        "name_eng": "Debate Club",
+        "name": "Épée de la raison",
+        "type": "claymore",
+        "rarity": 3,
+        "atk": 401,
+        "stat_type": "atk_purcent",
+        "stat_value": 35.2
+    },
+    {
+        "name_eng": "Calamity Queller",
+        "name": "Étouffeur de calamités",
+        "type": "spear",
+        "rarity": 5,
+        "atk": 741,
+        "stat_type": "atk_purcent",
+        "stat_value": 16.5
+    },
+    {
+        "name_eng": "Vortex Vanquisher",
+        "name": "Perceur prismatique",
+        "type": "spear",
+        "rarity": 5,
+        "atk": 608,
+        "stat_type": "atk_purcent",
+        "stat_value": 49.6
+    },
+    {
+        "name_eng": "Wavebreaker's Fin",
+        "name": "Aileron de brise-vagues",
+        "type": "spear",
+        "rarity": 4,
+        "atk": 620,
+        "stat_type": "atk_purcent",
+        "stat_value": 13.8
+    },
+    {
+        "name_eng": "Royal Spear",
+        "name": "Lance de chasse royale",
+        "type": "spear",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "atk_purcent",
+        "stat_value": 27.6
+    },
+    {
+        "name_eng": "Lithic Spear",
+        "name": "Lance des Millelithes",
+        "type": "spear",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "atk_purcent",
+        "stat_value": 27.6
+    },
+    {
+        "name_eng": "Missive Windspear",
+        "name": "Lance du vent saisonnier",
+        "type": "spear",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "atk_purcent",
+        "stat_value": 41.3
+    },
+    {
+        "name_eng": "Halberd",
+        "name": "Hallebarde",
+        "type": "spear",
+        "rarity": 3,
+        "atk": 448,
+        "stat_type": "atk_purcent",
+        "stat_value": 23.4
+    },
+    {
+        "name_eng": "Summit Shaper",
+        "name": "Tranche-sommets",
+        "type": "sword",
+        "rarity": 5,
+        "atk": 608,
+        "stat_type": "atk_purcent",
+        "stat_value": 49.6
+    },
+    {
+        "name_eng": "Sword of Descension",
+        "name": "Épée de la descente",
+        "type": "sword",
+        "rarity": 4,
+        "atk": 440,
+        "stat_type": "atk_purcent",
+        "stat_value": 35.2
+    },
+    {
+        "name_eng": "Royal Longsword",
+        "name": "Épée longue royale",
+        "type": "sword",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "atk_purcent",
+        "stat_value": 41.3
+    },
+    {
+        "name_eng": "The Flute",
+        "name": "Flûte",
+        "type": "sword",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "atk_purcent",
+        "stat_value": 41.3
+    },
+    {
+        "name_eng": "Kagotsurube Isshin",
+        "name": "Kagotsurube Isshin",
+        "type": "sword",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "atk_purcent",
+        "stat_value": 41.3
+    },
+    {
+        "name_eng": "Amenoma Kageuchi",
+        "name": "Lame kageuchi d'Amenoma",
+        "type": "sword",
+        "rarity": 4,
+        "atk": 454,
+        "stat_type": "atk_purcent",
+        "stat_value": 55.1
+    },
+    {
+        "name_eng": "Lion's Roar",
+        "name": "Rugissement du Lion",
+        "type": "sword",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "atk_purcent",
+        "stat_value": 41.3
+    },
+    {
+        "name_eng": "Fillet Blade",
+        "name": "Couteau&nbsp;à&nbsp;filets",
+        "type": "sword",
+        "rarity": 3,
+        "atk": 401,
+        "stat_type": "atk_purcent",
+        "stat_value": 35.2
+    },
+    {
+        "name_eng": "Cool Steel",
+        "name": "Lame froide",
+        "type": "sword",
+        "rarity": 3,
+        "atk": 401,
+        "stat_type": "atk_purcent",
+        "stat_value": 35.2
+    },
+    {
+        "name_eng": "Thundering Pulse",
+        "name": "Pulsation du tonnerre",
+        "type": "bow",
+        "rarity": 5,
+        "atk": 608,
+        "stat_type": "crt_dmg",
+        "stat_value": 66.2
+    },
+    {
+        "name_eng": "Aqua Simulacra",
+        "name": "Simulacre d'eau",
+        "type": "bow",
+        "rarity": 5,
+        "atk": 542,
+        "stat_type": "crt_dmg",
+        "stat_value": 88.2
+    },
+    {
+        "name_eng": "Blackcliff Warbow",
+        "name": "Arc de guerre de Rochenoire",
+        "type": "bow",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "crt_dmg",
+        "stat_value": 36.8
+    },
+    {
+        "name_eng": "Messenger",
+        "name": "Messager",
+        "type": "bow",
+        "rarity": 3,
+        "atk": 448,
+        "stat_type": "crt_dmg",
+        "stat_value": 31.2
+    },
+    {
+        "name_eng": "Sharpshooter's Oath",
+        "name": "Serment de l'archer",
+        "type": "bow",
+        "rarity": 3,
+        "atk": 401,
+        "stat_type": "crt_dmg",
+        "stat_value": 46.9
+    },
+    {
+        "name_eng": "Tulaytullah's Remembrance",
+        "name": "Mémoire de Tulaytullah",
+        "type": "catalyst",
+        "rarity": 5,
+        "atk": 674,
+        "stat_type": "crt_dmg",
+        "stat_value": 44.1
+    },
+    {
+        "name_eng": "Kagura's Verity",
+        "name": "Vérité&nbsp;de Kagura",
+        "type": "catalyst",
+        "rarity": 5,
+        "atk": 608,
+        "stat_type": "crt_dmg",
+        "stat_value": 66.2
+    },
+    {
+        "name_eng": "Blackcliff Agate",
+        "name": "Agate de Rochenoire",
+        "type": "catalyst",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "crt_dmg",
+        "stat_value": 55.1
+    },
+    {
+        "name_eng": "The Widsith",
+        "name": "Mouvement vagabond",
+        "type": "catalyst",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "crt_dmg",
+        "stat_value": 55.1
+    },
+    {
+        "name_eng": "Redhorn Stonethresher",
+        "name": "Brise-pierre de corne rouge",
+        "type": "claymore",
+        "rarity": 5,
+        "atk": 542,
+        "stat_type": "crt_dmg",
+        "stat_value": 88.2
+    },
+    {
+        "name_eng": "Blackcliff Slasher",
+        "name": "Trancheuse de Rochenoire",
+        "type": "claymore",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "crt_dmg",
+        "stat_value": 55.1
+    },
+    {
+        "name_eng": "Staff of Homa",
+        "name": "Bâton de Homa",
+        "type": "spear",
+        "rarity": 5,
+        "atk": 608,
+        "stat_type": "crt_dmg",
+        "stat_value": 66.2
+    },
+    {
+        "name_eng": "Blackcliff Pole",
+        "name": "Lance de Rochenoire",
+        "type": "spear",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "crt_dmg",
+        "stat_value": 55.1
+    },
+    {
+        "name_eng": "Light of Foliar Incision",
+        "name": "Lumière d'incision foliaire",
+        "type": "sword",
+        "rarity": 5,
+        "atk": 542,
+        "stat_type": "crt_dmg",
+        "stat_value": 88.2
+    },
+    {
+        "name_eng": "Mistsplitter Reforged",
+        "name": "Reflet de tranche-brume",
+        "type": "sword",
+        "rarity": 5,
+        "atk": 674,
+        "stat_type": "crt_dmg",
+        "stat_value": 44.1
+    },
+    {
+        "name_eng": "Blackcliff Longsword",
+        "name": "Épée longue de Rochenoire",
+        "type": "sword",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "crt_dmg",
+        "stat_value": 36.8
+    },
+    {
+        "name_eng": "Harbinger of Dawn",
+        "name": "Messager de l'Aube",
+        "type": "sword",
+        "rarity": 3,
+        "atk": 401,
+        "stat_type": "crt_dmg",
+        "stat_value": 46.9
+    },
+    {
+        "name_eng": "Skyward Harp",
+        "name": "Ailes de la Voûte d'Azur",
+        "type": "bow",
+        "rarity": 5,
+        "atk": 674,
+        "stat_type": "crt_rate",
+        "stat_value": 22.1
+    },
+    {
+        "name_eng": "Polar Star",
+        "name": "Étoile polaire",
+        "type": "bow",
+        "rarity": 5,
+        "atk": 608,
+        "stat_type": "crt_rate",
+        "stat_value": 33.1
+    },
+    {
+        "name_eng": "Hunter's Path",
+        "name": "La voie du chasseur",
+        "type": "bow",
+        "rarity": 5,
+        "atk": 542,
+        "stat_type": "crt_rate",
+        "stat_value": 44.1
+    },
+    {
+        "name_eng": "The Viridescent Hunt",
+        "name": "Arc de chasse verdoyant",
+        "type": "bow",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "crt_rate",
+        "stat_value": 27.6
+    },
+    {
+        "name_eng": "Slingshot",
+        "name": "Lance-pierres",
+        "type": "bow",
+        "rarity": 3,
+        "atk": 354,
+        "stat_type": "crt_rate",
+        "stat_value": 31.2
+    },
+    {
+        "name_eng": "Lost Prayer to the Sacred Winds",
+        "name": "L'origine des Quatre Vents",
+        "type": "catalyst",
+        "rarity": 5,
+        "atk": 608,
+        "stat_type": "crt_rate",
+        "stat_value": 33.1
+    },
+    {
+        "name_eng": "Solar Pearl",
+        "name": "Perle solaire",
+        "type": "catalyst",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "crt_rate",
+        "stat_value": 27.6
+    },
+    {
+        "name_eng": "Twin Nephrite",
+        "name": "Néphrite jumelle",
+        "type": "catalyst",
+        "rarity": 3,
+        "atk": 448,
+        "stat_type": "crt_rate",
+        "stat_value": 15.6
+    },
+    {
+        "name_eng": "Beacon of the Reed Sea",
+        "name": "Balise de la mer de roseaux",
+        "type": "claymore",
+        "rarity": 5,
+        "atk": 608,
+        "stat_type": "crt_rate",
+        "stat_value": 33.1
+    },
+    {
+        "name_eng": "Serpent Spine",
+        "name": "Ossature du dragon",
+        "type": "claymore",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "crt_rate",
+        "stat_value": 27.6
+    },
+    {
+        "name_eng": "Staff of the Scarlet Sands",
+        "name": "Bâton des sables&nbsp;écarlates",
+        "type": "spear",
+        "rarity": 5,
+        "atk": 542,
+        "stat_type": "crt_rate",
+        "stat_value": 44.1
+    },
+    {
+        "name_eng": "Primordial Jade Winged-Spear",
+        "name": "Lance de jade ailée",
+        "type": "spear",
+        "rarity": 5,
+        "atk": 674,
+        "stat_type": "crt_rate",
+        "stat_value": 22.1
+    },
+    {
+        "name_eng": "Deathmatch",
+        "name": "Scion de la victoire",
+        "type": "spear",
+        "rarity": 4,
+        "atk": 454,
+        "stat_type": "crt_rate",
+        "stat_value": 36.8
+    },
+    {
+        "name_eng": "White Tassel",
+        "name": "Pampille blanche",
+        "type": "spear",
+        "rarity": 3,
+        "atk": 401,
+        "stat_type": "crt_rate",
+        "stat_value": 23.4
+    },
+    {
+        "name_eng": "Primordial Jade Cutter",
+        "name": "Coupeur de jade primordial",
+        "type": "sword",
+        "rarity": 5,
+        "atk": 542,
+        "stat_type": "crt_rate",
+        "stat_value": 44.1
+    },
+    {
+        "name_eng": "Haran Geppaku Futsu",
+        "name": "Lune ondulante de Futsu",
+        "type": "sword",
+        "rarity": 5,
+        "atk": 608,
+        "stat_type": "crt_rate",
+        "stat_value": 33.1
+    },
+    {
+        "name_eng": "The Black Sword",
+        "name": "Épée noire",
+        "type": "sword",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "crt_rate",
+        "stat_value": 27.6
+    },
+    {
+        "name_eng": "Whiteblind",
+        "name": "Ombre immaculée",
+        "type": "claymore",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "def_purcent",
+        "stat_value": 51.7
+    },
+    {
+        "name_eng": "White Iron Greatsword",
+        "name": "Grande&nbsp;épée en fer blanc",
+        "type": "claymore",
+        "rarity": 3,
+        "atk": 401,
+        "stat_type": "def_purcent",
+        "stat_value": 43.9
+    },
+    {
+        "name_eng": "Cinnabar Spindle",
+        "name": "Fuseau de cinabre",
+        "type": "sword",
+        "rarity": 4,
+        "atk": 454,
+        "stat_type": "def_purcent",
+        "stat_value": 69
+    },
+    {
+        "name_eng": "Traveler's Handy Sword",
+        "name": "Épée du voyageur",
+        "type": "sword",
+        "rarity": 3,
+        "atk": 448,
+        "stat_type": "def_purcent",
+        "stat_value": 29.3
+    },
+    {
+        "name_eng": "The Stringless",
+        "name": "Dernière corde",
+        "type": "bow",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "elemental_mastery",
+        "stat_value": 165
+    },
+    {
+        "name_eng": "Windblume Ode",
+        "name": "Ode aux alizées",
+        "type": "bow",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "elemental_mastery",
+        "stat_value": 165
+    },
+    {
+        "name_eng": "Raven Bow",
+        "name": "Arc du corbeau",
+        "type": "bow",
+        "rarity": 3,
+        "atk": 448,
+        "stat_type": "elemental_mastery",
+        "stat_value": 94
+    },
+    {
+        "name_eng": "A Thousand Floating Dreams",
+        "name": "Mille rêves flottants",
+        "type": "catalyst",
+        "rarity": 5,
+        "atk": 542,
+        "stat_type": "elemental_mastery",
+        "stat_value": 265
+    },
+    {
+        "name_eng": "Mappa Mare",
+        "name": "Atlas des terres et des mers",
+        "type": "catalyst",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "elemental_mastery",
+        "stat_value": 110
+    },
+    {
+        "name_eng": "Wandering Evenstar",
+        "name": "Étoile du soir errante",
+        "type": "catalyst",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "elemental_mastery",
+        "stat_value": 165
+    },
+    {
+        "name_eng": "Sacrificial Fragments",
+        "name": "Mémoires de rituels",
+        "type": "catalyst",
+        "rarity": 4,
+        "atk": 454,
+        "stat_type": "elemental_mastery",
+        "stat_value": 221
+    },
+    {
+        "name_eng": "Magic Guide",
+        "name": "Guide de magie",
+        "type": "catalyst",
+        "rarity": 3,
+        "atk": 354,
+        "stat_type": "elemental_mastery",
+        "stat_value": 187
+    },
+    {
+        "name_eng": "Emerald Orb",
+        "name": "Orbe jadien",
+        "type": "catalyst",
+        "rarity": 3,
+        "atk": 448,
+        "stat_type": "elemental_mastery",
+        "stat_value": 94
+    },
+    {
+        "name_eng": "Makhaira Aquamarine",
+        "name": "Aigue-marine de Makhaira",
+        "type": "claymore",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "elemental_mastery",
+        "stat_value": 165
+    },
+    {
+        "name_eng": "Mailed Flower",
+        "name": "Fleur de mailles",
+        "type": "claymore",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "elemental_mastery",
+        "stat_value": 110
+    },
+    {
+        "name_eng": "Rainslasher",
+        "name": "Fluorescence",
+        "type": "claymore",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "elemental_mastery",
+        "stat_value": 165
+    },
+    {
+        "name_eng": "Bloodtainted Greatsword",
+        "name": "Épée sanglante",
+        "type": "claymore",
+        "rarity": 3,
+        "atk": 354,
+        "stat_type": "elemental_mastery",
+        "stat_value": 187
+    },
+    {
+        "name_eng": "Dragon's Bane",
+        "name": "Fléau du dragon",
+        "type": "spear",
+        "rarity": 4,
+        "atk": 454,
+        "stat_type": "elemental_mastery",
+        "stat_value": 221
+    },
+    {
+        "name_eng": "Kitain Cross Spear",
+        "name": "Lance en croix de Kitain",
+        "type": "spear",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "elemental_mastery",
+        "stat_value": 110
+    },
+    {
+        "name_eng": "Moonpiercer",
+        "name": "Perce-lune",
+        "type": "spear",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "elemental_mastery",
+        "stat_value": 110
+    },
+    {
+        "name_eng": "Freedom-Sworn",
+        "name": "Serment de la liberté",
+        "type": "sword",
+        "rarity": 5,
+        "atk": 608,
+        "stat_type": "elemental_mastery",
+        "stat_value": 198
+    },
+    {
+        "name_eng": "Xiphos' Moonlight",
+        "name": "Clair de lune de Xiphos",
+        "type": "sword",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "elemental_mastery",
+        "stat_value": 165
+    },
+    {
+        "name_eng": "The Alley Flash",
+        "name": "Éclair des impasses",
+        "type": "sword",
+        "rarity": 4,
+        "atk": 620,
+        "stat_type": "elemental_mastery",
+        "stat_value": 55
+    },
+    {
+        "name_eng": "Iron Sting",
+        "name": "Piqûre de fer",
+        "type": "sword",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "elemental_mastery",
+        "stat_value": 165
+    },
+    {
+        "name_eng": "Toukabou Shigure",
+        "name": "Pluie florale",
+        "type": "sword",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "elemental_mastery",
+        "stat_value": 165
+    },
+    {
+        "name_eng": "Dark Iron Sword",
+        "name": "Épée en fer noir",
+        "type": "sword",
+        "rarity": 3,
+        "atk": 401,
+        "stat_type": "elemental_mastery",
+        "stat_value": 141
+    },
+    {
+        "name_eng": "Elegy for the End",
+        "name": "Ultime soupir",
+        "type": "bow",
+        "rarity": 5,
+        "atk": 608,
+        "stat_type": "energy_recharge",
+        "stat_value": 55.1
+    },
+    {
+        "name_eng": "Favonius Warbow",
+        "name": "Arc de chasse de Favonius",
+        "type": "bow",
+        "rarity": 4,
+        "atk": 454,
+        "stat_type": "energy_recharge",
+        "stat_value": 61.3
+    },
+    {
+        "name_eng": "Sacrificial Bow",
+        "name": "Arc rituel",
+        "type": "bow",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "energy_recharge",
+        "stat_value": 30.6
+    },
+    {
+        "name_eng": "End of the Line",
+        "name": "Chalutier",
+        "type": "bow",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "energy_recharge",
+        "stat_value": 45.9
+    },
+    {
+        "name_eng": "Fading Twilight",
+        "name": "Crépuscule couchant",
+        "type": "bow",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "energy_recharge",
+        "stat_value": 30.6
+    },
+    {
+        "name_eng": "Hakushin Ring",
+        "name": "Anneau des Hakushin",
+        "type": "catalyst",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "energy_recharge",
+        "stat_value": 30.6
+    },
+    {
+        "name_eng": "Favonius Codex",
+        "name": "Code de Favonius",
+        "type": "catalyst",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "energy_recharge",
+        "stat_value": 45.9
+    },
+    {
+        "name_eng": "Fruit of Fulfillment",
+        "name": "Le fruit de l'accomplissement",
+        "type": "catalyst",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "energy_recharge",
+        "stat_value": 45.9
+    },
+    {
+        "name_eng": "Wine and Song",
+        "name": "Vins et chants",
+        "type": "catalyst",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "energy_recharge",
+        "stat_value": 30.6
+    },
+    {
+        "name_eng": "Otherworldly Story",
+        "name": "Conte d'un autre monde",
+        "type": "catalyst",
+        "rarity": 3,
+        "atk": 401,
+        "stat_type": "energy_recharge",
+        "stat_value": 39
+    },
+    {
+        "name_eng": "Skyward Pride",
+        "name": "Fierté&nbsp;de la Voûte d'Azur",
+        "type": "claymore",
+        "rarity": 5,
+        "atk": 674,
+        "stat_type": "energy_recharge",
+        "stat_value": 36.8
+    },
+    {
+        "name_eng": "Forest Regalia",
+        "name": "Apparat de la forêt",
+        "type": "claymore",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "energy_recharge",
+        "stat_value": 30.6
+    },
+    {
+        "name_eng": "Favonius Greatsword",
+        "name": "Espadon de Favonius",
+        "type": "claymore",
+        "rarity": 4,
+        "atk": 454,
+        "stat_type": "energy_recharge",
+        "stat_value": 61.3
+    },
+    {
+        "name_eng": "Katsuragikiri Nagamasa",
+        "name": "Espadon de Nagamasa",
+        "type": "claymore",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "energy_recharge",
+        "stat_value": 45.9
+    },
+    {
+        "name_eng": "Sacrificial Greatsword",
+        "name": "Espadon rituel",
+        "type": "claymore",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "energy_recharge",
+        "stat_value": 30.6
+    },
+    {
+        "name_eng": "Skyward Spine",
+        "name": "Berge de la Voûte d'Azur",
+        "type": "spear",
+        "rarity": 5,
+        "atk": 674,
+        "stat_type": "energy_recharge",
+        "stat_value": 36.8
+    },
+    {
+        "name_eng": "Engulfing Lightning",
+        "name": "Lumière du faucheur",
+        "type": "spear",
+        "rarity": 5,
+        "atk": 608,
+        "stat_type": "energy_recharge",
+        "stat_value": 55.1
+    },
+    {
+        "name_eng": "\"The Catch\"",
+        "name": "« La prise »",
+        "type": "spear",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "energy_recharge",
+        "stat_value": 45.9
+    },
+    {
+        "name_eng": "Prototype Starglitter",
+        "name": "Guisarme stellaire (prototype)",
+        "type": "spear",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "energy_recharge",
+        "stat_value": 45.9
+    },
+    {
+        "name_eng": "Favonius Lance",
+        "name": "Lance de Favonius",
+        "type": "spear",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "energy_recharge",
+        "stat_value": 30.6
+    },
+    {
+        "name_eng": "Skyward Blade",
+        "name": "Lame de la Voûte d'Azur",
+        "type": "sword",
+        "rarity": 5,
+        "atk": 608,
+        "stat_type": "energy_recharge",
+        "stat_value": 55.1
+    },
+    {
+        "name_eng": "Festering Desire",
+        "name": "Croc suppurant",
+        "type": "sword",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "energy_recharge",
+        "stat_value": 45.9
+    },
+    {
+        "name_eng": "Favonius Sword",
+        "name": "Épée de Favonius",
+        "type": "sword",
+        "rarity": 4,
+        "atk": 454,
+        "stat_type": "energy_recharge",
+        "stat_value": 61.3
+    },
+    {
+        "name_eng": "Sacrificial Sword",
+        "name": "Épée rituelle",
+        "type": "sword",
+        "rarity": 4,
+        "atk": 454,
+        "stat_type": "energy_recharge",
+        "stat_value": 61.3
+    },
+    {
+        "name_eng": "Sapwood Blade",
+        "name": "Lame d'aubier",
+        "type": "sword",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "energy_recharge",
+        "stat_value": 30.6
+    },
+    {
+        "name_eng": "Skyrider Sword",
+        "name": "Épée céleste",
+        "type": "sword",
+        "rarity": 3,
+        "atk": 354,
+        "stat_type": "energy_recharge",
+        "stat_value": 51.7
+    },
+    {
+        "name_eng": "Recurve Bow",
+        "name": "Arc courbé",
+        "type": "bow",
+        "rarity": 3,
+        "atk": 354,
+        "stat_type": "hp_purcent",
+        "stat_value": 46.9
+    },
+    {
+        "name_eng": "Everlasting Moonglow",
+        "name": "Lueur de la lune&nbsp;éternelle",
+        "type": "catalyst",
+        "rarity": 5,
+        "atk": 608,
+        "stat_type": "hp_purcent",
+        "stat_value": 49.6
+    },
+    {
+        "name_eng": "Jadefall's Splendor",
+        "name": "Splendeur de l'azur",
+        "type": "catalyst",
+        "rarity": 5,
+        "atk": 608,
+        "stat_type": "hp_purcent",
+        "stat_value": 49.6
+    },
+    {
+        "name_eng": "Prototype Amber",
+        "name": "Malice (prototype)",
+        "type": "catalyst",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "hp_purcent",
+        "stat_value": 41.3
+    },
+    {
+        "name_eng": "Thrilling Tales of Dragon Slayers",
+        "name": "Histoire des chasseurs de dragon",
+        "type": "catalyst",
+        "rarity": 3,
+        "atk": 401,
+        "stat_type": "hp_purcent",
+        "stat_value": 35.2
+    },
+    {
+        "name_eng": "The Bell",
+        "name": "Épée-horloge",
+        "type": "claymore",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "hp_purcent",
+        "stat_value": 41.3
+    },
+    {
+        "name_eng": "Ferrous Shadow",
+        "name": "Ombre ferreuse",
+        "type": "claymore",
+        "rarity": 3,
+        "atk": 401,
+        "stat_type": "hp_purcent",
+        "stat_value": 35.2
+    },
+    {
+        "name_eng": "Black Tassel",
+        "name": "Pampille noire",
+        "type": "spear",
+        "rarity": 3,
+        "atk": 354,
+        "stat_type": "hp_purcent",
+        "stat_value": 46.9
+    },
+    {
+        "name_eng": "Key of Khaj-Nisut",
+        "name": "Clé&nbsp;de Khaj-Nisut",
+        "type": "sword",
+        "rarity": 5,
+        "atk": 542,
+        "stat_type": "hp_purcent",
+        "stat_value": 66.2
+    },
+    {
+        "name_eng": "Seasoned Hunter's Bow",
+        "name": "Arc de chasse aguerri",
+        "type": "bow",
+        "rarity": 2,
+        "atk": 243,
+        "stat_type": "none",
+        "stat_value": "none"
+    },
+    {
+        "name_eng": "Hunter's Bow",
+        "name": "Arc de chasse",
+        "type": "bow",
+        "rarity": 1,
+        "atk": 185,
+        "stat_type": "none",
+        "stat_value": "none"
+    },
+    {
+        "name_eng": "Pocket Grimoire",
+        "name": "Grimoire de poche",
+        "type": "catalyst",
+        "rarity": 2,
+        "atk": 243,
+        "stat_type": "none",
+        "stat_value": "none"
+    },
+    {
+        "name_eng": "Apprentice's Notes",
+        "name": "Notes de l'Apprenti",
+        "type": "catalyst",
+        "rarity": 1,
+        "atk": 185,
+        "stat_type": "none",
+        "stat_value": "none"
+    },
+    {
+        "name_eng": "Old Merc's Pal",
+        "name": "Lame du mercenaire",
+        "type": "claymore",
+        "rarity": 2,
+        "atk": 243,
+        "stat_type": "none",
+        "stat_value": "none"
+    },
+    {
+        "name_eng": "Waster Greatsword",
+        "name": "Épée d'entraînement",
+        "type": "claymore",
+        "rarity": 1,
+        "atk": 185,
+        "stat_type": "none",
+        "stat_value": "none"
+    },
+    {
+        "name_eng": "Iron Point",
+        "name": "Pointe de fer",
+        "type": "spear",
+        "rarity": 2,
+        "atk": 243,
+        "stat_type": "none",
+        "stat_value": "none"
+    },
+    {
+        "name_eng": "Beginner's Protector",
+        "name": "Lance du débutant",
+        "type": "spear",
+        "rarity": 1,
+        "atk": 185,
+        "stat_type": "none",
+        "stat_value": "none"
+    },
+    {
+        "name_eng": "Silver Sword",
+        "name": "Épée en argent",
+        "type": "sword",
+        "rarity": 2,
+        "atk": 243,
+        "stat_type": "none",
+        "stat_value": "none"
+    },
+    {
+        "name_eng": "Dull Blade",
+        "name": "Épée&nbsp;émoussée",
+        "type": "sword",
+        "rarity": 1,
+        "atk": 185,
+        "stat_type": "none",
+        "stat_value": "none"
+    },
+    {
+        "name_eng": "Compound Bow",
+        "name": "Arc&nbsp;à&nbsp;poulies",
+        "type": "bow",
+        "rarity": 4,
+        "atk": 454,
+        "stat_type": "physical_bonus",
+        "stat_value": 69
+    },
+    {
+        "name_eng": "Mitternachts Waltz",
+        "name": "Valse nocturne",
+        "type": "bow",
+        "rarity": 4,
+        "atk": 510,
+        "stat_type": "physical_bonus",
+        "stat_value": 51.7
+    },
+    {
+        "name_eng": "Song of Broken Pines",
+        "name": "Ode au chant du vent",
+        "type": "claymore",
+        "rarity": 5,
+        "atk": 741,
+        "stat_type": "physical_bonus",
+        "stat_value": 20.7
+    },
+    {
+        "name_eng": "Snow-Tombed Starsilver",
+        "name": "Tombe-neige en argétoile",
+        "type": "claymore",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "physical_bonus",
+        "stat_value": 34.5
+    },
+    {
+        "name_eng": "Skyrider Greatsword",
+        "name": "Grande&nbsp;épée céleste",
+        "type": "claymore",
+        "rarity": 3,
+        "atk": 401,
+        "stat_type": "physical_bonus",
+        "stat_value": 43.9
+    },
+    {
+        "name_eng": "Dragonspine Spear",
+        "name": "Lance Dosdragon",
+        "type": "spear",
+        "rarity": 4,
+        "atk": 454,
+        "stat_type": "physical_bonus",
+        "stat_value": 69
+    },
+    {
+        "name_eng": "Crescent Pike",
+        "name": "Pique du croissant de lune",
+        "type": "spear",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "physical_bonus",
+        "stat_value": 34.5
+    },
+    {
+        "name_eng": "Aquila Favonia",
+        "name": "Épée du faucon",
+        "type": "sword",
+        "rarity": 5,
+        "atk": 674,
+        "stat_type": "physical_bonus",
+        "stat_value": 41.3
+    },
+    {
+        "name_eng": "Prototype Rancour",
+        "name": "Tailleur de pierre (prototype)",
+        "type": "sword",
+        "rarity": 4,
+        "atk": 565,
+        "stat_type": "physical_bonus",
+        "stat_value": 34.5
+    }
+]
