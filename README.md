@@ -29,4 +29,9 @@ Et voici le [répo du serveur](https://github.com/Alexandre-RICHARD/Portfolio-Ba
 
 -   Rajout du lien du site dans le readme.md
 
+### 1.0.3 `13 août 2023`
+
+-   Mise à jour des packages npm
+-   Rajout d'un script pnpm pour mettre à jour plus facilement les dépendances
+
 </details>
