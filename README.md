@@ -16,4 +16,13 @@ Et voici le [répo du serveur](https://github.com/Alexandre-RICHARD/Portfolio-Ba
 
 -   Création du repo unique pour ce projet et premier commit
 
+### 1.0.1 `12 août 2023`
+
+-   Finiolage de petits détails pour la mise en prod commune avec tous les autres projets
+-   Rajout d'un htaccess pour bien gérer l'accès à l'index.html une fois hébergé
+-   Rajout du htaccess au .gitignore
+-   Remaniement du webpack.config.js, du package.json et du readme.md
+-   Changement du favicon
+-   Test de Iframe et Popup pour y intégrer une connexion depuis le site principale
+
 </details>
