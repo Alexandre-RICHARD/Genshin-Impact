@@ -170,18 +170,80 @@ onBeforeMount(() => {
         </thead>
         <tbody>
             <tr v-for="character in charactersData" :key="character.name">
-                <td>{{ character.name }}</td>
-                <td>{{ character.got }}</td>
-                <td>{{ character.doing }}</td>
-                <td>{{ character.only }}</td>
-                <td>{{ character.cLvl }}</td>
-                <td>{{ character.wLvl }}</td>
-                <td>{{ character.cAp1 }}</td>
-                <td>{{ character.wAp1 }}</td>
-                <td>{{ character.cAp2 }}</td>
-                <td>{{ character.wAp2 }}</td>
-                <td>{{ character.cAp3 }}</td>
-                <td>{{ character.wAp3 }}</td>
+                <td class="name">{{ character.name }}</td>
+                <td>
+                    <input v-model="character.got" type="checkbox" class="checkbox" @change="updateLocalStorage">
+                </td>
+                <td>
+                    <input v-model="character.doing" type="checkbox" class="checkbox" @change="updateLocalStorage">
+                </td>
+                <td>
+                    <input v-model="character.only" type="checkbox" class="checkbox" @change="updateLocalStorage">
+                </td>
+                <td>
+                    <select v-model="character.cLvl" class="select" @change="updateLocalStorage">
+                        <option v-for="lvl in lvlList" :key="lvl" :value="lvl">
+                            {{ lvl }}
+                        </option>
+                        {{ character.cLvl }}
+                    </select>
+                </td>
+                <td>
+                    <select v-model="character.wLvl" class="select" @change="updateLocalStorage">
+                        <option v-for="lvl in lvlList" :key="lvl" :value="lvl">
+                            {{ lvl }}
+                        </option>
+                        {{ character.wLvl }}
+                    </select>
+                </td>
+                <td>
+                    <select v-model="character.cAp1" class="select" @change="updateLocalStorage">
+                        <option v-for="lvl in aptList" :key="lvl" :value="lvl">
+                            {{ lvl }}
+                        </option>
+                        {{ character.cAp1 }}
+                    </select>
+                </td>
+                <td>
+                    <select v-model="character.wAp1" class="select" @change="updateLocalStorage">
+                        <option v-for="lvl in aptList" :key="lvl" :value="lvl">
+                            {{ lvl }}
+                        </option>
+                        {{ character.wAp1 }}
+                    </select>
+                </td>
+                <td>
+                    <select v-model="character.cAp2" class="select" @change="updateLocalStorage">
+                        <option v-for="lvl in aptList" :key="lvl" :value="lvl">
+                            {{ lvl }}
+                        </option>
+                        {{ character.cAp2 }}
+                    </select>
+                </td>
+                <td>
+                    <select v-model="character.wAp2" class="select" @change="updateLocalStorage">
+                        <option v-for="lvl in aptList" :key="lvl" :value="lvl">
+                            {{ lvl }}
+                        </option>
+                        {{ character.wAp2 }}
+                    </select>
+                </td>
+                <td>
+                    <select v-model="character.cAp3" class="select" @change="updateLocalStorage">
+                        <option v-for="lvl in aptList" :key="lvl" :value="lvl">
+                            {{ lvl }}
+                        </option>
+                        {{ character.cAp3 }}
+                    </select>
+                </td>
+                <td>
+                    <select v-model="character.wAp3" class="select" @change="updateLocalStorage">
+                        <option v-for="lvl in aptList" :key="lvl" :value="lvl">
+                            {{ lvl }}
+                        </option>
+                        {{ character.wAp3 }}
+                    </select>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -197,18 +259,17 @@ onBeforeMount(() => {
     th,
     td {
         border: 1px solid #cacaca;
-        padding: 5px;
+        padding: 6px 2px;
     }
 
     th {
         color: #f5f5f5;
         background-color: #4650ac;
-    }
+        width: 54px;
 
-    td {
-        color: #000000;
-        font-weight: 300;
-        text-align: center;
+        &:first-child {
+            width: fit-content;
+        }
     }
 
     tr {
@@ -216,7 +277,44 @@ onBeforeMount(() => {
     }
 
     tr:nth-child(even) {
-        background-color: #a0a0a0;
+        background-color: #a3a3a3;
+    }
+
+    td {
+        color: #000000;
+        font-weight: 300;
+        text-align: center;
+
+        .checkbox {
+            appearance: checkbox;
+            width: 20px;
+            height: 20px;
+        }
+
+        .select {
+            appearance: menulist-button;
+            padding: 3px 0 3px 0px;
+            text-align: center;
+            border-radius: 4px;
+            box-shadow: 0px 0px 4px 0px #000000 inset;
+
+            option {
+                color: #000000;
+                background-color: #bbbbbb;
+                margin: 20px;
+            }
+
+            &:hover {
+                cursor: pointer;
+                background-color: #7c7c7c;
+                color: #cacaca;
+            }
+        }
+    }
+
+    td.name {
+        font-weight: 400;
+        text-align: left;
     }
 }
 </style>

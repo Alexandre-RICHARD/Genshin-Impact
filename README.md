@@ -53,4 +53,11 @@ Et voici le [répo du serveur](https://github.com/Alexandre-RICHARD/Portfolio-Ba
 -   Petites modifs dans le package.json
 -   Supression du package npm zxcvbn
 
+### 1.0.6 `16 août 2023`
+
+-   Transformation de 11 colonnes qui était de simples données affichées en input correspondant et pertinent
+-   Les données sont liées au tableau CharactersData qui changent automatiquement à chaque actions sur un input
+-   Aussi, à chaque action sur un input, la chaîne de caractère est reconstruite et stockée sur le localStorage
+-   Adaptation et ajout d'un style sur ces nouveaux éléments afin d'en faciliter la lisibilité
+
 </details>
