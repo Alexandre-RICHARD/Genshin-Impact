@@ -41,4 +41,16 @@ Et voici le [répo du serveur](https://github.com/Alexandre-RICHARD/Portfolio-Ba
 -   Déplacement des petits tests de iframe et popup de la vue App à la vue GenshinMenu
 -   Deux petits détails de style mis à jour sur la page artefact/arme/persos "Statisfyer"
 
+### 1.0.5 `16 août 2023`
+
+-   Supression de deux micro bouts de code inutiles
+-   Début du projet de farming de Genshin
+-   Création d'un tableau répertoriant tous les persos avec 11 valeurs associés
+-   Celles-ci sont stockés en localStorage
+-   À chaque rechargement, elles sont récupérés, vérifiées, complétées et/ou réparées si besoin puis affichées.
+-   Ajout d'un encadré expliquant ce que signifie chaque entête de colonne, volontairement raccourcies pour ne pas faire trop large.
+-   Mise en place d'un style basique juste pour y voir mieux pour l'instant
+-   Petites modifs dans le package.json
+-   Supression du package npm zxcvbn
+
 </details>

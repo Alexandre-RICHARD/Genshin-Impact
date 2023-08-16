@@ -1,7 +1,3 @@
-<script setup>
-
-</script>
-
 <template>
     <div class="genshin-navigation-box">
         <router-link class="genshin-navigation" :to="{ name: 'Statisfyer' }">Statisfyer</router-link>
