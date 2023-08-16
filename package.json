@@ -1,6 +1,6 @@
 {
     "name": "project-to-define",
-    "version": "1.0.0",
+    "version": "1.0.4",
     "description": "PROJET A DEFINIR",
     "main": "webpack.config.js",
     "scripts": {
@@ -44,7 +44,7 @@
         "html-webpack-plugin": "^5.5.3",
         "mini-css-extract-plugin": "^2.7.6",
         "pinia": "^2.1.6",
-        "postcss": "^8.4.27",
+        "postcss": "^8.4.28",
         "postcss-loader": "^7.3.3",
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.65.1",

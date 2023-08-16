@@ -651,7 +651,7 @@ $foreground-color: #f3f3f3;
 
 .genshin {
     max-width: 1500px;
-    margin: 20px auto;
+    margin: 20px auto 0 auto;
     padding: 10px;
     color: $foreground-color;
     background-color: $background-color;
@@ -681,6 +681,7 @@ $foreground-color: #f3f3f3;
             border-radius: 12px;
             width: 110px;
             height: fit-content;
+            overflow: hidden;
 
             &-selected {
                 border: 2px solid #d6be52;

@@ -16,7 +16,7 @@ const routes = [
         name: "GenshinHome",
         components: { mainRouter: GenshinMenu },
         meta: {
-            documentTitle: "Genshin Impact",
+            documentTitle: "Genshin - Fan Tool Site",
         },
     },
     //Curriculum

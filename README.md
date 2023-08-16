@@ -34,4 +34,11 @@ Et voici le [répo du serveur](https://github.com/Alexandre-RICHARD/Portfolio-Ba
 -   Mise à jour des packages npm
 -   Rajout d'un script pnpm pour mettre à jour plus facilement les dépendances
 
+### 1.0.4 `16 août 2023`
+
+-   Petit changement de nom de la page principale
+-   Mise à jour du favicon
+-   Déplacement des petits tests de iframe et popup de la vue App à la vue GenshinMenu
+-   Deux petits détails de style mis à jour sur la page artefact/arme/persos "Statisfyer"
+
 </details>
