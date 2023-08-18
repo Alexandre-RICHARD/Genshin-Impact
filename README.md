@@ -76,4 +76,13 @@ Et voici le [répo du serveur](https://github.com/Alexandre-RICHARD/Portfolio-Ba
 -   Rajout de certains informations sur l'amélioration des persos au fichier json contenant déjà leur statistiques
 -   Rajout d'un fichier JSON contenant les informations sur chaque matériaux de farm du jeu
 
+### 1.0.8 `18 août 2023`
+
+-   Renommage et correction du fichier genshinMaterialData.json
+-   Renommage du fichier InputCharacters en InputCreator
+-   Ajout d'un autre tableau pour les matériaux de farm et leurs données provenant du fichier json
+-   La fonction updateLocalStorage est devenu dynamique en fonction des arguments qu'elles reçoient
+-   Enveloppage du tableau précédent avec le nouveau pour les mettre en display flex
+-   Optimisation et uniformisation du style des 2 tableaux
+
 </details>

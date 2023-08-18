@@ -1,6 +1,7 @@
 <script setup>
 const charactersList = require("@middlewares/genshinCharactersData.json");
-import InputCharacters from "@parts/InputCharacters.vue";
+const materialsList = require("@middlewares/genshinMaterialData.json");
+import InputCreator from "@parts/InputCreator.vue";
 import { onBeforeMount, reactive } from "vue";
 
 const boolList = [true, false];
@@ -38,7 +39,7 @@ const dataInit = () => {
             data.Character.push(filler(name));
         });
     }
-    updateLocalStorage();
+    updateLocalStorage("genshinCharactersData", "Character");
 };
 
 const filler = (name) => {
@@ -58,8 +59,8 @@ const filler = (name) => {
     };
 };
 
-const updateLocalStorage = () => {
-    localStorage.setItem("genshinCharactersData", JSON.stringify(data.Character));
+const updateLocalStorage = (type, array) => {
+    localStorage.setItem(type, JSON.stringify(data[array]));
 };
 
 onBeforeMount(() => {
@@ -67,14 +68,13 @@ onBeforeMount(() => {
 });
 
 const cleanLocalStorage = () => {
-    console.log("LocalStorage cleaned");
     localStorage.removeItem("genshinCharactersData");
     dataInit();
 };
 
 const handleChange = (index, valuename, value) => {
     data.Character[index][valuename] = value;
-    updateLocalStorage();
+    updateLocalStorage("genshinCharactersData", "Character");
 };
 </script>
 
@@ -94,141 +94,171 @@ const handleChange = (index, valuename, value) => {
         <p>Ap3-A = Le niveau actuelle de son déchaînement élémentaire</p>
         <p>Ap3-V = Le niveau auquel je veux améliorer son déchaînement élémentaire</p>
     </div>
-    <table class="all-character-progress">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>J'ai</th>
-                <th>Build</th>
-                <th>Only</th>
-                <th>Lvl-A</th>
-                <th>Lvl-V</th>
-                <th>Ap1-A</th>
-                <th>Ap1-V</th>
-                <th>Ap2-A</th>
-                <th>Ap2-V</th>
-                <th>Ap3-A</th>
-                <th>Ap3-V</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="(character, index) in data.Character" :key="character.name">
-                <td class="name">{{ index + 1 }} - {{ character.name }}</td>
-                <InputCharacters
-                    v-model:checked="character.got" type="checkbox" :index="index" valuename="got"
-                    @update:checked="handleChange"
-                />
-                <InputCharacters
-                    v-model:checked="character.doing" type="checkbox" :disabled="character.only" :index="index"
-                    valuename="doing" @update:checked="handleChange"
-                />
-                <InputCharacters
-                    v-model:checked="character.only" type="checkbox" :disabled="!character.doing"
-                    :index="index" valuename="only" @update:checked="handleChange"
-                />
-                <InputCharacters
-                    v-model:value="character.cLvl" type="select" :index="index" valuename="cLvl"
-                    :list="lvlList.filter((el) => el <= character.wLvl)" @update:value="handleChange"
-                />
-                <InputCharacters
-                    v-model:value="character.wLvl" type="select" :index="index" valuename="wLvl"
-                    :list="lvlList.filter((el) => el >= character.cLvl)" @update:value="handleChange"
-                />
-                <InputCharacters
-                    v-model:value="character.cAp1" type="select" :index="index" valuename="cAp1"
-                    :list="aptList.filter((el) => el <= character.wAp1)" @update:value="handleChange"
-                />
-                <InputCharacters
-                    v-model:value="character.wAp1" type="select" :index="index" valuename="wAp1"
-                    :list="aptList.filter((el) => el >= character.cAp1)" @update:value="handleChange"
-                />
-                <InputCharacters
-                    v-model:value="character.cAp2" type="select" :index="index" valuename="cAp2"
-                    :list="aptList.filter((el) => el <= character.wAp2)" @update:value="handleChange"
-                />
-                <InputCharacters
-                    v-model:value="character.wAp2" type="select" :index="index" valuename="wAp2"
-                    :list="aptList.filter((el) => el >= character.cAp2)" @update:value="handleChange"
-                />
-                <InputCharacters
-                    v-model:value="character.cAp3" type="select" :index="index" valuename="cAp3"
-                    :list="aptList.filter((el) => el <= character.wAp3)" @update:value="handleChange"
-                />
-                <InputCharacters
-                    v-model:value="character.wAp3" type="select" :index="index" valuename="wAp3"
-                    :list="aptList.filter((el) => el >= character.cAp3)" @update:value="handleChange"
-                />
-            </tr>
-        </tbody>
-    </table>
+    <div class="tabs-contener">
+        <table class="all-character-progress">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>J'ai</th>
+                    <th>Build</th>
+                    <th>Only</th>
+                    <th>Lvl-A</th>
+                    <th>Lvl-V</th>
+                    <th>Ap1-A</th>
+                    <th>Ap1-V</th>
+                    <th>Ap2-A</th>
+                    <th>Ap2-V</th>
+                    <th>Ap3-A</th>
+                    <th>Ap3-V</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(character, index) in data.Character" :key="character.name">
+                    <td class="name">{{ index + 1 }} - {{ character.name }}</td>
+                    <InputCreator
+                        v-model:checked="character.got" type="checkbox" :index="index" valuename="got"
+                        @update:checked="handleChange"
+                    />
+                    <InputCreator
+                        v-model:checked="character.doing" type="checkbox" :disabled="character.only"
+                        :index="index" valuename="doing" @update:checked="handleChange"
+                    />
+                    <InputCreator
+                        v-model:checked="character.only" type="checkbox" :disabled="!character.doing"
+                        :index="index" valuename="only" @update:checked="handleChange"
+                    />
+                    <InputCreator
+                        v-model:value="character.cLvl" type="select" :index="index" valuename="cLvl"
+                        :list="lvlList.filter((el) => el <= character.wLvl)" @update:value="handleChange"
+                    />
+                    <InputCreator
+                        v-model:value="character.wLvl" type="select" :index="index" valuename="wLvl"
+                        :list="lvlList.filter((el) => el >= character.cLvl)" @update:value="handleChange"
+                    />
+                    <InputCreator
+                        v-model:value="character.cAp1" type="select" :index="index" valuename="cAp1"
+                        :list="aptList.filter((el) => el <= character.wAp1)" @update:value="handleChange"
+                    />
+                    <InputCreator
+                        v-model:value="character.wAp1" type="select" :index="index" valuename="wAp1"
+                        :list="aptList.filter((el) => el >= character.cAp1)" @update:value="handleChange"
+                    />
+                    <InputCreator
+                        v-model:value="character.cAp2" type="select" :index="index" valuename="cAp2"
+                        :list="aptList.filter((el) => el <= character.wAp2)" @update:value="handleChange"
+                    />
+                    <InputCreator
+                        v-model:value="character.wAp2" type="select" :index="index" valuename="wAp2"
+                        :list="aptList.filter((el) => el >= character.cAp2)" @update:value="handleChange"
+                    />
+                    <InputCreator
+                        v-model:value="character.cAp3" type="select" :index="index" valuename="cAp3"
+                        :list="aptList.filter((el) => el <= character.wAp3)" @update:value="handleChange"
+                    />
+                    <InputCreator
+                        v-model:value="character.wAp3" type="select" :index="index" valuename="wAp3"
+                        :list="aptList.filter((el) => el >= character.cAp3)" @update:value="handleChange"
+                    />
+                </tr>
+            </tbody>
+        </table>
+        <table class="all-material-inventory">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Code</th>
+                    <th>Quantité</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="material in materialsList" :key="material.id">
+                    <td class="name">{{ material.name }}</td>
+                    <td>{{ material.code }}</td>
+                    <td>{{ material.quantity }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
 
 <style lang="scss">
 @import "@styles/variables.scss";
 
-.all-character-progress {
-    border-collapse: collapse;
-    margin: 30px auto 0 auto;
+.tabs-contener {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 30px;
+    align-items: start;
+    gap: 15px;
 
-    th,
-    td {
-        border: 1px solid #cacaca;
-        padding: 6px 2px;
-    }
+    .all-character-progress,
+    .all-material-inventory {
+        border-collapse: collapse;
 
-    th {
-        color: #f5f5f5;
-        background-color: #4650ac;
-        width: 54px;
-
-        &:first-child {
-            width: fit-content;
-        }
-    }
-
-    tr {
-        background-color: #bbbbbb;
-    }
-
-    tr:nth-child(even) {
-        background-color: #a3a3a3;
-    }
-
-    td {
-        color: #000000;
-        font-weight: 300;
-        text-align: center;
-
-        .checkbox {
-            appearance: checkbox;
-            width: 20px;
-            height: 20px;
+        th,
+        td {
+            border: 1px solid #cacaca;
+            padding: 6px 2px;
         }
 
-        .select {
-            appearance: menulist-button;
-            padding: 3px 0 3px 0px;
+        th {
+            color: #f5f5f5;
+            background-color: #4650ac;
+            width: 54px;
+
+            &:first-child {
+                width: fit-content;
+            }
+        }
+
+        tr {
+            background-color: #bbbbbb;
+        }
+
+        tr:nth-child(even) {
+            background-color: #a3a3a3;
+        }
+
+        td {
+            color: #000000;
+            font-weight: 300;
             text-align: center;
-            border-radius: 4px;
-            box-shadow: 0px 0px 4px 0px #000000 inset;
 
-            option {
-                color: #000000;
-                background-color: #bbbbbb;
-                margin: 20px;
-            }
-
-            &:hover {
-                cursor: pointer;
-                background-color: #7c7c7c;
-                color: #cacaca;
+            &.name {
+                font-weight: 400;
+                text-align: left;
             }
         }
     }
 
-    td.name {
-        font-weight: 400;
-        text-align: left;
+    .all-character-progress {
+        td {
+            .checkbox {
+                appearance: checkbox;
+                width: 20px;
+                height: 20px;
+            }
+
+            .select {
+                appearance: menulist-button;
+                padding: 3px 0 3px 0px;
+                text-align: center;
+                border-radius: 4px;
+                box-shadow: 0px 0px 4px 0px #000000 inset;
+
+                option {
+                    color: #000000;
+                    background-color: #bbbbbb;
+                    margin: 20px;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                    background-color: #7c7c7c;
+                    color: #cacaca;
+                }
+            }
+        }
     }
 }
 </style>
