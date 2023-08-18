@@ -60,4 +60,20 @@ Et voici le [répo du serveur](https://github.com/Alexandre-RICHARD/Portfolio-Ba
 -   Aussi, à chaque action sur un input, la chaîne de caractère est reconstruite et stockée sur le localStorage
 -   Adaptation et ajout d'un style sur ces nouveaux éléments afin d'en faciliter la lisibilité
 
+### 1.0.7 `18 août 2023`
+
+-   Mise à jour des package npm
+-   Rajout de deux lignes de configurations pour webpack et vueJS
+-   Suppression de CookieHandler.js qui ne servait à rien
+-   Suppression de l'array contenant  le nom des personnages au profit du fichier json contenant toutes leurs informations
+-   L'array reactive charactersData est devenu Data = reactive({character: null}) pour contrer tous les problème de réactivité que cela posait
+-   Déstructuration du nom des perso dans le foreach
+-   Rajout d'une fonction lié à un bouton pour supprimer le localStorage pour les tests
+-   Rajout d'une fonction handleChange afin de lié les données du composant parent au composant enfant avec les emit
+-   Création donc d'un composant à part pour créer tous les input afin de séparer cette logique là tout en simplifiant la création d'un input
+-   Ajout de règle vis à vis des input. La colonne 3 (only) ne peut être coché que si la 2 l'est. Inversement, la 2 (doing) ne peut être décoché si la 3 l'est
+-   Chaque input select voit ses options limitées en fonction de son duo. On ne peut choisir d'atteindre un niveau plus faible que celui actuel et inversement.
+-   Rajout de certains informations sur l'amélioration des persos au fichier json contenant déjà leur statistiques
+-   Rajout d'un fichier JSON contenant les informations sur chaque matériaux de farm du jeu
+
 </details>

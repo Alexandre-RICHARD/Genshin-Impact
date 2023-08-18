@@ -8,7 +8,13 @@
         "base_atk": 251,
         "base_def": 876,
         "stat_type": "geo_bonus",
-        "stat_value": 28.8
+        "stat_value": "28,8",
+        "gem": "p7",
+        "mini_boss_material": "s21",
+        "weekly_boss_materials": "b31",
+        "common_material": "m3",
+        "talent_book": "lm3",
+        "local_speciality": "rm3"
     },
     {
         "name": "Alhaitham",
@@ -19,7 +25,13 @@
         "base_atk": 313,
         "base_def": 781,
         "stat_type": "dendro_bonus",
-        "stat_value": 28.8
+        "stat_value": "28,8",
+        "gem": "p3",
+        "mini_boss_material": "s46",
+        "weekly_boss_materials": "b72",
+        "common_material": "m22",
+        "talent_book": "ls2",
+        "local_speciality": "rs6"
     },
     {
         "name": "Aloy",
@@ -30,7 +42,13 @@
         "base_atk": 233,
         "base_def": 676,
         "stat_type": "cryo_bonus",
-        "stat_value": 28.8
+        "stat_value": "28,8",
+        "gem": "p6",
+        "mini_boss_material": "s14",
+        "weekly_boss_materials": "b51",
+        "common_material": "m17",
+        "talent_book": "lm1",
+        "local_speciality": "ri3"
     },
     {
         "name": "Amber",
@@ -41,7 +59,13 @@
         "base_atk": 223,
         "base_def": 600,
         "stat_type": "atk_purcent",
-        "stat_value": 24
+        "stat_value": "24",
+        "gem": "p1",
+        "mini_boss_material": "s22",
+        "weekly_boss_materials": "b13",
+        "common_material": "m4",
+        "talent_book": "lm1",
+        "local_speciality": "rm6"
     },
     {
         "name": "Arataki Itto",
@@ -52,7 +76,13 @@
         "base_atk": 227,
         "base_def": 959,
         "stat_type": "crt_rate",
-        "stat_value": 19.2
+        "stat_value": "19,2",
+        "gem": "p7",
+        "mini_boss_material": "s36",
+        "weekly_boss_materials": "b53",
+        "common_material": "m1",
+        "talent_book": "li2",
+        "local_speciality": "ri1"
     },
     {
         "name": "Baizhu",
@@ -63,7 +93,13 @@
         "base_atk": 192,
         "base_def": 499,
         "stat_type": "hp_purcent",
-        "stat_value": 28.8
+        "stat_value": "28,8",
+        "gem": "p3",
+        "mini_boss_material": "s47",
+        "weekly_boss_materials": "b81",
+        "common_material": "m20",
+        "talent_book": "ll3",
+        "local_speciality": "rl7"
     },
     {
         "name": "Barbara",
@@ -74,7 +110,13 @@
         "base_atk": 159,
         "base_def": 668,
         "stat_type": "hp_purcent",
-        "stat_value": 24
+        "stat_value": "24",
+        "gem": "p2",
+        "mini_boss_material": "s23",
+        "weekly_boss_materials": "b22",
+        "common_material": "m3",
+        "talent_book": "lm1",
+        "local_speciality": "rm5"
     },
     {
         "name": "Beidou",
@@ -85,7 +127,13 @@
         "base_atk": 225,
         "base_def": 648,
         "stat_type": "electro_bonus",
-        "stat_value": 24
+        "stat_value": "24",
+        "gem": "p4",
+        "mini_boss_material": "s12",
+        "weekly_boss_materials": "b13",
+        "common_material": "m11",
+        "talent_book": "ll3",
+        "local_speciality": "rl2"
     },
     {
         "name": "Bennett",
@@ -96,7 +144,13 @@
         "base_atk": 191,
         "base_def": 771,
         "stat_type": "energy_recharge",
-        "stat_value": 26.8
+        "stat_value": "26,8",
+        "gem": "p1",
+        "mini_boss_material": "s22",
+        "weekly_boss_materials": "b11",
+        "common_material": "m11",
+        "talent_book": "lm2",
+        "local_speciality": "rm4"
     },
     {
         "name": "Candace",
@@ -107,7 +161,13 @@
         "base_atk": 212,
         "base_def": 682,
         "stat_type": "hp_purcent",
-        "stat_value": 24
+        "stat_value": "24",
+        "gem": "p2",
+        "mini_boss_material": "s44",
+        "weekly_boss_materials": "b62",
+        "common_material": "m22",
+        "talent_book": "ls1",
+        "local_speciality": "rs5"
     },
     {
         "name": "Chongyun",
@@ -118,7 +178,13 @@
         "base_atk": 223,
         "base_def": 648,
         "stat_type": "atk_purcent",
-        "stat_value": 24
+        "stat_value": "24",
+        "gem": "p6",
+        "mini_boss_material": "s13",
+        "weekly_boss_materials": "b13",
+        "common_material": "m2",
+        "talent_book": "ll2",
+        "local_speciality": "rl8"
     },
     {
         "name": "Collei",
@@ -129,7 +195,13 @@
         "base_atk": 199,
         "base_def": 600,
         "stat_type": "atk_purcent",
-        "stat_value": 24
+        "stat_value": "24",
+        "gem": "p3",
+        "mini_boss_material": "s41",
+        "weekly_boss_materials": "b62",
+        "common_material": "m4",
+        "talent_book": "ls3",
+        "local_speciality": "rs1"
     },
     {
         "name": "Cyno",
@@ -140,7 +212,13 @@
         "base_atk": 318,
         "base_def": 859,
         "stat_type": "crt_dmg",
-        "stat_value": 38.4
+        "stat_value": "38,4",
+        "gem": "p4",
+        "mini_boss_material": "s42",
+        "weekly_boss_materials": "b61",
+        "common_material": "m3",
+        "talent_book": "ls1",
+        "local_speciality": "rs9"
     },
     {
         "name": "Dehya",
@@ -151,7 +229,13 @@
         "base_atk": 265,
         "base_def": 627,
         "stat_type": "hp_purcent",
-        "stat_value": 28.8
+        "stat_value": "28,8",
+        "gem": "p1",
+        "mini_boss_material": "s44",
+        "weekly_boss_materials": "b71",
+        "common_material": "m22",
+        "talent_book": "ls3",
+        "local_speciality": "rs6"
     },
     {
         "name": "Diluc",
@@ -162,7 +246,13 @@
         "base_atk": 334,
         "base_def": 783,
         "stat_type": "crt_rate",
-        "stat_value": 19.2
+        "stat_value": "19,2",
+        "gem": "p1",
+        "mini_boss_material": "s22",
+        "weekly_boss_materials": "b11",
+        "common_material": "m10",
+        "talent_book": "lm2",
+        "local_speciality": "rm6"
     },
     {
         "name": "Diona",
@@ -173,7 +263,13 @@
         "base_atk": 212,
         "base_def": 600,
         "stat_type": "cryo_bonus",
-        "stat_value": 24
+        "stat_value": "24",
+        "gem": "p6",
+        "mini_boss_material": "s13",
+        "weekly_boss_materials": "b32",
+        "common_material": "m4",
+        "talent_book": "lm1",
+        "local_speciality": "rm7"
     },
     {
         "name": "Dori",
@@ -184,7 +280,13 @@
         "base_atk": 223,
         "base_def": 723,
         "stat_type": "hp_purcent",
-        "stat_value": 24
+        "stat_value": "24",
+        "gem": "p4",
+        "mini_boss_material": "s42",
+        "weekly_boss_materials": "b42",
+        "common_material": "m22",
+        "talent_book": "ls2",
+        "local_speciality": "rs4"
     },
     {
         "name": "Eula",
@@ -195,7 +297,13 @@
         "base_atk": 342,
         "base_def": 750,
         "stat_type": "crt_dmg",
-        "stat_value": 38.4
+        "stat_value": "38,4",
+        "gem": "p6",
+        "mini_boss_material": "s14",
+        "weekly_boss_materials": "b41",
+        "common_material": "m2",
+        "talent_book": "lm2",
+        "local_speciality": "rm8"
     },
     {
         "name": "Faruzan",
@@ -206,7 +314,13 @@
         "base_atk": 196,
         "base_def": 627,
         "stat_type": "atk_purcent",
-        "stat_value": 24
+        "stat_value": "24",
+        "gem": "p5",
+        "mini_boss_material": "s44",
+        "weekly_boss_materials": "b71",
+        "common_material": "m22",
+        "talent_book": "ls1",
+        "local_speciality": "rs5"
     },
     {
         "name": "Fischl",
@@ -217,7 +331,13 @@
         "base_atk": 244,
         "base_def": 593,
         "stat_type": "atk_purcent",
-        "stat_value": 24
+        "stat_value": "24",
+        "gem": "p4",
+        "mini_boss_material": "s12",
+        "weekly_boss_materials": "b23",
+        "common_material": "m4",
+        "talent_book": "lm3",
+        "local_speciality": "rm6"
     },
     {
         "name": "Ganyu",
@@ -228,7 +348,13 @@
         "base_atk": 334,
         "base_def": 630,
         "stat_type": "crt_dmg",
-        "stat_value": 38.4
+        "stat_value": "38,4",
+        "gem": "p6",
+        "mini_boss_material": "s13",
+        "weekly_boss_materials": "b33",
+        "common_material": "m12",
+        "talent_book": "ll2",
+        "local_speciality": "rl5"
     },
     {
         "name": "Gorou",
@@ -239,7 +365,13 @@
         "base_atk": 182,
         "base_def": 648,
         "stat_type": "geo_bonus",
-        "stat_value": 24
+        "stat_value": "24",
+        "gem": "p7",
+        "mini_boss_material": "s32",
+        "weekly_boss_materials": "b51",
+        "common_material": "m17",
+        "talent_book": "li3",
+        "local_speciality": "ri7"
     },
     {
         "name": "Hu Tao",
@@ -250,7 +382,13 @@
         "base_atk": 106,
         "base_def": 876,
         "stat_type": "crt_dmg",
-        "stat_value": 38.4
+        "stat_value": "38,4",
+        "gem": "p1",
+        "mini_boss_material": "s24",
+        "weekly_boss_materials": "b32",
+        "common_material": "m12",
+        "talent_book": "ll2",
+        "local_speciality": "rl3"
     },
     {
         "name": "Jean",
@@ -261,7 +399,13 @@
         "base_atk": 239,
         "base_def": 768,
         "stat_type": "heal",
-        "stat_value": 22
+        "stat_value": "22",
+        "gem": "p5",
+        "mini_boss_material": "s11",
+        "weekly_boss_materials": "b11",
+        "common_material": "m2",
+        "talent_book": "lm2",
+        "local_speciality": "rm8"
     },
     {
         "name": "Kaedehara Kazuha",
@@ -272,7 +416,13 @@
         "base_atk": 296,
         "base_def": 806,
         "stat_type": "elemental_mastery",
-        "stat_value": 115.2
+        "stat_value": "115,2",
+        "gem": "p5",
+        "mini_boss_material": "s31",
+        "weekly_boss_materials": "b43",
+        "common_material": "m11",
+        "talent_book": "ll2",
+        "local_speciality": "ri6"
     },
     {
         "name": "Kaeya",
@@ -283,7 +433,13 @@
         "base_atk": 223,
         "base_def": 791,
         "stat_type": "energy_recharge",
-        "stat_value": 26.8
+        "stat_value": "26,8",
+        "gem": "p6",
+        "mini_boss_material": "s13",
+        "weekly_boss_materials": "b23",
+        "common_material": "m11",
+        "talent_book": "lm3",
+        "local_speciality": "rm7"
     },
     {
         "name": "Kamisato Ayaka",
@@ -294,7 +450,13 @@
         "base_atk": 342,
         "base_def": 783,
         "stat_type": "crt_dmg",
-        "stat_value": 38.4
+        "stat_value": "38,4",
+        "gem": "p6",
+        "mini_boss_material": "s32",
+        "weekly_boss_materials": "b42",
+        "common_material": "m14",
+        "talent_book": "li2",
+        "local_speciality": "ri2"
     },
     {
         "name": "Kamisato Ayato",
@@ -305,7 +467,13 @@
         "base_atk": 298,
         "base_def": 768,
         "stat_type": "crt_dmg",
-        "stat_value": 38.4
+        "stat_value": "38,4",
+        "gem": "p2",
+        "mini_boss_material": "s34",
+        "weekly_boss_materials": "b61",
+        "common_material": "m14",
+        "talent_book": "li2",
+        "local_speciality": "ri2"
     },
     {
         "name": "Kaveh",
@@ -316,7 +484,13 @@
         "base_atk": 233,
         "base_def": 750,
         "stat_type": "elemental_mastery",
-        "stat_value": 96
+        "stat_value": "96",
+        "gem": "p3",
+        "mini_boss_material": "s45",
+        "weekly_boss_materials": "b82",
+        "common_material": "m20",
+        "talent_book": "ls2",
+        "local_speciality": "rs7"
     },
     {
         "name": "Keqing",
@@ -327,7 +501,30 @@
         "base_atk": 322,
         "base_def": 799,
         "stat_type": "crt_dmg",
-        "stat_value": 38.4
+        "stat_value": "38,4",
+        "gem": "p4",
+        "mini_boss_material": "s12",
+        "weekly_boss_materials": "b22",
+        "common_material": "m12",
+        "talent_book": "ll1",
+        "local_speciality": "rl8"
+    },
+    {
+        "name": "Kirara",
+        "rarity": 4,
+        "element": "dendro",
+        "weapon": "sword",
+        "base_hp": 12179,
+        "base_atk": 223,
+        "base_def": 546,
+        "stat_type": "hp_purcent",
+        "stat_value": "24",
+        "gem": "p3",
+        "mini_boss_material": "s47",
+        "weekly_boss_materials": "b83",
+        "common_material": "m17",
+        "talent_book": "li1",
+        "local_speciality": "ri8"
     },
     {
         "name": "Klee",
@@ -338,7 +535,13 @@
         "base_atk": 310,
         "base_def": 614,
         "stat_type": "pyro_bonus",
-        "stat_value": 28.8
+        "stat_value": "28,8",
+        "gem": "p1",
+        "mini_boss_material": "s22",
+        "weekly_boss_materials": "b22",
+        "common_material": "m3",
+        "talent_book": "lm1",
+        "local_speciality": "rm5"
     },
     {
         "name": "Kujou Sara",
@@ -349,7 +552,13 @@
         "base_atk": 195,
         "base_def": 627,
         "stat_type": "atk_purcent",
-        "stat_value": 24
+        "stat_value": "24",
+        "gem": "p4",
+        "mini_boss_material": "s35",
+        "weekly_boss_materials": "b53",
+        "common_material": "m2",
+        "talent_book": "li2",
+        "local_speciality": "ri4"
     },
     {
         "name": "Kuki Shinobu",
@@ -360,7 +569,13 @@
         "base_atk": 212,
         "base_def": 750,
         "stat_type": "hp_purcent",
-        "stat_value": 24
+        "stat_value": "24",
+        "gem": "p4",
+        "mini_boss_material": "s25",
+        "weekly_boss_materials": "b62",
+        "common_material": "m17",
+        "talent_book": "li2",
+        "local_speciality": "ri5"
     },
     {
         "name": "Layla",
@@ -371,7 +586,13 @@
         "base_atk": 216,
         "base_def": 655,
         "stat_type": "hp_purcent",
-        "stat_value": 24
+        "stat_value": "24",
+        "gem": "p6",
+        "mini_boss_material": "s43",
+        "weekly_boss_materials": "b72",
+        "common_material": "m3",
+        "talent_book": "ls2",
+        "local_speciality": "rs3"
     },
     {
         "name": "Lisa",
@@ -382,7 +603,13 @@
         "base_atk": 231,
         "base_def": 573,
         "stat_type": "elemental_mastery",
-        "stat_value": 96
+        "stat_value": "96",
+        "gem": "p4",
+        "mini_boss_material": "s12",
+        "weekly_boss_materials": "b12",
+        "common_material": "m1",
+        "talent_book": "lm3",
+        "local_speciality": "rm2"
     },
     {
         "name": "Mika",
@@ -393,7 +620,13 @@
         "base_atk": 223,
         "base_def": 713,
         "stat_type": "hp_purcent",
-        "stat_value": 24
+        "stat_value": "24",
+        "gem": "p6",
+        "mini_boss_material": "s46",
+        "weekly_boss_materials": "b72",
+        "common_material": "m10",
+        "talent_book": "lm3",
+        "local_speciality": "rm1"
     },
     {
         "name": "Mona",
@@ -404,7 +637,13 @@
         "base_atk": 287,
         "base_def": 653,
         "stat_type": "energy_recharge",
-        "stat_value": 32
+        "stat_value": "32",
+        "gem": "p2",
+        "mini_boss_material": "s23",
+        "weekly_boss_materials": "b22",
+        "common_material": "m12",
+        "talent_book": "lm2",
+        "local_speciality": "rm5"
     },
     {
         "name": "Nahida",
@@ -415,7 +654,13 @@
         "base_atk": 298,
         "base_def": 630,
         "stat_type": "elemental_mastery",
-        "stat_value": 115.2
+        "stat_value": "115,2",
+        "gem": "p3",
+        "mini_boss_material": "s45",
+        "weekly_boss_materials": "b71",
+        "common_material": "m20",
+        "talent_book": "ls2",
+        "local_speciality": "rs4"
     },
     {
         "name": "Nilou",
@@ -426,7 +671,13 @@
         "base_atk": 229,
         "base_def": 728,
         "stat_type": "hp_purcent",
-        "stat_value": 28.8
+        "stat_value": "28,8",
+        "gem": "p2",
+        "mini_boss_material": "s43",
+        "weekly_boss_materials": "b62",
+        "common_material": "m20",
+        "talent_book": "ls3",
+        "local_speciality": "rs2"
     },
     {
         "name": "Ningguang",
@@ -437,7 +688,13 @@
         "base_atk": 212,
         "base_def": 573,
         "stat_type": "geo_bonus",
-        "stat_value": 24
+        "stat_value": "24",
+        "gem": "p7",
+        "mini_boss_material": "s21",
+        "weekly_boss_materials": "b23",
+        "common_material": "m10",
+        "talent_book": "ll1",
+        "local_speciality": "rl4"
     },
     {
         "name": "Noelle",
@@ -448,161 +705,13 @@
         "base_atk": 191,
         "base_def": 798,
         "stat_type": "def_purcent",
-        "stat_value": 30
-    },
-    {
-        "name": "Qiqi",
-        "rarity": 5,
-        "element": "cryo",
-        "weapon": "sword",
-        "base_hp": 12368,
-        "base_atk": 287,
-        "base_def": 922,
-        "stat_type": "heal",
-        "stat_value": 22
-    },
-    {
-        "name": "Raiden Shogun",
-        "rarity": 5,
-        "element": "electro",
-        "weapon": "spear",
-        "base_hp": 12907,
-        "base_atk": 337,
-        "base_def": 789,
-        "stat_type": "energy_recharge",
-        "stat_value": 32
-    },
-    {
-        "name": "Razor",
-        "rarity": 4,
-        "element": "electro",
-        "weapon": "claymore",
-        "base_hp": 11962,
-        "base_atk": 233,
-        "base_def": 750,
-        "stat_type": "physical_bonus",
-        "stat_value": 30
-    },
-    {
-        "name": "Rosaria",
-        "rarity": 4,
-        "element": "cryo",
-        "weapon": "spear",
-        "base_hp": 12288,
-        "base_atk": 240,
-        "base_def": 709,
-        "stat_type": "atk_purcent",
-        "stat_value": 24
-    },
-    {
-        "name": "Sangonomiya Kokomi",
-        "rarity": 5,
-        "element": "hydro",
-        "weapon": "catalyst",
-        "base_hp": 1347,
-        "base_atk": 234,
-        "base_def": 657,
-        "stat_type": "hydro_bonus",
-        "stat_value": 28.8
-    },
-    {
-        "name": "Sayu",
-        "rarity": 4,
-        "element": "anemo",
-        "weapon": "claymore",
-        "base_hp": 11853,
-        "base_atk": 244,
-        "base_def": 744,
-        "stat_type": "elemental_mastery",
-        "stat_value": 96
-    },
-    {
-        "name": "Shenhe",
-        "rarity": 5,
-        "element": "cryo",
-        "weapon": "spear",
-        "base_hp": 12992,
-        "base_atk": 303,
-        "base_def": 830,
-        "stat_type": "atk_purcent",
-        "stat_value": 28.8
-    },
-    {
-        "name": "Shikanoin Heizou",
-        "rarity": 4,
-        "element": "anemo",
-        "weapon": "catalyst",
-        "base_hp": 10657,
-        "base_atk": 225,
-        "base_def": 683,
-        "stat_type": "anemo_bonus",
-        "stat_value": 24
-    },
-    {
-        "name": "Sucrose",
-        "rarity": 4,
-        "element": "anemo",
-        "weapon": "catalyst",
-        "base_hp": 9243,
-        "base_atk": 169,
-        "base_def": 702,
-        "stat_type": "anemo_bonus",
-        "stat_value": 24
-    },
-    {
-        "name": "Tartaglia",
-        "rarity": 5,
-        "element": "hydro",
-        "weapon": "bow",
-        "base_hp": 13103,
-        "base_atk": 301,
-        "base_def": 814,
-        "stat_type": "hydro_bonus",
-        "stat_value": 28.8
-    },
-    {
-        "name": "Thoma",
-        "rarity": 4,
-        "element": "pyro",
-        "weapon": "spear",
-        "base_hp": 10331,
-        "base_atk": 201,
-        "base_def": 750,
-        "stat_type": "atk_purcent",
-        "stat_value": 24
-    },
-    {
-        "name": "Tighnari",
-        "rarity": 5,
-        "element": "dendro",
-        "weapon": "bow",
-        "base_hp": 10849,
-        "base_atk": 267,
-        "base_def": 630,
-        "stat_type": "dendro_bonus",
-        "stat_value": 28.8
-    },
-    {
-        "name": "Voyageur",
-        "rarity": 5,
-        "element": "None",
-        "weapon": "sword",
-        "base_hp": 10874,
-        "base_atk": 212,
-        "base_def": 682,
-        "stat_type": "atk_purcent",
-        "stat_value": 24
-    },
-    {
-        "name": "Venti",
-        "rarity": 5,
-        "element": "anemo",
-        "weapon": "bow",
-        "base_hp": 10531,
-        "base_atk": 263,
-        "base_def": 668,
-        "stat_type": "energy_recharge",
-        "stat_value": 32
+        "stat_value": "30",
+        "gem": "p7",
+        "mini_boss_material": "s21",
+        "weekly_boss_materials": "b12",
+        "common_material": "m2",
+        "talent_book": "lm2",
+        "local_speciality": "rm2"
     },
     {
         "name": "Nomade",
@@ -613,7 +722,234 @@
         "base_atk": 327,
         "base_def": 607,
         "stat_type": "crt_rate",
-        "stat_value": 19.2
+        "stat_value": "19,2",
+        "gem": "p5",
+        "mini_boss_material": "s43",
+        "weekly_boss_materials": "b73",
+        "common_material": "m14",
+        "talent_book": "ls3",
+        "local_speciality": "rs1"
+    },
+    {
+        "name": "Qiqi",
+        "rarity": 5,
+        "element": "cryo",
+        "weapon": "sword",
+        "base_hp": 12368,
+        "base_atk": 287,
+        "base_def": 922,
+        "stat_type": "heal",
+        "stat_value": "22",
+        "gem": "p6",
+        "mini_boss_material": "s13",
+        "weekly_boss_materials": "b21",
+        "common_material": "m3",
+        "talent_book": "ll1",
+        "local_speciality": "rl7"
+    },
+    {
+        "name": "Raiden Shogun",
+        "rarity": 5,
+        "element": "electro",
+        "weapon": "spear",
+        "base_hp": 12907,
+        "base_atk": 337,
+        "base_def": 789,
+        "stat_type": "energy_recharge",
+        "stat_value": "32",
+        "gem": "p4",
+        "mini_boss_material": "s35",
+        "weekly_boss_materials": "b51",
+        "common_material": "m14",
+        "talent_book": "li3",
+        "local_speciality": "ri8"
+    },
+    {
+        "name": "Razor",
+        "rarity": 4,
+        "element": "electro",
+        "weapon": "claymore",
+        "base_hp": 11962,
+        "base_atk": 233,
+        "base_def": 750,
+        "stat_type": "physical_bonus",
+        "stat_value": "30",
+        "gem": "p4",
+        "mini_boss_material": "s12",
+        "weekly_boss_materials": "b12",
+        "common_material": "m2",
+        "talent_book": "lm2",
+        "local_speciality": "rm1"
+    },
+    {
+        "name": "Rosaria",
+        "rarity": 4,
+        "element": "cryo",
+        "weapon": "spear",
+        "base_hp": 12288,
+        "base_atk": 240,
+        "base_def": 709,
+        "stat_type": "atk_purcent",
+        "stat_value": "24",
+        "gem": "p6",
+        "mini_boss_material": "s13",
+        "weekly_boss_materials": "b33",
+        "common_material": "m10",
+        "talent_book": "lm3",
+        "local_speciality": "rm2"
+    },
+    {
+        "name": "Sangonomiya Kokomi",
+        "rarity": 5,
+        "element": "hydro",
+        "weapon": "catalyst",
+        "base_hp": 1347,
+        "base_atk": 234,
+        "base_def": 657,
+        "stat_type": "hydro_bonus",
+        "stat_value": "28,8",
+        "gem": "p2",
+        "mini_boss_material": "s34",
+        "weekly_boss_materials": "b52",
+        "common_material": "m17",
+        "talent_book": "li1",
+        "local_speciality": "ri7"
+    },
+    {
+        "name": "Sayu",
+        "rarity": 4,
+        "element": "anemo",
+        "weapon": "claymore",
+        "base_hp": 11853,
+        "base_atk": 244,
+        "base_def": 744,
+        "stat_type": "elemental_mastery",
+        "stat_value": "96",
+        "gem": "p5",
+        "mini_boss_material": "s31",
+        "weekly_boss_materials": "b43",
+        "common_material": "m12",
+        "talent_book": "li3",
+        "local_speciality": "ri3"
+    },
+    {
+        "name": "Shenhe",
+        "rarity": 5,
+        "element": "cryo",
+        "weapon": "spear",
+        "base_hp": 12992,
+        "base_atk": 303,
+        "base_def": 830,
+        "stat_type": "atk_purcent",
+        "stat_value": "28,8",
+        "gem": "p6",
+        "mini_boss_material": "s37",
+        "weekly_boss_materials": "b52",
+        "common_material": "m12",
+        "talent_book": "ll1",
+        "local_speciality": "rl5"
+    },
+    {
+        "name": "Shikanoin Heizou",
+        "rarity": 4,
+        "element": "anemo",
+        "weapon": "catalyst",
+        "base_hp": 10657,
+        "base_atk": 225,
+        "base_def": 683,
+        "stat_type": "anemo_bonus",
+        "stat_value": "24",
+        "gem": "p5",
+        "mini_boss_material": "s25",
+        "weekly_boss_materials": "b63",
+        "common_material": "m11",
+        "talent_book": "li1",
+        "local_speciality": "ri1"
+    },
+    {
+        "name": "Sucrose",
+        "rarity": 4,
+        "element": "anemo",
+        "weapon": "catalyst",
+        "base_hp": 9243,
+        "base_atk": 169,
+        "base_def": 702,
+        "stat_type": "anemo_bonus",
+        "stat_value": "24",
+        "gem": "p5",
+        "mini_boss_material": "s11",
+        "weekly_boss_materials": "b23",
+        "common_material": "m12",
+        "talent_book": "lm1",
+        "local_speciality": "rm4"
+    },
+    {
+        "name": "Tartaglia",
+        "rarity": 5,
+        "element": "hydro",
+        "weapon": "bow",
+        "base_hp": 13103,
+        "base_atk": 301,
+        "base_def": 814,
+        "stat_type": "hydro_bonus",
+        "stat_value": "28,8",
+        "gem": "p2",
+        "mini_boss_material": "s23",
+        "weekly_boss_materials": "b32",
+        "common_material": "m10",
+        "talent_book": "lm1",
+        "local_speciality": "rl6"
+    },
+    {
+        "name": "Thoma",
+        "rarity": 4,
+        "element": "pyro",
+        "weapon": "spear",
+        "base_hp": 10331,
+        "base_atk": 201,
+        "base_def": 750,
+        "stat_type": "atk_purcent",
+        "stat_value": "24",
+        "gem": "p1",
+        "mini_boss_material": "s33",
+        "weekly_boss_materials": "b52",
+        "common_material": "m11",
+        "talent_book": "li1",
+        "local_speciality": "ri9"
+    },
+    {
+        "name": "Tighnari",
+        "rarity": 5,
+        "element": "dendro",
+        "weapon": "bow",
+        "base_hp": 10849,
+        "base_atk": 267,
+        "base_def": 630,
+        "stat_type": "dendro_bonus",
+        "stat_value": "28,8",
+        "gem": "p3",
+        "mini_boss_material": "s41",
+        "weekly_boss_materials": "b63",
+        "common_material": "m20",
+        "talent_book": "ls1",
+        "local_speciality": "rs3"
+    },
+    {
+        "name": "Venti",
+        "rarity": 5,
+        "element": "anemo",
+        "weapon": "bow",
+        "base_hp": 10531,
+        "base_atk": 263,
+        "base_def": 668,
+        "stat_type": "energy_recharge",
+        "stat_value": "32",
+        "gem": "p5",
+        "mini_boss_material": "s11",
+        "weekly_boss_materials": "b21",
+        "common_material": "m1",
+        "talent_book": "lm3",
+        "local_speciality": "rm3"
     },
     {
         "name": "Xiangling",
@@ -624,7 +960,13 @@
         "base_atk": 225,
         "base_def": 668,
         "stat_type": "elemental_mastery",
-        "stat_value": 96
+        "stat_value": "96",
+        "gem": "p1",
+        "mini_boss_material": "s22",
+        "weekly_boss_materials": "b12",
+        "common_material": "m1",
+        "talent_book": "ll2",
+        "local_speciality": "rl1"
     },
     {
         "name": "Xiao",
@@ -635,7 +977,13 @@
         "base_atk": 349,
         "base_def": 799,
         "stat_type": "crt_rate",
-        "stat_value": 19.2
+        "stat_value": "19,2",
+        "gem": "p5",
+        "mini_boss_material": "s24",
+        "weekly_boss_materials": "b33",
+        "common_material": "m1",
+        "talent_book": "ll1",
+        "local_speciality": "rl5"
     },
     {
         "name": "Xingqiu",
@@ -646,7 +994,13 @@
         "base_atk": 201,
         "base_def": 757,
         "stat_type": "atk_purcent",
-        "stat_value": 24
+        "stat_value": "24",
+        "gem": "p2",
+        "mini_boss_material": "s23",
+        "weekly_boss_materials": "b21",
+        "common_material": "m2",
+        "talent_book": "ll3",
+        "local_speciality": "rl3"
     },
     {
         "name": "Xinyan",
@@ -657,7 +1011,13 @@
         "base_atk": 248,
         "base_def": 798,
         "stat_type": "atk_purcent",
-        "stat_value": 24
+        "stat_value": "24",
+        "gem": "p1",
+        "mini_boss_material": "s22",
+        "weekly_boss_materials": "b31",
+        "common_material": "m11",
+        "talent_book": "ll3",
+        "local_speciality": "rl7"
     },
     {
         "name": "Yae Miko",
@@ -668,7 +1028,13 @@
         "base_atk": 339,
         "base_def": 568,
         "stat_type": "crt_rate",
-        "stat_value": 19.2
+        "stat_value": "19,2",
+        "gem": "p4",
+        "mini_boss_material": "s37",
+        "weekly_boss_materials": "b63",
+        "common_material": "m14",
+        "talent_book": "li3",
+        "local_speciality": "ri6"
     },
     {
         "name": "Yanfei",
@@ -679,7 +1045,13 @@
         "base_atk": 240,
         "base_def": 586,
         "stat_type": "pyro_bonus",
-        "stat_value": 24
+        "stat_value": "24",
+        "gem": "p1",
+        "mini_boss_material": "s24",
+        "weekly_boss_materials": "b42",
+        "common_material": "m11",
+        "talent_book": "ll3",
+        "local_speciality": "rl2"
     },
     {
         "name": "Yaoyao",
@@ -690,7 +1062,13 @@
         "base_atk": 212,
         "base_def": 750,
         "stat_type": "hp_purcent",
-        "stat_value": 24
+        "stat_value": "24",
+        "gem": "p3",
+        "mini_boss_material": "s45",
+        "weekly_boss_materials": "b73",
+        "common_material": "m1",
+        "talent_book": "ll2",
+        "local_speciality": "rl1"
     },
     {
         "name": "Yelan",
@@ -701,7 +1079,13 @@
         "base_atk": 243,
         "base_def": 547,
         "stat_type": "crt_rate",
-        "stat_value": 19.2
+        "stat_value": "19,2",
+        "gem": "p2",
+        "mini_boss_material": "s25",
+        "weekly_boss_materials": "b43",
+        "common_material": "m10",
+        "talent_book": "ll1",
+        "local_speciality": "rl6"
     },
     {
         "name": "Yoimiya",
@@ -712,7 +1096,13 @@
         "base_atk": 322,
         "base_def": 614,
         "stat_type": "crt_rate",
-        "stat_value": 19.2
+        "stat_value": "19,2",
+        "gem": "p1",
+        "mini_boss_material": "s33",
+        "weekly_boss_materials": "b41",
+        "common_material": "m3",
+        "talent_book": "li1",
+        "local_speciality": "ri5"
     },
     {
         "name": "Yun Jin",
@@ -723,7 +1113,13 @@
         "base_atk": 191,
         "base_def": 734,
         "stat_type": "energy_recharge",
-        "stat_value": 26.8
+        "stat_value": "26,8",
+        "gem": "p7",
+        "mini_boss_material": "s36",
+        "weekly_boss_materials": "b53",
+        "common_material": "m2",
+        "talent_book": "ll2",
+        "local_speciality": "rl4"
     },
     {
         "name": "Zhongli",
@@ -734,6 +1130,12 @@
         "base_atk": 251,
         "base_def": 737,
         "stat_type": "geo_bonus",
-        "stat_value": 28.8
+        "stat_value": "28,8",
+        "gem": "p7",
+        "mini_boss_material": "s21",
+        "weekly_boss_materials": "b31",
+        "common_material": "m1",
+        "talent_book": "ll3",
+        "local_speciality": "rl8"
     }
 ]

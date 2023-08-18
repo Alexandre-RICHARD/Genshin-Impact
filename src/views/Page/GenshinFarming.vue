@@ -1,109 +1,41 @@
 <script setup>
+const charactersList = require("@middlewares/genshinCharactersData.json");
+import InputCharacters from "@parts/InputCharacters.vue";
 import { onBeforeMount, reactive } from "vue";
 
-const charactersList = [
-    "Albedo",
-    "Alhaitham",
-    "Aloy",
-    "Amber",
-    "Arataki Itto",
-    "Baizhu",
-    "Barbara",
-    "Beidou",
-    "Bennett",
-    "Candace",
-    "Chongyun",
-    "Collei",
-    "Cyno",
-    "Dehya",
-    "Diluc",
-    "Diona",
-    "Dori",
-    "Eula",
-    "Faruzan",
-    "Fischl",
-    "Ganyu",
-    "Gorou",
-    "Hu Tao",
-    "Jean",
-    "Kaedehara Kazuha",
-    "Kaeya",
-    "Kamisato Ayaka",
-    "Kamisato Ayato",
-    "Kaveh",
-    "Keqing",
-    "Kirara",
-    "Klee",
-    "Kujou Sara",
-    "Kuki Shinobu",
-    "Layla",
-    "Lisa",
-    "Mika",
-    "Mona",
-    "Nahida",
-    "Nilou",
-    "Ningguang",
-    "Noelle",
-    "Nomade",
-    "Qiqi",
-    "Raiden Shogun",
-    "Razor",
-    "Rosaria",
-    "Sangonomiya Kokomi",
-    "Sayu",
-    "Shenhe",
-    "Shikanoin Heizou",
-    "Sucrose",
-    "Tartaglia",
-    "Thoma",
-    "Tighnari",
-    "Venti",
-    "Voyageur",
-    "Xiangling",
-    "Xiao",
-    "Xingqiu",
-    "Xinyan",
-    "Yae Miko",
-    "Yanfei",
-    "Yaoyao",
-    "Yelan",
-    "Yoimiya",
-    "Yun Jin",
-    "Zhongli",
-];
 const boolList = [true, false];
 const lvlList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90];
 const aptList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-let charactersData = reactive([]);
+const data = reactive({ Character: null });
 
 const dataInit = () => {
-    const data = localStorage.getItem("genshinCharactersData");
-    if (data) {
-        charactersData = JSON.parse(data);
-        charactersList.forEach(el => {
-            const currentChar = charactersData.find(fi => el === fi.name);
+    const lsCharacter = localStorage.getItem("genshinCharactersData");
+    if (lsCharacter) {
+        data.Character = JSON.parse(lsCharacter);
+        charactersList.forEach(({ name }) => {
+            const currentChar = data.Character.find(fi => name === fi.name);
             if (currentChar) {
-                const i = charactersData.findIndex(fi => el === fi.name);
-                if (boolList.indexOf(currentChar.got) < 0) charactersData[i].got = false;
-                if (boolList.indexOf(currentChar.doing) < 0) charactersData[i].doing = false;
-                if (boolList.indexOf(currentChar.only) < 0) charactersData[i].only = false;
-                if (lvlList.indexOf(currentChar.cLvl) < 0) charactersData[i].cLvl = 1;
-                if (lvlList.indexOf(currentChar.wLvl) < 0) charactersData[i].wLvl = 90;
-                if (aptList.indexOf(currentChar.cAp1) < 0) charactersData[i].cAp1 = 1;
-                if (aptList.indexOf(currentChar.wAp1) < 0) charactersData[i].wAp1 = 10;
-                if (aptList.indexOf(currentChar.cAp2) < 0) charactersData[i].cAp2 = 1;
-                if (aptList.indexOf(currentChar.wAp2) < 0) charactersData[i].wAp2 = 10;
-                if (aptList.indexOf(currentChar.cAp3) < 0) charactersData[i].cAp3 = 1;
-                if (aptList.indexOf(currentChar.wAp3) < 0) charactersData[i].wAp3 = 10;
+                const i = data.Character.findIndex(fi => name === fi.name);
+                if (boolList.indexOf(currentChar.got) < 0) data.Character[i].got = false;
+                if (boolList.indexOf(currentChar.doing) < 0) data.Character[i].doing = false;
+                if (boolList.indexOf(currentChar.only) < 0) data.Character[i].only = false;
+                if (lvlList.indexOf(currentChar.cLvl) < 0) data.Character[i].cLvl = 1;
+                if (lvlList.indexOf(currentChar.wLvl) < 0) data.Character[i].wLvl = 90;
+                if (aptList.indexOf(currentChar.cAp1) < 0) data.Character[i].cAp1 = 1;
+                if (aptList.indexOf(currentChar.wAp1) < 0) data.Character[i].wAp1 = 10;
+                if (aptList.indexOf(currentChar.cAp2) < 0) data.Character[i].cAp2 = 1;
+                if (aptList.indexOf(currentChar.wAp2) < 0) data.Character[i].wAp2 = 10;
+                if (aptList.indexOf(currentChar.cAp3) < 0) data.Character[i].cAp3 = 1;
+                if (aptList.indexOf(currentChar.wAp3) < 0) data.Character[i].wAp3 = 10;
             } else {
-                charactersData.push(filler(el));
+                data.Character.push(filler(name));
             }
         });
     } else {
-        charactersData = [];
-        charactersList.forEach(el => {
-            charactersData.push(filler(el));
+        data.Character = [];
+        charactersList.forEach(({ name }) => {
+            data.Character.push(filler(name));
         });
     }
     updateLocalStorage();
@@ -127,16 +59,27 @@ const filler = (name) => {
 };
 
 const updateLocalStorage = () => {
-    localStorage.setItem("genshinCharactersData", JSON.stringify(charactersData));
+    localStorage.setItem("genshinCharactersData", JSON.stringify(data.Character));
 };
-
 
 onBeforeMount(() => {
     dataInit();
 });
+
+const cleanLocalStorage = () => {
+    console.log("LocalStorage cleaned");
+    localStorage.removeItem("genshinCharactersData");
+    dataInit();
+};
+
+const handleChange = (index, valuename, value) => {
+    data.Character[index][valuename] = value;
+    updateLocalStorage();
+};
 </script>
 
 <template>
+    <button @click="cleanLocalStorage">VIDER LE LOCAL STORAGE</button>
     <div class="explaination">
         <p>Nom = nom du personnage</p>
         <p>J'ai = Je possède ce personnage</p>
@@ -169,81 +112,52 @@ onBeforeMount(() => {
             </tr>
         </thead>
         <tbody>
-            <tr v-for="character in charactersData" :key="character.name">
-                <td class="name">{{ character.name }}</td>
-                <td>
-                    <input v-model="character.got" type="checkbox" class="checkbox" @change="updateLocalStorage">
-                </td>
-                <td>
-                    <input v-model="character.doing" type="checkbox" class="checkbox" @change="updateLocalStorage">
-                </td>
-                <td>
-                    <input v-model="character.only" type="checkbox" class="checkbox" @change="updateLocalStorage">
-                </td>
-                <td>
-                    <select v-model="character.cLvl" class="select" @change="updateLocalStorage">
-                        <option v-for="lvl in lvlList" :key="lvl" :value="lvl">
-                            {{ lvl }}
-                        </option>
-                        {{ character.cLvl }}
-                    </select>
-                </td>
-                <td>
-                    <select v-model="character.wLvl" class="select" @change="updateLocalStorage">
-                        <option v-for="lvl in lvlList" :key="lvl" :value="lvl">
-                            {{ lvl }}
-                        </option>
-                        {{ character.wLvl }}
-                    </select>
-                </td>
-                <td>
-                    <select v-model="character.cAp1" class="select" @change="updateLocalStorage">
-                        <option v-for="lvl in aptList" :key="lvl" :value="lvl">
-                            {{ lvl }}
-                        </option>
-                        {{ character.cAp1 }}
-                    </select>
-                </td>
-                <td>
-                    <select v-model="character.wAp1" class="select" @change="updateLocalStorage">
-                        <option v-for="lvl in aptList" :key="lvl" :value="lvl">
-                            {{ lvl }}
-                        </option>
-                        {{ character.wAp1 }}
-                    </select>
-                </td>
-                <td>
-                    <select v-model="character.cAp2" class="select" @change="updateLocalStorage">
-                        <option v-for="lvl in aptList" :key="lvl" :value="lvl">
-                            {{ lvl }}
-                        </option>
-                        {{ character.cAp2 }}
-                    </select>
-                </td>
-                <td>
-                    <select v-model="character.wAp2" class="select" @change="updateLocalStorage">
-                        <option v-for="lvl in aptList" :key="lvl" :value="lvl">
-                            {{ lvl }}
-                        </option>
-                        {{ character.wAp2 }}
-                    </select>
-                </td>
-                <td>
-                    <select v-model="character.cAp3" class="select" @change="updateLocalStorage">
-                        <option v-for="lvl in aptList" :key="lvl" :value="lvl">
-                            {{ lvl }}
-                        </option>
-                        {{ character.cAp3 }}
-                    </select>
-                </td>
-                <td>
-                    <select v-model="character.wAp3" class="select" @change="updateLocalStorage">
-                        <option v-for="lvl in aptList" :key="lvl" :value="lvl">
-                            {{ lvl }}
-                        </option>
-                        {{ character.wAp3 }}
-                    </select>
-                </td>
+            <tr v-for="(character, index) in data.Character" :key="character.name">
+                <td class="name">{{ index + 1 }} - {{ character.name }}</td>
+                <InputCharacters
+                    v-model:checked="character.got" type="checkbox" :index="index" valuename="got"
+                    @update:checked="handleChange"
+                />
+                <InputCharacters
+                    v-model:checked="character.doing" type="checkbox" :disabled="character.only" :index="index"
+                    valuename="doing" @update:checked="handleChange"
+                />
+                <InputCharacters
+                    v-model:checked="character.only" type="checkbox" :disabled="!character.doing"
+                    :index="index" valuename="only" @update:checked="handleChange"
+                />
+                <InputCharacters
+                    v-model:value="character.cLvl" type="select" :index="index" valuename="cLvl"
+                    :list="lvlList.filter((el) => el <= character.wLvl)" @update:value="handleChange"
+                />
+                <InputCharacters
+                    v-model:value="character.wLvl" type="select" :index="index" valuename="wLvl"
+                    :list="lvlList.filter((el) => el >= character.cLvl)" @update:value="handleChange"
+                />
+                <InputCharacters
+                    v-model:value="character.cAp1" type="select" :index="index" valuename="cAp1"
+                    :list="aptList.filter((el) => el <= character.wAp1)" @update:value="handleChange"
+                />
+                <InputCharacters
+                    v-model:value="character.wAp1" type="select" :index="index" valuename="wAp1"
+                    :list="aptList.filter((el) => el >= character.cAp1)" @update:value="handleChange"
+                />
+                <InputCharacters
+                    v-model:value="character.cAp2" type="select" :index="index" valuename="cAp2"
+                    :list="aptList.filter((el) => el <= character.wAp2)" @update:value="handleChange"
+                />
+                <InputCharacters
+                    v-model:value="character.wAp2" type="select" :index="index" valuename="wAp2"
+                    :list="aptList.filter((el) => el >= character.cAp2)" @update:value="handleChange"
+                />
+                <InputCharacters
+                    v-model:value="character.cAp3" type="select" :index="index" valuename="cAp3"
+                    :list="aptList.filter((el) => el <= character.wAp3)" @update:value="handleChange"
+                />
+                <InputCharacters
+                    v-model:value="character.wAp3" type="select" :index="index" valuename="wAp3"
+                    :list="aptList.filter((el) => el >= character.cAp3)" @update:value="handleChange"
+                />
             </tr>
         </tbody>
     </table>
