@@ -96,4 +96,25 @@ Et voici le [répo du serveur](https://github.com/Alexandre-RICHARD/Portfolio-Ba
 -   Rajout d'un props group aux différents input afin de pouvoir après le emit, appeler la fonction handleChange et qu'elle change la bonne donnée
 -   Le tableau des Materials est maintenant fonctionnel, sauvegardé en temps réel et réactif
 
+### 1.1.1 `19 août 2023`
+
+-   Sur le fichier json contenant les informations sur les ressources de farm, les code de ressources ont été mis en minuscule
+-   Ajout du fichier json contenant les informations sur les niveau et aptitudes, ce qu'ils demandent comme ressources
+-   Pour pallier au nouveau problème que posent le fait d'avoir des valeur de niveau qui ne soient plus uniquement des nombres, nouveau système mis en place
+-   En effet, inputCreator prend en compte un 4ème type d'input, select se divisant en select-level et select-aptitude
+-   La différence se fait que le tableau contenant les informations sur les aptitudes est plus simple, uniquement des nombres alors que dans les niveaux, il y a des string
+-   Ainsi on envoi dans le composant tous le tableaux, pas juste un tableau de nombre. L'ID est sauvegardé et utilisé comme value, mais c'est le nom qui est affiché même s'ils sont identiques.
+-   Dans le fichier principal GenshinFarming :
+-   Importation du fichier contenant les informations sur les niveaux
+-   Dans DataInit, on vérifie la présence et la validité des valeurs qui sont stockées dans le localStorage. On utilisait donc deux tableaux contenant les valeurs possibles d'aptitudes et de niveaux. Ces tableaux sont maintenant générés à partir du fichier json.
+-   Rajout d'une troisième valeurs dans l'objet data : Options. Une logique différente des deux autres mais stockées de la même façon, il va stocker les différents paramètres choisis par l'utilisateur
+-   Par défaut, en comptant maintenant les 6 niveaux d'ascension, les id des niveaux vont jusqu'à 96, ce qui est la valeur par défaut maintenant au lieu de 90
+-   Dans la fonction updateLocalStorage, la variable type s'appelle désormais group pour ne pas laisser de confusion possible avec d'autres variables type
+-   Rajout de la propriétés computed de vue.JS afin de calculer de manière réactive un sous-tableau de personnage à afficher en fonction de si l'utilisateur ne veut voir que les personnages qu'il a choisi de faire
+-   Rajout d'une fonction de tri pour être sûr que les différents personnages apparaissent dans l'ordre alphabétique
+-   Un peu de rangement, et regroupement des différents outils de developpement ou options dans un même encadré
+-   Possibilité maintenant de faire apparraître ou non les explications détaillées.
+-   Rajout d'une ligne d'explication pour évoquer les niveaux nommées XX + en rapport avec les Ascension de personnages
+-   Quelques changements dans les styles
+
 </details>

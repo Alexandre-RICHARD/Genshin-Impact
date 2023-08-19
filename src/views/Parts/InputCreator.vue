@@ -46,7 +46,17 @@ defineEmits(["update:checked", "update:value"]);
             @change="$emit('update:checked', group, index, valuename, $event.target.checked)"
         >
     </td>
-    <td v-if="type === 'select'">
+
+    <td v-if="type === 'select-level'">
+        <select :value="value" class="select" @change="$emit('update:value', group, index, valuename, parseInt($event.target.value))">
+            <option v-for="lvl in list" :key="lvl.id" :value="lvl.id">
+                {{ lvl.level }}
+            </option>
+            {{ list.find(el => el.id === value).level }}
+        </select>
+    </td>
+
+    <td v-if="type === 'select-aptitude'">
         <select :value="value" class="select" @change="$emit('update:value', group, index, valuename, parseInt($event.target.value))">
             <option v-for="lvl in list" :key="lvl" :value="lvl">
                 {{ lvl }}
@@ -54,7 +64,7 @@ defineEmits(["update:checked", "update:value"]);
             {{ value }}
         </select>
     </td>
-
+    
     <td v-if="type === 'number'">
         <input
             type="number" min="0" step="1" :value="value"

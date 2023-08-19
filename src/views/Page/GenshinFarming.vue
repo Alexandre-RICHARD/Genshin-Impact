@@ -1,14 +1,23 @@
 <script setup>
 const charactersList = require("@middlewares/genshinCharactersData.json");
 const materialsList = require("@middlewares/genshinMaterialData.json");
+const levelingData = require("@middlewares/genshinLevelingData.json");
 import InputCreator from "@parts/InputCreator.vue";
-import { onBeforeMount, reactive } from "vue";
+import { computed, onBeforeMount, reactive } from "vue";
 
-const boolList = [true, false];
-const lvlList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90];
-const aptList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+onBeforeMount(() => {
+    dataInit();
+});
 
-const data = reactive({ Characters: null, Material: null });
+const lvlList = levelingData.level.map((el) => {
+    return el.id;
+});
+
+const aptList = levelingData.aptitude.map((el) => {
+    return el.level;
+});
+
+const data = reactive({ Characters: null, Material: null, Options: {} });
 
 const dataInit = () => {
     // Pour gérer les stats et souhaits de chaque perso
@@ -19,11 +28,11 @@ const dataInit = () => {
             const currentChar = data.Characters.find(fi => name === fi.name);
             if (currentChar) {
                 const i = data.Characters.findIndex(fi => name === fi.name);
-                if (boolList.indexOf(currentChar.got) < 0) data.Characters[i].got = false;
-                if (boolList.indexOf(currentChar.doing) < 0) data.Characters[i].doing = false;
-                if (boolList.indexOf(currentChar.only) < 0) data.Characters[i].only = false;
+                if ([false, true].indexOf(currentChar.got) < 0) data.Characters[i].got = false;
+                if ([false, true].indexOf(currentChar.doing) < 0) data.Characters[i].doing = false;
+                if ([false, true].indexOf(currentChar.only) < 0) data.Characters[i].only = false;
                 if (lvlList.indexOf(currentChar.cLvl) < 0) data.Characters[i].cLvl = 1;
-                if (lvlList.indexOf(currentChar.wLvl) < 0) data.Characters[i].wLvl = 90;
+                if (lvlList.indexOf(currentChar.wLvl) < 0) data.Characters[i].wLvl = 96;
                 if (aptList.indexOf(currentChar.cAp1) < 0) data.Characters[i].cAp1 = 1;
                 if (aptList.indexOf(currentChar.wAp1) < 0) data.Characters[i].wAp1 = 10;
                 if (aptList.indexOf(currentChar.cAp2) < 0) data.Characters[i].cAp2 = 1;
@@ -62,6 +71,20 @@ const dataInit = () => {
         });
     }
     updateLocalStorage("genshinMaterialData", "Material");
+
+    // Pour gérer les options
+    const lsOptions = localStorage.getItem("genshinOptionsData");
+    if (lsOptions) {
+        data.Options = JSON.parse(lsOptions);
+        if ([false, true].indexOf(data.Options.onlyShowsDoingCharacter) < 0) data.Options.onlyShowsDoingCharacter = false;
+        if ([false, true].indexOf(data.Options.explaination) < 0) data.Options.explaination = true;
+    } else {
+        data.Options = {
+            onlyShowsDoingCharacter: false,
+            explaination: true,
+        };
+    }
+    updateLocalStorage("genshinOptionsData", "Options");
 };
 
 const filler = (type, name) => {
@@ -73,7 +96,7 @@ const filler = (type, name) => {
             doing: false,
             only: false,
             cLvl: 1,
-            wLvl: 90,
+            wLvl: 96,
             cAp1: 1,
             wAp1: 10,
             cAp2: 1,
@@ -90,29 +113,55 @@ const filler = (type, name) => {
 
 };
 
-const updateLocalStorage = (type, array) => {
-    localStorage.setItem(type, JSON.stringify(data[array]));
-};
-
-onBeforeMount(() => {
-    dataInit();
-});
-
 const cleanLocalStorage = () => {
     localStorage.removeItem("genshinCharactersData");
     localStorage.removeItem("genshinMaterialData");
+    localStorage.removeItem("genshinOptionsData");
     dataInit();
 };
 
-const handleChange = (type, index, valuename, value) => {
-    data[type][index][valuename] = value;
-    updateLocalStorage(`genshin${type}Data`, type);
+const updateLocalStorage = (type, array) => {
+    localStorage.setItem(type, JSON.stringify(data[array]));
+};
+const handleChange = (group, index, valuename, value) => {
+    data[group][index][valuename] = value;
+    updateLocalStorage(`genshin${group}Data`, group);
+};
+
+const filteredCharacters = computed(() => {
+    if (data.Options.onlyShowsDoingCharacter) {
+        return data.Characters.filter(el => el.doing === true);
+    } else {
+        return data.Characters;
+    }
+});
+
+const sortFunction = (a, b) => {
+    if ( a.name < b.name ) return -1;
+    if ( a.name > b.name ) return 1;
+    return 0;
 };
 </script>
 
 <template>
-    <button @click="cleanLocalStorage">VIDER LE LOCAL STORAGE</button>
-    <div class="explaination">
+    <div class="dev-options">
+        <button class="clean-button" @click="cleanLocalStorage">VIDER LE LOCAL STORAGE</button>
+        <div class="boolean">
+            <input
+                id="boolean-doing" v-model="data.Options.onlyShowsDoingCharacter" class="boolean-checkbox" type="checkbox"
+                name="boolean-doing" @change="updateLocalStorage('genshinOptionsData', 'Options');"
+            >
+            <label class="boolean-label" for="boolean-doing">Ne montrer que les "doing"</label>
+        </div>
+        <div class="boolean">
+            <input
+                id="boolean-explaination" v-model="data.Options.explaination" class="boolean-checkbox" type="checkbox"
+                name="boolean-explaination" @change="updateLocalStorage('genshinOptionsData', 'Options');"
+            >
+            <label class="boolean-label" for="boolean-explaination">Montrer les explications</label>
+        </div>
+    </div>
+    <div v-if="data.Options.explaination" class="explaination">
         <p>Nom = nom du personnage</p>
         <p>J'ai = Je possède ce personnage</p>
         <p>Build = Je veux monter ce personnage</p>
@@ -125,7 +174,27 @@ const handleChange = (type, index, valuename, value) => {
         <p>Ap2-V = Le niveau auquel je veux améliorer sa compétence élémentaire</p>
         <p>Ap3-A = Le niveau actuelle de son déchaînement élémentaire</p>
         <p>Ap3-V = Le niveau auquel je veux améliorer son déchaînement élémentaire</p>
+        <br>
+        <p>Les niveaux suivis d'un "+" représentent les Ascensions de personnages après les niveaux 20, 40, 50, 60, 70 et 80</p>
     </div>
+    <table class="farming-review">
+        <thead>
+            <tr>
+                <th>Nom de la ressources</th>
+                <th>Combien il en faut</th>
+                <th>Combien j'en ai</th>
+                <th>Il m'en faut</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
+            </tr>
+        </tbody>
+    </table>
     <div class="tabs-contener">
         <table class="all-character-progress">
             <thead>
@@ -145,8 +214,8 @@ const handleChange = (type, index, valuename, value) => {
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(character, index) in data.Characters" :key="character.name">
-                    <td class="name">{{ index + 1 }} - {{ character.name }}</td>
+                <tr v-for="(character, index) in filteredCharacters.sort(sortFunction)" :key="character.name">
+                    <td class="name">{{ character.name }}</td>
                     <InputCreator
                         v-model:checked="character.got" type="checkbox" :index="index" valuename="got"
                         group="Characters" @update:checked="handleChange"
@@ -160,36 +229,44 @@ const handleChange = (type, index, valuename, value) => {
                         :index="index" valuename="only" group="Characters" @update:checked="handleChange"
                     />
                     <InputCreator
-                        v-model:value="character.cLvl" type="select" :index="index" valuename="cLvl"
-                        :list="lvlList.filter((el) => el <= character.wLvl)" group="Characters" @update:value="handleChange"
+                        v-model:value="character.cLvl" type="select-level" :index="index" valuename="cLvl"
+                        :list="levelingData.level.filter((el) => el.id <= character.wLvl)" group="Characters"
+                        @update:value="handleChange"
                     />
                     <InputCreator
-                        v-model:value="character.wLvl" type="select" :index="index" valuename="wLvl"
-                        :list="lvlList.filter((el) => el >= character.cLvl)" group="Characters" @update:value="handleChange"
+                        v-model:value="character.wLvl" type="select-level" :index="index" valuename="wLvl"
+                        :list="levelingData.level.filter((el) => el.id >= character.cLvl)" group="Characters"
+                        @update:value="handleChange"
                     />
                     <InputCreator
-                        v-model:value="character.cAp1" type="select" :index="index" valuename="cAp1"
-                        :list="aptList.filter((el) => el <= character.wAp1)" group="Characters" @update:value="handleChange"
+                        v-model:value="character.cAp1" type="select-aptitude" :index="index" valuename="cAp1"
+                        :list="aptList.filter((el) => el <= character.wAp1)" group="Characters"
+                        @update:value="handleChange"
                     />
                     <InputCreator
-                        v-model:value="character.wAp1" type="select" :index="index" valuename="wAp1"
-                        :list="aptList.filter((el) => el >= character.cAp1)" group="Characters" @update:value="handleChange"
+                        v-model:value="character.wAp1" type="select-aptitude" :index="index" valuename="wAp1"
+                        :list="aptList.filter((el) => el >= character.cAp1)" group="Characters"
+                        @update:value="handleChange"
                     />
                     <InputCreator
-                        v-model:value="character.cAp2" type="select" :index="index" valuename="cAp2"
-                        :list="aptList.filter((el) => el <= character.wAp2)" group="Characters" @update:value="handleChange"
+                        v-model:value="character.cAp2" type="select-aptitude" :index="index" valuename="cAp2"
+                        :list="aptList.filter((el) => el <= character.wAp2)" group="Characters"
+                        @update:value="handleChange"
                     />
                     <InputCreator
-                        v-model:value="character.wAp2" type="select" :index="index" valuename="wAp2"
-                        :list="aptList.filter((el) => el >= character.cAp2)" group="Characters" @update:value="handleChange"
+                        v-model:value="character.wAp2" type="select-aptitude" :index="index" valuename="wAp2"
+                        :list="aptList.filter((el) => el >= character.cAp2)" group="Characters"
+                        @update:value="handleChange"
                     />
                     <InputCreator
-                        v-model:value="character.cAp3" type="select" :index="index" valuename="cAp3"
-                        :list="aptList.filter((el) => el <= character.wAp3)" group="Characters" @update:value="handleChange"
+                        v-model:value="character.cAp3" type="select-aptitude" :index="index" valuename="cAp3"
+                        :list="aptList.filter((el) => el <= character.wAp3)" group="Characters"
+                        @update:value="handleChange"
                     />
                     <InputCreator
-                        v-model:value="character.wAp3" type="select" :index="index" valuename="wAp3"
-                        :list="aptList.filter((el) => el >= character.cAp3)" group="Characters" @update:value="handleChange"
+                        v-model:value="character.wAp3" type="select-aptitude" :index="index" valuename="wAp3"
+                        :list="aptList.filter((el) => el >= character.cAp3)" group="Characters"
+                        @update:value="handleChange"
                     />
                 </tr>
             </tbody>
@@ -198,14 +275,12 @@ const handleChange = (type, index, valuename, value) => {
             <thead>
                 <tr>
                     <th>Nom</th>
-                    <th>Code</th>
                     <th>Quantité</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(material, index) in data.Material" :key="material.id">
                     <td class="name">{{ materialsList.find((el) => el.code === material.code).name }}</td>
-                    <td>{{ material.code }}</td>
                     <InputCreator
                         v-model:value="material.quantity" type="number" :index="index" valuename="quantity"
                         group="Material" @update:value="handleChange"
@@ -218,6 +293,43 @@ const handleChange = (type, index, valuename, value) => {
 
 <style lang="scss">
 @import "@styles/variables.scss";
+
+.dev-options {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 10px;
+    color: #000000;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    .clean-button {
+        font-weight: 500;
+
+        &:hover {
+            text-decoration: underline 3px;
+        }
+    }
+
+    .boolean {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 8px;
+        align-items: center;
+
+        &-checkbox {
+            appearance: checkbox;
+            width: 18px;
+            height: 18px;
+        }
+
+        &-label {
+            font-weight: 500;
+        }
+    }
+}
 
 .tabs-contener {
     display: flex;
