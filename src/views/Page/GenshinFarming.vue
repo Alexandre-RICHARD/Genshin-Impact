@@ -145,64 +145,48 @@ function sortFunction(...args) {
 }
 
 const farmingMaterial = computed(() => {
-    const temp = [];
+    const computedBuildArray = [];
+    const processVar = [
+        {searchLoc: "level", currentValue: "cLvl", wantedValue: "wLvl"},
+        {searchLoc: "aptitude", currentValue: "cAp1", wantedValue: "wAp1"},
+        {searchLoc: "aptitude", currentValue: "cAp2", wantedValue: "wAp2"},
+        {searchLoc: "aptitude", currentValue: "cAp3", wantedValue: "wAp3"},
+    ];
 
-    data.Characters.filter(el => el.doing === true).forEach(el => {
-        const currentcharacter = charactersList.find(char => char.name === el.name);
-        const materialType = {};
-        const levelToDo = levelingData.level.filter(level => level.id > el.cLvl && level.id <= el.wLvl);
-        if (levelToDo.length > 0) {
-            levelToDo.forEach(level => {
-                for (const [key, value] of Object.entries(level)) {
-                    if (value > 0 && key != "id" && key!= "level") {
-                        if (materialType[key]) {
-                            materialType[key] += value;
-                        } else {
-                            materialType[key] = value;
-                        }
-                    }
-                }
-            });
-        }
-        for (let i = 1 ; i < 4 ; i++) {
-            const AptTodo = levelingData.aptitude.filter(aptitude => aptitude.level > el[`cAp${i}`] && aptitude.level <= el[`wAp${i}`]);
-            if (AptTodo.length > 0) {
-                AptTodo.forEach(aptitude => {
-                    for (const [key, value] of Object.entries(aptitude)) {
-                        if (value > 0 && key!= "level") {
-                            if (materialType[key]) {
-                                materialType[key] += value;
+    data.Characters.filter(char => char.doing === true).forEach(char => {
+        const currentcharacter = charactersList.find(find => find.name === char.name);
+        for (let i = 0 ; i < 4 ; i++) {
+            const progressStep = levelingData[processVar[i].searchLoc].filter(step => step.id > char[processVar[i].currentValue] && step.id <= char[processVar[i].wantedValue]);
+            if (progressStep.length > 0) {
+                progressStep.forEach(step => {
+                    for (const [key, value] of Object.entries(step)) {
+                        if (value > 0 && key != "id" && key!= "level") {                            
+                            let materialCode;
+                            if (!isNaN(key.charAt(key.length-1))) {
+                                materialCode = currentcharacter[key.slice(0, -2)]+key.slice(-1);
                             } else {
-                                materialType[key] = value;
+                                materialCode = currentcharacter[key];
                             }
+                            const findIndex = computedBuildArray.findIndex(fi => fi.code === materialCode);
+                            if (findIndex >= 0) {
+                                computedBuildArray[findIndex].quantity += value;
+                            } else {
+                                let materialData = {
+                                    ...materialsList.find(material => material.code === materialCode),
+                                    quantity: value,
+                                };
+                                computedBuildArray.push(materialData);
+                            }
+
                         }
                     }
                 });
             }
         }
-        for (const [key, value] of Object.entries(materialType)) {
-            let materialCode;
-            if (!isNaN(key.charAt(key.length-1))) {
-                materialCode = currentcharacter[key.slice(0, -2)]+key.slice(-1);
-            } else {
-                materialCode = currentcharacter[key];
-            }
-
-            const findIndex = temp.findIndex(fi => fi.code === materialCode);
-            if (findIndex >= 0) {
-                temp[findIndex].quantity += value;
-            } else {
-                let materialData = {
-                    ...materialsList.find(material => material.code === materialCode),
-                    quantity: value,
-                };
-                temp.push(materialData);
-            }
-        }
     });
-    const xp_book = temp.findIndex(fi => fi.code === "g2");
-    if (xp_book >= 0) temp[xp_book].quantity = Math.ceil(temp[xp_book].quantity);
-    return temp.sort(sortFunction("id"));
+    const xp_book = computedBuildArray.findIndex(fi => fi.code === "g2");
+    if (xp_book >= 0) computedBuildArray[xp_book].quantity = Math.ceil(computedBuildArray[xp_book].quantity);
+    return computedBuildArray.sort(sortFunction("id"));
 });
 </script>
 

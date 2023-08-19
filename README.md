@@ -125,4 +125,10 @@ Et voici le [répo du serveur](https://github.com/Alexandre-RICHARD/Portfolio-Ba
 -   Création d'un objet computed afin de lister et regrouper toutes les ressources nécessaires en fonction de ce que l'utilisateur à mis comme données.
 -   En gros, on prend tous les persos mis en "doing", on prend tous les niveaux qui manquent, on regarde ce qu'ils demandent, on fait le cumul de ceci. Une fois fait, on converti le nom de base de la ressource en son code, et après l'avoir fait pour chaque perso on fait la somme de tous et on l'affiche dans un tableau simple pour l'instant.
 
+### 1.1.3 `20 août 2023`
+
+-   Factorisation à l'extrême de la fonction permettant de résumé en un seul objet toutes les ressources nécéssaires
+-   Changement de noms de quelques variables
+-   Rajout d'un ID sur les level d'aptitude afin de pouvoir factoriser la fonction citée plus haut
+
 </details>
