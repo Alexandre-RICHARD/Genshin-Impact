@@ -85,4 +85,15 @@ Et voici le [répo du serveur](https://github.com/Alexandre-RICHARD/Portfolio-Ba
 -   Enveloppage du tableau précédent avec le nouveau pour les mettre en display flex
 -   Optimisation et uniformisation du style des 2 tableaux
 
+### 1.1.0 `19 août 2023`
+
+-   Rajout du côté réactif des données d'inventaire de matériaux de farm
+-   Toutes les notions de data.Character sont devenu data.Characters afin que tous les appels à ces données soient identiques et puissent être dynamique avec une seule variable
+-   La fonction filler était déjà réactive mais l'est davantage. En effet, elle permet de fill les deux champs qui nous intéresse, Character et Material à l'aide d'une nouvelle variable
+-   Duplication de la logique de code de DataInit pour le côté Characters afin de qu'il fasse la même chose mais pour les materials
+-   Utilisation d'un switch case pour la fonction filler
+-   cleanLocalStorage clean maintenant également le localStorage des Materials
+-   Rajout d'un props group aux différents input afin de pouvoir après le emit, appeler la fonction handleChange et qu'elle change la bonne donnée
+-   Le tableau des Materials est maintenant fonctionnel, sauvegardé en temps réel et réactif
+
 </details>

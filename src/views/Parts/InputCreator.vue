@@ -4,6 +4,10 @@ defineProps({
         type: String,
         required: true,
     },
+    group: {
+        type: String,
+        required: true,
+    },
     value: {
         type: Number,
         default: 1,
@@ -39,15 +43,22 @@ defineEmits(["update:checked", "update:value"]);
             type="checkbox"
             :checked="checked"
             :disabled="disabled"
-            @change="$emit('update:checked', index, valuename, $event.target.checked)"
+            @change="$emit('update:checked', group, index, valuename, $event.target.checked)"
         >
     </td>
     <td v-if="type === 'select'">
-        <select :value="value" class="select" @change="$emit('update:value', index, valuename, parseInt($event.target.value))">
+        <select :value="value" class="select" @change="$emit('update:value', group, index, valuename, parseInt($event.target.value))">
             <option v-for="lvl in list" :key="lvl" :value="lvl">
                 {{ lvl }}
             </option>
             {{ value }}
         </select>
+    </td>
+
+    <td v-if="type === 'number'">
+        <input
+            type="number" min="0" step="1" :value="value"
+            class="number" @change="$emit('update:value', group, index, valuename, parseInt($event.target.value))"
+        >
     </td>
 </template>
