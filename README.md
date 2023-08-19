@@ -117,4 +117,12 @@ Et voici le [répo du serveur](https://github.com/Alexandre-RICHARD/Portfolio-Ba
 -   Rajout d'une ligne d'explication pour évoquer les niveaux nommées XX + en rapport avec les Ascension de personnages
 -   Quelques changements dans les styles
 
+### 1.1.2 `19 août 2023`
+
+-   Même si cela surcharge un peu plus encore le fichier json, rajout de trois propriétés pour chaque personne sur leur code matériel pour les ressources globales
+-   Dans le fichier json des material, modification de la valeur des character_xp en experience_book pour que la valeur soit directement utilisable
+-   Modification de la fonction sortFunction afin qu'elle puisse recevoir un argument en plus disant quelle clé de l'objet doit servir au tri
+-   Création d'un objet computed afin de lister et regrouper toutes les ressources nécessaires en fonction de ce que l'utilisateur à mis comme données.
+-   En gros, on prend tous les persos mis en "doing", on prend tous les niveaux qui manquent, on regarde ce qu'ils demandent, on fait le cumul de ceci. Une fois fait, on converti le nom de base de la ressource en son code, et après l'avoir fait pour chaque perso on fait la somme de tous et on l'affiche dans un tableau simple pour l'instant.
+
 </details>

@@ -1,6 +1,6 @@
 {
     "name": "project-to-define",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "scripts": {
         "start": "cross-env NODE_ENV=development webpack serve --history-api-fallback",
         "build": "cross-env NODE_ENV=production webpack",
