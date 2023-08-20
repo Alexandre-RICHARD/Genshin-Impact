@@ -167,4 +167,8 @@ Et voici le [répo du serveur](https://github.com/Alexandre-RICHARD/Portfolio-Ba
 -   Renommage de la fonction handleTimeFunction en handleTime
 -   Modification de la logique de création des heures ainsi que leur mise en forme (beaucoup appris au passage)
 
+### 1.2.3 `21 août 2023`
+
+-   Supression du triage directement dans le v-for du tableau. C'est désormais fait en amont dans le computed filteredCharacters
+
 </details>

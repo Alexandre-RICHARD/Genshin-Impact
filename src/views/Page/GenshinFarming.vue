@@ -128,9 +128,9 @@ const handleChange = (group, index, valuename, value) => {
 
 const filteredCharacters = computed(() => {
     if (data.Options.onlyShowsDoingCharacter) {
-        return data.Characters.filter(el => el.doing === true);
+        return [...data.Characters].filter(el => el.doing === true).sort(sortFunction("name"));
     } else {
-        return data.Characters;
+        return [...data.Characters].sort(sortFunction("name"));
     }
 });
 
@@ -143,20 +143,12 @@ const filteredMaterials = computed(() => {
 });
 
 function sortFunction(...args) {
-    console.log("Called");
     return function (a, b) {
         if (a[args[0]] < b[args[0]]) return -1;
         if (a[args[0]] > b[args[0]]) return 1;
         return 0;
     };
 }
-
-const sortFunctionTWO = (a, b) => {
-    console.log("Called");
-    if (a.name < b.name) return 1;
-    if (a.name > b.name) return -1;
-    return 0;
-};
 
 const farmingMaterial = computed(() => {
     const computedBuildArray = [];
@@ -250,9 +242,7 @@ const handleTime = {
 
         const serverTime = Date.now() + handleTime.timeZone - handleTime.minusTheFourHoursReset;
         currentTime.value = handleTime.renderDate(new Date(Date.now()));
-
         coultdownReset.value = handleTime.renderDate(handleTime.coultdownBuilder(new Date(serverTime + 24 * handleTime.oneHour), new Date(serverTime)));
-        
         serverDay.value = ((new Date(Date.now() + handleTime.timeZone - handleTime.minusTheFourHoursReset).getDay() + 6) % 7) + 1;
 
         handleTime.timeRefresh();
@@ -395,7 +385,9 @@ onBeforeMount(() => {
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="character in filteredCharacters.sort(sortFunctionTWO)" :key="character.name">
+                <tr
+                    v-for="character in filteredCharacters" :key="character.name"
+                >
                     <td class="name">{{ character.name }}</td>
                     <InputCreator
                         v-model:checked="character.got" type="checkbox" :index="data.Characters.findIndex(el => el.name === character.name)" valuename="got"
