@@ -67,7 +67,8 @@ defineEmits(["update:checked", "update:value"]);
     
     <td v-if="type === 'number'">
         <input
-            type="number" min="0" step="1" :value="value"
+            type="number" min="0" step="1" max="1000000000"
+            :value="value"
             class="number" @change="$emit('update:value', group, index, valuename, parseInt($event.target.value))"
         >
     </td>

@@ -263,7 +263,7 @@ const handleTimeFunction = {
 
 onBeforeMount(() => {
     dataInit();
-    handleTimeFunction.timeRefresh();
+    // handleTimeFunction.timeRefresh();
 });
 </script>
 
@@ -279,17 +279,17 @@ onBeforeMount(() => {
         </div>
         <div class="boolean">
             <input
-                id="boolean-doing" v-model="data.Options.onlyShowsNeededMaterials" class="boolean-checkbox"
-                type="checkbox" name="boolean-doing" @change="updateLocalStorage('genshinOptionsData', 'Options');"
+                id="boolean-needed" v-model="data.Options.onlyShowsNeededMaterials" class="boolean-checkbox"
+                type="checkbox" name="boolean-needed" @change="updateLocalStorage('genshinOptionsData', 'Options');"
             >
-            <label class="boolean-label" for="boolean-doing">Afficher uniquement les ressources nécessaires</label>
+            <label class="boolean-label" for="boolean-needed">Afficher uniquement les ressources nécessaires</label>
         </div>
         <div class="boolean">
             <input
-                id="boolean-doing" v-model="data.Options.alwaysOneMoreMaterial" class="boolean-checkbox" type="checkbox"
-                name="boolean-doing" @change="updateLocalStorage('genshinOptionsData', 'Options');"
+                id="boolean-one-more" v-model="data.Options.alwaysOneMoreMaterial" class="boolean-checkbox" type="checkbox"
+                name="boolean-one-more" @change="updateLocalStorage('genshinOptionsData', 'Options');"
             >
-            <label class="boolean-label" for="boolean-doing">Toujours avoir 1 de plus</label>
+            <label class="boolean-label" for="boolean-one-more">Toujours avoir 1 de plus</label>
         </div>
         <div class="boolean">
             <input
@@ -335,81 +335,6 @@ onBeforeMount(() => {
         </p>
     </div>
     <div class="tabs-contener">
-        <table class="all-character-progress">
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>J'ai</th>
-                    <th>Build</th>
-                    <th>Only</th>
-                    <th>Lvl-A</th>
-                    <th>Lvl-V</th>
-                    <th>Ap1-A</th>
-                    <th>Ap1-V</th>
-                    <th>Ap2-A</th>
-                    <th>Ap2-V</th>
-                    <th>Ap3-A</th>
-                    <th>Ap3-V</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(character, index) in filteredCharacters.sort(sortFunction('name'))" :key="character.name">
-                    <td class="name">{{ character.name }}</td>
-                    <InputCreator
-                        v-model:checked="character.got" type="checkbox" :index="index" valuename="got"
-                        group="Characters" @update:checked="handleChange"
-                    />
-                    <InputCreator
-                        v-model:checked="character.doing" type="checkbox" :disabled="character.only"
-                        :index="index" valuename="doing" group="Characters" @update:checked="handleChange"
-                    />
-                    <InputCreator
-                        v-model:checked="character.only" type="checkbox" :disabled="!character.doing"
-                        :index="index" valuename="only" group="Characters" @update:checked="handleChange"
-                    />
-                    <InputCreator
-                        v-model:value="character.cLvl" type="select-level" :index="index" valuename="cLvl"
-                        :list="levelingData.level.filter((el) => el.id <= character.wLvl)" group="Characters"
-                        @update:value="handleChange"
-                    />
-                    <InputCreator
-                        v-model:value="character.wLvl" type="select-level" :index="index" valuename="wLvl"
-                        :list="levelingData.level.filter((el) => el.id >= character.cLvl)" group="Characters"
-                        @update:value="handleChange"
-                    />
-                    <InputCreator
-                        v-model:value="character.cAp1" type="select-aptitude" :index="index" valuename="cAp1"
-                        :list="aptList.filter((el) => el <= character.wAp1)" group="Characters"
-                        @update:value="handleChange"
-                    />
-                    <InputCreator
-                        v-model:value="character.wAp1" type="select-aptitude" :index="index" valuename="wAp1"
-                        :list="aptList.filter((el) => el >= character.cAp1)" group="Characters"
-                        @update:value="handleChange"
-                    />
-                    <InputCreator
-                        v-model:value="character.cAp2" type="select-aptitude" :index="index" valuename="cAp2"
-                        :list="aptList.filter((el) => el <= character.wAp2)" group="Characters"
-                        @update:value="handleChange"
-                    />
-                    <InputCreator
-                        v-model:value="character.wAp2" type="select-aptitude" :index="index" valuename="wAp2"
-                        :list="aptList.filter((el) => el >= character.cAp2)" group="Characters"
-                        @update:value="handleChange"
-                    />
-                    <InputCreator
-                        v-model:value="character.cAp3" type="select-aptitude" :index="index" valuename="cAp3"
-                        :list="aptList.filter((el) => el <= character.wAp3)" group="Characters"
-                        @update:value="handleChange"
-                    />
-                    <InputCreator
-                        v-model:value="character.wAp3" type="select-aptitude" :index="index" valuename="wAp3"
-                        :list="aptList.filter((el) => el >= character.cAp3)" group="Characters"
-                        @update:value="handleChange"
-                    />
-                </tr>
-            </tbody>
-        </table>
         <table class="all-material-inventory">
             <thead>
                 <tr>
@@ -436,6 +361,81 @@ onBeforeMount(() => {
                         {{ !!serverDay ? (typeof material.farming_days === "number" ?
                             material.farming_days.toString().includes(serverDay.toString()) : "") : "" }}
                     </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="all-character-progress">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>J'ai</th>
+                    <th>Build</th>
+                    <th>Only</th>
+                    <th>Lvl-A</th>
+                    <th>Lvl-V</th>
+                    <th>Ap1-A</th>
+                    <th>Ap1-V</th>
+                    <th>Ap2-A</th>
+                    <th>Ap2-V</th>
+                    <th>Ap3-A</th>
+                    <th>Ap3-V</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="character in filteredCharacters.sort(sortFunction('name'))" :key="character.name">
+                    <td class="name">{{ character.name }}</td>
+                    <InputCreator
+                        v-model:checked="character.got" type="checkbox" :index="data.Characters.findIndex(el => el.name === character.name)" valuename="got"
+                        group="Characters" @update:checked="handleChange"
+                    />
+                    <InputCreator
+                        v-model:checked="character.doing" type="checkbox" :disabled="character.only"
+                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="doing" group="Characters" @update:checked="handleChange"
+                    />
+                    <InputCreator
+                        v-model:checked="character.only" type="checkbox" :disabled="!character.doing"
+                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="only" group="Characters" @update:checked="handleChange"
+                    />
+                    <InputCreator
+                        v-model:value="character.cLvl" type="select-level" :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cLvl"
+                        :list="levelingData.level.filter((el) => el.id <= character.wLvl)" group="Characters"
+                        @update:value="handleChange"
+                    />
+                    <InputCreator
+                        v-model:value="character.wLvl" type="select-level" :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wLvl"
+                        :list="levelingData.level.filter((el) => el.id >= character.cLvl)" group="Characters"
+                        @update:value="handleChange"
+                    />
+                    <InputCreator
+                        v-model:value="character.cAp1" type="select-aptitude" :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cAp1"
+                        :list="aptList.filter((el) => el <= character.wAp1)" group="Characters"
+                        @update:value="handleChange"
+                    />
+                    <InputCreator
+                        v-model:value="character.wAp1" type="select-aptitude" :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wAp1"
+                        :list="aptList.filter((el) => el >= character.cAp1)" group="Characters"
+                        @update:value="handleChange"
+                    />
+                    <InputCreator
+                        v-model:value="character.cAp2" type="select-aptitude" :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cAp2"
+                        :list="aptList.filter((el) => el <= character.wAp2)" group="Characters"
+                        @update:value="handleChange"
+                    />
+                    <InputCreator
+                        v-model:value="character.wAp2" type="select-aptitude" :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wAp2"
+                        :list="aptList.filter((el) => el >= character.cAp2)" group="Characters"
+                        @update:value="handleChange"
+                    />
+                    <InputCreator
+                        v-model:value="character.cAp3" type="select-aptitude" :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cAp3"
+                        :list="aptList.filter((el) => el <= character.wAp3)" group="Characters"
+                        @update:value="handleChange"
+                    />
+                    <InputCreator
+                        v-model:value="character.wAp3" type="select-aptitude" :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wAp3"
+                        :list="aptList.filter((el) => el >= character.cAp3)" group="Characters"
+                        @update:value="handleChange"
+                    />
                 </tr>
             </tbody>
         </table>

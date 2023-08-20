@@ -153,4 +153,11 @@ Et voici le [répo du serveur](https://github.com/Alexandre-RICHARD/Portfolio-Ba
 -   Supression du 3ème tableau qui montrait le bilan des ressources nécessaires
 -   Mise en forme et adaptation du tableau de Material. Ajout des colonnes needed, remain et farmable. La colonne remain affiche perfect si la quantité possédé dépasse la quantité voulue
 
+### 1.2.1 `20 août 2023`
+
+-   Ajout d'un maximum pour l'input number permettant de rentrer les valeurs de son inventaire
+-   Résolution d'un bug avec les input/label des options, les id/for n'étaient pas cohérent entre eux
+-   Interversion des deux tableaux de données
+-   Quand on ne demandait à voir que certaine données à travers les options les index envoyé dans InputCreator n'étaient plus les bons, c'est corrigé
+
 </details>
