@@ -138,4 +138,19 @@ Et voici le [répo du serveur](https://github.com/Alexandre-RICHARD/Portfolio-Ba
 -   Rajout d'une foncion permettant d'afficher l'heure actuelle, l'heure relative du serveur utilisé ainsi que le jour de la semaine sur lequel le serveur est.
 -   Adaptation du style du tableau des ressource par rapport aux autres
 
+### 1.2.0 `20 août 2023`
+
+-   Regroupement des 3 listes (lvlList, aptList et serverList)
+-   Simplification des .map de lvlList et d'aptList
+-   Changement de la variable affectée aux matériel pour la quantité que le joueur possède, passant de quantity à have
+-   Rajout de 2 options enregistrée comme les autres, l'une pour ne montrer que les ressources nécessaire par ce que veut le joueur, l'autre pour toujours vouloir 1 ressource en plus avant que le tableau montre "Perfect"
+-   Rajout d'une valeur computed retournant les matériaux filtré en fonction de si oui ou non l'utilisateur ne veut voir que les matériaux nécessaires
+-   Dans le calcul des ressources nécessaires, la variable quantity est devenu needed.
+-   Rajout d'un morceau de code pour rajouter au sein de l'objet regroupant les matériaux calculé tous ceux qui ne sont pas nécessaires, car l'objectif est de n'avoir qu'un seul tableau au lieu des 2 précédent
+-   Arrangement de la logique derrière la gestion des heures, des dates. Regroupement de tout ceci au sein d'un seul et même objet.
+-   OnBeforeMount est maintenant à la fin du script
+-   Rajout des deux input pour les nouvelles options
+-   Supression du 3ème tableau qui montrait le bilan des ressources nécessaires
+-   Mise en forme et adaptation du tableau de Material. Ajout des colonnes needed, remain et farmable. La colonne remain affiche perfect si la quantité possédé dépasse la quantité voulue
+
 </details>

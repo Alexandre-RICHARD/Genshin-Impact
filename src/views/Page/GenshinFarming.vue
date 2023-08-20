@@ -5,19 +5,8 @@ const levelingData = require("@middlewares/genshinLevelingData.json");
 import InputCreator from "@parts/InputCreator.vue";
 import { computed, onBeforeMount, reactive, ref } from "vue";
 
-onBeforeMount(() => {
-    dataInit();
-    timeRefresh();
-});
-
-const lvlList = levelingData.level.map((el) => {
-    return el.id;
-});
-
-const aptList = levelingData.aptitude.map((el) => {
-    return el.level;
-});
-
+const lvlList = levelingData.level.map(el => el.id);
+const aptList = levelingData.aptitude.map(el => el.level);
 const serverList = ["Sélectionne ton serveur", "American", "Asiatic", "European"];
 
 const data = reactive({ Characters: null, Material: null, Options: {} });
@@ -62,7 +51,7 @@ const dataInit = () => {
             const currentMat = data.Material.find(fi => code === fi.code);
             if (currentMat) {
                 const i = data.Material.findIndex(fi => code === fi.code);
-                if (currentMat.quantity < 0 || !Number.isInteger(currentMat.quantity)) data.Material[i].quantity = 0;
+                if (currentMat.have < 0 || !Number.isInteger(currentMat.have)) data.Material[i].have = 0;
             } else {
                 data.Material.push(filler("Material", code));
             }
@@ -80,11 +69,15 @@ const dataInit = () => {
     if (lsOptions) {
         data.Options = JSON.parse(lsOptions);
         if ([false, true].indexOf(data.Options.onlyShowsDoingCharacter) < 0) data.Options.onlyShowsDoingCharacter = false;
+        if ([false, true].indexOf(data.Options.onlyShowsNeededMaterials) < 0) data.Options.onlyShowsNeededMaterials = false;
+        if ([false, true].indexOf(data.Options.alwaysOneMoreMaterial) < 0) data.Options.alwaysOneMoreMaterial = false;
         if ([false, true].indexOf(data.Options.explaination) < 0) data.Options.explaination = true;
         if (serverList.indexOf(data.Options.server) < 0) data.Options.server = "";
     } else {
         data.Options = {
             onlyShowsDoingCharacter: false,
+            onlyShowsNeededMaterials: false,
+            alwaysOneMoreMaterial: false,
             explaination: true,
             server: "",
         };
@@ -112,7 +105,7 @@ const filler = (type, name) => {
     case "Material":
         return {
             code: name,
-            quantity: 0,
+            have: 0,
         };
     }
 
@@ -138,6 +131,14 @@ const filteredCharacters = computed(() => {
         return data.Characters.filter(el => el.doing === true);
     } else {
         return data.Characters;
+    }
+});
+
+const filteredMaterials = computed(() => {
+    if (data.Options.onlyShowsNeededMaterials) {
+        return farmingMaterial.value.filter(el => el.needed > 0);
+    } else {
+        return farmingMaterial.value;
     }
 });
 
@@ -174,13 +175,12 @@ const farmingMaterial = computed(() => {
                             }
                             const findIndex = computedBuildArray.findIndex(fi => fi.code === materialCode);
                             if (findIndex >= 0) {
-                                computedBuildArray[findIndex].quantity += value;
+                                computedBuildArray[findIndex].needed += value;
                             } else {
-                                let materialData = {
+                                computedBuildArray.push({
                                     ...materialsList.find(material => material.code === materialCode),
-                                    quantity: value,
-                                };
-                                computedBuildArray.push(materialData);
+                                    needed: value,
+                                });
                             }
 
                         }
@@ -190,55 +190,81 @@ const farmingMaterial = computed(() => {
         }
     });
     const xp_book = computedBuildArray.findIndex(fi => fi.code === "g2");
-    if (xp_book >= 0) computedBuildArray[xp_book].quantity = Math.ceil(computedBuildArray[xp_book].quantity);
-    return computedBuildArray.sort(sortFunction("id"));
-});
+    if (xp_book >= 0) computedBuildArray[xp_book].needed = Math.ceil(computedBuildArray[xp_book].needed);
 
-const jour = computed(() => {
-    return [currentTime, ResetIn, day];
+    materialsList.forEach(material => {
+        const userValue = data.Material.find(fi => fi.code === material.code).have;
+        const alreadyIn = computedBuildArray.findIndex(fi => fi.id === material.id);
+        if (alreadyIn < 0) {
+            computedBuildArray.push({
+                ...material,
+                have: userValue,
+                needed: 0,
+                remain: 0,
+            });
+        } else {
+            computedBuildArray[alreadyIn] = {
+                ...computedBuildArray[alreadyIn],
+                have: userValue,
+                needed: computedBuildArray[alreadyIn].needed,
+                remain: computedBuildArray[alreadyIn].needed - userValue,
+            };
+        }
+    });
+
+    const sorted = computedBuildArray.sort(sortFunction("id"));
+    return sorted;
 });
 
 let currentTime = ref();
 let ResetIn = ref();
-let day = ref();
+let serverDay = ref();
 
-const renderDate = (dateM, type) => {
-    let H, M, S;
-    if (type === "normal") {
-        H = dateM.getHours();
-        M = dateM.getMinutes();
-        S = dateM.getSeconds();
-    } else if (type === "reverse") {
-        H = 23 - dateM.getHours();
-        M = 59 - dateM.getMinutes();
-        S = 60 - dateM.getSeconds();
-    }
-    
-    if (H < 10) H = "0" + H;
-    if (M < 10) M = "0" + M;
-    if (S < 10) S = "0" + S;
-
-    return H + ":" + M + ":" + S;
-};
-
-const timeRefresh = () => {
-    setTimeout(getBeautifulHours, 1000);
-};
-
-const getBeautifulHours = () => {
-    const timeShift = {
+const handleTimeFunction = {
+    timeShift: {
         Asiatic: 8,
         European: 1,
         American: -5,
-    };
-    const difference = timeShift[data.Options.server] - new Date().getTimezoneOffset() / -60;
-    const minusTheFourHoursReset = 3600000 * 4;
+    },
 
-    currentTime.value = renderDate(new Date(Date.now()), "normal");
-    ResetIn.value = renderDate(new Date(Date.now() + 3600000 * difference - minusTheFourHoursReset), "reverse");
-    day.value = (new Date(Date.now() + 3600000 * difference - minusTheFourHoursReset).getDay() + 6) % 7 + 1;
-    timeRefresh();
+    timeRefresh: () => {
+        setTimeout(handleTimeFunction.getBeautifulHours, 1000);
+    },
+
+    getBeautifulHours: () => {
+        const difference = handleTimeFunction.timeShift[data.Options.server] - new Date().getTimezoneOffset() / -60;
+        const minusTheFourHoursReset = 3600000 * 4;
+
+        currentTime.value = handleTimeFunction.renderDate(new Date(Date.now()), "normal");
+        ResetIn.value = handleTimeFunction.renderDate(new Date(Date.now() + 3600000 * difference - minusTheFourHoursReset), "reverse");
+        serverDay.value = (new Date(Date.now() + 3600000 * difference - minusTheFourHoursReset).getDay() + 6) % 7 + 1;
+        handleTimeFunction.timeRefresh();
+    },
+
+    renderDate: (dateM, type) => {
+        let H, M, S;
+        if (type === "normal") {
+            H = dateM.getHours();
+            M = dateM.getMinutes();
+            S = dateM.getSeconds();
+        } else if (type === "reverse") {
+            H = 23 - dateM.getHours();
+            M = 59 - dateM.getMinutes();
+            S = 60 - dateM.getSeconds();
+        }
+
+        if (H < 10) H = "0" + H;
+        if (M < 10) M = "0" + M;
+        if (S < 10) S = "0" + S;
+
+        return H + ":" + M + ":" + S;
+    },
 };
+
+onBeforeMount(() => {
+    dataInit();
+    handleTimeFunction.timeRefresh();
+});
 </script>
 
 <template>
@@ -250,6 +276,20 @@ const getBeautifulHours = () => {
                 type="checkbox" name="boolean-doing" @change="updateLocalStorage('genshinOptionsData', 'Options');"
             >
             <label class="boolean-label" for="boolean-doing">Ne montrer que les "doing"</label>
+        </div>
+        <div class="boolean">
+            <input
+                id="boolean-doing" v-model="data.Options.onlyShowsNeededMaterials" class="boolean-checkbox"
+                type="checkbox" name="boolean-doing" @change="updateLocalStorage('genshinOptionsData', 'Options');"
+            >
+            <label class="boolean-label" for="boolean-doing">Afficher uniquement les ressources nécessaires</label>
+        </div>
+        <div class="boolean">
+            <input
+                id="boolean-doing" v-model="data.Options.alwaysOneMoreMaterial" class="boolean-checkbox" type="checkbox"
+                name="boolean-doing" @change="updateLocalStorage('genshinOptionsData', 'Options');"
+            >
+            <label class="boolean-label" for="boolean-doing">Toujours avoir 1 de plus</label>
         </div>
         <div class="boolean">
             <input
@@ -267,9 +307,9 @@ const getBeautifulHours = () => {
             </option>
             {{ data.Options.server }}
         </select>
-        <p>Heure actuelle : {{ jour[0] }}</p>
-        <p>Reset serveur dans : {{ jour[1] }}</p>
-        <p>Jour de la semaine : {{ jour[2] }}</p>
+        <p>Heure actuelle : {{ currentTime }}</p>
+        <p>Reset serveur dans : {{ ResetIn }}</p>
+        <p>Jour de la semaine : {{ serverDay }}</p>
     </div>
     <div v-if="data.Options.explaination" class="explaination">
         <p>Nom = nom du personnage</p>
@@ -289,27 +329,11 @@ const getBeautifulHours = () => {
             Les niveaux suivis d'un "+" représentent les Ascensions de personnages après les niveaux 20, 40, 50, 60, 70 et
             80
         </p>
+        <br>
+        <p>
+            L'option "toujours avoir 1 de plus" est là pour simplifier la rentrée des données. En effet, avoir toujours 1 ressources de chaque choses du jeu signifie qu'il suffira de les rentrer dans l'ordre sans se soucier de ne pas en avoir certaine et donc de tout décaler
+        </p>
     </div>
-    <table class="farming-review">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom de la ressources</th>
-                <th>Combien il en faut</th>
-                <th>Combien j'en ai</th>
-                <th>Il m'en faut</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="ressource in farmingMaterial" :key="ressource.id">
-                <td>{{ ressource.id }}</td>
-                <td>{{ ressource.name }}</td>
-                <td>{{ ressource.quantity }}</td>
-                <td>{{ data.Material.find(el => el.code === ressource.code).quantity }}</td>
-                <td>{{ ressource.quantity - data.Material.find(el => el.code === ressource.code).quantity }}</td>
-            </tr>
-        </tbody>
-    </table>
     <div class="tabs-contener">
         <table class="all-character-progress">
             <thead>
@@ -390,16 +414,28 @@ const getBeautifulHours = () => {
             <thead>
                 <tr>
                     <th>Nom</th>
-                    <th>Quantité</th>
+                    <th>Possédé</th>
+                    <th>Nécessaire</th>
+                    <th>Reste</th>
+                    <th>Farmable</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(material, index) in data.Material" :key="material.id">
-                    <td class="name">{{ materialsList.find((el) => el.code === material.code).name }}</td>
+                <tr v-for="material in filteredMaterials" :key="material.id">
+                    <td>{{ material.name }}</td>
                     <InputCreator
-                        v-model:value="material.quantity" type="number" :index="index" valuename="quantity"
-                        group="Material" @update:value="handleChange"
+                        v-model:value="data.Material.find(el => el.code === material.code).have" type="number"
+                        :index="data.Material.findIndex(el => el.code === material.code)" valuename="have" group="Material"
+                        @update:value="handleChange"
                     />
+                    <td>{{ material.needed }}</td>
+                    <td>
+                        {{ material.remain >= (data.Options.alwaysOneMoreMaterial ? 0 : 1) ? material.remain : "Parfait" }}
+                    </td>
+                    <td>
+                        {{ !!serverDay ? (typeof material.farming_days === "number" ?
+                            material.farming_days.toString().includes(serverDay.toString()) : "") : "" }}
+                    </td>
                 </tr>
             </tbody>
         </table>
