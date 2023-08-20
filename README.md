@@ -131,4 +131,11 @@ Et voici le [répo du serveur](https://github.com/Alexandre-RICHARD/Portfolio-Ba
 -   Changement de noms de quelques variables
 -   Rajout d'un ID sur les level d'aptitude afin de pouvoir factoriser la fonction citée plus haut
 
+### 1.1.4 `20 août 2023`
+
+-   Rajout d'une options sauvegardé en localStorage pour le serveur Gesnhin que l'utilisateur utilise
+-   Rajout d'une fonction rendant une heure bien affiché avec un paramètre pour faire un compte à rebours si besoin
+-   Rajout d'une foncion permettant d'afficher l'heure actuelle, l'heure relative du serveur utilisé ainsi que le jour de la semaine sur lequel le serveur est.
+-   Adaptation du style du tableau des ressource par rapport aux autres
+
 </details>

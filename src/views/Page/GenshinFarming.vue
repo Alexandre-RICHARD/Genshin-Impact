@@ -3,10 +3,11 @@ const charactersList = require("@middlewares/genshinCharactersData.json");
 const materialsList = require("@middlewares/genshinMaterialData.json");
 const levelingData = require("@middlewares/genshinLevelingData.json");
 import InputCreator from "@parts/InputCreator.vue";
-import { computed, onBeforeMount, reactive } from "vue";
+import { computed, onBeforeMount, reactive, ref } from "vue";
 
 onBeforeMount(() => {
     dataInit();
+    timeRefresh();
 });
 
 const lvlList = levelingData.level.map((el) => {
@@ -16,6 +17,8 @@ const lvlList = levelingData.level.map((el) => {
 const aptList = levelingData.aptitude.map((el) => {
     return el.level;
 });
+
+const serverList = ["Sélectionne ton serveur", "American", "Asiatic", "European"];
 
 const data = reactive({ Characters: null, Material: null, Options: {} });
 
@@ -78,10 +81,12 @@ const dataInit = () => {
         data.Options = JSON.parse(lsOptions);
         if ([false, true].indexOf(data.Options.onlyShowsDoingCharacter) < 0) data.Options.onlyShowsDoingCharacter = false;
         if ([false, true].indexOf(data.Options.explaination) < 0) data.Options.explaination = true;
+        if (serverList.indexOf(data.Options.server) < 0) data.Options.server = "";
     } else {
         data.Options = {
             onlyShowsDoingCharacter: false,
             explaination: true,
+            server: "",
         };
     }
     updateLocalStorage("genshinOptionsData", "Options");
@@ -138,8 +143,8 @@ const filteredCharacters = computed(() => {
 
 function sortFunction(...args) {
     return function (a, b) {
-        if ( a[args[0]] < b[args[0]] ) return -1;
-        if ( a[args[0]] > b[args[0]] ) return 1;
+        if (a[args[0]] < b[args[0]]) return -1;
+        if (a[args[0]] > b[args[0]]) return 1;
         return 0;
     };
 }
@@ -147,23 +152,23 @@ function sortFunction(...args) {
 const farmingMaterial = computed(() => {
     const computedBuildArray = [];
     const processVar = [
-        {searchLoc: "level", currentValue: "cLvl", wantedValue: "wLvl"},
-        {searchLoc: "aptitude", currentValue: "cAp1", wantedValue: "wAp1"},
-        {searchLoc: "aptitude", currentValue: "cAp2", wantedValue: "wAp2"},
-        {searchLoc: "aptitude", currentValue: "cAp3", wantedValue: "wAp3"},
+        { searchLoc: "level", currentValue: "cLvl", wantedValue: "wLvl" },
+        { searchLoc: "aptitude", currentValue: "cAp1", wantedValue: "wAp1" },
+        { searchLoc: "aptitude", currentValue: "cAp2", wantedValue: "wAp2" },
+        { searchLoc: "aptitude", currentValue: "cAp3", wantedValue: "wAp3" },
     ];
 
     data.Characters.filter(char => char.doing === true).forEach(char => {
         const currentcharacter = charactersList.find(find => find.name === char.name);
-        for (let i = 0 ; i < 4 ; i++) {
+        for (let i = 0; i < 4; i++) {
             const progressStep = levelingData[processVar[i].searchLoc].filter(step => step.id > char[processVar[i].currentValue] && step.id <= char[processVar[i].wantedValue]);
             if (progressStep.length > 0) {
                 progressStep.forEach(step => {
                     for (const [key, value] of Object.entries(step)) {
-                        if (value > 0 && key != "id" && key!= "level") {                            
+                        if (value > 0 && key != "id" && key != "level") {
                             let materialCode;
-                            if (!isNaN(key.charAt(key.length-1))) {
-                                materialCode = currentcharacter[key.slice(0, -2)]+key.slice(-1);
+                            if (!isNaN(key.charAt(key.length - 1))) {
+                                materialCode = currentcharacter[key.slice(0, -2)] + key.slice(-1);
                             } else {
                                 materialCode = currentcharacter[key];
                             }
@@ -188,6 +193,52 @@ const farmingMaterial = computed(() => {
     if (xp_book >= 0) computedBuildArray[xp_book].quantity = Math.ceil(computedBuildArray[xp_book].quantity);
     return computedBuildArray.sort(sortFunction("id"));
 });
+
+const jour = computed(() => {
+    return [currentTime, ResetIn, day];
+});
+
+let currentTime = ref();
+let ResetIn = ref();
+let day = ref();
+
+const renderDate = (dateM, type) => {
+    let H, M, S;
+    if (type === "normal") {
+        H = dateM.getHours();
+        M = dateM.getMinutes();
+        S = dateM.getSeconds();
+    } else if (type === "reverse") {
+        H = 23 - dateM.getHours();
+        M = 59 - dateM.getMinutes();
+        S = 60 - dateM.getSeconds();
+    }
+    
+    if (H < 10) H = "0" + H;
+    if (M < 10) M = "0" + M;
+    if (S < 10) S = "0" + S;
+
+    return H + ":" + M + ":" + S;
+};
+
+const timeRefresh = () => {
+    setTimeout(getBeautifulHours, 1000);
+};
+
+const getBeautifulHours = () => {
+    const timeShift = {
+        Asiatic: 8,
+        European: 1,
+        American: -5,
+    };
+    const difference = timeShift[data.Options.server] - new Date().getTimezoneOffset() / -60;
+    const minusTheFourHoursReset = 3600000 * 4;
+
+    currentTime.value = renderDate(new Date(Date.now()), "normal");
+    ResetIn.value = renderDate(new Date(Date.now() + 3600000 * difference - minusTheFourHoursReset), "reverse");
+    day.value = (new Date(Date.now() + 3600000 * difference - minusTheFourHoursReset).getDay() + 6) % 7 + 1;
+    timeRefresh();
+};
 </script>
 
 <template>
@@ -195,18 +246,30 @@ const farmingMaterial = computed(() => {
         <button class="clean-button" @click="cleanLocalStorage">VIDER LE LOCAL STORAGE</button>
         <div class="boolean">
             <input
-                id="boolean-doing" v-model="data.Options.onlyShowsDoingCharacter" class="boolean-checkbox" type="checkbox"
-                name="boolean-doing" @change="updateLocalStorage('genshinOptionsData', 'Options');"
+                id="boolean-doing" v-model="data.Options.onlyShowsDoingCharacter" class="boolean-checkbox"
+                type="checkbox" name="boolean-doing" @change="updateLocalStorage('genshinOptionsData', 'Options');"
             >
             <label class="boolean-label" for="boolean-doing">Ne montrer que les "doing"</label>
         </div>
         <div class="boolean">
             <input
                 id="boolean-explaination" v-model="data.Options.explaination" class="boolean-checkbox" type="checkbox"
-                name="boolean-explaination" @change="updateLocalStorage('genshinOptionsData', 'Options');"
+                name="boolean-explaination" @change="updateLocalStorage('genshinOptionsData', 'Options')"
             >
             <label class="boolean-label" for="boolean-explaination">Montrer les explications</label>
         </div>
+        <select
+            v-model="data.Options.server" style="appearance: menulist-button"
+            @change="updateLocalStorage('genshinOptionsData', 'Options')"
+        >
+            <option v-for="server in serverList" :key="server" :value="server">
+                {{ server }}
+            </option>
+            {{ data.Options.server }}
+        </select>
+        <p>Heure actuelle : {{ jour[0] }}</p>
+        <p>Reset serveur dans : {{ jour[1] }}</p>
+        <p>Jour de la semaine : {{ jour[2] }}</p>
     </div>
     <div v-if="data.Options.explaination" class="explaination">
         <p>Nom = nom du personnage</p>
@@ -222,7 +285,10 @@ const farmingMaterial = computed(() => {
         <p>Ap3-A = Le niveau actuelle de son déchaînement élémentaire</p>
         <p>Ap3-V = Le niveau auquel je veux améliorer son déchaînement élémentaire</p>
         <br>
-        <p>Les niveaux suivis d'un "+" représentent les Ascensions de personnages après les niveaux 20, 40, 50, 60, 70 et 80</p>
+        <p>
+            Les niveaux suivis d'un "+" représentent les Ascensions de personnages après les niveaux 20, 40, 50, 60, 70 et
+            80
+        </p>
     </div>
     <table class="farming-review">
         <thead>
@@ -230,6 +296,8 @@ const farmingMaterial = computed(() => {
                 <th>Id</th>
                 <th>Nom de la ressources</th>
                 <th>Combien il en faut</th>
+                <th>Combien j'en ai</th>
+                <th>Il m'en faut</th>
             </tr>
         </thead>
         <tbody>
@@ -237,6 +305,8 @@ const farmingMaterial = computed(() => {
                 <td>{{ ressource.id }}</td>
                 <td>{{ ressource.name }}</td>
                 <td>{{ ressource.quantity }}</td>
+                <td>{{ data.Material.find(el => el.code === ressource.code).quantity }}</td>
+                <td>{{ ressource.quantity - data.Material.find(el => el.code === ressource.code).quantity }}</td>
             </tr>
         </tbody>
     </table>
@@ -383,72 +453,74 @@ const farmingMaterial = computed(() => {
     align-items: start;
     gap: 15px;
 
-    .all-character-progress,
-    .all-material-inventory {
-        border-collapse: collapse;
+}
 
-        th,
-        td {
-            border: 1px solid #cacaca;
-            padding: 6px 2px;
-        }
+.all-character-progress,
+.all-material-inventory,
+.farming-review {
+    border-collapse: collapse;
 
-        th {
-            color: #f5f5f5;
-            background-color: #4650ac;
-            width: 54px;
+    th,
+    td {
+        border: 1px solid #cacaca;
+        padding: 6px 2px;
+    }
 
-            &:first-child {
-                width: fit-content;
-            }
-        }
+    th {
+        color: #f5f5f5;
+        background-color: #4650ac;
+        width: 54px;
 
-        tr {
-            background-color: #bbbbbb;
-        }
-
-        tr:nth-child(even) {
-            background-color: #a3a3a3;
-        }
-
-        td {
-            color: #000000;
-            font-weight: 300;
-            text-align: center;
-
-            &.name {
-                font-weight: 400;
-                text-align: left;
-            }
+        &:first-child {
+            width: fit-content;
         }
     }
 
-    .all-character-progress {
-        td {
-            .checkbox {
-                appearance: checkbox;
-                width: 20px;
-                height: 20px;
+    tr {
+        background-color: #bbbbbb;
+    }
+
+    tr:nth-child(even) {
+        background-color: #a3a3a3;
+    }
+
+    td {
+        color: #000000;
+        font-weight: 300;
+        text-align: center;
+
+        &.name {
+            font-weight: 400;
+            text-align: left;
+        }
+    }
+}
+
+.all-character-progress {
+    td {
+        .checkbox {
+            appearance: checkbox;
+            width: 20px;
+            height: 20px;
+        }
+
+        .select {
+            appearance: menulist-button;
+            padding: 3px 0 3px 0px;
+            text-align: center;
+            border-radius: 4px;
+            box-shadow: 0px 0px 4px 0px #000000 inset;
+
+            option {
+                color: #000000;
+                background-color: #bbbbbb;
+                margin: 20px;
             }
 
-            .select {
-                appearance: menulist-button;
-                padding: 3px 0 3px 0px;
-                text-align: center;
-                border-radius: 4px;
-                box-shadow: 0px 0px 4px 0px #000000 inset;
-
-                option {
-                    color: #000000;
-                    background-color: #bbbbbb;
-                    margin: 20px;
-                }
-
-                &:hover {
-                    cursor: pointer;
-                    background-color: #7c7c7c;
-                    color: #cacaca;
-                }
+            &:hover {
+                cursor: pointer;
+                background-color: #7c7c7c;
+                color: #cacaca;
             }
         }
     }
