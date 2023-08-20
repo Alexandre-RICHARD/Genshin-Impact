@@ -160,4 +160,11 @@ Et voici le [répo du serveur](https://github.com/Alexandre-RICHARD/Portfolio-Ba
 -   Interversion des deux tableaux de données
 -   Quand on ne demandait à voir que certaine données à travers les options les index envoyé dans InputCreator n'étaient plus les bons, c'est corrigé
 
+### 1.2.2 `21 août 2023`
+
+-   Rajout de deux console.log pour détecter un appel trop important de fonction à cause de la boucle gérant les heures
+-   La variable ResetIn est renommé en coultdownReset
+-   Renommage de la fonction handleTimeFunction en handleTime
+-   Modification de la logique de création des heures ainsi que leur mise en forme (beaucoup appris au passage)
+
 </details>

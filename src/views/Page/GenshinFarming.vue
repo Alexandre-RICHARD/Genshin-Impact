@@ -143,12 +143,20 @@ const filteredMaterials = computed(() => {
 });
 
 function sortFunction(...args) {
+    console.log("Called");
     return function (a, b) {
         if (a[args[0]] < b[args[0]]) return -1;
         if (a[args[0]] > b[args[0]]) return 1;
         return 0;
     };
 }
+
+const sortFunctionTWO = (a, b) => {
+    console.log("Called");
+    if (a.name < b.name) return 1;
+    if (a.name > b.name) return -1;
+    return 0;
+};
 
 const farmingMaterial = computed(() => {
     const computedBuildArray = [];
@@ -217,53 +225,58 @@ const farmingMaterial = computed(() => {
 });
 
 let currentTime = ref();
-let ResetIn = ref();
+let coultdownReset = ref();
 let serverDay = ref();
 
-const handleTimeFunction = {
+const handleTime = {
     timeShift: {
         Asiatic: 8,
         European: 1,
         American: -5,
     },
-
-    timeRefresh: () => {
-        setTimeout(handleTimeFunction.getBeautifulHours, 1000);
+    oneHour: 60 * 60 * 1000,
+    timeZone: null,
+    minusTheFourHoursReset: null,
+    
+    coultdownBuilder: (date, serverTime) => {
+        const tomorrowMidnight = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 1);
+        const difference = tomorrowMidnight - serverTime;
+        return new Date(new Date(difference).getTime() + new Date(difference).getTimezoneOffset() * 60000);
     },
-
+    
     getBeautifulHours: () => {
-        const difference = handleTimeFunction.timeShift[data.Options.server] - new Date().getTimezoneOffset() / -60;
-        const minusTheFourHoursReset = 3600000 * 4;
+        handleTime.timeZone = (handleTime.timeShift[data.Options.server] - new Date().getTimezoneOffset() / -60) * handleTime.oneHour,
+        handleTime.minusTheFourHoursReset = handleTime.oneHour * 4;
 
-        currentTime.value = handleTimeFunction.renderDate(new Date(Date.now()), "normal");
-        ResetIn.value = handleTimeFunction.renderDate(new Date(Date.now() + 3600000 * difference - minusTheFourHoursReset), "reverse");
-        serverDay.value = (new Date(Date.now() + 3600000 * difference - minusTheFourHoursReset).getDay() + 6) % 7 + 1;
-        handleTimeFunction.timeRefresh();
+        const serverTime = Date.now() + handleTime.timeZone - handleTime.minusTheFourHoursReset;
+        currentTime.value = handleTime.renderDate(new Date(Date.now()));
+
+        coultdownReset.value = handleTime.renderDate(handleTime.coultdownBuilder(new Date(serverTime + 24 * handleTime.oneHour), new Date(serverTime)));
+        
+        serverDay.value = ((new Date(Date.now() + handleTime.timeZone - handleTime.minusTheFourHoursReset).getDay() + 6) % 7) + 1;
+
+        handleTime.timeRefresh();
     },
 
-    renderDate: (dateM, type) => {
+    renderDate: (date) => {
         let H, M, S;
-        if (type === "normal") {
-            H = dateM.getHours();
-            M = dateM.getMinutes();
-            S = dateM.getSeconds();
-        } else if (type === "reverse") {
-            H = 23 - dateM.getHours();
-            M = 59 - dateM.getMinutes();
-            S = 60 - dateM.getSeconds();
-        }
-
+        H = date.getHours();
+        M = date.getMinutes();
+        S = date.getSeconds();
         if (H < 10) H = "0" + H;
         if (M < 10) M = "0" + M;
         if (S < 10) S = "0" + S;
-
         return H + ":" + M + ":" + S;
+    },
+
+    timeRefresh: () => {
+        setTimeout(handleTime.getBeautifulHours, 1000);
     },
 };
 
 onBeforeMount(() => {
     dataInit();
-    // handleTimeFunction.timeRefresh();
+    handleTime.timeRefresh();
 });
 </script>
 
@@ -308,7 +321,7 @@ onBeforeMount(() => {
             {{ data.Options.server }}
         </select>
         <p>Heure actuelle : {{ currentTime }}</p>
-        <p>Reset serveur dans : {{ ResetIn }}</p>
+        <p>Reset serveur dans : {{ coultdownReset }}</p>
         <p>Jour de la semaine : {{ serverDay }}</p>
     </div>
     <div v-if="data.Options.explaination" class="explaination">
@@ -382,7 +395,7 @@ onBeforeMount(() => {
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="character in filteredCharacters.sort(sortFunction('name'))" :key="character.name">
+                <tr v-for="character in filteredCharacters.sort(sortFunctionTWO)" :key="character.name">
                     <td class="name">{{ character.name }}</td>
                     <InputCreator
                         v-model:checked="character.got" type="checkbox" :index="data.Characters.findIndex(el => el.name === character.name)" valuename="got"
@@ -485,6 +498,7 @@ onBeforeMount(() => {
 .tabs-contener {
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
     padding: 30px;
     align-items: start;
     gap: 15px;
