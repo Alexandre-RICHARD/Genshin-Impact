@@ -213,6 +213,12 @@ const farmingMaterial = computed(() => {
     });
 
     const sorted = computedBuildArray.sort(sortFunction("id"));
+
+
+
+    sorted.forEach(el => console.log(el));
+
+
     return sorted;
 });
 

@@ -2,9 +2,8 @@
 
 Bonjour, bienvenue sur le répo de, je l'espère, mon futur gros projets en lien avec le jeu vidéo : Genshin Impact. J'ai vu des tas d'opportunités de créer des outils à partir de ce jeu et j'ai envie de le transmettrz aux joueurs en le mettant sous forme de site internet. Je m'inspire de mes propres créations antérieurs mais également de certains choses que d'autres joueurs fan ont fait, auquel cas, j'essaierai de ne pas oublier de les citer. 
 
-Voici [le site](http://genshin.rial7539.odns.fr/) en question.
-
-Et voici le [répo du serveur](https://github.com/Alexandre-RICHARD/Portfolio-Back) lié.
+Voici [le site](https://genshin.alexandre-richard.fr/) en question.
+Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 
 ## Historique des versions
 
@@ -170,5 +169,11 @@ Et voici le [répo du serveur](https://github.com/Alexandre-RICHARD/Portfolio-Ba
 ### 1.2.3 `21 août 2023`
 
 -   Supression du triage directement dans le v-for du tableau. C'est désormais fait en amont dans le computed filteredCharacters
+
+### 1.2.4 `21 août 2023`
+
+-   Maintenant que j'ai récupéré le nom de domaine, actualisation de tous les liens sortant
+-   Mise à jour des packages npm
+-   Invisible au commit mais suppression des .env inutiles pour l'instant
 
 </details>
