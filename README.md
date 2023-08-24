@@ -184,4 +184,26 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Calcul de ces différentes données dans la continuité de ce qui a été fait précédemment dans l'objet computed "farmingMaterial".
 -   Ajout de ces données aux tableaux de matériels déjà existants
 
+### 1.2.6 `24 août 2023`
+
+-   Mise à jour des packages npm
+-   Suppresion des deux fichiers svg show_password et unshow_password
+-   Changement du nom de genshinMaterialData en genshinMaterialsData
+-   Changement des codes de plusieurs catégories : global passe de gX à G0X pour prévenir s'il y en a plus un jour
+-   Rajout de la rareté pour chaque ressources (de 1 à 5)
+-   Rajout des 3 ressources d'amélioration d'armes pour l'xp, les minerai de renforcement.
+-   Les codes de matériaux de boss hebdomadaire sont passés de bXY à b(région)XY
+-   Les codes de matériaux de sous-boss sont passés de sXY à s(région)Y
+-   Les ressources locales sont passées de rmX à rm0X
+-   Adaptation de chacun de ses changements dans le fichier json des personnages sur leurs besoin.
+-   Mise en commentaire de toute la partie Script du fichier GenshinFarming pour l'expliquer au mieux au vus de la compléxité de code qui s'installait
+-   Toutes les notions pertinentes à le devenir de Material sont devenues Materials
+-   Mise à jour et simplification de la fonction updateLocalStorage et ses appels pour qu'elle ne recoive plus qu'un seul argument. Les deux étaient redondants
+-   Changement d'une logique complexe de récupération de caractère à un simple slice
+-   Supression d'une ligne qui réaffectait une valeur à la valeur qu'elle avait déjà
+-   Changement dans la manière de traiter les livres et cristaux d'expérience de persos et d'armes. Désormais, le même principe que pour les matériaux à synthèse est utilisé et sont comptés les 3 rareté du matériaux dans le calcul
+-   Factorisation fonctionnelle de la quintuple boucle if pour attribuer la résine aux différentes ressources
+-   Les 3 valeurs en ref pour le traitement des heures ont une valeur par défaut, même si peu visible
+-   Rajout des images de personnes et de ressources et implémentation de celles-ci avec un style basique
+
 </details>

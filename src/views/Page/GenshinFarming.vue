@@ -1,24 +1,36 @@
 <script setup>
+// Importation des différentes données de Genshin stockées en JSON
 const charactersList = require("@middlewares/genshinCharactersData.json");
-const materialsList = require("@middlewares/genshinMaterialData.json");
+const materialsList = require("@middlewares/genshinMaterialsData.json");
 const levelingData = require("@middlewares/genshinLevelingData.json");
 import InputCreator from "@parts/InputCreator.vue";
 import { computed, onBeforeMount, reactive, ref } from "vue";
 
+// Dès le début, on stock la liste des Niveaux de personnages et d'aptitudes séparément pour faciliter leurs accès dans le template
 const lvlList = levelingData.level.map(el => el.id);
 const aptList = levelingData.aptitude.map(el => el.level);
+// Les différentes options du choix de serveur
 const serverList = ["Sélectionne ton serveur", "American", "Asiatic", "European"];
 
-const data = reactive({ Characters: null, Material: null, Options: {} });
+// Notre gros objet global qui va contenir toutes les informations utiles à sauvegarder pour que l'utilisateur concerve ses données
+const data = reactive({ Characters: null, Materials: null, Options: {} });
 
+// Une fonction appelé en théorie uniquement lors du chargement de la page (ou lors du clean du localStorage)
 const dataInit = () => {
-    // Pour gérer les stats et souhaits de chaque perso
+    // On récupère dans le localStorage la chaine de caractère correspondant à nos données de personnages
     const lsCharacter = localStorage.getItem("genshinCharactersData");
+    // On vérifie qu'elle exsite
     if (lsCharacter) {
+        // Si oui, on la transforme en un tableau utilisable
         data.Characters = JSON.parse(lsCharacter);
+        // Boucle initié avec la liste des personnages complètes avec uniquement le nom du personnages servant d'identifiant unique
         charactersList.forEach(({ name }) => {
+            // On le cherche dans notre nouveau tableau. 
             const currentChar = data.Characters.find(fi => name === fi.name);
+            // S'il existe, on va étudier chacune des valeurs que ce personnage contient pour assurer leur validité et les remplacer si besoin
             if (currentChar) {
+                // Pour chaque donnée, on va regarder si elle est logique et du bon type auquel cas inverse, cela casserai l'application. Un mauvais type ne pourrait être présent que par maladresse ou volonté de l'utilisateur
+                // On regarde si chaque valeur est contenu dans les tableaux de référence, et sinon, on la remplace par la valeur par défaut
                 const i = data.Characters.findIndex(fi => name === fi.name);
                 if ([false, true].indexOf(currentChar.got) < 0) data.Characters[i].got = false;
                 if ([false, true].indexOf(currentChar.doing) < 0) data.Characters[i].doing = false;
@@ -32,39 +44,42 @@ const dataInit = () => {
                 if (aptList.indexOf(currentChar.cAp3) < 0) data.Characters[i].cAp3 = 1;
                 if (aptList.indexOf(currentChar.wAp3) < 0) data.Characters[i].wAp3 = 10;
             } else {
+                // Sinon, on va simplement créer ce personnage avec son nom et les valeurs par défaut à l'aide de la fonction filler
                 data.Characters.push(filler("Characters", name));
             }
         });
+        // Si la chaîne de caractère n'existe pas, alors on va la créer de toute pièce en utilisant la fonction filler pour mettre par défaut chaque personnage
     } else {
         data.Characters = [];
         charactersList.forEach(({ name }) => {
             data.Characters.push(filler("Characters", name));
         });
     }
-    updateLocalStorage("genshinCharactersData", "Characters");
+    // Une fois tout cela géré, on va mettre à jour le localStorage avec nos données actualisées et vérifiées
+    updateLocalStorage("Characters");
 
-    // Pour gérer l'inventaire des ressources de farm
-    const lsMaterial = localStorage.getItem("genshinMaterialData");
+    // Pour gérer l'inventaire des ressources de farm, même procédé que la fonction ci-dessus, mais compliqué et probablement vilain à factoriser les 2 en 1
+    const lsMaterial = localStorage.getItem("genshinMaterialsData");
     if (lsMaterial) {
-        data.Material = JSON.parse(lsMaterial);
+        data.Materials = JSON.parse(lsMaterial);
         materialsList.forEach(({ code }) => {
-            const currentMat = data.Material.find(fi => code === fi.code);
+            const currentMat = data.Materials.find(fi => code === fi.code);
             if (currentMat) {
-                const i = data.Material.findIndex(fi => code === fi.code);
-                if (currentMat.have < 0 || !Number.isInteger(currentMat.have)) data.Material[i].have = 0;
+                const i = data.Materials.findIndex(fi => code === fi.code);
+                if (currentMat.have < 0 || !Number.isInteger(currentMat.have)) data.Materials[i].have = 0;
             } else {
-                data.Material.push(filler("Material", code));
+                data.Materials.push(filler("Materials", code));
             }
         });
     } else {
-        data.Material = [];
+        data.Materials = [];
         materialsList.forEach(({ code }) => {
-            data.Material.push(filler("Material", code));
+            data.Materials.push(filler("Materials", code));
         });
     }
-    updateLocalStorage("genshinMaterialData", "Material");
+    updateLocalStorage("Materials");
 
-    // Pour gérer les options
+    // Pour gérer les options, pratiquement le même procédé mais avec beaucoup moins de valeurs et propriétés donc fait à la main pour chacune
     const lsOptions = localStorage.getItem("genshinOptionsData");
     if (lsOptions) {
         data.Options = JSON.parse(lsOptions);
@@ -82,10 +97,12 @@ const dataInit = () => {
             server: "",
         };
     }
-    updateLocalStorage("genshinOptionsData", "Options");
+    updateLocalStorage("Options");
 };
 
 const filler = (type, name) => {
+    // La fonction filler, utilisée pour complété les données de l'array data quand les données présente dans le localStorage ne sont pas bonnes
+    // Prise en compte du type de données pour différencier les propriétés à renvoyer et le nom.
     switch (type) {
     case "Characters":
         return {
@@ -102,7 +119,7 @@ const filler = (type, name) => {
             cAp3: 1,
             wAp3: 10,
         };
-    case "Material":
+    case "Materials":
         return {
             code: name,
             have: 0,
@@ -111,22 +128,26 @@ const filler = (type, name) => {
 
 };
 
+// Relié à un bouton permettant de nettoyer et reset par défaut le localStorage
 const cleanLocalStorage = () => {
     localStorage.removeItem("genshinCharactersData");
-    localStorage.removeItem("genshinMaterialData");
+    localStorage.removeItem("genshinMaterialsData");
     localStorage.removeItem("genshinOptionsData");
     dataInit();
 };
 
-const updateLocalStorage = (type, array) => {
-    localStorage.setItem(type, JSON.stringify(data[array]));
+// La fonction utilisée pour sauvegarder dans le navigateur au sein du localStorage les différentes données. En fonction 
+const updateLocalStorage = (type) => {
+    localStorage.setItem(`genshin${type}Data`, JSON.stringify(data[type]));
 };
 
+// Quand un input créer avec le composant InputCreator, sa valuer est suivi avec un V-model puis un emit envoyé dans la fonction handleChange qui se charge de changer la bonne valeur dans l'array "data"
 const handleChange = (group, index, valuename, value) => {
     data[group][index][valuename] = value;
-    updateLocalStorage(`genshin${group}Data`, group);
+    updateLocalStorage(group);
 };
 
+// Un objet computed afin de filtrer en fonction d'une options si on ne veut voir que les personnages qui ont été noté comme build
 const filteredCharacters = computed(() => {
     if (data.Options.onlyShowsDoingCharacter) {
         return [...data.Characters].filter(el => el.doing === true).sort(sortFunction("name"));
@@ -135,6 +156,7 @@ const filteredCharacters = computed(() => {
     }
 });
 
+// Un objet computed afin de filtrer en fonction d'une option si on ne veut voir que les matériaux de farm dont on a besoin
 const filteredMaterials = computed(() => {
     if (data.Options.onlyShowsNeededMaterials) {
         return farmingMaterial.value.filter(el => el.needed > 0);
@@ -143,6 +165,7 @@ const filteredMaterials = computed(() => {
     }
 });
 
+// Une fonction de triage non fléché, la seule afin d'accueillir des arguments autres que les a et b habituels.
 function sortFunction(...args) {
     return function (a, b) {
         if (a[args[0]] < b[args[0]]) return -1;
@@ -151,8 +174,11 @@ function sortFunction(...args) {
     };
 }
 
+// Le gros morceaux, le gros objet computed farmingMaterial qui va avoir pour but de prendre nos données rentrées par l'utilisateur sur les personnages et les matériaux de farm et de calculer combien il en faut, combien il en a, la différence, la somme de points pour chaque groupe qui est possible de faire avec la synthèse ainsi que la résine nécessaire estimée.
 const farmingMaterial = computed(() => {
+    // Notre array qui va être utilisé et retourné pour créer l'array farmingMaterial
     const computedBuildArray = [];
+    // Pour le premier bloc de code traitant du fait de calculer la quantité de matériaux nécessaires en fonction des valeurs de personnages pris, pour factoriser, on utilise une boucle de 0 à 3 prenant ses valeurs comme repères.
     const processVar = [
         { searchLoc: "level", currentValue: "cLvl", wantedValue: "wLvl" },
         { searchLoc: "aptitude", currentValue: "cAp1", wantedValue: "wAp1" },
@@ -160,24 +186,38 @@ const farmingMaterial = computed(() => {
         { searchLoc: "aptitude", currentValue: "cAp3", wantedValue: "wAp3" },
     ];
 
+    // La logique est donc :
+    // POur chaque personnage, on ne va prendre en compte que ceux qui ont été noté comme étant à faire, à monter. On boucle sur ceux qui restent.
     data.Characters.filter(char => char.doing === true).forEach(char => {
+        // Dans la données de persos, on récupère celles du personnage actuel.
         const currentcharacter = charactersList.find(find => find.name === char.name);
-        for (let i = 0; i < 4; i++) {
+        // On boucle de 0 à 3 car on va surveiller 4 choses, le lvl, l'aptitude 1, la 2 et la 3.
+        for (let i = 0; i <= 3; i++) {
+            // On va récupérer la liste des niveaux séparant le niveau actuel du niveau voulu pour ainsi avoir accès à la liste de ce que demande chaque niveau comme matériel
             const progressStep = levelingData[processVar[i].searchLoc].filter(step => step.id > char[processVar[i].currentValue] && step.id <= char[processVar[i].wantedValue]);
+            // S'il y a le moindre niveau dans cette liste, on rentre dans cette boucle forEach
             if (progressStep.length > 0) {
                 progressStep.forEach(step => {
+                    // On boucle sur chacune des données des niveaux récupéré sur id et level inutile
                     for (const [key, value] of Object.entries(step)) {
                         if (value > 0 && key != "id" && key != "level") {
+                            // On crée une variable temporaire
                             let materialCode;
-                            if (!isNaN(key.charAt(key.length - 1))) {
+                            // On vérifie dans les données du personnages, si la clé représente une ressources avec différents niveau de rareté ou non, réprésenté par un nombre en dernier caractère
+                            if (!isNaN(key.slice(-1))) {
+                                // Si c'est un chiffre, on reconstitue le bon code de la ressources
                                 materialCode = currentcharacter[key.slice(0, -2)] + key.slice(-1);
                             } else {
+                                // Sinon, on prend simplement le code comme il est
                                 materialCode = currentcharacter[key];
                             }
+                            // Dans l'objet temporaire du computed, on cherche la ressource actuelle
                             const findIndex = computedBuildArray.findIndex(fi => fi.code === materialCode);
+                            // Si elle existe, on lui rajoute à sa propre valeur le besoin représenter par le niveau
                             if (findIndex >= 0) {
                                 computedBuildArray[findIndex].needed += value;
                             } else {
+                                // Sinon, on créer un nouvel objet reprenant les données des ressources en y ajoutant la quantité nécessaires
                                 computedBuildArray.push({
                                     ...materialsList.find(material => material.code === materialCode),
                                     needed: value,
@@ -190,12 +230,14 @@ const farmingMaterial = computed(() => {
             }
         }
     });
-    const xp_book = computedBuildArray.findIndex(fi => fi.code === "g2");
-    if (xp_book >= 0) computedBuildArray[xp_book].needed = Math.ceil(computedBuildArray[xp_book].needed);
 
+    // Ce code va servir a tout de même crée un objet pour chque ressources, même s'il n'est pas demandé pour le farm des persos choisis
     materialsList.forEach(material => {
-        const userValue = data.Material.find(fi => fi.code === material.code).have;
+        // On boucle sur la liste de ressources provenant du json, on récupère la quantité que le joueur a
+        const userValue = data.Materials.find(fi => fi.code === material.code).have;
+        // On regarde si cette ressources est déjà dans le tableau provisoire
         const alreadyIn = computedBuildArray.findIndex(fi => fi.id === material.id);
+        // Si non, alors on le créé manuellement avec les valeurs par défaut et la quantité que le joueur a
         if (alreadyIn < 0) {
             computedBuildArray.push({
                 ...material,
@@ -207,11 +249,11 @@ const farmingMaterial = computed(() => {
                 group_resin: 0,
                 synthesis: false,
             });
+            // Si oui, alors on va mettre à jour certaines valeurs. On inscrit la quantité possédé, combien il y a de différence entre besoin/possession et des valeurs par défaut utiles après
         } else {
             computedBuildArray[alreadyIn] = {
                 ...computedBuildArray[alreadyIn],
                 have: userValue,
-                needed: computedBuildArray[alreadyIn].needed,
                 remain: computedBuildArray[alreadyIn].needed - userValue,
                 group_have: 0,
                 group_needed: 0,
@@ -221,21 +263,65 @@ const farmingMaterial = computed(() => {
         }
     });
 
+
+    // Code spécifique pour les cristaux d'expérience. On récupère l'objet de chaque rareté de cristal d'expérience d'arme.
+    const xp_ore_3 = computedBuildArray.findIndex(fi => fi.code === "g02");
+    const xp_ore_2 = computedBuildArray.findIndex(fi => fi.code === "g03");
+    const xp_ore_1 = computedBuildArray.findIndex(fi => fi.code === "g04");
+
+    // On va changer l'objet du cristal de raffinement le plus précieux en utilisant la valeur des 2 autres.
+    computedBuildArray[xp_ore_3] = {
+        // On reprend l'objet tel quel
+        ...computedBuildArray[xp_ore_3],
+        // On arrondi les valeurs
+        needed: Math.ceil(computedBuildArray[xp_ore_3].needed),
+        remain: Math.ceil(computedBuildArray[xp_ore_3].remain),
+        // On va inclure une fausse valeur de synthèse mais en reprenant le principe car cela revient au même. Ainsi on multiplie par les bons coefficient les valeurs de besoin/possession
+        group_have: computedBuildArray[xp_ore_3].have * 25 + computedBuildArray[xp_ore_2].have * 5 + computedBuildArray[xp_ore_1].have,
+        group_needed: Math.ceil(computedBuildArray[xp_ore_3].needed * 25),
+        // On active la synthèse pour que cela soit affiché par la suite
+        synthesis: true,
+    };
+
+    // Code spécifique pour les livres d'expériences. Même principe et code que ci-dessus
+    const xp_book_3 = computedBuildArray.findIndex(fi => fi.code === "g05");
+    const xp_book_2 = computedBuildArray.findIndex(fi => fi.code === "g06");
+    const xp_book_1 = computedBuildArray.findIndex(fi => fi.code === "g07");
+
+    computedBuildArray[xp_book_3] = {
+        ...computedBuildArray[xp_book_3],
+        needed: Math.ceil(computedBuildArray[xp_book_3].needed),
+        remain: Math.ceil(computedBuildArray[xp_book_3].remain),
+        group_have: computedBuildArray[xp_book_3].have * 20 + computedBuildArray[xp_book_2].have * 5 + computedBuildArray[xp_book_1].have,
+        group_needed: Math.ceil(computedBuildArray[xp_book_3].needed * 20),
+        synthesis: true,
+    };
+
+
+    // Ce code va avoir pour objectif de générer les données de synthèse des groupes de ressources concernées par celle-ci. Ainsi, on va
+    // Boucler sur les ressources du tableaux temporaires
     computedBuildArray.forEach((el, index) => {
+        // Récupérer sa catégorie de ressources (parmi les 8) et sa rareté s'il en a une
         const category = el.code.slice(0, 1);
         const quality = el.code.slice(-1);
 
+        // Si la ressource fait partie des catégorie m ou l et a une qualité de 3, ou bien p ou a avec une qualité de 4, alors c'est une ressources concernée par notre affichage de la synthèse
         if ((["m", "l"].indexOf(category) >= 0 && quality === "3") || (["p", "a"].indexOf(category) >= 0 && quality === "4")) {
+            // On initialise les données de besoin de groupe et celles de possession de ce groupe
             let group_have = 0;
             let group_needed = 0;
-
+            // On filtre le tableau temporaire avec uniquement les ressources appartenant a notre groupe actuel et on boucle dessus
             computedBuildArray.filter(fi => fi.code.slice(0, 3) === el.code.slice(0, 3)).forEach(ele => {
+                // On initialise le multiplier en faisant 3 puissance (dernier caractère représentant la rareté) - 1. Par exeple, avec les raretés 4, 3, 2 et 1 respectivement
+                // On obtient : 3 puissance (4 - 1) = 27 ; 3 puissance (4 - 2) = 9 ; 3 puissance (4 - 3) = 3 ; 3 puissance (4 - 4) = 1
                 const multiplier = Math.pow(3, parseInt(ele.code.slice(-1)) - 1);
                 const have = ele.have;
                 const needed = ele.needed;
+                // On additionne au fur et à mesure que les ressources du même groupe passe
                 group_have += multiplier * have;
                 group_needed += multiplier * needed;
             });
+            // Puis on modifie l'objet concerné pour lui affecter ces nouvelles valeurs
             computedBuildArray[index] = {
                 ...computedBuildArray[index],
                 group_have: group_have,
@@ -244,72 +330,109 @@ const farmingMaterial = computed(() => {
             };
         }
 
+        // Nouvelle partie, dernière, le calcul de la quantité estimée de résine nécessaires pour farmer toutes les ressources qui en dépendent
+        // On inscrit ici les différents coefficient de drop propre à leur catégorie
         const coefficientResin = {
             weekly_boss: 2.38 / 3,
             mini_boss: 2.55,
-            gem: 0.215325,
+            gem: 0.215325 * 20,
             talent_book: 10.18,
             weapon_material: 17.05,
-            
         };
 
-        if (category === "b" && computedBuildArray[index].needed - computedBuildArray[index].have > 0) {
-            computedBuildArray[index].group_resin = Math.ceil((computedBuildArray[index].needed - computedBuildArray[index].have) / coefficientResin.weekly_boss) * 60;
-        }
+        // Pour factoriser, on utilise un tableau pour les différentes itérations avec les bonnes valeurs à utiliser
+        const processResinVar = [
+            { letter: "b", resin: 60, group: "weekly_boss", qualityCheck: false },
+            { letter: "s", resin: 40, group: "mini_boss", qualityCheck: false },
+            { letter: "p", resin: 20, group: "gem", qualityCheck: true, qualityValue: "4", },
+            { letter: "l", resin: 20, group: "talent_book", qualityCheck: true, qualityValue: "3", },
+            { letter: "a", resin: 20, group: "weapon_material", qualityCheck: true, qualityValue: "4", },
+        ];
 
-        if (category === "s" && computedBuildArray[index].needed - computedBuildArray[index].have > 0) {
-            computedBuildArray[index].group_resin = Math.ceil((computedBuildArray[index].needed - computedBuildArray[index].have) / coefficientResin.mini_boss) * 40;
-        }
-
-        if (category === "p" && quality === "4" && computedBuildArray[index].needed - computedBuildArray[index].have > 0) {
-            computedBuildArray[index].group_resin = Math.ceil((computedBuildArray[index].group_needed - computedBuildArray[index].group_have) / coefficientResin.gem / 20);
-        }
-
-        if (category === "l" && quality === "3" && computedBuildArray[index].needed - computedBuildArray[index].have > 0) {
-            computedBuildArray[index].group_resin = Math.ceil((computedBuildArray[index].group_needed - computedBuildArray[index].group_have) / coefficientResin.talent_book) * 20;
-        }
-
-        if (category === "a" && quality === "4" && computedBuildArray[index].needed - computedBuildArray[index].have > 0) {
-            computedBuildArray[index].group_resin = Math.ceil((computedBuildArray[index].group_needed - computedBuildArray[index].group_have) / coefficientResin.weapon_material) * 40;
+        // 5 catégories donc boucle de 0 à 4
+        for (let i = 0; i <= 4; i++) {
+            // On a besoin que 3 conditions soient vraies
+            if ((
+                // La ressource doit appartenir à l'une des catégories [b, s, p, l, a]
+                (category === processResinVar[i].letter) &&
+                // Si qualityCheck = true, alors on vérifie que la qualité est égale à la valeur maximale du groupe (3 ou 4), sinon c'est true d'office
+                (!processResinVar[i].qualityCheck ? true : quality === processResinVar[i].qualityValue ? true : false) &&
+                // On vérifie qu'il y a bien un besoin de matériel
+                (computedBuildArray[index].needed - computedBuildArray[index].have > 0)
+            )) {
+                // On affecte à group resin une nouvelle valeurs
+                computedBuildArray[index].group_resin =
+                    // Arrondi sup (( need - have ) / coef ) * resin. Ou  (( group_need - group_have ) / coef ) * resin
+                    Math.ceil(
+                        (
+                            computedBuildArray[index][`${processResinVar[i].qualityCheck ? "group_" : ""}needed`] -
+                            computedBuildArray[index][`${processResinVar[i].qualityCheck ? "group_" : ""}have`]
+                        ) / coefficientResin[processResinVar[i].group]
+                    ) * processResinVar[i].resin;
+            }
         }
     });
 
+    // Enfin, on renvoie tous notre tableau computed en le triant par Id pour être sûr que les matériaux soient affichés dans le même ordre que l'inventaire du jeu
     const sorted = computedBuildArray.sort(sortFunction("id"));
     return sorted;
 });
 
-let currentTime = ref();
-let coultdownReset = ref();
-let serverDay = ref();
+// Création de trois valeur en ref qui se chargement d'accueillir les données liées aux heures
+let currentTime = ref("En attente");
+let coultdownReset = ref("Choisir un serveur");
+let serverDay = ref("Choisir un serveur");
 
+// Objet gérant tout ce qui est date et heure
 const handleTime = {
+    // Fuseau horaire par rapport à GMT de chacun des trois serveurs
     timeShift: {
         Asiatic: 8,
         European: 1,
         American: -5,
     },
+    // Création de trois variables utilisées après
+    // Nombre de milisecondes dans une heure
     oneHour: 60 * 60 * 1000,
     timeZone: null,
     minusTheFourHoursReset: null,
 
-    coultdownBuilder: (date, serverTime) => {
-        const tomorrowMidnight = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 1);
-        const difference = tomorrowMidnight - serverTime;
-        return new Date(new Date(difference).getTime() + new Date(difference).getTimezoneOffset() * 60000);
+    // La fonction qui va être démarrée en première. Elle va actualisée chaque seconde les valeurs. Elle semble avoir un effet de bord involontaire car en cas de bug, elle va actualisé les messages d'erreur chaque seconde
+    timeRefresh: () => {
+        setTimeout(handleTime.getBeautifulHours, 1000);
     },
 
+    // Fonction centrale de cet objet.
     getBeautifulHours: () => {
+        // La valeur de timezone va être défini comme étant la différence de fuseau horaire entre l'heure locale et l'heure du serveur sélectionner. On transforme cette valeur en milisecondes
         handleTime.timeZone = (handleTime.timeShift[data.Options.server] - new Date().getTimezoneOffset() / -60) * handleTime.oneHour,
+        // Les serveurs se reset à 4h du matin, mais on va vouloir simuler que c'est à 00h donc on calcul la valeur de 4 heures en milisecondes
         handleTime.minusTheFourHoursReset = handleTime.oneHour * 4;
 
+        // Heure du serveur = heureLocal + décalage - les 4 heures
         const serverTime = Date.now() + handleTime.timeZone - handleTime.minusTheFourHoursReset;
+        // Heure local avec fonction pour la rendre au format voulu
         currentTime.value = handleTime.renderDate(new Date(Date.now()));
+        // Calcul du compte à rebourd jusqu'à arriver au reset du serveur.
         coultdownReset.value = handleTime.renderDate(handleTime.coultdownBuilder(new Date(serverTime + 24 * handleTime.oneHour), new Date(serverTime)));
+        // On essaie de savoir à quel jour le serveur est. On prend l'heure server, on prend la date (dimanche 0 et samedi 6) et on adapte ce résultat pour avoir (lundi 1 et dimanche 7)
         serverDay.value = ((new Date(Date.now() + handleTime.timeZone - handleTime.minusTheFourHoursReset).getDay() + 6) % 7) + 1;
 
+        // Une fois fait, on relance la boucle
         handleTime.timeRefresh();
     },
 
+    // Fonction spécifique au compte à rebourd.
+    coultdownBuilder: (date, serverTime) => {
+        // On simule le lendemain minuit en créant une nouvelle date manuellement avec l'heure du serveur + 24h mais en mettant minuit dans new Date
+        const tomorrowMidnight = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 1);
+        // On calcule la différence entre les deux date
+        const difference = tomorrowMidnight - serverTime;
+        // On adapte la date reçue pour qu'elle ne subisse pas de problème à cause des fuseaux horaires
+        return new Date(new Date(difference).getTime() + new Date(difference).getTimezoneOffset() * 60000);
+    },
+
+    // Fonction pour rendre les heures jolies avecjuste heures, minutes et secondes avec vérification des dizaines
     renderDate: (date) => {
         let H, M, S;
         H = date.getHours();
@@ -320,12 +443,9 @@ const handleTime = {
         if (S < 10) S = "0" + S;
         return H + ":" + M + ":" + S;
     },
-
-    timeRefresh: () => {
-        setTimeout(handleTime.getBeautifulHours, 1000);
-    },
 };
 
+// Fonction appelé avant le montage du composant afin d'initier les tablaux de données et la mise en marche de l'horloge
 onBeforeMount(() => {
     dataInit();
     handleTime.timeRefresh();
@@ -338,35 +458,32 @@ onBeforeMount(() => {
         <div class="boolean">
             <input
                 id="boolean-doing" v-model="data.Options.onlyShowsDoingCharacter" class="boolean-checkbox"
-                type="checkbox" name="boolean-doing" @change="updateLocalStorage('genshinOptionsData', 'Options');"
+                type="checkbox" name="boolean-doing" @change="updateLocalStorage('Options');"
             >
             <label class="boolean-label" for="boolean-doing">Ne montrer que les "doing"</label>
         </div>
         <div class="boolean">
             <input
                 id="boolean-needed" v-model="data.Options.onlyShowsNeededMaterials" class="boolean-checkbox"
-                type="checkbox" name="boolean-needed" @change="updateLocalStorage('genshinOptionsData', 'Options');"
+                type="checkbox" name="boolean-needed" @change="updateLocalStorage('Options');"
             >
             <label class="boolean-label" for="boolean-needed">Afficher uniquement les ressources nécessaires</label>
         </div>
         <div class="boolean">
             <input
                 id="boolean-one-more" v-model="data.Options.alwaysOneMoreMaterial" class="boolean-checkbox"
-                type="checkbox" name="boolean-one-more" @change="updateLocalStorage('genshinOptionsData', 'Options');"
+                type="checkbox" name="boolean-one-more" @change="updateLocalStorage('Options');"
             >
             <label class="boolean-label" for="boolean-one-more">Toujours avoir 1 de plus</label>
         </div>
         <div class="boolean">
             <input
                 id="boolean-explaination" v-model="data.Options.explaination" class="boolean-checkbox" type="checkbox"
-                name="boolean-explaination" @change="updateLocalStorage('genshinOptionsData', 'Options')"
+                name="boolean-explaination" @change="updateLocalStorage('Options')"
             >
             <label class="boolean-label" for="boolean-explaination">Montrer les explications</label>
         </div>
-        <select
-            v-model="data.Options.server" style="appearance: menulist-button"
-            @change="updateLocalStorage('genshinOptionsData', 'Options')"
-        >
+        <select v-model="data.Options.server" style="appearance: menulist-button" @change="updateLocalStorage('Options')">
             <option v-for="server in serverList" :key="server" :value="server">
                 {{ server }}
             </option>
@@ -402,7 +519,7 @@ onBeforeMount(() => {
         </p>
     </div>
     <div class="tabs-contener">
-        <table class="all-material-inventory">
+        <table class="all-materials-inventory">
             <thead>
                 <tr>
                     <th>Nom</th>
@@ -417,11 +534,16 @@ onBeforeMount(() => {
             </thead>
             <tbody>
                 <tr v-for="material in filteredMaterials" :key="material.id">
-                    <td>{{ material.name }}</td>
+                    <td>
+                        <div class="name_cell">
+                            <img :src="require(`@static/images/genshin_icon/materials/${material.code}.png`)">
+                            <p>{{ material.name }}</p>
+                        </div>
+                    </td>
                     <InputCreator
-                        v-model:value="data.Material.find(el => el.code === material.code).have" type="number"
-                        :index="data.Material.findIndex(el => el.code === material.code)" valuename="have" group="Material"
-                        @update:value="handleChange"
+                        v-model:value="data.Materials.find(el => el.code === material.code).have" type="number"
+                        :index="data.Materials.findIndex(el => el.code === material.code)" valuename="have"
+                        group="Materials" @update:value="handleChange"
                     />
                     <td>{{ material.needed }}</td>
                     <td>
@@ -456,7 +578,12 @@ onBeforeMount(() => {
             </thead>
             <tbody>
                 <tr v-for="character in filteredCharacters" :key="character.name">
-                    <td class="name">{{ character.name }}</td>
+                    <td>
+                        <div class="name_cell">
+                            <img :src="require(`@static/images/genshin_icon/characters/${character.name}.png`)">
+                            <p>{{ character.name }}</p>
+                        </div>
+                    </td>
                     <InputCreator
                         v-model:checked="character.got" type="checkbox"
                         :index="data.Characters.findIndex(el => el.name === character.name)" valuename="got"
@@ -577,7 +704,7 @@ onBeforeMount(() => {
 }
 
 .all-character-progress,
-.all-material-inventory,
+.all-materials-inventory,
 .farming-review {
     border-collapse: collapse;
 
@@ -610,9 +737,16 @@ onBeforeMount(() => {
         font-weight: 300;
         text-align: center;
 
-        &.name {
+        .name_cell {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: flex-start;
             font-weight: 400;
-            text-align: left;
+
+            img {
+                width: 40px;
+            }
         }
     }
 }
