@@ -121,6 +121,7 @@ const cleanLocalStorage = () => {
 const updateLocalStorage = (type, array) => {
     localStorage.setItem(type, JSON.stringify(data[array]));
 };
+
 const handleChange = (group, index, valuename, value) => {
     data[group][index][valuename] = value;
     updateLocalStorage(`genshin${group}Data`, group);
@@ -201,6 +202,10 @@ const farmingMaterial = computed(() => {
                 have: userValue,
                 needed: 0,
                 remain: 0,
+                group_have: 0,
+                group_needed: 0,
+                group_resin: 0,
+                synthesis: false,
             });
         } else {
             computedBuildArray[alreadyIn] = {
@@ -208,17 +213,68 @@ const farmingMaterial = computed(() => {
                 have: userValue,
                 needed: computedBuildArray[alreadyIn].needed,
                 remain: computedBuildArray[alreadyIn].needed - userValue,
+                group_have: 0,
+                group_needed: 0,
+                group_resin: 0,
+                synthesis: false,
             };
         }
     });
 
+    computedBuildArray.forEach((el, index) => {
+        const category = el.code.slice(0, 1);
+        const quality = el.code.slice(-1);
+
+        if ((["m", "l"].indexOf(category) >= 0 && quality === "3") || (["p", "a"].indexOf(category) >= 0 && quality === "4")) {
+            let group_have = 0;
+            let group_needed = 0;
+
+            computedBuildArray.filter(fi => fi.code.slice(0, 3) === el.code.slice(0, 3)).forEach(ele => {
+                const multiplier = Math.pow(3, parseInt(ele.code.slice(-1)) - 1);
+                const have = ele.have;
+                const needed = ele.needed;
+                group_have += multiplier * have;
+                group_needed += multiplier * needed;
+            });
+            computedBuildArray[index] = {
+                ...computedBuildArray[index],
+                group_have: group_have,
+                group_needed: group_needed,
+                synthesis: true,
+            };
+        }
+
+        const coefficientResin = {
+            weekly_boss: 2.38 / 3,
+            mini_boss: 2.55,
+            gem: 0.215325,
+            talent_book: 10.18,
+            weapon_material: 17.05,
+            
+        };
+
+        if (category === "b" && computedBuildArray[index].needed - computedBuildArray[index].have > 0) {
+            computedBuildArray[index].group_resin = Math.ceil((computedBuildArray[index].needed - computedBuildArray[index].have) / coefficientResin.weekly_boss) * 60;
+        }
+
+        if (category === "s" && computedBuildArray[index].needed - computedBuildArray[index].have > 0) {
+            computedBuildArray[index].group_resin = Math.ceil((computedBuildArray[index].needed - computedBuildArray[index].have) / coefficientResin.mini_boss) * 40;
+        }
+
+        if (category === "p" && quality === "4" && computedBuildArray[index].needed - computedBuildArray[index].have > 0) {
+            computedBuildArray[index].group_resin = Math.ceil((computedBuildArray[index].group_needed - computedBuildArray[index].group_have) / coefficientResin.gem / 20);
+        }
+
+        if (category === "l" && quality === "3" && computedBuildArray[index].needed - computedBuildArray[index].have > 0) {
+            computedBuildArray[index].group_resin = Math.ceil((computedBuildArray[index].group_needed - computedBuildArray[index].group_have) / coefficientResin.talent_book) * 20;
+        }
+
+        if (category === "a" && quality === "4" && computedBuildArray[index].needed - computedBuildArray[index].have > 0) {
+            computedBuildArray[index].group_resin = Math.ceil((computedBuildArray[index].group_needed - computedBuildArray[index].group_have) / coefficientResin.weapon_material) * 40;
+        }
+    });
+
     const sorted = computedBuildArray.sort(sortFunction("id"));
-
-
-
-    sorted.forEach(el => console.log(el));
-
-
     return sorted;
 });
 
@@ -235,13 +291,13 @@ const handleTime = {
     oneHour: 60 * 60 * 1000,
     timeZone: null,
     minusTheFourHoursReset: null,
-    
+
     coultdownBuilder: (date, serverTime) => {
         const tomorrowMidnight = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 1);
         const difference = tomorrowMidnight - serverTime;
         return new Date(new Date(difference).getTime() + new Date(difference).getTimezoneOffset() * 60000);
     },
-    
+
     getBeautifulHours: () => {
         handleTime.timeZone = (handleTime.timeShift[data.Options.server] - new Date().getTimezoneOffset() / -60) * handleTime.oneHour,
         handleTime.minusTheFourHoursReset = handleTime.oneHour * 4;
@@ -295,8 +351,8 @@ onBeforeMount(() => {
         </div>
         <div class="boolean">
             <input
-                id="boolean-one-more" v-model="data.Options.alwaysOneMoreMaterial" class="boolean-checkbox" type="checkbox"
-                name="boolean-one-more" @change="updateLocalStorage('genshinOptionsData', 'Options');"
+                id="boolean-one-more" v-model="data.Options.alwaysOneMoreMaterial" class="boolean-checkbox"
+                type="checkbox" name="boolean-one-more" @change="updateLocalStorage('genshinOptionsData', 'Options');"
             >
             <label class="boolean-label" for="boolean-one-more">Toujours avoir 1 de plus</label>
         </div>
@@ -340,7 +396,9 @@ onBeforeMount(() => {
         </p>
         <br>
         <p>
-            L'option "toujours avoir 1 de plus" est là pour simplifier la rentrée des données. En effet, avoir toujours 1 ressources de chaque choses du jeu signifie qu'il suffira de les rentrer dans l'ordre sans se soucier de ne pas en avoir certaine et donc de tout décaler
+            L'option "toujours avoir 1 de plus" est là pour simplifier la rentrée des données. En effet, avoir toujours 1
+            ressources de chaque choses du jeu signifie qu'il suffira de les rentrer dans l'ordre sans se soucier de ne pas
+            en avoir certaine et donc de tout décaler
         </p>
     </div>
     <div class="tabs-contener">
@@ -352,6 +410,9 @@ onBeforeMount(() => {
                     <th>Nécessaire</th>
                     <th>Reste</th>
                     <th>Farmable</th>
+                    <th>Synthèse : Have</th>
+                    <th>Synthèse : Needed</th>
+                    <th>Résine</th>
                 </tr>
             </thead>
             <tbody>
@@ -370,6 +431,9 @@ onBeforeMount(() => {
                         {{ !!serverDay ? (typeof material.farming_days === "number" ?
                             material.farming_days.toString().includes(serverDay.toString()) : "") : "" }}
                     </td>
+                    <td>{{ material.synthesis ? material.group_have : "" }}</td>
+                    <td>{{ material.synthesis ? material.group_needed : "" }}</td>
+                    <td>{{ material.group_resin > 0 ? material.group_resin : "" }}</td>
                 </tr>
             </tbody>
         </table>
@@ -391,59 +455,68 @@ onBeforeMount(() => {
                 </tr>
             </thead>
             <tbody>
-                <tr
-                    v-for="character in filteredCharacters" :key="character.name"
-                >
+                <tr v-for="character in filteredCharacters" :key="character.name">
                     <td class="name">{{ character.name }}</td>
                     <InputCreator
-                        v-model:checked="character.got" type="checkbox" :index="data.Characters.findIndex(el => el.name === character.name)" valuename="got"
+                        v-model:checked="character.got" type="checkbox"
+                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="got"
                         group="Characters" @update:checked="handleChange"
                     />
                     <InputCreator
                         v-model:checked="character.doing" type="checkbox" :disabled="character.only"
-                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="doing" group="Characters" @update:checked="handleChange"
+                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="doing"
+                        group="Characters" @update:checked="handleChange"
                     />
                     <InputCreator
                         v-model:checked="character.only" type="checkbox" :disabled="!character.doing"
-                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="only" group="Characters" @update:checked="handleChange"
+                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="only"
+                        group="Characters" @update:checked="handleChange"
                     />
                     <InputCreator
-                        v-model:value="character.cLvl" type="select-level" :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cLvl"
+                        v-model:value="character.cLvl" type="select-level"
+                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cLvl"
                         :list="levelingData.level.filter((el) => el.id <= character.wLvl)" group="Characters"
                         @update:value="handleChange"
                     />
                     <InputCreator
-                        v-model:value="character.wLvl" type="select-level" :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wLvl"
+                        v-model:value="character.wLvl" type="select-level"
+                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wLvl"
                         :list="levelingData.level.filter((el) => el.id >= character.cLvl)" group="Characters"
                         @update:value="handleChange"
                     />
                     <InputCreator
-                        v-model:value="character.cAp1" type="select-aptitude" :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cAp1"
+                        v-model:value="character.cAp1" type="select-aptitude"
+                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cAp1"
                         :list="aptList.filter((el) => el <= character.wAp1)" group="Characters"
                         @update:value="handleChange"
                     />
                     <InputCreator
-                        v-model:value="character.wAp1" type="select-aptitude" :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wAp1"
+                        v-model:value="character.wAp1" type="select-aptitude"
+                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wAp1"
                         :list="aptList.filter((el) => el >= character.cAp1)" group="Characters"
                         @update:value="handleChange"
                     />
                     <InputCreator
-                        v-model:value="character.cAp2" type="select-aptitude" :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cAp2"
+                        v-model:value="character.cAp2" type="select-aptitude"
+                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cAp2"
                         :list="aptList.filter((el) => el <= character.wAp2)" group="Characters"
                         @update:value="handleChange"
                     />
                     <InputCreator
-                        v-model:value="character.wAp2" type="select-aptitude" :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wAp2"
+                        v-model:value="character.wAp2" type="select-aptitude"
+                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wAp2"
                         :list="aptList.filter((el) => el >= character.cAp2)" group="Characters"
                         @update:value="handleChange"
                     />
                     <InputCreator
-                        v-model:value="character.cAp3" type="select-aptitude" :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cAp3"
+                        v-model:value="character.cAp3" type="select-aptitude"
+                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cAp3"
                         :list="aptList.filter((el) => el <= character.wAp3)" group="Characters"
                         @update:value="handleChange"
                     />
                     <InputCreator
-                        v-model:value="character.wAp3" type="select-aptitude" :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wAp3"
+                        v-model:value="character.wAp3" type="select-aptitude"
+                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wAp3"
                         :list="aptList.filter((el) => el >= character.cAp3)" group="Characters"
                         @update:value="handleChange"
                     />

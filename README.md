@@ -176,4 +176,12 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Mise à jour des packages npm
 -   Invisible au commit mais suppression des .env inutiles pour l'instant
 
+### 1.2.5 `24 août 2023`
+
+-   Dans le fichier json des matériaux, changement des codes de 2 types de ressources. Les ressources en dessous de la dizaine abordent désormais un zéro devant leur nnuméro pour que chacun fasse la même longueur
+-   Accords de ces changements dans le fichier json des personnages pour que les code de matériaux dont ils ont besoin correspondent de nouveau
+-   Rajout de 4 clés/valeurs à l'objet des ressources de farm. Group_have, group_needed, group_resin et synthesis. Elles ont pour but que les ressources synthétisable aient un compteur global pour déterminer les stocks. Et les ressources récupérable avec de la résine peuvent avoir une estimation de la résine nécessaires.
+-   Calcul de ces différentes données dans la continuité de ce qui a été fait précédemment dans l'objet computed "farmingMaterial".
+-   Ajout de ces données aux tableaux de matériels déjà existants
+
 </details>

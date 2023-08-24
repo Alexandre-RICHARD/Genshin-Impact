@@ -30,189 +30,189 @@
     {
         "id": 5,
         "name": "Essence de blob",
-        "code": "m13",
+        "code": "m013",
         "category": "common_material",
         "farming_days": null
     },
     {
         "id": 6,
         "name": "Mucus de Blob",
-        "code": "m12",
+        "code": "m012",
         "category": "common_material",
         "farming_days": null
     },
     {
         "id": 7,
         "name": "Bave de Blob",
-        "code": "m11",
+        "code": "m011",
         "category": "common_material",
         "farming_days": null
     },
     {
         "id": 8,
         "name": "Masque sinistre",
-        "code": "m23",
+        "code": "m023",
         "category": "common_material",
         "farming_days": null
     },
     {
         "id": 9,
         "name": "Masque sale",
-        "code": "m22",
+        "code": "m022",
         "category": "common_material",
         "farming_days": null
     },
     {
         "id": 10,
         "name": "Masque endommagé",
-        "code": "m21",
+        "code": "m021",
         "category": "common_material",
         "farming_days": null
     },
     {
         "id": 11,
         "name": "Parchemin maudit",
-        "code": "m33",
+        "code": "m033",
         "category": "common_material",
         "farming_days": null
     },
     {
         "id": 12,
         "name": "Parchemin sigillé",
-        "code": "m32",
+        "code": "m032",
         "category": "common_material",
         "farming_days": null
     },
     {
         "id": 13,
         "name": "Parchemin divinatoire",
-        "code": "m31",
+        "code": "m031",
         "category": "common_material",
         "farming_days": null
     },
     {
         "id": 14,
         "name": "Pointe de flèche usée",
-        "code": "m43",
+        "code": "m043",
         "category": "common_material",
         "farming_days": null
     },
     {
         "id": 15,
         "name": "Pointe de flèche aiguisée",
-        "code": "m42",
+        "code": "m042",
         "category": "common_material",
         "farming_days": null
     },
     {
         "id": 16,
         "name": "Pointe de flèche robuste",
-        "code": "m41",
+        "code": "m041",
         "category": "common_material",
         "farming_days": null
     },
     {
         "id": 17,
         "name": "Corne à cristal noir",
-        "code": "m53",
+        "code": "m053",
         "category": "rare_material",
         "farming_days": null
     },
     {
         "id": 18,
         "name": "Corne en bronze noir",
-        "code": "m52",
+        "code": "m052",
         "category": "rare_material",
         "farming_days": null
     },
     {
         "id": 19,
         "name": "Corne lourde",
-        "code": "m51",
+        "code": "m051",
         "category": "rare_material",
         "farming_days": null
     },
     {
         "id": 20,
         "name": "Pousse des lignes énergétiques",
-        "code": "m63",
+        "code": "m063",
         "category": "rare_material",
         "farming_days": null
     },
     {
         "id": 21,
         "name": "Feuilles morte des lignes énergétiques",
-        "code": "m62",
+        "code": "m062",
         "category": "rare_material",
         "farming_days": null
     },
     {
         "id": 22,
         "name": "Branche morte des lignes énergétiques",
-        "code": "m61",
+        "code": "m061",
         "category": "rare_material",
         "farming_days": null
     },
     {
         "id": 23,
         "name": "Noyau du chaos",
-        "code": "m73",
+        "code": "m073",
         "category": "rare_material",
         "farming_days": null
     },
     {
         "id": 24,
         "name": "Circuit du chaos",
-        "code": "m72",
+        "code": "m072",
         "category": "rare_material",
         "farming_days": null
     },
     {
         "id": 25,
         "name": "Dispositif du chaos",
-        "code": "m71",
+        "code": "m071",
         "category": "rare_material",
         "farming_days": null
     },
     {
         "id": 26,
         "name": "Mèche d'herbe brumeuse",
-        "code": "m83",
+        "code": "m083",
         "category": "rare_material",
         "farming_days": null
     },
     {
         "id": 27,
         "name": "Herbe brumeuse",
-        "code": "m82",
+        "code": "m082",
         "category": "rare_material",
         "farming_days": null
     },
     {
         "id": 28,
         "name": "Pollen d'herbe brumeuse",
-        "code": "m81",
+        "code": "m081",
         "category": "rare_material",
         "farming_days": null
     },
     {
         "id": 29,
         "name": "Grande dague de l'Inspecteur",
-        "code": "m93",
+        "code": "m093",
         "category": "rare_material",
         "farming_days": null
     },
     {
         "id": 30,
         "name": "Dague rituelle de l'usurier",
-        "code": "m92",
+        "code": "m092",
         "category": "rare_material",
         "farming_days": null
     },
     {
         "id": 31,
         "name": "Dague de chasse rituelle",
-        "code": "m91",
+        "code": "m091",
         "category": "rare_material",
         "farming_days": null
     },
@@ -905,196 +905,196 @@
     {
         "id": 130,
         "name": "Pyro - Pierre d'Agate agnidus",
-        "code": "p14",
+        "code": "p014",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 131,
         "name": "Pyro - Morceau d'Agate agnidus",
-        "code": "p13",
+        "code": "p013",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 132,
         "name": "Pyro - Fragment d'Agate agnidus",
-        "code": "p12",
+        "code": "p012",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 133,
         "name": "Pyro - Éclat d'Agate agnidus",
-        "code": "p11",
+        "code": "p011",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 134,
         "name": "Hydro - Pierre de lazurite varunada",
-        "code": "p24",
+        "code": "p024",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 135,
         "name": "Hydro - Morceau de lazurite varunada",
-        "code": "p23",
+        "code": "p023",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 136,
         "name": "Hydro - Fragment de lazurite varunada",
-        "code": "p22",
+        "code": "p022",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 137,
         "name": "Hydro - Éclat de lazurite varunada",
-        "code": "p21",
+        "code": "p021",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 138,
         "name": "Dendro - Pierre d'émeraude nagadus",
-        "code": "p34",
+        "code": "p034",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 139,
         "name": "Dendro - Morceau d'émeraude nagadus",
-        "code": "p33",
+        "code": "p033",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 140,
         "name": "Dendro - Fragment d'émeraude nagadus",
-        "code": "p32",
+        "code": "p032",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 141,
         "name": "Dendro - Éclat d'émeraude nagadus",
-        "code": "p31",
+        "code": "p031",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 142,
         "name": "Électro - Pierre d'émeraude nagadus",
-        "code": "p44",
+        "code": "p044",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 143,
         "name": "Électro - Morceau d'émeraude nagadus",
-        "code": "p43",
+        "code": "p043",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 144,
         "name": "Électro - Fragment d'émeraude nagadus",
-        "code": "p42",
+        "code": "p042",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 145,
         "name": "Électro - Éclat d'émeraude nagadus",
-        "code": "p41",
+        "code": "p041",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 146,
         "name": "Anémo - Pierre de turquoise vayuda",
-        "code": "p54",
+        "code": "p054",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 147,
         "name": "Anémo - Morceau de turquoise vayuda",
-        "code": "p53",
+        "code": "p053",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 148,
         "name": "Anémo - Fragment de turquoise vayuda",
-        "code": "p52",
+        "code": "p052",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 149,
         "name": "Anémo - Éclat de turquoise vayuda",
-        "code": "p51",
+        "code": "p051",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 150,
         "name": "Cryo - Pierre de jade shivada",
-        "code": "p64",
+        "code": "p064",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 151,
         "name": "Cryo - Morceau de jade shivada",
-        "code": "p63",
+        "code": "p063",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 152,
         "name": "Cryo - Fragment de jade shivada",
-        "code": "p62",
+        "code": "p062",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 153,
         "name": "Cryo - Éclat de jade shivada",
-        "code": "p61",
+        "code": "p061",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 154,
         "name": "Géo - Pierre de topaze prithiva",
-        "code": "p74",
+        "code": "p074",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 155,
         "name": "Géo - Morceau de topaze prithiva",
-        "code": "p73",
+        "code": "p073",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 156,
         "name": "Géo - Fragment de topaze prithiva",
-        "code": "p72",
+        "code": "p072",
         "category": "gem",
         "farming_days": null
     },
     {
         "id": 157,
         "name": "Géo - Éclat de topaze prithiva",
-        "code": "p71",
+        "code": "p071",
         "category": "gem",
         "farming_days": null
     },
