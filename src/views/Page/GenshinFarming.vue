@@ -10,11 +10,15 @@ import { computed, onBeforeMount, reactive, ref } from "vue";
 // Dès le début, on stock la liste des Niveaux de personnages et d'aptitudes séparément pour faciliter leurs accès dans le template
 const lvlList = levelingData.level.map(el => el.id);
 const aptList = levelingData.aptitude.map(el => el.level);
+const weaponNameList = weaponsList.flatMap(el => [el.name, el.eng_name]);
+    
+
+
 // Les différentes options du choix de serveur
-const serverList = ["Sélectionne ton serveur", "American", "Asiatic", "European"];
+const serverList = ["Sélectionne ton serveur", "Asiatique", "Européen", "Américain"];
 
 // Notre gros objet global qui va contenir toutes les informations utiles à sauvegarder pour que l'utilisateur concerve ses données
-const data = reactive({ Characters: null, Materials: null, Options: {} });
+const data = reactive({ Characters: [], Weapons: [], Materials: [], Options: {} });
 
 // Une fonction appelé en théorie uniquement lors du chargement de la page (ou lors du clean du localStorage)
 const dataInit = () => {
@@ -58,6 +62,22 @@ const dataInit = () => {
     }
     // Une fois tout cela géré, on va mettre à jour le localStorage avec nos données actualisées et vérifiées
     updateLocalStorage("Characters");
+
+    const lsWeapons = localStorage.getItem("genshinWeaponsData");
+    if (lsWeapons) {
+        data.Weapons = JSON.parse(lsWeapons);
+        weaponsList.forEach(({ name }) => {
+            const currentChar = data.Weapons.find(fi => name === fi.name);
+            if (currentChar) {
+                const i = data.Weapons.findIndex(fi => name === fi.name);
+                if (lvlList.indexOf(currentChar.cLvl) < 0) data.Weapons[i].cLvl = 1;
+                if (lvlList.indexOf(currentChar.wLvl) < 0) data.Weapons[i].wLvl = 96;
+            }
+        });
+    } else {
+        data.Weapons = [];
+    }
+    updateLocalStorage("Weapons");
 
     // Pour gérer l'inventaire des ressources de farm, même procédé que la fonction ci-dessus, mais compliqué et probablement vilain à factoriser les 2 en 1
     const lsMaterial = localStorage.getItem("genshinMaterialsData");
@@ -189,52 +209,65 @@ const farmingMaterial = computed(() => {
         { searchLoc: "aptitude", currentValue: "cAp3", wantedValue: "wAp3" },
     ];
 
+    const materialsAttributor = (progressStep, currentElement) => {
+        progressStep.forEach(step => {
+            // On boucle sur chacune des données des niveaux récupéré sur id et level inutile
+            for (const [key, value] of Object.entries(step)) {
+                if (value > 0 && key != "id" && key != "level") {
+                    // On crée une variable temporaire
+                    let materialCode;
+                    // On vérifie dans les données du personnages, si la clé représente une ressources avec différents niveau de rareté ou non, réprésenté par un nombre en dernier caractère
+                    if (!isNaN(key.slice(-1))) {
+                        // Si c'est un chiffre, on reconstitue le bon code de la ressources
+                        materialCode = currentElement[key.slice(0, -2)] + key.slice(-1);
+                    } else {
+                        // Sinon, on prend simplement le code comme il est
+                        materialCode = currentElement[key];
+                    }
+                    // Dans l'objet temporaire du computed, on cherche la ressource actuelle
+                    const findIndex = computedBuildArray.findIndex(fi => fi.code === materialCode);
+                    // Si elle existe, on lui rajoute à sa propre valeur le besoin représenter par le niveau
+                    if (findIndex >= 0) {
+                        computedBuildArray[findIndex].needed += value;
+                    } else {
+                        // Sinon, on créer un nouvel objet reprenant les données des ressources en y ajoutant la quantité nécessaires
+                        computedBuildArray.push({
+                            ...materialsList.find(material => material.code === materialCode),
+                            needed: value,
+                        });
+                    }
+
+                }
+            }
+        });
+    };
+
     // La logique est donc :
     // POur chaque personnage, on ne va prendre en compte que ceux qui ont été noté comme étant à faire, à monter. On boucle sur ceux qui restent.
     data.Characters.filter(char => char.doing === true).forEach(char => {
         // Dans la données de persos, on récupère celles du personnage actuel.
-        const currentcharacter = charactersList.find(find => find.name === char.name);
+        const currentElement = charactersList.find(find => find.name === char.name);
         // On boucle de 0 à 3 car on va surveiller 4 choses, le lvl, l'aptitude 1, la 2 et la 3.
         for (let i = 0; i <= 3; i++) {
             // On va récupérer la liste des niveaux séparant le niveau actuel du niveau voulu pour ainsi avoir accès à la liste de ce que demande chaque niveau comme matériel
             const progressStep = levelingData[processVar[i].searchLoc].filter(step => step.id > char[processVar[i].currentValue] && step.id <= char[processVar[i].wantedValue]);
             // S'il y a le moindre niveau dans cette liste, on rentre dans cette boucle forEach
             if (progressStep.length > 0) {
-                progressStep.forEach(step => {
-                    // On boucle sur chacune des données des niveaux récupéré sur id et level inutile
-                    for (const [key, value] of Object.entries(step)) {
-                        if (value > 0 && key != "id" && key != "level") {
-                            // On crée une variable temporaire
-                            let materialCode;
-                            // On vérifie dans les données du personnages, si la clé représente une ressources avec différents niveau de rareté ou non, réprésenté par un nombre en dernier caractère
-                            if (!isNaN(key.slice(-1))) {
-                                // Si c'est un chiffre, on reconstitue le bon code de la ressources
-                                materialCode = currentcharacter[key.slice(0, -2)] + key.slice(-1);
-                            } else {
-                                // Sinon, on prend simplement le code comme il est
-                                materialCode = currentcharacter[key];
-                            }
-                            // Dans l'objet temporaire du computed, on cherche la ressource actuelle
-                            const findIndex = computedBuildArray.findIndex(fi => fi.code === materialCode);
-                            // Si elle existe, on lui rajoute à sa propre valeur le besoin représenter par le niveau
-                            if (findIndex >= 0) {
-                                computedBuildArray[findIndex].needed += value;
-                            } else {
-                                // Sinon, on créer un nouvel objet reprenant les données des ressources en y ajoutant la quantité nécessaires
-                                computedBuildArray.push({
-                                    ...materialsList.find(material => material.code === materialCode),
-                                    needed: value,
-                                });
-                            }
-
-                        }
-                    }
-                });
+                materialsAttributor(progressStep, currentElement);
             }
         }
     });
 
-    // Ce code va servir a tout de même crée un objet pour chque ressources, même s'il n'est pas demandé pour le farm des persos choisis
+    // La logique pour les armes est exactement la même
+    data.Weapons.forEach(weap => {
+        const currentElement = weaponsList.find(find => find.name === weap.name);
+        const progressStep = levelingData[`weapon_${currentElement.rarity}`].filter(step => step.id > weap.cLvl && step.id <= weap.wLvl);
+        if (progressStep.length > 0) {
+            materialsAttributor(progressStep, currentElement);
+        }
+    });
+
+    // Ce code va servir a tout de même crée un objet pour chaque ressources, même s'il n'est pas demandé pour le farm des persos choisis
     materialsList.forEach(material => {
         // On boucle sur la liste de ressources provenant du json, on récupère la quantité que le joueur a
         const userValue = data.Materials.find(fi => fi.code === material.code).have;
@@ -381,6 +414,42 @@ const farmingMaterial = computed(() => {
     return sorted;
 });
 
+const searchingWeaponQuery = ref("");
+const showResultList = ref(false);
+
+const filteredResults = computed(() => {
+    let temporaryArray = [];
+    if (searchingWeaponQuery.value.length > 0) {
+        temporaryArray = weaponNameList.filter(name =>
+            name.toLowerCase().includes(searchingWeaponQuery.value.toLowerCase())
+        ).slice(0, 5);
+    }
+    return temporaryArray;
+});
+
+const hideList = () => {
+    setTimeout(() => {
+        showResultList.value = false;
+    }, 100);
+};
+
+const addWeaponToDo = (name) => {
+    const currentWeapon = weaponsList.find(el => el.eng_name === name || el.name === name);
+    data.Weapons.push({
+        name: currentWeapon.name,
+        rarity: currentWeapon.rarity,
+        cLvl: 1,
+        wLvl: currentWeapon.rarity < 3 ? 74 : 96,
+    });
+    searchingWeaponQuery.value = "";
+    updateLocalStorage("Weapons");
+};
+
+const deletingWeaponToDo = (index) => {
+    data.Weapons.splice(index, 1);
+    updateLocalStorage("Weapons");
+};
+
 // Création de trois valeur en ref qui se chargement d'accueillir les données liées aux heures
 let currentTime = ref("En attente");
 let coultdownReset = ref("Choisir un serveur");
@@ -390,9 +459,9 @@ let serverDay = ref("Choisir un serveur");
 const handleTime = {
     // Fuseau horaire par rapport à GMT de chacun des trois serveurs
     timeShift: {
-        Asiatic: 8,
-        European: 1,
-        American: -5,
+        Asiatique: 8,
+        Européen: 1,
+        Américain: -5,
     },
     // Création de trois variables utilisées après
     // Nombre de milisecondes dans une heure
@@ -491,7 +560,8 @@ onBeforeMount(() => {
                 id="boolean-load-image" v-model="data.Options.loadIMG" class="boolean-checkbox" type="checkbox"
                 name="boolean-load-image" @change="updateLocalStorage('Options')"
             >
-            <label class="boolean-label" for="boolean-load-image">Afficher les images (chargement jusqu'à 5x plus long avec une connexion lente)</label>
+            <label class="boolean-label" for="boolean-load-image">Afficher les images (chargement jusqu'à 5x plus long avec
+                une connexion lente)</label>
         </div>
         <select v-model="data.Options.server" style="appearance: menulist-button" @change="updateLocalStorage('Options')">
             <option v-for="server in serverList" :key="server" :value="server">
@@ -548,9 +618,9 @@ onBeforeMount(() => {
                         <div class="name_cell">
                             <img
                                 v-if="data.Options.loadIMG"
-                                :src="require(`@static/images/genshin_icon/materials/${material.code}.png`)" 
-                                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${materialsList.find(fi => fi.code === material.code).rarity}.png`)}')`}"
-                                >
+                                :src="require(`@static/images/genshin_icon/materials/${material.code}.png`)"
+                                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${materialsList.find(fi => fi.code === material.code).rarity}.png`)}')` }"
+                            >
                             <p>{{ material.name }}</p>
                         </div>
                     </td>
@@ -596,9 +666,9 @@ onBeforeMount(() => {
                         <div class="name_cell">
                             <img
                                 v-if="data.Options.loadIMG"
-                                :src="require(`@static/images/genshin_icon/characters/${character.name}.png`)" 
-                                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${charactersList.find(fi => fi.name === character.name).rarity}.png`)}')`}"
-                                >
+                                :src="require(`@static/images/genshin_icon/characters/${character.name}.png`)"
+                                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${charactersList.find(fi => fi.name === character.name).rarity}.png`)}')` }"
+                            >
                             <p>{{ character.name }}</p>
                         </div>
                     </td>
@@ -668,27 +738,70 @@ onBeforeMount(() => {
                 </tr>
             </tbody>
         </table>
-        <table class="all-weapons-progress">
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="weapon in weaponsList" :key="weapon.name">
-                    <td>
-                        <div class="name_cell">
-                            <img
-                                v-if="data.Options.loadIMG"
-                                :src="require(`@static/images/genshin_icon/weapons/${weapon.name}.png`)" 
-                                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${weapon.rarity}.png`)}')`}"
-                            >
-                            <p>{{ weapon.name }}</p>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div>
+            <div class="search-input">
+                <input
+                    v-model="searchingWeaponQuery"
+                    class="input"
+                    type="text"
+                    placeholder="Rechercher une arme"
+                    @focus="showResultList = true"
+                    @blur="hideList"
+                >
+                <ul v-if="showResultList" class="list">
+                    <li
+                        v-for="result in filteredResults"
+                        :key="result"
+                        class="one-result"
+                        @click="addWeaponToDo(result)"
+                    >
+                        <img
+                            v-if="data.Options.loadIMG"
+                            class="results-image"
+                            :src="require(`@static/images/genshin_icon/weapons/${weaponsList.find(fi => fi.name === result || fi.eng_name === result).name}.png`)"
+                            :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${weaponsList.find(fi => fi.name === result || fi.eng_name === result).rarity}.png`)}')` }"
+                        >
+                        <p class="result-name">{{ result }}</p>
+                    </li>
+                </ul>
+            </div>
+            <table class="all-weapons-progress">
+                <thead>
+                    <tr>
+                        <th>Nom de l'arme</th>
+                        <th>Niveau actuel</th>
+                        <th>Niveau voulu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(weapon, index) in data.Weapons" :key="index">
+                        <td>
+                            <div class="name_cell">
+                                <button class="deleting-weapon" type="button" @click="deletingWeaponToDo(index)">X</button>
+                                <img
+                                    v-if="data.Options.loadIMG"
+                                    :src="require(`@static/images/genshin_icon/weapons/${weapon.name}.png`)"
+                                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${weaponsList.find(fi => fi.name === weapon.name).rarity}.png`)}')` }"
+                                >
+                                <p>{{ weapon.name }}</p>
+                            </div>
+                        </td>
+                        <InputCreator
+                            v-model:value="weapon.cLvl" type="select-level"
+                            :index="index" valuename="cLvl"
+                            :list="levelingData[`weapon_${weapon.rarity}`].filter((el) => el.id <= weapon.wLvl)" group="Weapons"
+                            @update:value="handleChange"
+                        />
+                        <InputCreator
+                            v-model:value="weapon.wLvl" type="select-level"
+                            :index="index" valuename="wLvl"
+                            :list="levelingData[`weapon_${weapon.rarity}`].filter((el) => el.id >= weapon.cLvl)" group="Weapons"
+                            @update:value="handleChange"
+                        />
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 
@@ -822,5 +935,63 @@ onBeforeMount(() => {
             }
         }
     }
+}
+
+.search-input {
+    position: relative;
+    color: #f5f5f5;
+    background-color: #4650ac;
+    margin: 10px;
+
+    .input {
+        padding: 5px;
+
+        &::placeholder {
+            color: #c9c9c9;
+            font-style: oblique;
+            font-size: 0.8rem;
+        }
+    }
+
+    .list {
+        z-index: 1;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        background-color: #24252c;
+        border: 2px solid #24252c;
+
+        .one-result {
+            display: flex;
+            gap: 4px;
+            cursor: pointer;
+            background-color: #3f425e;
+            padding: 4px;
+
+            .results-image {
+                border-radius: 5px;
+                width: 30px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            &:hover {
+                background-color: #b8b9bd;
+                color: #32333a;
+            }
+        }
+    }
+}
+
+.deleting-weapon {
+    font-weight: 500;
+    font-size: 19px;
+    color: #d6d6d6;
+    background-color: #c94b4b;
+    padding: 0px 5px;
+    border-radius: 20px;
+    margin: 0 10px;
 }
 </style>

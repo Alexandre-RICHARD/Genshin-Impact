@@ -7,6 +7,8 @@
         "atk": 510,
         "stat_type": "crt_dmg",
         "stat_value": 55.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m03",
         "rare_material": "m09",
         "weapon_material": "a21"
@@ -19,6 +21,8 @@
         "atk": 510,
         "stat_type": "elemental_mastery",
         "stat_value": 165,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m11",
         "rare_material": "m23",
         "weapon_material": "a43"
@@ -31,6 +35,8 @@
         "atk": 620,
         "stat_type": "atk_purcent",
         "stat_value": 13.8,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m14",
         "rare_material": "m18",
         "weapon_material": "a33"
@@ -43,6 +49,8 @@
         "atk": 674,
         "stat_type": "crt_rate",
         "stat_value": 22.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m06",
         "weapon_material": "a12"
@@ -55,6 +63,8 @@
         "atk": 510,
         "stat_type": "atk_purcent",
         "stat_value": 41.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m14",
         "rare_material": "m18",
         "weapon_material": "a31"
@@ -67,6 +77,8 @@
         "atk": 565,
         "stat_type": "energy_recharge",
         "stat_value": 30.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m03",
         "rare_material": "m16",
         "weapon_material": "a31"
@@ -79,6 +91,8 @@
         "atk": 565,
         "stat_type": "energy_recharge",
         "stat_value": 30.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m22",
         "rare_material": "m23",
         "weapon_material": "a41"
@@ -91,6 +105,8 @@
         "atk": 454,
         "stat_type": "physical_bonus",
         "stat_value": 69,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m10",
         "rare_material": "m13",
         "weapon_material": "a23"
@@ -103,6 +119,8 @@
         "atk": 354,
         "stat_type": "hp_purcent",
         "stat_value": 46.9,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m03",
         "rare_material": "m07",
         "weapon_material": "a13"
@@ -115,6 +133,8 @@
         "atk": 608,
         "stat_type": "atk_purcent",
         "stat_value": 49.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m07",
         "weapon_material": "a13"
@@ -127,6 +147,8 @@
         "atk": 185,
         "stat_type": "none",
         "stat_value": 0,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m11",
         "rare_material": "m06",
         "weapon_material": "a12"
@@ -139,6 +161,8 @@
         "atk": 243,
         "stat_type": "none",
         "stat_value": 0,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m11",
         "rare_material": "m06",
         "weapon_material": "a12"
@@ -151,6 +175,8 @@
         "atk": 454,
         "stat_type": "energy_recharge",
         "stat_value": 61.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m12",
         "rare_material": "m07",
         "weapon_material": "a13"
@@ -163,6 +189,8 @@
         "atk": 510,
         "stat_type": "crt_rate",
         "stat_value": 27.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m05",
         "weapon_material": "a11"
@@ -175,6 +203,8 @@
         "atk": 565,
         "stat_type": "crt_dmg",
         "stat_value": 36.8,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m12",
         "rare_material": "m09",
         "weapon_material": "a21"
@@ -187,6 +217,8 @@
         "atk": 454,
         "stat_type": "atk_purcent",
         "stat_value": 55.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m16",
         "weapon_material": "a32"
@@ -199,6 +231,8 @@
         "atk": 448,
         "stat_type": "elemental_mastery",
         "stat_value": 94,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m05",
         "weapon_material": "a11"
@@ -211,6 +245,8 @@
         "atk": 565,
         "stat_type": "energy_recharge",
         "stat_value": 30.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m06",
         "weapon_material": "a12"
@@ -223,6 +259,8 @@
         "atk": 510,
         "stat_type": "atk_purcent",
         "stat_value": 41.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m02",
         "rare_material": "m09",
         "weapon_material": "a21"
@@ -235,6 +273,8 @@
         "atk": 510,
         "stat_type": "atk_purcent",
         "stat_value": 41.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m03",
         "rare_material": "m07",
         "weapon_material": "a13"
@@ -247,6 +287,8 @@
         "atk": 674,
         "stat_type": "atk_purcent",
         "stat_value": 33.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m06",
         "weapon_material": "a12"
@@ -259,6 +301,8 @@
         "atk": 565,
         "stat_type": "elemental_mastery",
         "stat_value": 110,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m13",
         "weapon_material": "a23"
@@ -271,6 +315,8 @@
         "atk": 608,
         "stat_type": "crt_rate",
         "stat_value": 33.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m22",
         "rare_material": "m25",
         "weapon_material": "a43"
@@ -283,6 +329,8 @@
         "atk": 510,
         "stat_type": "crt_rate",
         "stat_value": 27.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m12",
         "rare_material": "m26",
         "weapon_material": "a53"
@@ -295,6 +343,8 @@
         "atk": 565,
         "stat_type": "crt_rate",
         "stat_value": 18.4,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m25",
         "weapon_material": "a42"
@@ -307,6 +357,8 @@
         "atk": 608,
         "stat_type": "crt_dmg",
         "stat_value": 66.2,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m06",
         "weapon_material": "a23"
@@ -319,6 +371,8 @@
         "atk": 542,
         "stat_type": "crt_rate",
         "stat_value": 44.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m20",
         "rare_material": "m23",
         "weapon_material": "a42"
@@ -331,6 +385,8 @@
         "atk": 674,
         "stat_type": "energy_recharge",
         "stat_value": 36.8,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m03",
         "rare_material": "m07",
         "weapon_material": "a13"
@@ -343,6 +399,8 @@
         "atk": 542,
         "stat_type": "crt_dmg",
         "stat_value": 88.2,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m14",
         "rare_material": "m18",
         "weapon_material": "a32"
@@ -355,6 +413,8 @@
         "atk": 608,
         "stat_type": "atk_purcent",
         "stat_value": 49.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m02",
         "rare_material": "m13",
         "weapon_material": "a23"
@@ -367,6 +427,8 @@
         "atk": 510,
         "stat_type": "energy_recharge",
         "stat_value": 45.9,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m20",
         "rare_material": "m21",
         "weapon_material": "a43"
@@ -379,6 +441,8 @@
         "atk": 510,
         "stat_type": "atk_purcent",
         "stat_value": 41.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m29",
         "weapon_material": "a51"
@@ -391,6 +455,8 @@
         "atk": 510,
         "stat_type": "elemental_mastery",
         "stat_value": 165,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m22",
         "rare_material": "m24",
         "weapon_material": "a41"
@@ -403,6 +469,8 @@
         "atk": 542,
         "stat_type": "hp_purcent",
         "stat_value": 66.2,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m22",
         "rare_material": "m24",
         "weapon_material": "a41"
@@ -415,6 +483,8 @@
         "atk": 510,
         "stat_type": "energy_recharge",
         "stat_value": 45.9,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m03",
         "rare_material": "m05",
         "weapon_material": "a11"
@@ -427,6 +497,8 @@
         "atk": 401,
         "stat_type": "energy_recharge",
         "stat_value": 39,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m02",
         "rare_material": "m07",
         "weapon_material": "a13"
@@ -439,6 +511,8 @@
         "atk": 454,
         "stat_type": "atk_purcent",
         "stat_value": 55.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m02",
         "rare_material": "m06",
         "weapon_material": "a12"
@@ -451,6 +525,8 @@
         "atk": 542,
         "stat_type": "crt_rate",
         "stat_value": 44.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m11",
         "rare_material": "m08",
         "weapon_material": "a22"
@@ -463,6 +539,8 @@
         "atk": 401,
         "stat_type": "atk_purcent",
         "stat_value": 35.2,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m11",
         "rare_material": "m08",
         "weapon_material": "a22"
@@ -475,6 +553,8 @@
         "atk": 565,
         "stat_type": "energy_recharge",
         "stat_value": 30.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m03",
         "rare_material": "m09",
         "weapon_material": "a23"
@@ -487,6 +567,8 @@
         "atk": 510,
         "stat_type": "crt_rate",
         "stat_value": 27.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m02",
         "rare_material": "m07",
         "weapon_material": "a11"
@@ -499,6 +581,8 @@
         "atk": 510,
         "stat_type": "energy_recharge",
         "stat_value": 45.9,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m10",
         "rare_material": "m05",
         "weapon_material": "a13"
@@ -511,6 +595,8 @@
         "atk": 510,
         "stat_type": "elemental_mastery",
         "stat_value": 165,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m05",
         "weapon_material": "a11"
@@ -523,6 +609,8 @@
         "atk": 565,
         "stat_type": "crt_rate",
         "stat_value": 18.4,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m20",
         "rare_material": "m26",
         "weapon_material": "a43"
@@ -535,6 +623,8 @@
         "atk": 620,
         "stat_type": "elemental_mastery",
         "stat_value": 55,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m03",
         "rare_material": "m05",
         "weapon_material": "a11"
@@ -547,6 +637,8 @@
         "atk": 510,
         "stat_type": "atk_purcent",
         "stat_value": 41.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m09",
         "weapon_material": "a21"
@@ -559,6 +651,8 @@
         "atk": 354,
         "stat_type": "energy_recharge",
         "stat_value": 51.7,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m10",
         "rare_material": "m13",
         "weapon_material": "a23"
@@ -571,6 +665,8 @@
         "atk": 454,
         "stat_type": "energy_recharge",
         "stat_value": 61.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m05",
         "weapon_material": "a11"
@@ -583,6 +679,8 @@
         "atk": 440,
         "stat_type": "atk_purcent",
         "stat_value": 35.2,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m11",
         "rare_material": "m06",
         "weapon_material": "a12"
@@ -595,6 +693,8 @@
         "atk": 401,
         "stat_type": "atk_purcent",
         "stat_value": 35.2,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m02",
         "rare_material": "m08",
         "weapon_material": "a22"
@@ -607,6 +707,8 @@
         "atk": 185,
         "stat_type": "none",
         "stat_value": 0,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m06",
         "weapon_material": "a12"
@@ -619,6 +721,8 @@
         "atk": 674,
         "stat_type": "physical_bonus",
         "stat_value": 41.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m05",
         "weapon_material": "a11"
@@ -631,6 +735,8 @@
         "atk": 448,
         "stat_type": "def_purcent",
         "stat_value": 29.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m03",
         "rare_material": "m07",
         "weapon_material": "a13"
@@ -643,6 +749,8 @@
         "atk": 185,
         "stat_type": "none",
         "stat_value": 0,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m05",
         "weapon_material": "a11"
@@ -655,6 +763,8 @@
         "atk": 243,
         "stat_type": "none",
         "stat_value": 0,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m05",
         "weapon_material": "a11"
@@ -667,6 +777,8 @@
         "atk": 401,
         "stat_type": "elemental_mastery",
         "stat_value": 141,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m02",
         "rare_material": "m09",
         "weapon_material": "a21"
@@ -679,6 +791,8 @@
         "atk": 565,
         "stat_type": "crt_dmg",
         "stat_value": 36.8,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m09",
         "weapon_material": "a21"
@@ -691,6 +805,8 @@
         "atk": 510,
         "stat_type": "atk_purcent",
         "stat_value": 41.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m05",
         "weapon_material": "a11"
@@ -703,6 +819,8 @@
         "atk": 510,
         "stat_type": "crt_rate",
         "stat_value": 27.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m06",
         "weapon_material": "a12"
@@ -715,6 +833,8 @@
         "atk": 454,
         "stat_type": "energy_recharge",
         "stat_value": 61.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m03",
         "rare_material": "m07",
         "weapon_material": "a13"
@@ -727,6 +847,8 @@
         "atk": 354,
         "stat_type": "elemental_mastery",
         "stat_value": 187,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m06",
         "weapon_material": "a12"
@@ -739,6 +861,8 @@
         "atk": 510,
         "stat_type": "hp_purcent",
         "stat_value": 41.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m12",
         "rare_material": "m05",
         "weapon_material": "a11"
@@ -751,6 +875,8 @@
         "atk": 565,
         "stat_type": "atk_purcent",
         "stat_value": 27.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m02",
         "rare_material": "m13",
         "weapon_material": "a23"
@@ -763,6 +889,8 @@
         "atk": 454,
         "stat_type": "energy_recharge",
         "stat_value": 61.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m10",
         "rare_material": "m07",
         "weapon_material": "a13"
@@ -775,6 +903,8 @@
         "atk": 510,
         "stat_type": "energy_recharge",
         "stat_value": 45.9,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m14",
         "rare_material": "m15",
         "weapon_material": "a32"
@@ -787,6 +917,8 @@
         "atk": 565,
         "stat_type": "energy_recharge",
         "stat_value": 30.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m06",
         "weapon_material": "a12"
@@ -799,6 +931,8 @@
         "atk": 565,
         "stat_type": "atk_purcent",
         "stat_value": 27.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m07",
         "weapon_material": "a13"
@@ -811,6 +945,8 @@
         "atk": 510,
         "stat_type": "elemental_mastery",
         "stat_value": 165,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m20",
         "rare_material": "m21",
         "weapon_material": "a42"
@@ -823,6 +959,8 @@
         "atk": 608,
         "stat_type": "crt_rate",
         "stat_value": 33.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m17",
         "rare_material": "m18",
         "weapon_material": "a33"
@@ -835,6 +973,8 @@
         "atk": 741,
         "stat_type": "atk_purcent",
         "stat_value": 16.5,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m12",
         "rare_material": "m08",
         "weapon_material": "a22"
@@ -847,6 +987,8 @@
         "atk": 674,
         "stat_type": "energy_recharge",
         "stat_value": 36.8,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m06",
         "weapon_material": "a12"
@@ -859,6 +1001,8 @@
         "atk": 565,
         "stat_type": "atk_purcent",
         "stat_value": 27.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m14",
         "rare_material": "m29",
         "weapon_material": "a52"
@@ -871,6 +1015,8 @@
         "atk": 454,
         "stat_type": "elemental_mastery",
         "stat_value": 221,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m03",
         "rare_material": "m08",
         "weapon_material": "a22"
@@ -883,6 +1029,8 @@
         "atk": 565,
         "stat_type": "elemental_mastery",
         "stat_value": 110,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m17",
         "rare_material": "m25",
         "weapon_material": "a13"
@@ -895,6 +1043,8 @@
         "atk": 510,
         "stat_type": "elemental_mastery",
         "stat_value": 165,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m03",
         "rare_material": "m08",
         "weapon_material": "a22"
@@ -907,6 +1057,8 @@
         "atk": 510,
         "stat_type": "atk_purcent",
         "stat_value": 41.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m06",
         "weapon_material": "a12"
@@ -919,6 +1071,8 @@
         "atk": 510,
         "stat_type": "atk_purcent",
         "stat_value": 41.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m12",
         "rare_material": "m07",
         "weapon_material": "a13"
@@ -931,6 +1085,8 @@
         "atk": 454,
         "stat_type": "def_purcent",
         "stat_value": 69,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m02",
         "rare_material": "m07",
         "weapon_material": "a11"
@@ -943,6 +1099,8 @@
         "atk": 401,
         "stat_type": "physical_bonus",
         "stat_value": 43.9,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m11",
         "rare_material": "m13",
         "weapon_material": "a23"
@@ -955,6 +1113,8 @@
         "atk": 401,
         "stat_type": "def_purcent",
         "stat_value": 43.9,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m07",
         "weapon_material": "a13"
@@ -967,6 +1127,8 @@
         "atk": 243,
         "stat_type": "none",
         "stat_value": 0,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m02",
         "rare_material": "m05",
         "weapon_material": "a11"
@@ -979,6 +1141,8 @@
         "atk": 565,
         "stat_type": "atk_purcent",
         "stat_value": 27.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m10",
         "rare_material": "m05",
         "weapon_material": "a11"
@@ -991,6 +1155,8 @@
         "atk": 354,
         "stat_type": "elemental_mastery",
         "stat_value": 187,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m05",
         "weapon_material": "a11"
@@ -1003,6 +1169,8 @@
         "atk": 510,
         "stat_type": "energy_recharge",
         "stat_value": 45.9,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m02",
         "rare_material": "m13",
         "weapon_material": "a23"
@@ -1015,6 +1183,8 @@
         "atk": 448,
         "stat_type": "atk_purcent",
         "stat_value": 23.4,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m12",
         "rare_material": "m08",
         "weapon_material": "a22"
@@ -1027,6 +1197,8 @@
         "atk": 401,
         "stat_type": "hp_purcent",
         "stat_value": 35.2,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m03",
         "rare_material": "m06",
         "weapon_material": "a12"
@@ -1039,6 +1211,8 @@
         "atk": 454,
         "stat_type": "atk_purcent",
         "stat_value": 55.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m13",
         "weapon_material": "a23"
@@ -1051,6 +1225,8 @@
         "atk": 454,
         "stat_type": "crt_rate",
         "stat_value": 36.8,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m03",
         "rare_material": "m08",
         "weapon_material": "a21"
@@ -1063,6 +1239,8 @@
         "atk": 510,
         "stat_type": "atk_purcent",
         "stat_value": 41.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m17",
         "rare_material": "m19",
         "weapon_material": "a33"
@@ -1075,6 +1253,8 @@
         "atk": 608,
         "stat_type": "crt_dmg",
         "stat_value": 66.2,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m27",
         "rare_material": "m29",
         "weapon_material": "a51"
@@ -1087,6 +1267,8 @@
         "atk": 510,
         "stat_type": "energy_recharge",
         "stat_value": 45.9,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m17",
         "rare_material": "m15",
         "weapon_material": "a33"
@@ -1099,6 +1281,8 @@
         "atk": 542,
         "stat_type": "crt_rate",
         "stat_value": 44.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m22",
         "rare_material": "m21",
         "weapon_material": "a43"
@@ -1111,6 +1295,8 @@
         "atk": 608,
         "stat_type": "atk_purcent",
         "stat_value": 49.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m11",
         "rare_material": "m08",
         "weapon_material": "a22"
@@ -1123,6 +1309,8 @@
         "atk": 565,
         "stat_type": "energy_recharge",
         "stat_value": 30.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m22",
         "rare_material": "m23",
         "weapon_material": "a41"
@@ -1135,6 +1323,8 @@
         "atk": 608,
         "stat_type": "energy_recharge",
         "stat_value": 55.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m06",
         "weapon_material": "a12"
@@ -1147,6 +1337,8 @@
         "atk": 243,
         "stat_type": "none",
         "stat_value": 0,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m06",
         "weapon_material": "a12"
@@ -1159,6 +1351,8 @@
         "atk": 401,
         "stat_type": "atk_purcent",
         "stat_value": 35.2,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m05",
         "weapon_material": "a11"
@@ -1171,6 +1365,8 @@
         "atk": 454,
         "stat_type": "atk_purcent",
         "stat_value": 55.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m14",
         "rare_material": "m15",
         "weapon_material": "a31"
@@ -1183,6 +1379,8 @@
         "atk": 565,
         "stat_type": "atk_purcent",
         "stat_value": 27.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m10",
         "rare_material": "m08",
         "weapon_material": "a22"
@@ -1195,6 +1393,8 @@
         "atk": 565,
         "stat_type": "energy_recharge",
         "stat_value": 30.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m07",
         "weapon_material": "a13"
@@ -1207,6 +1407,8 @@
         "atk": 674,
         "stat_type": "crt_rate",
         "stat_value": 22.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m10",
         "rare_material": "m09",
         "weapon_material": "a21"
@@ -1219,6 +1421,8 @@
         "atk": 510,
         "stat_type": "crt_dmg",
         "stat_value": 55.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m10",
         "rare_material": "m08",
         "weapon_material": "a22"
@@ -1231,6 +1435,8 @@
         "atk": 565,
         "stat_type": "atk_purcent",
         "stat_value": 27.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m13",
         "weapon_material": "a23"
@@ -1243,6 +1449,8 @@
         "atk": 454,
         "stat_type": "physical_bonus",
         "stat_value": 69,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m10",
         "rare_material": "m08",
         "weapon_material": "a12"
@@ -1255,6 +1463,8 @@
         "atk": 185,
         "stat_type": "none",
         "stat_value": 0,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m03",
         "rare_material": "m07",
         "weapon_material": "a13"
@@ -1267,6 +1477,8 @@
         "atk": 510,
         "stat_type": "atk_purcent",
         "stat_value": 41.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m19",
         "weapon_material": "a12"
@@ -1279,6 +1491,8 @@
         "atk": 565,
         "stat_type": "elemental_mastery",
         "stat_value": 110,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m11",
         "rare_material": "m15",
         "weapon_material": "a33"
@@ -1291,6 +1505,8 @@
         "atk": 354,
         "stat_type": "crt_rate",
         "stat_value": 31.2,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m02",
         "rare_material": "m09",
         "weapon_material": "a21"
@@ -1303,6 +1519,8 @@
         "atk": 510,
         "stat_type": "energy_recharge",
         "stat_value": 45.9,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m20",
         "rare_material": "m19",
         "weapon_material": "a42"
@@ -1315,6 +1533,8 @@
         "atk": 454,
         "stat_type": "atk_purcent",
         "stat_value": 55.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m21",
         "weapon_material": "a43"
@@ -1327,6 +1547,8 @@
         "atk": 608,
         "stat_type": "crt_rate",
         "stat_value": 33.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m07",
         "weapon_material": "a13"
@@ -1339,6 +1561,8 @@
         "atk": 608,
         "stat_type": "hp_purcent",
         "stat_value": 49.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m17",
         "rare_material": "m16",
         "weapon_material": "a31"
@@ -1351,6 +1575,8 @@
         "atk": 542,
         "stat_type": "crt_dmg",
         "stat_value": 88.2,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m22",
         "rare_material": "m25",
         "weapon_material": "a41"
@@ -1363,6 +1589,8 @@
         "atk": 608,
         "stat_type": "energy_recharge",
         "stat_value": 55.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m14",
         "rare_material": "m15",
         "weapon_material": "a33"
@@ -1375,6 +1603,8 @@
         "atk": 565,
         "stat_type": "atk_purcent",
         "stat_value": 27.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m17",
         "rare_material": "m16",
         "weapon_material": "a32"
@@ -1387,6 +1617,8 @@
         "atk": 608,
         "stat_type": "crt_rate",
         "stat_value": 33.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m14",
         "rare_material": "m19",
         "weapon_material": "a32"
@@ -1399,6 +1631,8 @@
         "atk": 510,
         "stat_type": "atk_purcent",
         "stat_value": 41.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m11",
         "rare_material": "m08",
         "weapon_material": "a22"
@@ -1411,6 +1645,8 @@
         "atk": 510,
         "stat_type": "hp_purcent",
         "stat_value": 41.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m08",
         "weapon_material": "a22"
@@ -1423,6 +1659,8 @@
         "atk": 674,
         "stat_type": "crt_dmg",
         "stat_value": 44.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m20",
         "rare_material": "m21",
         "weapon_material": "a43"
@@ -1435,6 +1673,8 @@
         "atk": 454,
         "stat_type": "elemental_mastery",
         "stat_value": 221,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m11",
         "rare_material": "m07",
         "weapon_material": "a13"
@@ -1447,6 +1687,8 @@
         "atk": 448,
         "stat_type": "crt_dmg",
         "stat_value": 31.2,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m11",
         "rare_material": "m08",
         "weapon_material": "a22"
@@ -1459,6 +1701,8 @@
         "atk": 401,
         "stat_type": "crt_dmg",
         "stat_value": 46.9,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m06",
         "weapon_material": "a12"
@@ -1471,6 +1715,8 @@
         "atk": 542,
         "stat_type": "elemental_mastery",
         "stat_value": 265,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m20",
         "rare_material": "m24",
         "weapon_material": "a42"
@@ -1483,6 +1729,8 @@
         "atk": 608,
         "stat_type": "atk_purcent",
         "stat_value": 49.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m03",
         "rare_material": "m07",
         "weapon_material": "a13"
@@ -1495,6 +1743,8 @@
         "atk": 510,
         "stat_type": "crt_dmg",
         "stat_value": 55.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m02",
         "rare_material": "m06",
         "weapon_material": "a12"
@@ -1507,6 +1757,8 @@
         "atk": 448,
         "stat_type": "crt_rate",
         "stat_value": 15.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m10",
         "rare_material": "m08",
         "weapon_material": "a22"
@@ -1519,6 +1771,8 @@
         "atk": 185,
         "stat_type": "none",
         "stat_value": 0,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m02",
         "rare_material": "m05",
         "weapon_material": "a11"
@@ -1531,6 +1785,8 @@
         "atk": 741,
         "stat_type": "physical_bonus",
         "stat_value": 20.7,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m02",
         "rare_material": "m05",
         "weapon_material": "a11"
@@ -1543,6 +1799,8 @@
         "atk": 510,
         "stat_type": "elemental_mastery",
         "stat_value": 165,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m12",
         "rare_material": "m06",
         "weapon_material": "a13"
@@ -1555,6 +1813,8 @@
         "atk": 565,
         "stat_type": "atk_purcent",
         "stat_value": 27.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m17",
         "rare_material": "m18",
         "weapon_material": "a31"
@@ -1567,6 +1827,8 @@
         "atk": 454,
         "stat_type": "atk_purcent",
         "stat_value": 55.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m02",
         "rare_material": "m08",
         "weapon_material": "a22"
@@ -1579,6 +1841,8 @@
         "atk": 401,
         "stat_type": "hp_purcent",
         "stat_value": 35.2,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m12",
         "rare_material": "m05",
         "weapon_material": "a11"
@@ -1591,6 +1855,8 @@
         "atk": 510,
         "stat_type": "def_purcent",
         "stat_value": 51.7,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m11",
         "rare_material": "m09",
         "weapon_material": "a21"
@@ -1603,6 +1869,8 @@
         "atk": 510,
         "stat_type": "atk_purcent",
         "stat_value": 41.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m28",
         "rare_material": "m30",
         "weapon_material": "a53"
@@ -1615,6 +1883,8 @@
         "atk": 448,
         "stat_type": "elemental_mastery",
         "stat_value": 94,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m11",
         "rare_material": "m09",
         "weapon_material": "a21"
@@ -1627,6 +1897,8 @@
         "atk": 510,
         "stat_type": "crt_rate",
         "stat_value": 27.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m12",
         "rare_material": "m13",
         "weapon_material": "a23"
@@ -1639,6 +1911,8 @@
         "atk": 401,
         "stat_type": "crt_rate",
         "stat_value": 23.4,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m10",
         "rare_material": "m09",
         "weapon_material": "a21"
@@ -1651,6 +1925,8 @@
         "atk": 354,
         "stat_type": "hp_purcent",
         "stat_value": 46.9,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m13",
         "weapon_material": "a23"
@@ -1663,6 +1939,8 @@
         "atk": 510,
         "stat_type": "energy_recharge",
         "stat_value": 45.9,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m27",
         "rare_material": "m29",
         "weapon_material": "a51"
@@ -1675,6 +1953,8 @@
         "atk": 565,
         "stat_type": "elemental_mastery",
         "stat_value": 110,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m10",
         "rare_material": "m23",
         "weapon_material": "a42"
@@ -1687,6 +1967,8 @@
         "atk": 565,
         "stat_type": "atk_purcent",
         "stat_value": 27.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m22",
         "rare_material": "m26",
         "weapon_material": "a41"
@@ -1699,6 +1981,8 @@
         "atk": 608,
         "stat_type": "atk_purcent",
         "stat_value": 49.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m11",
         "rare_material": "m13",
         "weapon_material": "a23"
@@ -1711,6 +1995,8 @@
         "atk": 510,
         "stat_type": "crt_rate",
         "stat_value": 27.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m12",
         "rare_material": "m09",
         "weapon_material": "a21"
@@ -1723,6 +2009,8 @@
         "atk": 565,
         "stat_type": "physical_bonus",
         "stat_value": 34.5,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m11",
         "rare_material": "m09",
         "weapon_material": "a21"
@@ -1735,6 +2023,8 @@
         "atk": 510,
         "stat_type": "elemental_mastery",
         "stat_value": 165,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m12",
         "rare_material": "m13",
         "weapon_material": "a23"
@@ -1747,6 +2037,8 @@
         "atk": 510,
         "stat_type": "elemental_mastery",
         "stat_value": 165,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m14",
         "rare_material": "m24",
         "weapon_material": "a32"
@@ -1759,6 +2051,8 @@
         "atk": 243,
         "stat_type": "none",
         "stat_value": 0,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m03",
         "rare_material": "m07",
         "weapon_material": "a13"
@@ -1771,6 +2065,8 @@
         "atk": 510,
         "stat_type": "atk_purcent",
         "stat_value": 41.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m16",
         "weapon_material": "a32"
@@ -1783,6 +2079,8 @@
         "atk": 608,
         "stat_type": "crt_dmg",
         "stat_value": 66.2,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m04",
         "rare_material": "m16",
         "weapon_material": "a32"
@@ -1795,6 +2093,8 @@
         "atk": 565,
         "stat_type": "atk_purcent",
         "stat_value": 27.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m27",
         "rare_material": "m30",
         "weapon_material": "a52"
@@ -1807,6 +2107,8 @@
         "atk": 565,
         "stat_type": "hp_purcent",
         "stat_value": 27.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m28",
         "rare_material": "m30",
         "weapon_material": "a53"
@@ -1819,6 +2121,8 @@
         "atk": 674,
         "stat_type": "crt_dmg",
         "stat_value": 44.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m14",
         "rare_material": "m15",
         "weapon_material": "a31"
@@ -1831,6 +2135,8 @@
         "atk": 510,
         "stat_type": "atk_purcent",
         "stat_value": 41.3,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m11",
         "rare_material": "m09",
         "weapon_material": "a21"
@@ -1843,6 +2149,8 @@
         "atk": 454,
         "stat_type": "crt_rate",
         "stat_value": 36.8,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m12",
         "rare_material": "m06",
         "weapon_material": "a12"
@@ -1855,6 +2163,8 @@
         "atk": 608,
         "stat_type": "elemental_mastery",
         "stat_value": 198,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m03",
         "rare_material": "m07",
         "weapon_material": "a13"
@@ -1867,6 +2177,8 @@
         "atk": 401,
         "stat_type": "crt_dmg",
         "stat_value": 46.9,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m06",
         "weapon_material": "a12"
@@ -1879,6 +2191,8 @@
         "atk": 542,
         "stat_type": "crt_dmg",
         "stat_value": 88.2,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m17",
         "rare_material": "m19",
         "weapon_material": "a21"
@@ -1891,6 +2205,8 @@
         "atk": 608,
         "stat_type": "hp_purcent",
         "stat_value": 49.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m20",
         "rare_material": "m26",
         "weapon_material": "a21"
@@ -1903,6 +2219,8 @@
         "atk": 565,
         "stat_type": "physical_bonus",
         "stat_value": 34.5,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m10",
         "rare_material": "m08",
         "weapon_material": "a22"
@@ -1915,6 +2233,8 @@
         "atk": 565,
         "stat_type": "physical_bonus",
         "stat_value": 34.5,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m05",
         "weapon_material": "a11"
@@ -1927,6 +2247,8 @@
         "atk": 608,
         "stat_type": "atk_purcent",
         "stat_value": 49.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m02",
         "rare_material": "m09",
         "weapon_material": "a21"
@@ -1939,6 +2261,8 @@
         "atk": 510,
         "stat_type": "crt_dmg",
         "stat_value": 55.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m10",
         "rare_material": "m08",
         "weapon_material": "a22"
@@ -1951,6 +2275,8 @@
         "atk": 565,
         "stat_type": "atk_purcent",
         "stat_value": 27.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m01",
         "rare_material": "m07",
         "weapon_material": "a13"
@@ -1963,6 +2289,8 @@
         "atk": 608,
         "stat_type": "energy_recharge",
         "stat_value": 55.1,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m10",
         "rare_material": "m05",
         "weapon_material": "a12"
@@ -1975,6 +2303,8 @@
         "atk": 510,
         "stat_type": "physical_bonus",
         "stat_value": 51.7,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m11",
         "rare_material": "m05",
         "weapon_material": "a11"
@@ -1987,6 +2317,8 @@
         "atk": 608,
         "stat_type": "crt_dmg",
         "stat_value": 66.2,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m17",
         "rare_material": "m18",
         "weapon_material": "a33"
@@ -1999,6 +2331,8 @@
         "atk": 565,
         "stat_type": "energy_recharge",
         "stat_value": 30.6,
+        "mora": "g01",
+        "experience_ore": "g02",
         "common_material": "m11",
         "rare_material": "m06",
         "weapon_material": "a12"

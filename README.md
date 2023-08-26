@@ -221,4 +221,14 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Rajout d'un nouveau tableau pour les armes
 -   Chaque nouvelles et actuelles images vont maintenant avoir un background représentant leur rareté
 
+### 1.2.8 `26 août 2023`
+
+-   Rajout des colonnes de besoins des armes pour les améliorer avec les 2 ressources global, Mora et Minerai de renforcement
+-   Rajout des armes de Genshin dans le projet
+-   Pour les rechercher avec un input, il faut créer une liste des noms possibles, fait avec flatMap à partir des noms français et anglais
+-   Extension de la logique de DataInit pour gérer les armes
+-   L'objet computed avait déjà sa logique pour les personnages, donc rajout des armes et factorisation au mieux du code commun
+-   Rajout de la logique de recherche du nom des armes avec la chaîne de recherche, le boolean qui représente l'ouverture de la liste, les résultats filtrés, la fonction pour cacher la liste et celle pour ajouter une arme et la sauvegardé dans le localStorage ainsi que celle pour supprimer
+-   Changement des noms des serveurs
+
 </details>
