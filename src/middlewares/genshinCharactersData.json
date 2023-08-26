@@ -13,11 +13,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p07",
-        "mini_boss_material": "sl1",
-        "weekly_boss_materials": "bl11",
+        "mini_boss_material": "s201",
+        "weekly_boss_materials": "b031",
         "common_material": "m03",
-        "talent_book": "lm3",
-        "local_speciality": "rm03"
+        "talent_book": "l13",
+        "local_speciality": "r103"
     },
     {
         "name": "Alhaitham",
@@ -33,11 +33,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p03",
-        "mini_boss_material": "ss6",
-        "weekly_boss_materials": "bs12",
+        "mini_boss_material": "s406",
+        "weekly_boss_materials": "b072",
         "common_material": "m22",
-        "talent_book": "ls2",
-        "local_speciality": "rs06"
+        "talent_book": "l42",
+        "local_speciality": "r406"
     },
     {
         "name": "Aloy",
@@ -53,11 +53,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p06",
-        "mini_boss_material": "sm4",
-        "weekly_boss_materials": "bi11",
+        "mini_boss_material": "s104",
+        "weekly_boss_materials": "b051",
         "common_material": "m17",
-        "talent_book": "lm1",
-        "local_speciality": "ri03"
+        "talent_book": "l11",
+        "local_speciality": "r303"
     },
     {
         "name": "Amber",
@@ -73,11 +73,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p01",
-        "mini_boss_material": "sl2",
-        "weekly_boss_materials": "bm13",
+        "mini_boss_material": "s202",
+        "weekly_boss_materials": "b013",
         "common_material": "m04",
-        "talent_book": "lm1",
-        "local_speciality": "rm06"
+        "talent_book": "l11",
+        "local_speciality": "r106"
     },
     {
         "name": "Arataki Itto",
@@ -93,11 +93,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p07",
-        "mini_boss_material": "si6",
-        "weekly_boss_materials": "bi13",
+        "mini_boss_material": "s306",
+        "weekly_boss_materials": "b053",
         "common_material": "m01",
-        "talent_book": "li2",
-        "local_speciality": "ri01"
+        "talent_book": "l32",
+        "local_speciality": "r301"
     },
     {
         "name": "Baizhu",
@@ -113,11 +113,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p03",
-        "mini_boss_material": "ss7",
-        "weekly_boss_materials": "bs21",
+        "mini_boss_material": "s407",
+        "weekly_boss_materials": "b081",
         "common_material": "m20",
-        "talent_book": "ll3",
-        "local_speciality": "rl07"
+        "talent_book": "l23",
+        "local_speciality": "r207"
     },
     {
         "name": "Barbara",
@@ -133,11 +133,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p02",
-        "mini_boss_material": "sl3",
-        "weekly_boss_materials": "bm22",
+        "mini_boss_material": "s203",
+        "weekly_boss_materials": "b022",
         "common_material": "m03",
-        "talent_book": "lm1",
-        "local_speciality": "rm05"
+        "talent_book": "l11",
+        "local_speciality": "r105"
     },
     {
         "name": "Beidou",
@@ -153,11 +153,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p04",
-        "mini_boss_material": "sm2",
-        "weekly_boss_materials": "bm13",
+        "mini_boss_material": "s102",
+        "weekly_boss_materials": "b013",
         "common_material": "m11",
-        "talent_book": "ll3",
-        "local_speciality": "rl02"
+        "talent_book": "l23",
+        "local_speciality": "r202"
     },
     {
         "name": "Bennett",
@@ -173,11 +173,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p01",
-        "mini_boss_material": "sl2",
-        "weekly_boss_materials": "bm11",
+        "mini_boss_material": "s202",
+        "weekly_boss_materials": "b011",
         "common_material": "m11",
-        "talent_book": "lm2",
-        "local_speciality": "rm04"
+        "talent_book": "l12",
+        "local_speciality": "r104"
     },
     {
         "name": "Candace",
@@ -193,11 +193,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p02",
-        "mini_boss_material": "ss4",
-        "weekly_boss_materials": "bi22",
+        "mini_boss_material": "s404",
+        "weekly_boss_materials": "b062",
         "common_material": "m22",
-        "talent_book": "ls1",
-        "local_speciality": "rs05"
+        "talent_book": "l41",
+        "local_speciality": "r405"
     },
     {
         "name": "Chongyun",
@@ -213,11 +213,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p06",
-        "mini_boss_material": "sm3",
-        "weekly_boss_materials": "bm13",
+        "mini_boss_material": "s103",
+        "weekly_boss_materials": "b013",
         "common_material": "m02",
-        "talent_book": "ll2",
-        "local_speciality": "rl08"
+        "talent_book": "l22",
+        "local_speciality": "r208"
     },
     {
         "name": "Collei",
@@ -233,11 +233,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p03",
-        "mini_boss_material": "ss1",
-        "weekly_boss_materials": "bi22",
+        "mini_boss_material": "s401",
+        "weekly_boss_materials": "b062",
         "common_material": "m04",
-        "talent_book": "ls3",
-        "local_speciality": "rs01"
+        "talent_book": "l43",
+        "local_speciality": "r401"
     },
     {
         "name": "Cyno",
@@ -253,11 +253,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p04",
-        "mini_boss_material": "ss2",
-        "weekly_boss_materials": "bi21",
+        "mini_boss_material": "s402",
+        "weekly_boss_materials": "b061",
         "common_material": "m03",
-        "talent_book": "ls1",
-        "local_speciality": "rs09"
+        "talent_book": "l41",
+        "local_speciality": "r409"
     },
     {
         "name": "Dehya",
@@ -273,11 +273,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p01",
-        "mini_boss_material": "ss4",
-        "weekly_boss_materials": "bs11",
+        "mini_boss_material": "s404",
+        "weekly_boss_materials": "b071",
         "common_material": "m22",
-        "talent_book": "ls3",
-        "local_speciality": "rs06"
+        "talent_book": "l43",
+        "local_speciality": "r406"
     },
     {
         "name": "Diluc",
@@ -293,11 +293,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p01",
-        "mini_boss_material": "sl2",
-        "weekly_boss_materials": "bm11",
+        "mini_boss_material": "s202",
+        "weekly_boss_materials": "b011",
         "common_material": "m10",
-        "talent_book": "lm2",
-        "local_speciality": "rm06"
+        "talent_book": "l12",
+        "local_speciality": "r106"
     },
     {
         "name": "Diona",
@@ -313,11 +313,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p06",
-        "mini_boss_material": "sm3",
-        "weekly_boss_materials": "bl12",
+        "mini_boss_material": "s103",
+        "weekly_boss_materials": "b032",
         "common_material": "m04",
-        "talent_book": "lm1",
-        "local_speciality": "rm07"
+        "talent_book": "l11",
+        "local_speciality": "r107"
     },
     {
         "name": "Dori",
@@ -333,11 +333,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p04",
-        "mini_boss_material": "ss2",
-        "weekly_boss_materials": "bl22",
+        "mini_boss_material": "s402",
+        "weekly_boss_materials": "b042",
         "common_material": "m22",
-        "talent_book": "ls2",
-        "local_speciality": "rs04"
+        "talent_book": "l42",
+        "local_speciality": "r404"
     },
     {
         "name": "Eula",
@@ -353,11 +353,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p06",
-        "mini_boss_material": "sm4",
-        "weekly_boss_materials": "bl21",
+        "mini_boss_material": "s104",
+        "weekly_boss_materials": "b041",
         "common_material": "m02",
-        "talent_book": "lm2",
-        "local_speciality": "rm08"
+        "talent_book": "l12",
+        "local_speciality": "r108"
     },
     {
         "name": "Faruzan",
@@ -373,11 +373,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p05",
-        "mini_boss_material": "ss4",
-        "weekly_boss_materials": "bs11",
+        "mini_boss_material": "s404",
+        "weekly_boss_materials": "b071",
         "common_material": "m22",
-        "talent_book": "ls1",
-        "local_speciality": "rs05"
+        "talent_book": "l41",
+        "local_speciality": "r405"
     },
     {
         "name": "Fischl",
@@ -393,11 +393,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p04",
-        "mini_boss_material": "sm2",
-        "weekly_boss_materials": "bm23",
+        "mini_boss_material": "s102",
+        "weekly_boss_materials": "b023",
         "common_material": "m04",
-        "talent_book": "lm3",
-        "local_speciality": "rm06"
+        "talent_book": "l13",
+        "local_speciality": "r106"
     },
     {
         "name": "Ganyu",
@@ -413,11 +413,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p06",
-        "mini_boss_material": "sm3",
-        "weekly_boss_materials": "bl13",
+        "mini_boss_material": "s103",
+        "weekly_boss_materials": "b033",
         "common_material": "m12",
-        "talent_book": "ll2",
-        "local_speciality": "rl05"
+        "talent_book": "l22",
+        "local_speciality": "r205"
     },
     {
         "name": "Gorou",
@@ -433,11 +433,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p07",
-        "mini_boss_material": "si2",
-        "weekly_boss_materials": "bi11",
+        "mini_boss_material": "s302",
+        "weekly_boss_materials": "b051",
         "common_material": "m17",
-        "talent_book": "li3",
-        "local_speciality": "ri07"
+        "talent_book": "l33",
+        "local_speciality": "r307"
     },
     {
         "name": "Hu Tao",
@@ -453,11 +453,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p01",
-        "mini_boss_material": "sl4",
-        "weekly_boss_materials": "bl12",
+        "mini_boss_material": "s204",
+        "weekly_boss_materials": "b032",
         "common_material": "m12",
-        "talent_book": "ll2",
-        "local_speciality": "rl03"
+        "talent_book": "l22",
+        "local_speciality": "r203"
     },
     {
         "name": "Jean",
@@ -473,11 +473,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p05",
-        "mini_boss_material": "sm1",
-        "weekly_boss_materials": "bm11",
+        "mini_boss_material": "s101",
+        "weekly_boss_materials": "b011",
         "common_material": "m02",
-        "talent_book": "lm2",
-        "local_speciality": "rm08"
+        "talent_book": "l12",
+        "local_speciality": "r108"
     },
     {
         "name": "Kaedehara Kazuha",
@@ -493,11 +493,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p05",
-        "mini_boss_material": "si1",
-        "weekly_boss_materials": "bl23",
+        "mini_boss_material": "s301",
+        "weekly_boss_materials": "b043",
         "common_material": "m11",
-        "talent_book": "ll2",
-        "local_speciality": "ri06"
+        "talent_book": "l22",
+        "local_speciality": "r306"
     },
     {
         "name": "Kaeya",
@@ -513,11 +513,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p06",
-        "mini_boss_material": "sm3",
-        "weekly_boss_materials": "bm23",
+        "mini_boss_material": "s103",
+        "weekly_boss_materials": "b023",
         "common_material": "m11",
-        "talent_book": "lm3",
-        "local_speciality": "rm07"
+        "talent_book": "l13",
+        "local_speciality": "r107"
     },
     {
         "name": "Kamisato Ayaka",
@@ -533,11 +533,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p06",
-        "mini_boss_material": "si2",
-        "weekly_boss_materials": "bl22",
+        "mini_boss_material": "s302",
+        "weekly_boss_materials": "b042",
         "common_material": "m14",
-        "talent_book": "li2",
-        "local_speciality": "ri02"
+        "talent_book": "l32",
+        "local_speciality": "r302"
     },
     {
         "name": "Kamisato Ayato",
@@ -553,11 +553,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p02",
-        "mini_boss_material": "si4",
-        "weekly_boss_materials": "bi21",
+        "mini_boss_material": "s304",
+        "weekly_boss_materials": "b061",
         "common_material": "m14",
-        "talent_book": "li2",
-        "local_speciality": "ri02"
+        "talent_book": "l32",
+        "local_speciality": "r302"
     },
     {
         "name": "Kaveh",
@@ -573,11 +573,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p03",
-        "mini_boss_material": "ss5",
-        "weekly_boss_materials": "bs22",
+        "mini_boss_material": "s405",
+        "weekly_boss_materials": "b082",
         "common_material": "m20",
-        "talent_book": "ls2",
-        "local_speciality": "rs07"
+        "talent_book": "l42",
+        "local_speciality": "r407"
     },
     {
         "name": "Keqing",
@@ -593,11 +593,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p04",
-        "mini_boss_material": "sm2",
-        "weekly_boss_materials": "bm22",
+        "mini_boss_material": "s102",
+        "weekly_boss_materials": "b022",
         "common_material": "m12",
-        "talent_book": "ll1",
-        "local_speciality": "rl08"
+        "talent_book": "l21",
+        "local_speciality": "r208"
     },
     {
         "name": "Kirara",
@@ -613,11 +613,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p03",
-        "mini_boss_material": "ss7",
-        "weekly_boss_materials": "bs23",
+        "mini_boss_material": "s407",
+        "weekly_boss_materials": "b083",
         "common_material": "m17",
-        "talent_book": "li1",
-        "local_speciality": "ri08"
+        "talent_book": "l31",
+        "local_speciality": "r308"
     },
     {
         "name": "Klee",
@@ -633,11 +633,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p01",
-        "mini_boss_material": "sl2",
-        "weekly_boss_materials": "bm22",
+        "mini_boss_material": "s202",
+        "weekly_boss_materials": "b022",
         "common_material": "m03",
-        "talent_book": "lm1",
-        "local_speciality": "rm05"
+        "talent_book": "l11",
+        "local_speciality": "r105"
     },
     {
         "name": "Kujou Sara",
@@ -653,11 +653,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p04",
-        "mini_boss_material": "si5",
-        "weekly_boss_materials": "bi13",
+        "mini_boss_material": "s305",
+        "weekly_boss_materials": "b053",
         "common_material": "m02",
-        "talent_book": "li2",
-        "local_speciality": "ri04"
+        "talent_book": "l32",
+        "local_speciality": "r304"
     },
     {
         "name": "Kuki Shinobu",
@@ -673,11 +673,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p04",
-        "mini_boss_material": "sl5",
-        "weekly_boss_materials": "bi22",
+        "mini_boss_material": "s205",
+        "weekly_boss_materials": "b062",
         "common_material": "m17",
-        "talent_book": "li2",
-        "local_speciality": "ri05"
+        "talent_book": "l32",
+        "local_speciality": "r305"
     },
     {
         "name": "Layla",
@@ -693,11 +693,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p06",
-        "mini_boss_material": "ss3",
-        "weekly_boss_materials": "bs12",
+        "mini_boss_material": "s403",
+        "weekly_boss_materials": "b072",
         "common_material": "m03",
-        "talent_book": "ls2",
-        "local_speciality": "rs03"
+        "talent_book": "l42",
+        "local_speciality": "r403"
     },
     {
         "name": "Lisa",
@@ -713,11 +713,51 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p04",
-        "mini_boss_material": "sm2",
-        "weekly_boss_materials": "bm12",
+        "mini_boss_material": "s102",
+        "weekly_boss_materials": "b012",
         "common_material": "m01",
-        "talent_book": "lm3",
-        "local_speciality": "rm02"
+        "talent_book": "l13",
+        "local_speciality": "r102"
+    },
+    {
+        "name": "Lynette",
+        "rarity": 4,
+        "element": "anemo",
+        "weapon": "sword",
+        "base_hp": 12397,
+        "base_atk": 231,
+        "base_def": 711,
+        "stat_type": "anemo_bonus",
+        "stat_value": "24",
+        "mora": "g01",
+        "experience_book": "g05",
+        "crown": "g08",
+        "gem": "p05",
+        "mini_boss_material": "s501",
+        "weekly_boss_materials": "b083",
+        "common_material": "m28",
+        "talent_book": "l53",
+        "local_speciality": "r503"
+    },
+    {
+        "name": "Lyney",
+        "rarity": 5,
+        "element": "pyro",
+        "weapon": "bow",
+        "base_hp": 11021,
+        "base_atk": 318,
+        "base_def": 537,
+        "stat_type": "crt_rate",
+        "stat_value": "19,2",
+        "mora": "g01",
+        "experience_book": "g05",
+        "crown": "g08",
+        "gem": "p01",
+        "mini_boss_material": "s503",
+        "weekly_boss_materials": "b082",
+        "common_material": "m10",
+        "talent_book": "l51",
+        "local_speciality": "r504"
     },
     {
         "name": "Mika",
@@ -733,11 +773,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p06",
-        "mini_boss_material": "ss6",
-        "weekly_boss_materials": "bs12",
+        "mini_boss_material": "s406",
+        "weekly_boss_materials": "b072",
         "common_material": "m10",
-        "talent_book": "lm3",
-        "local_speciality": "rm01"
+        "talent_book": "l13",
+        "local_speciality": "r101"
     },
     {
         "name": "Mona",
@@ -753,11 +793,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p02",
-        "mini_boss_material": "sl3",
-        "weekly_boss_materials": "bm22",
+        "mini_boss_material": "s203",
+        "weekly_boss_materials": "b022",
         "common_material": "m12",
-        "talent_book": "lm2",
-        "local_speciality": "rm05"
+        "talent_book": "l12",
+        "local_speciality": "r105"
     },
     {
         "name": "Nahida",
@@ -773,11 +813,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p03",
-        "mini_boss_material": "ss5",
-        "weekly_boss_materials": "bs11",
+        "mini_boss_material": "s405",
+        "weekly_boss_materials": "b071",
         "common_material": "m20",
-        "talent_book": "ls2",
-        "local_speciality": "rs04"
+        "talent_book": "l42",
+        "local_speciality": "r404"
     },
     {
         "name": "Nilou",
@@ -793,11 +833,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p02",
-        "mini_boss_material": "ss3",
-        "weekly_boss_materials": "bi22",
+        "mini_boss_material": "s403",
+        "weekly_boss_materials": "b062",
         "common_material": "m20",
-        "talent_book": "ls3",
-        "local_speciality": "rs02"
+        "talent_book": "l43",
+        "local_speciality": "r402"
     },
     {
         "name": "Ningguang",
@@ -813,11 +853,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p07",
-        "mini_boss_material": "sl1",
-        "weekly_boss_materials": "bm23",
+        "mini_boss_material": "s201",
+        "weekly_boss_materials": "b023",
         "common_material": "m10",
-        "talent_book": "ll1",
-        "local_speciality": "rl04"
+        "talent_book": "l21",
+        "local_speciality": "r204"
     },
     {
         "name": "Noelle",
@@ -833,11 +873,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p07",
-        "mini_boss_material": "sl1",
-        "weekly_boss_materials": "bm12",
+        "mini_boss_material": "s201",
+        "weekly_boss_materials": "b012",
         "common_material": "m02",
-        "talent_book": "lm2",
-        "local_speciality": "rm02"
+        "talent_book": "l12",
+        "local_speciality": "r102"
     },
     {
         "name": "Nomade",
@@ -853,11 +893,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p05",
-        "mini_boss_material": "ss3",
-        "weekly_boss_materials": "bs13",
+        "mini_boss_material": "s403",
+        "weekly_boss_materials": "b073",
         "common_material": "m14",
-        "talent_book": "ls3",
-        "local_speciality": "rs01"
+        "talent_book": "l43",
+        "local_speciality": "r401"
     },
     {
         "name": "Qiqi",
@@ -873,11 +913,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p06",
-        "mini_boss_material": "sm3",
-        "weekly_boss_materials": "bm21",
+        "mini_boss_material": "s103",
+        "weekly_boss_materials": "b021",
         "common_material": "m03",
-        "talent_book": "ll1",
-        "local_speciality": "rl07"
+        "talent_book": "l21",
+        "local_speciality": "r207"
     },
     {
         "name": "Raiden Shogun",
@@ -893,11 +933,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p04",
-        "mini_boss_material": "si5",
-        "weekly_boss_materials": "bi11",
+        "mini_boss_material": "s305",
+        "weekly_boss_materials": "b051",
         "common_material": "m14",
-        "talent_book": "li3",
-        "local_speciality": "ri08"
+        "talent_book": "l33",
+        "local_speciality": "r308"
     },
     {
         "name": "Razor",
@@ -913,11 +953,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p04",
-        "mini_boss_material": "sm2",
-        "weekly_boss_materials": "bm12",
+        "mini_boss_material": "s102",
+        "weekly_boss_materials": "b012",
         "common_material": "m02",
-        "talent_book": "lm2",
-        "local_speciality": "rm01"
+        "talent_book": "l12",
+        "local_speciality": "r101"
     },
     {
         "name": "Rosaria",
@@ -933,11 +973,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p06",
-        "mini_boss_material": "sm3",
-        "weekly_boss_materials": "bl13",
+        "mini_boss_material": "s103",
+        "weekly_boss_materials": "b033",
         "common_material": "m10",
-        "talent_book": "lm3",
-        "local_speciality": "rm02"
+        "talent_book": "l13",
+        "local_speciality": "r102"
     },
     {
         "name": "Sangonomiya Kokomi",
@@ -953,11 +993,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p02",
-        "mini_boss_material": "si4",
-        "weekly_boss_materials": "bi12",
+        "mini_boss_material": "s304",
+        "weekly_boss_materials": "b052",
         "common_material": "m17",
-        "talent_book": "li1",
-        "local_speciality": "ri07"
+        "talent_book": "l31",
+        "local_speciality": "r307"
     },
     {
         "name": "Sayu",
@@ -973,11 +1013,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p05",
-        "mini_boss_material": "si1",
-        "weekly_boss_materials": "bl23",
+        "mini_boss_material": "s301",
+        "weekly_boss_materials": "b043",
         "common_material": "m12",
-        "talent_book": "li3",
-        "local_speciality": "ri03"
+        "talent_book": "l33",
+        "local_speciality": "r303"
     },
     {
         "name": "Shenhe",
@@ -993,11 +1033,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p06",
-        "mini_boss_material": "si7",
-        "weekly_boss_materials": "bi12",
+        "mini_boss_material": "s307",
+        "weekly_boss_materials": "b052",
         "common_material": "m12",
-        "talent_book": "ll1",
-        "local_speciality": "rl05"
+        "talent_book": "l21",
+        "local_speciality": "r205"
     },
     {
         "name": "Shikanoin Heizou",
@@ -1013,11 +1053,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p05",
-        "mini_boss_material": "sl5",
-        "weekly_boss_materials": "bi23",
+        "mini_boss_material": "s205",
+        "weekly_boss_materials": "b063",
         "common_material": "m11",
-        "talent_book": "li1",
-        "local_speciality": "ri01"
+        "talent_book": "l31",
+        "local_speciality": "r301"
     },
     {
         "name": "Sucrose",
@@ -1033,11 +1073,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p05",
-        "mini_boss_material": "sm1",
-        "weekly_boss_materials": "bm23",
+        "mini_boss_material": "s101",
+        "weekly_boss_materials": "b023",
         "common_material": "m12",
-        "talent_book": "lm1",
-        "local_speciality": "rm04"
+        "talent_book": "l11",
+        "local_speciality": "r104"
     },
     {
         "name": "Tartaglia",
@@ -1053,11 +1093,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p02",
-        "mini_boss_material": "sl3",
-        "weekly_boss_materials": "bl12",
+        "mini_boss_material": "s203",
+        "weekly_boss_materials": "b032",
         "common_material": "m10",
-        "talent_book": "lm1",
-        "local_speciality": "rl06"
+        "talent_book": "l11",
+        "local_speciality": "r206"
     },
     {
         "name": "Thoma",
@@ -1073,11 +1113,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p01",
-        "mini_boss_material": "si3",
-        "weekly_boss_materials": "bi12",
+        "mini_boss_material": "s303",
+        "weekly_boss_materials": "b052",
         "common_material": "m11",
-        "talent_book": "li1",
-        "local_speciality": "ri09"
+        "talent_book": "l31",
+        "local_speciality": "r309"
     },
     {
         "name": "Tighnari",
@@ -1093,11 +1133,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p03",
-        "mini_boss_material": "ss1",
-        "weekly_boss_materials": "bi23",
+        "mini_boss_material": "s401",
+        "weekly_boss_materials": "b063",
         "common_material": "m20",
-        "talent_book": "ls1",
-        "local_speciality": "rs03"
+        "talent_book": "l41",
+        "local_speciality": "r403"
     },
     {
         "name": "Venti",
@@ -1113,11 +1153,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p05",
-        "mini_boss_material": "sm1",
-        "weekly_boss_materials": "bm21",
+        "mini_boss_material": "s101",
+        "weekly_boss_materials": "b021",
         "common_material": "m01",
-        "talent_book": "lm3",
-        "local_speciality": "rm03"
+        "talent_book": "l13",
+        "local_speciality": "r103"
     },
     {
         "name": "Xiangling",
@@ -1133,11 +1173,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p01",
-        "mini_boss_material": "sl2",
-        "weekly_boss_materials": "bm12",
+        "mini_boss_material": "s202",
+        "weekly_boss_materials": "b012",
         "common_material": "m01",
-        "talent_book": "ll2",
-        "local_speciality": "rl01"
+        "talent_book": "l22",
+        "local_speciality": "r201"
     },
     {
         "name": "Xiao",
@@ -1153,11 +1193,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p05",
-        "mini_boss_material": "sl4",
-        "weekly_boss_materials": "bl13",
+        "mini_boss_material": "s204",
+        "weekly_boss_materials": "b033",
         "common_material": "m01",
-        "talent_book": "ll1",
-        "local_speciality": "rl05"
+        "talent_book": "l21",
+        "local_speciality": "r205"
     },
     {
         "name": "Xingqiu",
@@ -1173,11 +1213,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p02",
-        "mini_boss_material": "sl3",
-        "weekly_boss_materials": "bm21",
+        "mini_boss_material": "s203",
+        "weekly_boss_materials": "b021",
         "common_material": "m02",
-        "talent_book": "ll3",
-        "local_speciality": "rl03"
+        "talent_book": "l23",
+        "local_speciality": "r203"
     },
     {
         "name": "Xinyan",
@@ -1193,11 +1233,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p01",
-        "mini_boss_material": "sl2",
-        "weekly_boss_materials": "bl11",
+        "mini_boss_material": "s202",
+        "weekly_boss_materials": "b031",
         "common_material": "m11",
-        "talent_book": "ll3",
-        "local_speciality": "rl07"
+        "talent_book": "l23",
+        "local_speciality": "r207"
     },
     {
         "name": "Yae Miko",
@@ -1213,11 +1253,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p04",
-        "mini_boss_material": "si7",
-        "weekly_boss_materials": "bi23",
+        "mini_boss_material": "s307",
+        "weekly_boss_materials": "b063",
         "common_material": "m14",
-        "talent_book": "li3",
-        "local_speciality": "ri06"
+        "talent_book": "l33",
+        "local_speciality": "r306"
     },
     {
         "name": "Yanfei",
@@ -1233,11 +1273,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p01",
-        "mini_boss_material": "sl4",
-        "weekly_boss_materials": "bl22",
+        "mini_boss_material": "s204",
+        "weekly_boss_materials": "b042",
         "common_material": "m11",
-        "talent_book": "ll3",
-        "local_speciality": "rl02"
+        "talent_book": "l23",
+        "local_speciality": "r202"
     },
     {
         "name": "Yaoyao",
@@ -1253,11 +1293,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p03",
-        "mini_boss_material": "ss5",
-        "weekly_boss_materials": "bs13",
+        "mini_boss_material": "s405",
+        "weekly_boss_materials": "b073",
         "common_material": "m01",
-        "talent_book": "ll2",
-        "local_speciality": "rl01"
+        "talent_book": "l22",
+        "local_speciality": "r201"
     },
     {
         "name": "Yelan",
@@ -1273,11 +1313,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p02",
-        "mini_boss_material": "sl5",
-        "weekly_boss_materials": "bl23",
+        "mini_boss_material": "s205",
+        "weekly_boss_materials": "b043",
         "common_material": "m10",
-        "talent_book": "ll1",
-        "local_speciality": "rl06"
+        "talent_book": "l21",
+        "local_speciality": "r206"
     },
     {
         "name": "Yoimiya",
@@ -1293,11 +1333,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p01",
-        "mini_boss_material": "si3",
-        "weekly_boss_materials": "bl21",
+        "mini_boss_material": "s303",
+        "weekly_boss_materials": "b041",
         "common_material": "m03",
-        "talent_book": "li1",
-        "local_speciality": "ri05"
+        "talent_book": "l31",
+        "local_speciality": "r305"
     },
     {
         "name": "Yun Jin",
@@ -1313,11 +1353,11 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p07",
-        "mini_boss_material": "si6",
-        "weekly_boss_materials": "bi13",
+        "mini_boss_material": "s306",
+        "weekly_boss_materials": "b053",
         "common_material": "m02",
-        "talent_book": "ll2",
-        "local_speciality": "rl04"
+        "talent_book": "l22",
+        "local_speciality": "r204"
     },
     {
         "name": "Zhongli",
@@ -1333,10 +1373,10 @@
         "experience_book": "g05",
         "crown": "g08",
         "gem": "p07",
-        "mini_boss_material": "sl1",
-        "weekly_boss_materials": "bl11",
+        "mini_boss_material": "s201",
+        "weekly_boss_materials": "b031",
         "common_material": "m01",
-        "talent_book": "ll3",
-        "local_speciality": "rl08"
+        "talent_book": "l23",
+        "local_speciality": "r208"
     }
 ]

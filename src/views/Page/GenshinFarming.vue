@@ -1,6 +1,7 @@
 <script setup>
 // Importation des différentes données de Genshin stockées en JSON
 const charactersList = require("@middlewares/genshinCharactersData.json");
+const weaponsList = require("@middlewares/genshinWeaponsData.json");
 const materialsList = require("@middlewares/genshinMaterialsData.json");
 const levelingData = require("@middlewares/genshinLevelingData.json");
 import InputCreator from "@parts/InputCreator.vue";
@@ -87,6 +88,7 @@ const dataInit = () => {
         if ([false, true].indexOf(data.Options.onlyShowsNeededMaterials) < 0) data.Options.onlyShowsNeededMaterials = false;
         if ([false, true].indexOf(data.Options.alwaysOneMoreMaterial) < 0) data.Options.alwaysOneMoreMaterial = false;
         if ([false, true].indexOf(data.Options.explaination) < 0) data.Options.explaination = true;
+        if ([false, true].indexOf(data.Options.loadIMG) < 0) data.Options.loadIMG = false;
         if (serverList.indexOf(data.Options.server) < 0) data.Options.server = "";
     } else {
         data.Options = {
@@ -94,6 +96,7 @@ const dataInit = () => {
             onlyShowsNeededMaterials: false,
             alwaysOneMoreMaterial: false,
             explaination: true,
+            loadIMG: false,
             server: "",
         };
     }
@@ -483,6 +486,13 @@ onBeforeMount(() => {
             >
             <label class="boolean-label" for="boolean-explaination">Montrer les explications</label>
         </div>
+        <div class="boolean">
+            <input
+                id="boolean-load-image" v-model="data.Options.loadIMG" class="boolean-checkbox" type="checkbox"
+                name="boolean-load-image" @change="updateLocalStorage('Options')"
+            >
+            <label class="boolean-label" for="boolean-load-image">Afficher les images (chargement jusqu'à 5x plus long avec une connexion lente)</label>
+        </div>
         <select v-model="data.Options.server" style="appearance: menulist-button" @change="updateLocalStorage('Options')">
             <option v-for="server in serverList" :key="server" :value="server">
                 {{ server }}
@@ -536,7 +546,11 @@ onBeforeMount(() => {
                 <tr v-for="material in filteredMaterials" :key="material.id">
                     <td>
                         <div class="name_cell">
-                            <img :src="require(`@static/images/genshin_icon/materials/${material.code}.png`)">
+                            <img
+                                v-if="data.Options.loadIMG"
+                                :src="require(`@static/images/genshin_icon/materials/${material.code}.png`)" 
+                                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${materialsList.find(fi => fi.code === material.code).rarity}.png`)}')`}"
+                                >
                             <p>{{ material.name }}</p>
                         </div>
                     </td>
@@ -580,7 +594,11 @@ onBeforeMount(() => {
                 <tr v-for="character in filteredCharacters" :key="character.name">
                     <td>
                         <div class="name_cell">
-                            <img :src="require(`@static/images/genshin_icon/characters/${character.name}.png`)">
+                            <img
+                                v-if="data.Options.loadIMG"
+                                :src="require(`@static/images/genshin_icon/characters/${character.name}.png`)" 
+                                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${charactersList.find(fi => fi.name === character.name).rarity}.png`)}')`}"
+                                >
                             <p>{{ character.name }}</p>
                         </div>
                     </td>
@@ -650,6 +668,27 @@ onBeforeMount(() => {
                 </tr>
             </tbody>
         </table>
+        <table class="all-weapons-progress">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="weapon in weaponsList" :key="weapon.name">
+                    <td>
+                        <div class="name_cell">
+                            <img
+                                v-if="data.Options.loadIMG"
+                                :src="require(`@static/images/genshin_icon/weapons/${weapon.name}.png`)" 
+                                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${weapon.rarity}.png`)}')`}"
+                            >
+                            <p>{{ weapon.name }}</p>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 
@@ -705,7 +744,7 @@ onBeforeMount(() => {
 
 .all-character-progress,
 .all-materials-inventory,
-.farming-review {
+.all-weapons-progress {
     border-collapse: collapse;
 
     th,
@@ -745,7 +784,11 @@ onBeforeMount(() => {
             font-weight: 400;
 
             img {
+                border-radius: 5px;
                 width: 40px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
             }
         }
     }

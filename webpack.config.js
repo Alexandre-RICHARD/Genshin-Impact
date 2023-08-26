@@ -164,7 +164,7 @@ module.exports = {
             // Pas de loader pour les images, elles sont traités comme des assets, ce qui change leurs utilisations surtout pour les petites images transformées en base64 sinon
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
-                type: "asset",
+                type: 'asset/resource'
             },
             // SCSS loader et autres loaders ainsi que l'utilisation du plugin permettant que le css soit dans un fichier indépendant des fichiers js
             {

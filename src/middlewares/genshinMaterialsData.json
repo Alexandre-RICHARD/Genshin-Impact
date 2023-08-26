@@ -681,382 +681,502 @@
     },
     {
         "id": 86,
-        "name": "Stormterror - Plume de Stormterror",
-        "code": "bm11",
-        "category": "weekly_boss_materials",
+        "name": "Cristal xénochromatique",
+        "code": "m273",
+        "category": "common_material",
         "farming_days": null,
-        "rarity": 5
+        "rarity": 3
     },
     {
         "id": 87,
-        "name": "Stormterror - Griffe de Stormterror",
-        "code": "bm12",
-        "category": "weekly_boss_materials",
+        "name": "Morceau transocéanique",
+        "code": "m272",
+        "category": "common_material",
         "farming_days": null,
-        "rarity": 5
+        "rarity": 2
     },
     {
         "id": 88,
-        "name": "Stormterror - Souffle de Stormterror",
-        "code": "bm13",
-        "category": "weekly_boss_materials",
+        "name": "Perle transocéanique",
+        "code": "m271",
+        "category": "common_material",
         "farming_days": null,
-        "rarity": 5
+        "rarity": 1
     },
     {
         "id": 89,
-        "name": "Loup du Nord - Queue de Borée",
-        "code": "bm21",
-        "category": "weekly_boss_materials",
+        "name": "Engrenage dynamique artificié",
+        "code": "m283",
+        "category": "common_material",
         "farming_days": null,
-        "rarity": 5
+        "rarity": 3
     },
     {
         "id": 90,
-        "name": "Loup du Nord - Vertèbre de Borée",
-        "code": "bm22",
-        "category": "weekly_boss_materials",
+        "name": "Engrenage à coupe droite",
+        "code": "m282",
+        "category": "common_material",
         "farming_days": null,
-        "rarity": 5
+        "rarity": 2
     },
     {
         "id": 91,
-        "name": "Loup du Nord - Esprit de Borée",
-        "code": "bm23",
-        "category": "weekly_boss_materials",
+        "name": "Engrenage de maillage",
+        "code": "m281",
+        "category": "common_material",
         "farming_days": null,
-        "rarity": 5
+        "rarity": 1
     },
     {
         "id": 92,
-        "name": "Tartaglia - Corne de Monoceros Caeli",
-        "code": "bl11",
-        "category": "weekly_boss_materials",
+        "name": "Jeune Fantasme Hydro croupi",
+        "code": "m293",
+        "category": "rare_material",
         "farming_days": null,
-        "rarity": 5
+        "rarity": 4
     },
     {
         "id": 93,
-        "name": "Tartaglia - Fragment du démon",
-        "code": "bl12",
-        "category": "weekly_boss_materials",
+        "name": "Cuillère d'eau croupie",
+        "code": "m292",
+        "category": "rare_material",
         "farming_days": null,
-        "rarity": 5
+        "rarity": 3
     },
     {
         "id": 94,
-        "name": "Tartaglia - Ombre du guerrier",
-        "code": "bl13",
-        "category": "weekly_boss_materials",
+        "name": "Goutte d'eau croupie",
+        "code": "m291",
+        "category": "rare_material",
         "farming_days": null,
-        "rarity": 5
+        "rarity": 2
     },
     {
         "id": 95,
-        "name": "Azdaha - Couronne du roi-dragon",
-        "code": "bl21",
-        "category": "weekly_boss_materials",
+        "name": "Noyau d'organisme d'extramonde",
+        "code": "m303",
+        "category": "rare_material",
         "farming_days": null,
-        "rarity": 5
+        "rarity": 4
     },
     {
         "id": 96,
-        "name": "Azdaha - Branche de jade cramoisi",
-        "code": "bl22",
-        "category": "weekly_boss_materials",
+        "name": "Synapse étrangère",
+        "code": "m302",
+        "category": "rare_material",
         "farming_days": null,
-        "rarity": 5
+        "rarity": 3
     },
     {
         "id": 97,
-        "name": "Azdaha - Écaille dorée",
-        "code": "bl23",
-        "category": "weekly_boss_materials",
+        "name": "Noyau de faille",
+        "code": "m301",
+        "category": "rare_material",
         "farming_days": null,
-        "rarity": 5
+        "rarity": 2
     },
     {
         "id": 98,
-        "name": "Signora - Moment en fusion",
-        "code": "bi11",
+        "name": "Stormterror - Plume de Stormterror",
+        "code": "b011",
         "category": "weekly_boss_materials",
         "farming_days": null,
         "rarity": 5
     },
     {
         "id": 99,
-        "name": "Signora - Papillon infernal",
-        "code": "bi12",
+        "name": "Stormterror - Griffe de Stormterror",
+        "code": "b012",
         "category": "weekly_boss_materials",
         "farming_days": null,
         "rarity": 5
     },
     {
         "id": 100,
-        "name": "Signora - Coeur de cendre",
-        "code": "bi13",
+        "name": "Stormterror - Souffle de Stormterror",
+        "code": "b013",
         "category": "weekly_boss_materials",
         "farming_days": null,
         "rarity": 5
     },
     {
         "id": 101,
-        "name": "Shogun - Mudra du général maléfique",
-        "code": "bi21",
+        "name": "Loup du Nord - Queue de Borée",
+        "code": "b021",
         "category": "weekly_boss_materials",
         "farming_days": null,
         "rarity": 5
     },
     {
         "id": 102,
-        "name": "Shogun - Larme de la divinité calamiteuse",
-        "code": "bi22",
+        "name": "Loup du Nord - Vertèbre de Borée",
+        "code": "b022",
         "category": "weekly_boss_materials",
         "farming_days": null,
         "rarity": 5
     },
     {
         "id": 103,
-        "name": "Shogun - Signification d'une éternité",
-        "code": "bi23",
+        "name": "Loup du Nord - Esprit de Borée",
+        "code": "b023",
         "category": "weekly_boss_materials",
         "farming_days": null,
         "rarity": 5
     },
     {
         "id": 104,
-        "name": "Scaramuccia - Fils de marionnette",
-        "code": "bs11",
+        "name": "Tartaglia - Corne de Monoceros Caeli",
+        "code": "b031",
         "category": "weekly_boss_materials",
         "farming_days": null,
         "rarity": 5
     },
     {
         "id": 105,
-        "name": "Scaramuccia - Miroir de mushin",
-        "code": "bs12",
+        "name": "Tartaglia - Fragment du démon",
+        "code": "b032",
         "category": "weekly_boss_materials",
         "farming_days": null,
         "rarity": 5
     },
     {
         "id": 106,
-        "name": "Scaramuccia - Cloche de daka",
-        "code": "bs13",
+        "name": "Tartaglia - Ombre du guerrier",
+        "code": "b033",
         "category": "weekly_boss_materials",
         "farming_days": null,
         "rarity": 5
     },
     {
         "id": 107,
-        "name": "Apep - Fougère du monde luxuriant",
-        "code": "bs21",
+        "name": "Azdaha - Couronne du roi-dragon",
+        "code": "b041",
         "category": "weekly_boss_materials",
         "farming_days": null,
         "rarity": 5
     },
     {
         "id": 108,
-        "name": "Apep - Floraison première de l'oasis",
-        "code": "bs22",
+        "name": "Azdaha - Branche de jade cramoisi",
+        "code": "b042",
         "category": "weekly_boss_materials",
         "farming_days": null,
         "rarity": 5
     },
     {
         "id": 109,
-        "name": "Apep - Constambre",
-        "code": "bs23",
+        "name": "Azdaha - Écaille dorée",
+        "code": "b043",
         "category": "weekly_boss_materials",
         "farming_days": null,
         "rarity": 5
     },
     {
         "id": 110,
-        "name": "Graine d'ouragan",
-        "code": "sm1",
-        "category": "mini_boss_material",
+        "name": "Signora - Moment en fusion",
+        "code": "b051",
+        "category": "weekly_boss_materials",
         "farming_days": null,
-        "rarity": 4
+        "rarity": 5
     },
     {
         "id": 111,
-        "name": "Prisme d'éclair",
-        "code": "sm2",
-        "category": "mini_boss_material",
+        "name": "Signora - Papillon infernal",
+        "code": "b052",
+        "category": "weekly_boss_materials",
         "farming_days": null,
-        "rarity": 4
+        "rarity": 5
     },
     {
         "id": 112,
-        "name": "Pilier de basalte",
-        "code": "sl1",
-        "category": "mini_boss_material",
+        "name": "Signora - Coeur de cendre",
+        "code": "b053",
+        "category": "weekly_boss_materials",
         "farming_days": null,
-        "rarity": 4
+        "rarity": 5
     },
     {
         "id": 113,
-        "name": "Duramen de glace",
-        "code": "sm3",
-        "category": "mini_boss_material",
+        "name": "Shogun - Mudra du général maléfique",
+        "code": "b061",
+        "category": "weekly_boss_materials",
         "farming_days": null,
-        "rarity": 4
+        "rarity": 5
     },
     {
         "id": 114,
-        "name": "Graine de feu",
-        "code": "sl2",
-        "category": "mini_boss_material",
+        "name": "Shogun - Larme de la divinité calamiteuse",
+        "code": "b062",
+        "category": "weekly_boss_materials",
         "farming_days": null,
-        "rarity": 4
+        "rarity": 5
     },
     {
         "id": 115,
-        "name": "Cœur d'eau pure",
-        "code": "sl3",
-        "category": "mini_boss_material",
+        "name": "Shogun - Signification d'une éternité",
+        "code": "b063",
+        "category": "weekly_boss_materials",
         "farming_days": null,
-        "rarity": 4
+        "rarity": 5
     },
     {
         "id": 116,
-        "name": "Jade juvénile",
-        "code": "sl4",
-        "category": "mini_boss_material",
+        "name": "Scaramuccia - Fils de marionnette",
+        "code": "b071",
+        "category": "weekly_boss_materials",
         "farming_days": null,
-        "rarity": 4
+        "rarity": 5
     },
     {
         "id": 117,
-        "name": "Fleur cristalline",
-        "code": "sm4",
-        "category": "mini_boss_material",
+        "name": "Scaramuccia - Miroir de mushin",
+        "code": "b072",
+        "category": "weekly_boss_materials",
         "farming_days": null,
-        "rarity": 4
+        "rarity": 5
     },
     {
         "id": 118,
-        "name": "Mécanisme oni",
-        "code": "si1",
-        "category": "mini_boss_material",
+        "name": "Scaramuccia - Cloche de daka",
+        "code": "b073",
+        "category": "weekly_boss_materials",
         "farming_days": null,
-        "rarity": 4
+        "rarity": 5
     },
     {
         "id": 119,
-        "name": "Cœur perpétuel",
-        "code": "si2",
-        "category": "mini_boss_material",
+        "name": "Apep - Fougère du monde luxuriant",
+        "code": "b081",
+        "category": "weekly_boss_materials",
         "farming_days": null,
-        "rarity": 4
+        "rarity": 5
     },
     {
         "id": 120,
-        "name": "Perle brûlante",
-        "code": "si3",
-        "category": "mini_boss_material",
+        "name": "Apep - Floraison première de l'oasis",
+        "code": "b082",
+        "category": "weekly_boss_materials",
         "farming_days": null,
-        "rarity": 4
+        "rarity": 5
     },
     {
         "id": 121,
-        "name": "Rosée du rejet",
-        "code": "si4",
-        "category": "mini_boss_material",
+        "name": "Apep - Constambre",
+        "code": "b083",
+        "category": "weekly_boss_materials",
         "farming_days": null,
-        "rarity": 4
+        "rarity": 5
     },
     {
         "id": 122,
-        "name": "Perles tempestives",
-        "code": "si5",
+        "name": "Graine d'ouragan",
+        "code": "s101",
         "category": "mini_boss_material",
         "farming_days": null,
         "rarity": 4
     },
     {
         "id": 123,
-        "name": "Régalia de faille",
-        "code": "si6",
+        "name": "Prisme d'éclair",
+        "code": "s102",
         "category": "mini_boss_material",
         "farming_days": null,
         "rarity": 4
     },
     {
         "id": 124,
-        "name": "Fausse nageoire de l'héritier du dragon",
-        "code": "si7",
+        "name": "Pilier de basalte",
+        "code": "s201",
         "category": "mini_boss_material",
         "farming_days": null,
         "rarity": 4
     },
     {
         "id": 125,
-        "name": "Croc runique",
-        "code": "sl5",
+        "name": "Duramen de glace",
+        "code": "s103",
         "category": "mini_boss_material",
         "farming_days": null,
         "rarity": 4
     },
     {
         "id": 126,
-        "name": "Bec crochu majestueux",
-        "code": "ss1",
+        "name": "Graine de feu",
+        "code": "s202",
         "category": "mini_boss_material",
         "farming_days": null,
         "rarity": 4
     },
     {
         "id": 127,
-        "name": "Fruit du tonnerre",
-        "code": "ss2",
+        "name": "Cœur d'eau pure",
+        "code": "s203",
         "category": "mini_boss_material",
         "farming_days": null,
         "rarity": 4
     },
     {
         "id": 128,
-        "name": "Calibre perpétuel",
-        "code": "ss3",
+        "name": "Jade juvénile",
+        "code": "s204",
         "category": "mini_boss_material",
         "farming_days": null,
         "rarity": 4
     },
     {
         "id": 129,
-        "name": "Tétraèdre de lumière",
-        "code": "ss4",
+        "name": "Fleur cristalline",
+        "code": "s104",
         "category": "mini_boss_material",
         "farming_days": null,
         "rarity": 4
     },
     {
         "id": 130,
-        "name": "Liane d'oblitération",
-        "code": "ss5",
+        "name": "Mécanisme oni",
+        "code": "s301",
         "category": "mini_boss_material",
         "farming_days": null,
         "rarity": 4
     },
     {
         "id": 131,
-        "name": "Pseudo-étamines",
-        "code": "ss6",
+        "name": "Cœur perpétuel",
+        "code": "s302",
         "category": "mini_boss_material",
         "farming_days": null,
         "rarity": 4
     },
     {
         "id": 132,
-        "name": "Anneau de sombreur éternelle",
-        "code": "ss7",
+        "name": "Perle brûlante",
+        "code": "s303",
         "category": "mini_boss_material",
         "farming_days": null,
         "rarity": 4
     },
     {
         "id": 133,
+        "name": "Rosée du rejet",
+        "code": "s304",
+        "category": "mini_boss_material",
+        "farming_days": null,
+        "rarity": 4
+    },
+    {
+        "id": 134,
+        "name": "Perles tempestives",
+        "code": "s305",
+        "category": "mini_boss_material",
+        "farming_days": null,
+        "rarity": 4
+    },
+    {
+        "id": 135,
+        "name": "Régalia de faille",
+        "code": "s306",
+        "category": "mini_boss_material",
+        "farming_days": null,
+        "rarity": 4
+    },
+    {
+        "id": 136,
+        "name": "Fausse nageoire de l'héritier du dragon",
+        "code": "s307",
+        "category": "mini_boss_material",
+        "farming_days": null,
+        "rarity": 4
+    },
+    {
+        "id": 137,
+        "name": "Croc runique",
+        "code": "s205",
+        "category": "mini_boss_material",
+        "farming_days": null,
+        "rarity": 4
+    },
+    {
+        "id": 138,
+        "name": "Bec crochu majestueux",
+        "code": "s401",
+        "category": "mini_boss_material",
+        "farming_days": null,
+        "rarity": 4
+    },
+    {
+        "id": 139,
+        "name": "Fruit du tonnerre",
+        "code": "s402",
+        "category": "mini_boss_material",
+        "farming_days": null,
+        "rarity": 4
+    },
+    {
+        "id": 140,
+        "name": "Calibre perpétuel",
+        "code": "s403",
+        "category": "mini_boss_material",
+        "farming_days": null,
+        "rarity": 4
+    },
+    {
+        "id": 141,
+        "name": "Tétraèdre de lumière",
+        "code": "s404",
+        "category": "mini_boss_material",
+        "farming_days": null,
+        "rarity": 4
+    },
+    {
+        "id": 142,
+        "name": "Liane d'oblitération",
+        "code": "s405",
+        "category": "mini_boss_material",
+        "farming_days": null,
+        "rarity": 4
+    },
+    {
+        "id": 143,
+        "name": "Pseudo-étamines",
+        "code": "s406",
+        "category": "mini_boss_material",
+        "farming_days": null,
+        "rarity": 4
+    },
+    {
+        "id": 144,
+        "name": "Anneau de sombreur éternelle",
+        "code": "s407",
+        "category": "mini_boss_material",
+        "farming_days": null,
+        "rarity": 4
+    },
+    {
+        "id": 145,
+        "name": "Engrenage artificié de rechange : Coppelia",
+        "code": "s501",
+        "category": "mini_boss_material",
+        "farming_days": null,
+        "rarity": 4
+    },
+    {
+        "id": 146,
+        "name": "Engrenage artificié de rechange : Coppelius",
+        "code": "s502",
+        "category": "mini_boss_material",
+        "farming_days": null,
+        "rarity": 4
+    },
+    {
+        "id": 147,
+        "name": "Résolution de l'empereur",
+        "code": "s503",
+        "category": "mini_boss_material",
+        "farming_days": null,
+        "rarity": 4
+    },
+    {
+        "id": 148,
         "name": "Pierre d'Agate agnidus",
         "code": "p014",
         "category": "gem",
@@ -1064,7 +1184,7 @@
         "rarity": 5
     },
     {
-        "id": 134,
+        "id": 149,
         "name": "Morceau d'Agate agnidus",
         "code": "p013",
         "category": "gem",
@@ -1072,7 +1192,7 @@
         "rarity": 4
     },
     {
-        "id": 135,
+        "id": 150,
         "name": "Fragment d'Agate agnidus",
         "code": "p012",
         "category": "gem",
@@ -1080,7 +1200,7 @@
         "rarity": 3
     },
     {
-        "id": 136,
+        "id": 151,
         "name": "Éclat d'Agate agnidus",
         "code": "p011",
         "category": "gem",
@@ -1088,7 +1208,7 @@
         "rarity": 2
     },
     {
-        "id": 137,
+        "id": 152,
         "name": "Pierre de lazurite varunada",
         "code": "p024",
         "category": "gem",
@@ -1096,7 +1216,7 @@
         "rarity": 5
     },
     {
-        "id": 138,
+        "id": 153,
         "name": "Morceau de lazurite varunada",
         "code": "p023",
         "category": "gem",
@@ -1104,7 +1224,7 @@
         "rarity": 4
     },
     {
-        "id": 139,
+        "id": 154,
         "name": "Fragment de lazurite varunada",
         "code": "p022",
         "category": "gem",
@@ -1112,7 +1232,7 @@
         "rarity": 3
     },
     {
-        "id": 140,
+        "id": 155,
         "name": "Éclat de lazurite varunada",
         "code": "p021",
         "category": "gem",
@@ -1120,7 +1240,7 @@
         "rarity": 2
     },
     {
-        "id": 141,
+        "id": 156,
         "name": "Pierre d'émeraude nagadus",
         "code": "p034",
         "category": "gem",
@@ -1128,7 +1248,7 @@
         "rarity": 5
     },
     {
-        "id": 142,
+        "id": 157,
         "name": "Morceau d'émeraude nagadus",
         "code": "p033",
         "category": "gem",
@@ -1136,7 +1256,7 @@
         "rarity": 4
     },
     {
-        "id": 143,
+        "id": 158,
         "name": "Fragment d'émeraude nagadus",
         "code": "p032",
         "category": "gem",
@@ -1144,7 +1264,7 @@
         "rarity": 3
     },
     {
-        "id": 144,
+        "id": 159,
         "name": "Éclat d'émeraude nagadus",
         "code": "p031",
         "category": "gem",
@@ -1152,7 +1272,7 @@
         "rarity": 2
     },
     {
-        "id": 145,
+        "id": 160,
         "name": "Pierre d'émeraude nagadus",
         "code": "p044",
         "category": "gem",
@@ -1160,7 +1280,7 @@
         "rarity": 5
     },
     {
-        "id": 146,
+        "id": 161,
         "name": "Morceau d'émeraude nagadus",
         "code": "p043",
         "category": "gem",
@@ -1168,7 +1288,7 @@
         "rarity": 4
     },
     {
-        "id": 147,
+        "id": 162,
         "name": "Fragment d'émeraude nagadus",
         "code": "p042",
         "category": "gem",
@@ -1176,7 +1296,7 @@
         "rarity": 3
     },
     {
-        "id": 148,
+        "id": 163,
         "name": "Éclat d'émeraude nagadus",
         "code": "p041",
         "category": "gem",
@@ -1184,7 +1304,7 @@
         "rarity": 2
     },
     {
-        "id": 149,
+        "id": 164,
         "name": "Pierre de turquoise vayuda",
         "code": "p054",
         "category": "gem",
@@ -1192,7 +1312,7 @@
         "rarity": 5
     },
     {
-        "id": 150,
+        "id": 165,
         "name": "Morceau de turquoise vayuda",
         "code": "p053",
         "category": "gem",
@@ -1200,7 +1320,7 @@
         "rarity": 4
     },
     {
-        "id": 151,
+        "id": 166,
         "name": "Fragment de turquoise vayuda",
         "code": "p052",
         "category": "gem",
@@ -1208,7 +1328,7 @@
         "rarity": 3
     },
     {
-        "id": 152,
+        "id": 167,
         "name": "Éclat de turquoise vayuda",
         "code": "p051",
         "category": "gem",
@@ -1216,7 +1336,7 @@
         "rarity": 2
     },
     {
-        "id": 153,
+        "id": 168,
         "name": "Pierre de jade shivada",
         "code": "p064",
         "category": "gem",
@@ -1224,7 +1344,7 @@
         "rarity": 5
     },
     {
-        "id": 154,
+        "id": 169,
         "name": "Morceau de jade shivada",
         "code": "p063",
         "category": "gem",
@@ -1232,7 +1352,7 @@
         "rarity": 4
     },
     {
-        "id": 155,
+        "id": 170,
         "name": "Fragment de jade shivada",
         "code": "p062",
         "category": "gem",
@@ -1240,7 +1360,7 @@
         "rarity": 3
     },
     {
-        "id": 156,
+        "id": 171,
         "name": "Éclat de jade shivada",
         "code": "p061",
         "category": "gem",
@@ -1248,7 +1368,7 @@
         "rarity": 2
     },
     {
-        "id": 157,
+        "id": 172,
         "name": "Pierre de topaze prithiva",
         "code": "p074",
         "category": "gem",
@@ -1256,7 +1376,7 @@
         "rarity": 5
     },
     {
-        "id": 158,
+        "id": 173,
         "name": "Morceau de topaze prithiva",
         "code": "p073",
         "category": "gem",
@@ -1264,7 +1384,7 @@
         "rarity": 4
     },
     {
-        "id": 159,
+        "id": 174,
         "name": "Fragment de topaze prithiva",
         "code": "p072",
         "category": "gem",
@@ -1272,7 +1392,7 @@
         "rarity": 3
     },
     {
-        "id": 160,
+        "id": 175,
         "name": "Éclat de topaze prithiva",
         "code": "p071",
         "category": "gem",
@@ -1280,295 +1400,367 @@
         "rarity": 2
     },
     {
-        "id": 161,
-        "name": "Philosophie de la Liberté",
-        "code": "lm13",
-        "category": "talent_book",
-        "farming_days": 147,
-        "rarity": 4
-    },
-    {
-        "id": 162,
-        "name": "Guide de la Liberté",
-        "code": "lm12",
-        "category": "talent_book",
-        "farming_days": 147,
-        "rarity": 3
-    },
-    {
-        "id": 163,
-        "name": "Enseignement de la Liberté",
-        "code": "lm11",
-        "category": "talent_book",
-        "farming_days": 147,
-        "rarity": 2
-    },
-    {
-        "id": 164,
-        "name": "Philosophie de la Résistance",
-        "code": "lm23",
-        "category": "talent_book",
-        "farming_days": 257,
-        "rarity": 4
-    },
-    {
-        "id": 165,
-        "name": "Guide de la Résistance",
-        "code": "lm22",
-        "category": "talent_book",
-        "farming_days": 257,
-        "rarity": 3
-    },
-    {
-        "id": 166,
-        "name": "Enseignement de la Résistance",
-        "code": "lm21",
-        "category": "talent_book",
-        "farming_days": 257,
-        "rarity": 2
-    },
-    {
-        "id": 167,
-        "name": "Philosophie de la Poésie",
-        "code": "lm33",
-        "category": "talent_book",
-        "farming_days": 367,
-        "rarity": 4
-    },
-    {
-        "id": 168,
-        "name": "Guide de la Poésie",
-        "code": "lm32",
-        "category": "talent_book",
-        "farming_days": 367,
-        "rarity": 3
-    },
-    {
-        "id": 169,
-        "name": "Enseignement de la Poésie",
-        "code": "lm31",
-        "category": "talent_book",
-        "farming_days": 367,
-        "rarity": 2
-    },
-    {
-        "id": 170,
-        "name": "Philosophie de la Prospérité",
-        "code": "ll13",
-        "category": "talent_book",
-        "farming_days": 147,
-        "rarity": 4
-    },
-    {
-        "id": 171,
-        "name": "Guide de la Prospérité",
-        "code": "ll12",
-        "category": "talent_book",
-        "farming_days": 147,
-        "rarity": 3
-    },
-    {
-        "id": 172,
-        "name": "Enseignement de la Prospérité",
-        "code": "ll11",
-        "category": "talent_book",
-        "farming_days": 147,
-        "rarity": 2
-    },
-    {
-        "id": 173,
-        "name": "Philosophie de la Diligence",
-        "code": "ll23",
-        "category": "talent_book",
-        "farming_days": 257,
-        "rarity": 4
-    },
-    {
-        "id": 174,
-        "name": "Guide de la Diligence",
-        "code": "ll22",
-        "category": "talent_book",
-        "farming_days": 257,
-        "rarity": 3
-    },
-    {
-        "id": 175,
-        "name": "Enseignement de la Diligence",
-        "code": "ll21",
-        "category": "talent_book",
-        "farming_days": 257,
-        "rarity": 2
-    },
-    {
         "id": 176,
-        "name": "Philosophie de l'or",
-        "code": "ll33",
+        "name": "Philosophie de la Liberté",
+        "code": "l113",
         "category": "talent_book",
-        "farming_days": 367,
+        "farming_days": 147,
         "rarity": 4
     },
     {
         "id": 177,
-        "name": "Guide de l'or",
-        "code": "ll32",
+        "name": "Guide de la Liberté",
+        "code": "l112",
         "category": "talent_book",
-        "farming_days": 367,
+        "farming_days": 147,
         "rarity": 3
     },
     {
         "id": 178,
-        "name": "Enseignement de l'or",
-        "code": "ll31",
+        "name": "Enseignement de la Liberté",
+        "code": "l111",
         "category": "talent_book",
-        "farming_days": 367,
+        "farming_days": 147,
         "rarity": 2
     },
     {
         "id": 179,
-        "name": "Philosophie de l'Éphémère",
-        "code": "li13",
+        "name": "Philosophie de la Résistance",
+        "code": "l123",
         "category": "talent_book",
-        "farming_days": 147,
+        "farming_days": 257,
         "rarity": 4
     },
     {
         "id": 180,
-        "name": "Guide de l'Éphémère",
-        "code": "li12",
+        "name": "Guide de la Résistance",
+        "code": "l122",
         "category": "talent_book",
-        "farming_days": 147,
+        "farming_days": 257,
         "rarity": 3
     },
     {
         "id": 181,
-        "name": "Enseignement de l'Éphémère",
-        "code": "li11",
+        "name": "Enseignement de la Résistance",
+        "code": "l121",
         "category": "talent_book",
-        "farming_days": 147,
+        "farming_days": 257,
         "rarity": 2
     },
     {
         "id": 182,
-        "name": "Philosophie de l'Élégance",
-        "code": "li23",
+        "name": "Philosophie de la Poésie",
+        "code": "l133",
         "category": "talent_book",
-        "farming_days": 257,
+        "farming_days": 367,
         "rarity": 4
     },
     {
         "id": 183,
-        "name": "Guide de l'Élégance",
-        "code": "li22",
+        "name": "Guide de la Poésie",
+        "code": "l132",
         "category": "talent_book",
-        "farming_days": 257,
+        "farming_days": 367,
         "rarity": 3
     },
     {
         "id": 184,
-        "name": "Enseignement de l'Élégance",
-        "code": "li21",
+        "name": "Enseignement de la Poésie",
+        "code": "l131",
         "category": "talent_book",
-        "farming_days": 257,
+        "farming_days": 367,
         "rarity": 2
     },
     {
         "id": 185,
-        "name": "Philosophie de la Lumière",
-        "code": "li33",
+        "name": "Philosophie de la Prospérité",
+        "code": "l213",
         "category": "talent_book",
-        "farming_days": 367,
+        "farming_days": 147,
         "rarity": 4
     },
     {
         "id": 186,
-        "name": "Guide de la Lumière",
-        "code": "li32",
+        "name": "Guide de la Prospérité",
+        "code": "l212",
         "category": "talent_book",
-        "farming_days": 367,
+        "farming_days": 147,
         "rarity": 3
     },
     {
         "id": 187,
-        "name": "Enseignement de la Lumière",
-        "code": "li31",
+        "name": "Enseignement de la Prospérité",
+        "code": "l211",
         "category": "talent_book",
-        "farming_days": 367,
+        "farming_days": 147,
         "rarity": 2
     },
     {
         "id": 188,
-        "name": "Philosophie de l'Admonestation",
-        "code": "ls13",
+        "name": "Philosophie de la Diligence",
+        "code": "l223",
         "category": "talent_book",
-        "farming_days": 147,
+        "farming_days": 257,
         "rarity": 4
     },
     {
         "id": 189,
-        "name": "Guide de l'Admonestation",
-        "code": "ls12",
+        "name": "Guide de la Diligence",
+        "code": "l222",
         "category": "talent_book",
-        "farming_days": 147,
+        "farming_days": 257,
         "rarity": 3
     },
     {
         "id": 190,
-        "name": "Enseignement de l'Admonestation",
-        "code": "ls11",
+        "name": "Enseignement de la Diligence",
+        "code": "l221",
+        "category": "talent_book",
+        "farming_days": 257,
+        "rarity": 2
+    },
+    {
+        "id": 191,
+        "name": "Philosophie de l'or",
+        "code": "l233",
+        "category": "talent_book",
+        "farming_days": 367,
+        "rarity": 4
+    },
+    {
+        "id": 192,
+        "name": "Guide de l'or",
+        "code": "l232",
+        "category": "talent_book",
+        "farming_days": 367,
+        "rarity": 3
+    },
+    {
+        "id": 193,
+        "name": "Enseignement de l'or",
+        "code": "l231",
+        "category": "talent_book",
+        "farming_days": 367,
+        "rarity": 2
+    },
+    {
+        "id": 194,
+        "name": "Philosophie de l'Éphémère",
+        "code": "l313",
+        "category": "talent_book",
+        "farming_days": 147,
+        "rarity": 4
+    },
+    {
+        "id": 195,
+        "name": "Guide de l'Éphémère",
+        "code": "l312",
+        "category": "talent_book",
+        "farming_days": 147,
+        "rarity": 3
+    },
+    {
+        "id": 196,
+        "name": "Enseignement de l'Éphémère",
+        "code": "l311",
         "category": "talent_book",
         "farming_days": 147,
         "rarity": 2
     },
     {
-        "id": 191,
-        "name": "Philosophie de l'Ingénuité",
-        "code": "ls23",
-        "category": "talent_book",
-        "farming_days": 257,
-        "rarity": 4
-    },
-    {
-        "id": 192,
-        "name": "Guide de l'Ingénuité",
-        "code": "ls22",
-        "category": "talent_book",
-        "farming_days": 257,
-        "rarity": 3
-    },
-    {
-        "id": 193,
-        "name": "Enseignement de l'Ingénuité",
-        "code": "ls21",
-        "category": "talent_book",
-        "farming_days": 257,
-        "rarity": 2
-    },
-    {
-        "id": 194,
-        "name": "Philosophie de l'Usage",
-        "code": "ls33",
-        "category": "talent_book",
-        "farming_days": 367,
-        "rarity": 4
-    },
-    {
-        "id": 195,
-        "name": "Guide de l'Usage",
-        "code": "ls32",
-        "category": "talent_book",
-        "farming_days": 367,
-        "rarity": 3
-    },
-    {
-        "id": 196,
-        "name": "Enseignement de l'Usage",
-        "code": "ls31",
-        "category": "talent_book",
-        "farming_days": 367,
-        "rarity": 2
-    },
-    {
         "id": 197,
+        "name": "Philosophie de l'Élégance",
+        "code": "l323",
+        "category": "talent_book",
+        "farming_days": 257,
+        "rarity": 4
+    },
+    {
+        "id": 198,
+        "name": "Guide de l'Élégance",
+        "code": "l322",
+        "category": "talent_book",
+        "farming_days": 257,
+        "rarity": 3
+    },
+    {
+        "id": 199,
+        "name": "Enseignement de l'Élégance",
+        "code": "l321",
+        "category": "talent_book",
+        "farming_days": 257,
+        "rarity": 2
+    },
+    {
+        "id": 200,
+        "name": "Philosophie de la Lumière",
+        "code": "l333",
+        "category": "talent_book",
+        "farming_days": 367,
+        "rarity": 4
+    },
+    {
+        "id": 201,
+        "name": "Guide de la Lumière",
+        "code": "l332",
+        "category": "talent_book",
+        "farming_days": 367,
+        "rarity": 3
+    },
+    {
+        "id": 202,
+        "name": "Enseignement de la Lumière",
+        "code": "l331",
+        "category": "talent_book",
+        "farming_days": 367,
+        "rarity": 2
+    },
+    {
+        "id": 203,
+        "name": "Philosophie de l'Admonestation",
+        "code": "l413",
+        "category": "talent_book",
+        "farming_days": 147,
+        "rarity": 4
+    },
+    {
+        "id": 204,
+        "name": "Guide de l'Admonestation",
+        "code": "l412",
+        "category": "talent_book",
+        "farming_days": 147,
+        "rarity": 3
+    },
+    {
+        "id": 205,
+        "name": "Enseignement de l'Admonestation",
+        "code": "l411",
+        "category": "talent_book",
+        "farming_days": 147,
+        "rarity": 2
+    },
+    {
+        "id": 206,
+        "name": "Philosophie de l'Ingénuité",
+        "code": "l423",
+        "category": "talent_book",
+        "farming_days": 257,
+        "rarity": 4
+    },
+    {
+        "id": 207,
+        "name": "Guide de l'Ingénuité",
+        "code": "l422",
+        "category": "talent_book",
+        "farming_days": 257,
+        "rarity": 3
+    },
+    {
+        "id": 208,
+        "name": "Enseignement de l'Ingénuité",
+        "code": "l421",
+        "category": "talent_book",
+        "farming_days": 257,
+        "rarity": 2
+    },
+    {
+        "id": 209,
+        "name": "Philosophie de l'Usage",
+        "code": "l433",
+        "category": "talent_book",
+        "farming_days": 367,
+        "rarity": 4
+    },
+    {
+        "id": 210,
+        "name": "Guide de l'Usage",
+        "code": "l432",
+        "category": "talent_book",
+        "farming_days": 367,
+        "rarity": 3
+    },
+    {
+        "id": 211,
+        "name": "Enseignement de l'Usage",
+        "code": "l431",
+        "category": "talent_book",
+        "farming_days": 367,
+        "rarity": 2
+    },
+    {
+        "id": 212,
+        "name": "Philosophie de l'Équité",
+        "code": "l513",
+        "category": "talent_book",
+        "farming_days": 147,
+        "rarity": 4
+    },
+    {
+        "id": 213,
+        "name": "Guide de l'Équité",
+        "code": "l512",
+        "category": "talent_book",
+        "farming_days": 147,
+        "rarity": 3
+    },
+    {
+        "id": 214,
+        "name": "Enseignement de l'Équité",
+        "code": "l511",
+        "category": "talent_book",
+        "farming_days": 147,
+        "rarity": 2
+    },
+    {
+        "id": 215,
+        "name": "Philosophie de la Justice",
+        "code": "l523",
+        "category": "talent_book",
+        "farming_days": 257,
+        "rarity": 4
+    },
+    {
+        "id": 216,
+        "name": "Guide de la Justice",
+        "code": "l522",
+        "category": "talent_book",
+        "farming_days": 257,
+        "rarity": 3
+    },
+    {
+        "id": 217,
+        "name": "Enseignement de la Justice",
+        "code": "l521",
+        "category": "talent_book",
+        "farming_days": 257,
+        "rarity": 2
+    },
+    {
+        "id": 218,
+        "name": "Philosophie de l'Ordre",
+        "code": "l533",
+        "category": "talent_book",
+        "farming_days": 367,
+        "rarity": 4
+    },
+    {
+        "id": 219,
+        "name": "Guide de l'Ordre",
+        "code": "l532",
+        "category": "talent_book",
+        "farming_days": 367,
+        "rarity": 3
+    },
+    {
+        "id": 220,
+        "name": "Enseignement de l'Ordre",
+        "code": "l531",
+        "category": "talent_book",
+        "farming_days": 367,
+        "rarity": 2
+    },
+    {
+        "id": 221,
         "name": "Couronne de la sagesse",
         "code": "g08",
         "category": "global",
@@ -1576,657 +1768,785 @@
         "rarity": 5
     },
     {
-        "id": 198,
-        "name": "Rêve brisé de Décabarian",
-        "code": "am14",
-        "category": "weapon_material",
-        "farming_days": 147,
-        "rarity": 5
-    },
-    {
-        "id": 199,
-        "name": "Fragment dispersé de Décabarian",
-        "code": "am13",
-        "category": "weapon_material",
-        "farming_days": 147,
-        "rarity": 4
-    },
-    {
-        "id": 200,
-        "name": "Mur abattu de Décabarian",
-        "code": "am12",
-        "category": "weapon_material",
-        "farming_days": 147,
-        "rarity": 3
-    },
-    {
-        "id": 201,
-        "name": "Tuile cassée de Décabarian",
-        "code": "am11",
-        "category": "weapon_material",
-        "farming_days": 147,
-        "rarity": 2
-    },
-    {
-        "id": 202,
-        "name": "Nostalgie du Loup boréal",
-        "code": "am24",
-        "category": "weapon_material",
-        "farming_days": 257,
-        "rarity": 5
-    },
-    {
-        "id": 203,
-        "name": "Croc fendu du Loup boréal",
-        "code": "am23",
-        "category": "weapon_material",
-        "farming_days": 257,
-        "rarity": 4
-    },
-    {
-        "id": 204,
-        "name": "Croc brisé du Loup boréal",
-        "code": "am22",
-        "category": "weapon_material",
-        "farming_days": 257,
-        "rarity": 3
-    },
-    {
-        "id": 205,
-        "name": "Dent de lait du Loup boréal",
-        "code": "am21",
-        "category": "weapon_material",
-        "farming_days": 257,
-        "rarity": 2
-    },
-    {
-        "id": 206,
-        "name": "Idéaux du Chevalier du Croc de Lion",
-        "code": "am34",
-        "category": "weapon_material",
-        "farming_days": 367,
-        "rarity": 5
-    },
-    {
-        "id": 207,
-        "name": "Menottes du Chevalier du Croc de Lion",
-        "code": "am33",
-        "category": "weapon_material",
-        "farming_days": 367,
-        "rarity": 4
-    },
-    {
-        "id": 208,
-        "name": "Chaînes du Chevalier du Croc de Lion",
-        "code": "am32",
-        "category": "weapon_material",
-        "farming_days": 367,
-        "rarity": 3
-    },
-    {
-        "id": 209,
-        "name": "Entraves du Chevalier du Croc de Lion",
-        "code": "am31",
-        "category": "weapon_material",
-        "farming_days": 367,
-        "rarity": 2
-    },
-    {
-        "id": 210,
-        "name": "Corps divin de Guyun",
-        "code": "al14",
-        "category": "weapon_material",
-        "farming_days": 147,
-        "rarity": 5
-    },
-    {
-        "id": 211,
-        "name": "Squelette sacré de Guyun",
-        "code": "al13",
-        "category": "weapon_material",
-        "farming_days": 147,
-        "rarity": 4
-    },
-    {
-        "id": 212,
-        "name": "Roche lustrée de Guyun",
-        "code": "al12",
-        "category": "weapon_material",
-        "farming_days": 147,
-        "rarity": 3
-    },
-    {
-        "id": 213,
-        "name": "Sable lumineux de Guyun",
-        "code": "al11",
-        "category": "weapon_material",
-        "farming_days": 147,
-        "rarity": 2
-    },
-    {
-        "id": 214,
-        "name": "Or karstique",
-        "code": "al24",
-        "category": "weapon_material",
-        "farming_days": 257,
-        "rarity": 5
-    },
-    {
-        "id": 215,
-        "name": "Argent karstique",
-        "code": "al23",
-        "category": "weapon_material",
-        "farming_days": 257,
-        "rarity": 4
-    },
-    {
-        "id": 216,
-        "name": "Mercure karstique",
-        "code": "al22",
-        "category": "weapon_material",
-        "farming_days": 257,
-        "rarity": 3
-    },
-    {
-        "id": 217,
-        "name": "Plomb karstique",
-        "code": "al21",
-        "category": "weapon_material",
-        "farming_days": 257,
-        "rarity": 2
-    },
-    {
-        "id": 218,
-        "name": "Morceau d'aérosidérite noire",
-        "code": "al34",
-        "category": "weapon_material",
-        "farming_days": 367,
-        "rarity": 5
-    },
-    {
-        "id": 219,
-        "name": "Fragment d'aérosidérite noire",
-        "code": "al33",
-        "category": "weapon_material",
-        "farming_days": 367,
-        "rarity": 4
-    },
-    {
-        "id": 220,
-        "name": "Éclat d'aérosidérite noire",
-        "code": "al32",
-        "category": "weapon_material",
-        "farming_days": 367,
-        "rarity": 3
-    },
-    {
-        "id": 221,
-        "name": "Grain d'aérosidérite noire",
-        "code": "al31",
-        "category": "weapon_material",
-        "farming_days": 367,
-        "rarity": 2
-    },
-    {
         "id": 222,
-        "name": "Branche marine d'or",
-        "code": "ai14",
+        "name": "Rêve brisé de Décabarian",
+        "code": "a114",
         "category": "weapon_material",
         "farming_days": 147,
         "rarity": 5
     },
     {
         "id": 223,
-        "name": "Branche marine de jade",
-        "code": "ai13",
+        "name": "Fragment dispersé de Décabarian",
+        "code": "a113",
         "category": "weapon_material",
         "farming_days": 147,
         "rarity": 4
     },
     {
         "id": 224,
-        "name": "Branche marine de gemme",
-        "code": "ai12",
+        "name": "Mur abattu de Décabarian",
+        "code": "a112",
         "category": "weapon_material",
         "farming_days": 147,
         "rarity": 3
     },
     {
         "id": 225,
-        "name": "Branche marine de corail",
-        "code": "ai11",
+        "name": "Tuile cassée de Décabarian",
+        "code": "a111",
         "category": "weapon_material",
         "farming_days": 147,
         "rarity": 2
     },
     {
         "id": 226,
-        "name": "Vaillance de Narukami",
-        "code": "ai24",
+        "name": "Nostalgie du Loup boréal",
+        "code": "a124",
         "category": "weapon_material",
         "farming_days": 257,
         "rarity": 5
     },
     {
         "id": 227,
-        "name": "Affection de Narukami",
-        "code": "ai23",
+        "name": "Croc fendu du Loup boréal",
+        "code": "a123",
         "category": "weapon_material",
         "farming_days": 257,
         "rarity": 4
     },
     {
         "id": 228,
-        "name": "Joie de Narukami",
-        "code": "ai22",
+        "name": "Croc brisé du Loup boréal",
+        "code": "a122",
         "category": "weapon_material",
         "farming_days": 257,
         "rarity": 3
     },
     {
         "id": 229,
-        "name": "Sagesse de Narukami",
-        "code": "ai21",
+        "name": "Dent de lait du Loup boréal",
+        "code": "a121",
         "category": "weapon_material",
         "farming_days": 257,
         "rarity": 2
     },
     {
         "id": 230,
-        "name": "Masque du kijin",
-        "code": "ai34",
+        "name": "Idéaux du Chevalier du Croc de Lion",
+        "code": "a134",
         "category": "weapon_material",
         "farming_days": 367,
         "rarity": 5
     },
     {
         "id": 231,
-        "name": "Masque du cornu",
-        "code": "ai33",
+        "name": "Menottes du Chevalier du Croc de Lion",
+        "code": "a133",
         "category": "weapon_material",
         "farming_days": 367,
         "rarity": 4
     },
     {
         "id": 232,
-        "name": "Masque de la morsure du tigre",
-        "code": "ai32",
+        "name": "Chaînes du Chevalier du Croc de Lion",
+        "code": "a132",
         "category": "weapon_material",
         "farming_days": 367,
         "rarity": 3
     },
     {
         "id": 233,
-        "name": "Masque du lieutenant pernicieux",
-        "code": "ai31",
+        "name": "Entraves du Chevalier du Croc de Lion",
+        "code": "a131",
         "category": "weapon_material",
         "farming_days": 367,
         "rarity": 2
     },
     {
         "id": 234,
-        "name": "Talisman en or de la rosée",
-        "code": "as14",
+        "name": "Corps divin de Guyun",
+        "code": "a214",
         "category": "weapon_material",
         "farming_days": 147,
         "rarity": 5
     },
     {
         "id": 235,
-        "name": "Talisman en argent de la rosée",
-        "code": "as13",
+        "name": "Squelette sacré de Guyun",
+        "code": "a213",
         "category": "weapon_material",
         "farming_days": 147,
         "rarity": 4
     },
     {
         "id": 236,
-        "name": "Talisman en fer de la rosée",
-        "code": "as12",
+        "name": "Roche lustrée de Guyun",
+        "code": "a212",
         "category": "weapon_material",
         "farming_days": 147,
         "rarity": 3
     },
     {
         "id": 237,
-        "name": "Talisman en cuivre de la rosée",
-        "code": "as11",
+        "name": "Sable lumineux de Guyun",
+        "code": "a211",
         "category": "weapon_material",
         "farming_days": 147,
         "rarity": 2
     },
     {
         "id": 238,
-        "name": "Vérité du jardin d'oasis",
-        "code": "as24",
+        "name": "Or karstique",
+        "code": "a224",
         "category": "weapon_material",
         "farming_days": 257,
         "rarity": 5
     },
     {
         "id": 239,
-        "name": "Deuil du jardin d'oasis",
-        "code": "as23",
+        "name": "Argent karstique",
+        "code": "a223",
         "category": "weapon_material",
         "farming_days": 257,
         "rarity": 4
     },
     {
         "id": 240,
-        "name": "Gentillesse du jardin d'oasis",
-        "code": "as22",
+        "name": "Mercure karstique",
+        "code": "a222",
         "category": "weapon_material",
         "farming_days": 257,
         "rarity": 3
     },
     {
         "id": 241,
-        "name": "Souvenir du jardin d'oasis",
-        "code": "as21",
+        "name": "Plomb karstique",
+        "code": "a221",
         "category": "weapon_material",
         "farming_days": 257,
         "rarity": 2
     },
     {
         "id": 242,
-        "name": "Passé glorieux du pouvoir brûlant",
-        "code": "as34",
+        "name": "Morceau d'aérosidérite noire",
+        "code": "a234",
         "category": "weapon_material",
         "farming_days": 367,
         "rarity": 5
     },
     {
         "id": 243,
-        "name": "Rêve dominant du pouvoir brûlant",
-        "code": "as33",
+        "name": "Fragment d'aérosidérite noire",
+        "code": "a233",
         "category": "weapon_material",
         "farming_days": 367,
         "rarity": 4
     },
     {
         "id": 244,
-        "name": "Éclat subsistant du pouvoir brûlant",
-        "code": "as32",
+        "name": "Éclat d'aérosidérite noire",
+        "code": "a232",
         "category": "weapon_material",
         "farming_days": 367,
         "rarity": 3
     },
     {
         "id": 245,
-        "name": "Dernier echo du pouvoir brûlant",
-        "code": "as31",
+        "name": "Grain d'aérosidérite noire",
+        "code": "a231",
         "category": "weapon_material",
         "farming_days": 367,
         "rarity": 2
     },
     {
         "id": 246,
-        "name": "Baie à crochet",
-        "code": "rm01",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Branche marine d'or",
+        "code": "a314",
+        "category": "weapon_material",
+        "farming_days": 147,
+        "rarity": 5
     },
     {
         "id": 247,
-        "name": "Tombaie",
-        "code": "rm02",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Branche marine de jade",
+        "code": "a313",
+        "category": "weapon_material",
+        "farming_days": 147,
+        "rarity": 4
     },
     {
         "id": 248,
-        "name": "Cécilia",
-        "code": "rm03",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Branche marine de gemme",
+        "code": "a312",
+        "category": "weapon_material",
+        "farming_days": 147,
+        "rarity": 3
     },
     {
         "id": 249,
-        "name": "Chrysanthème à aubes",
-        "code": "rm04",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Branche marine de corail",
+        "code": "a311",
+        "category": "weapon_material",
+        "farming_days": 147,
+        "rarity": 2
     },
     {
         "id": 250,
-        "name": "Champignon anémophile",
-        "code": "rm05",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Vaillance de Narukami",
+        "code": "a324",
+        "category": "weapon_material",
+        "farming_days": 257,
+        "rarity": 5
     },
     {
         "id": 251,
-        "name": "Herbe à lampe",
-        "code": "rm06",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Affection de Narukami",
+        "code": "a323",
+        "category": "weapon_material",
+        "farming_days": 257,
+        "rarity": 4
     },
     {
         "id": 252,
-        "name": "Lys calla",
-        "code": "rm07",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Joie de Narukami",
+        "code": "a322",
+        "category": "weapon_material",
+        "farming_days": 257,
+        "rarity": 3
     },
     {
         "id": 253,
-        "name": "Graines de pissenlit",
-        "code": "rm08",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Sagesse de Narukami",
+        "code": "a321",
+        "category": "weapon_material",
+        "farming_days": 257,
+        "rarity": 2
     },
     {
         "id": 254,
-        "name": "Piment de Jueyun",
-        "code": "rl01",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Masque du kijin",
+        "code": "a334",
+        "category": "weapon_material",
+        "farming_days": 367,
+        "rarity": 5
     },
     {
         "id": 255,
-        "name": "Jade noctiluque",
-        "code": "rl02",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Masque du cornu",
+        "code": "a333",
+        "category": "weapon_material",
+        "farming_days": 367,
+        "rarity": 4
     },
     {
         "id": 256,
-        "name": "Fleur de soie",
-        "code": "rl03",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Masque de la morsure du tigre",
+        "code": "a332",
+        "category": "weapon_material",
+        "farming_days": 367,
+        "rarity": 3
     },
     {
         "id": 257,
-        "name": "Lys verni",
-        "code": "rl04",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Masque du lieutenant pernicieux",
+        "code": "a331",
+        "category": "weapon_material",
+        "farming_days": 367,
+        "rarity": 2
     },
     {
         "id": 258,
-        "name": "Fleur de Qingxin",
-        "code": "rl05",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Talisman en or de la rosée",
+        "code": "a414",
+        "category": "weapon_material",
+        "farming_days": 147,
+        "rarity": 5
     },
     {
         "id": 259,
-        "name": "Conque d'étoile",
-        "code": "rl06",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Talisman en argent de la rosée",
+        "code": "a413",
+        "category": "weapon_material",
+        "farming_days": 147,
+        "rarity": 4
     },
     {
         "id": 260,
-        "name": "Muguet bleu",
-        "code": "rl07",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Talisman en fer de la rosée",
+        "code": "a412",
+        "category": "weapon_material",
+        "farming_days": 147,
+        "rarity": 3
     },
     {
         "id": 261,
-        "name": "Cœur de lapis",
-        "code": "rl08",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Talisman en cuivre de la rosée",
+        "code": "a411",
+        "category": "weapon_material",
+        "farming_days": 147,
+        "rarity": 2
     },
     {
         "id": 262,
-        "name": "Scarabuto",
-        "code": "ri01",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Vérité du jardin d'oasis",
+        "code": "a424",
+        "category": "weapon_material",
+        "farming_days": 257,
+        "rarity": 5
     },
     {
         "id": 263,
-        "name": "Fleur de cerisier",
-        "code": "ri02",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Deuil du jardin d'oasis",
+        "code": "a423",
+        "category": "weapon_material",
+        "farming_days": 257,
+        "rarity": 4
     },
     {
         "id": 264,
-        "name": "Moelle cristalline",
-        "code": "ri03",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Gentillesse du jardin d'oasis",
+        "code": "a422",
+        "category": "weapon_material",
+        "farming_days": 257,
+        "rarity": 3
     },
     {
         "id": 265,
-        "name": "Dendrobium sanglant",
-        "code": "ri04",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Souvenir du jardin d'oasis",
+        "code": "a421",
+        "category": "weapon_material",
+        "farming_days": 257,
+        "rarity": 2
     },
     {
         "id": 266,
-        "name": "Herbe à sanglots",
-        "code": "ri05",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Passé glorieux du pouvoir brûlant",
+        "code": "a434",
+        "category": "weapon_material",
+        "farming_days": 367,
+        "rarity": 5
     },
     {
         "id": 267,
-        "name": "Ganoderma marin",
-        "code": "ri06",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Rêve dominant du pouvoir brûlant",
+        "code": "a433",
+        "category": "weapon_material",
+        "farming_days": 367,
+        "rarity": 4
     },
     {
         "id": 268,
-        "name": "Perle de corail",
-        "code": "ri07",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Éclat subsistant du pouvoir brûlant",
+        "code": "a432",
+        "category": "weapon_material",
+        "farming_days": 367,
+        "rarity": 3
     },
     {
         "id": 269,
-        "name": "Fruit d'Amakumo",
-        "code": "ri08",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Dernier echo du pouvoir brûlant",
+        "code": "a431",
+        "category": "weapon_material",
+        "farming_days": 367,
+        "rarity": 2
     },
     {
         "id": 270,
-        "name": "Champignon fluorescent",
-        "code": "ri09",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Écho d'un accord ancien",
+        "code": "a514",
+        "category": "weapon_material",
+        "farming_days": 147,
+        "rarity": 5
     },
     {
         "id": 271,
-        "name": "Champignon sacramental",
-        "code": "rs01",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Mouvement d'un accord ancien",
+        "code": "a513",
+        "category": "weapon_material",
+        "farming_days": 147,
+        "rarity": 4
     },
     {
         "id": 272,
-        "name": "Padisachidée",
-        "code": "rs02",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Chapitre d'un accord ancien",
+        "code": "a512",
+        "category": "weapon_material",
+        "farming_days": 147,
+        "rarity": 3
     },
     {
         "id": 273,
-        "name": "Nilotpalotus",
-        "code": "rs03",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Fragment d'un accord ancien",
+        "code": "a511",
+        "category": "weapon_material",
+        "farming_days": 147,
+        "rarity": 2
     },
     {
         "id": 274,
-        "name": "Kalpalotus",
-        "code": "rs04",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Essence de rosée sacrée pure",
+        "code": "a524",
+        "category": "weapon_material",
+        "farming_days": 257,
+        "rarity": 5
     },
     {
         "id": 275,
-        "name": "Quandong",
-        "code": "rs05",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Source de rosée sacrée pure",
+        "code": "a523",
+        "category": "weapon_material",
+        "farming_days": 257,
+        "rarity": 4
     },
     {
         "id": 276,
-        "name": "Pupe graisseuse des sables",
-        "code": "rs06",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Sublimation de rosée sacrée pure",
+        "code": "a522",
+        "category": "weapon_material",
+        "farming_days": 257,
+        "rarity": 3
     },
     {
         "id": 277,
-        "name": "Fleur funéraire",
-        "code": "rs07",
-        "category": "local_speciality",
-        "farming_days": null,
-        "rarity": 1
+        "name": "Résidu de rosée sacrée pure",
+        "code": "a521",
+        "category": "weapon_material",
+        "farming_days": 257,
+        "rarity": 2
     },
     {
         "id": 278,
-        "name": "Trishiraite",
-        "code": "rs08",
+        "name": "Gobelet d'or de la mer immaculée",
+        "code": "a534",
+        "category": "weapon_material",
+        "farming_days": 367,
+        "rarity": 5
+    },
+    {
+        "id": 279,
+        "name": "Gobelet d'argent de la mer immaculée",
+        "code": "a533",
+        "category": "weapon_material",
+        "farming_days": 367,
+        "rarity": 4
+    },
+    {
+        "id": 280,
+        "name": "Gobelet à vin de la mer immaculée",
+        "code": "a532",
+        "category": "weapon_material",
+        "farming_days": 367,
+        "rarity": 3
+    },
+    {
+        "id": 281,
+        "name": "Gobelet brisé de la mer immaculée",
+        "code": "a531",
+        "category": "weapon_material",
+        "farming_days": 367,
+        "rarity": 2
+    },
+    {
+        "id": 282,
+        "name": "Baie à crochet",
+        "code": "r101",
         "category": "local_speciality",
         "farming_days": null,
         "rarity": 1
     },
     {
-        "id": 279,
+        "id": 283,
+        "name": "Tombaie",
+        "code": "r102",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 284,
+        "name": "Cécilia",
+        "code": "r103",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 285,
+        "name": "Chrysanthème à aubes",
+        "code": "r104",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 286,
+        "name": "Champignon anémophile",
+        "code": "r105",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 287,
+        "name": "Herbe à lampe",
+        "code": "r106",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 288,
+        "name": "Lys calla",
+        "code": "r107",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 289,
+        "name": "Graines de pissenlit",
+        "code": "r108",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 290,
+        "name": "Piment de Jueyun",
+        "code": "r201",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 291,
+        "name": "Jade noctiluque",
+        "code": "r202",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 292,
+        "name": "Fleur de soie",
+        "code": "r203",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 293,
+        "name": "Lys verni",
+        "code": "r204",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 294,
+        "name": "Fleur de Qingxin",
+        "code": "r205",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 295,
+        "name": "Conque d'étoile",
+        "code": "r206",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 296,
+        "name": "Muguet bleu",
+        "code": "r207",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 297,
+        "name": "Cœur de lapis",
+        "code": "r208",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 298,
+        "name": "Scarabuto",
+        "code": "r301",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 299,
+        "name": "Fleur de cerisier",
+        "code": "r302",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 300,
+        "name": "Moelle cristalline",
+        "code": "r303",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 301,
+        "name": "Dendrobium sanglant",
+        "code": "r304",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 302,
+        "name": "Herbe à sanglots",
+        "code": "r305",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 303,
+        "name": "Ganoderma marin",
+        "code": "r306",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 304,
+        "name": "Perle de corail",
+        "code": "r307",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 305,
+        "name": "Fruit d'Amakumo",
+        "code": "r308",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 306,
+        "name": "Champignon fluorescent",
+        "code": "r309",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 307,
+        "name": "Champignon sacramental",
+        "code": "r401",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 308,
+        "name": "Padisachidée",
+        "code": "r402",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 309,
+        "name": "Nilotpalotus",
+        "code": "r403",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 310,
+        "name": "Kalpalotus",
+        "code": "r404",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 311,
+        "name": "Quandong",
+        "code": "r405",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 312,
+        "name": "Pupe graisseuse des sables",
+        "code": "r406",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 313,
+        "name": "Fleur funéraire",
+        "code": "r407",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 314,
+        "name": "Trishiraite",
+        "code": "r408",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 315,
         "name": "Scarabée",
-        "code": "rs09",
+        "code": "r409",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 316,
+        "name": "Conque de béryl",
+        "code": "r501",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 317,
+        "name": "Fleur romaritime",
+        "code": "r502",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 318,
+        "name": "Clochette de Lumidouce",
+        "code": "r503",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 319,
+        "name": "Rose arc-en-ciel",
+        "code": "r504",
         "category": "local_speciality",
         "farming_days": null,
         "rarity": 1

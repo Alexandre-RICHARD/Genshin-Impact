@@ -206,4 +206,19 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Les 3 valeurs en ref pour le traitement des heures ont une valeur par défaut, même si peu visible
 -   Rajout des images de personnes et de ressources et implémentation de celles-ci avec un style basique
 
+### 1.2.7 `26 août 2023`
+
+-   Mise à jour des packages npm
+-   Transformation des images en assets de webpack. Le but étant qu'elles ne soient pas converties en base64
+-   De gros changement dans les fichiers json.
+-   Rajout de Lyney et Lynette dans les personnages
+-   Rajout des données des nouveaux matériaux de Fontaine.
+-   Changement des codes de matériaux afin qu'ils soient indépendant de la lettre de la région. En effet, cela aurait posé problème
+-   Adaptation de ces codes sur les images et toutes les données liées
+-   Reprenant les mêmes principes que ce qui a déjà été fait, création des données de niveaux pour les armes
+-   Complétion des données d'armes, rajout de leurs images et correction de quelques erreurs afin de pouvoir les importer par la suite
+-   Rajout d'une option pour choisir ou non d'afficher les images afin d'alléger les temps de chargement
+-   Rajout d'un nouveau tableau pour les armes
+-   Chaque nouvelles et actuelles images vont maintenant avoir un background représentant leur rareté
+
 </details>
