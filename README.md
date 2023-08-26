@@ -231,4 +231,10 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Rajout de la logique de recherche du nom des armes avec la chaîne de recherche, le boolean qui représente l'ouverture de la liste, les résultats filtrés, la fonction pour cacher la liste et celle pour ajouter une arme et la sauvegardé dans le localStorage ainsi que celle pour supprimer
 -   Changement des noms des serveurs
 
+### 1.2.9 `27 août 2023`
+
+-   Rajout de la possibilité de clean le nouvel objet des armes comme les autres
+-   Remaniement de la manière dont sont gérés les filtres de personnages, en rajoutant le filtre par champ de recherche
+-   Rajout d'un champ de recherche un peu à l'arrache pour les personnages
+
 </details>

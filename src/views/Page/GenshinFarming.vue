@@ -154,6 +154,7 @@ const filler = (type, name) => {
 // Relié à un bouton permettant de nettoyer et reset par défaut le localStorage
 const cleanLocalStorage = () => {
     localStorage.removeItem("genshinCharactersData");
+    localStorage.removeItem("genshinWeaponsData");
     localStorage.removeItem("genshinMaterialsData");
     localStorage.removeItem("genshinOptionsData");
     dataInit();
@@ -172,11 +173,16 @@ const handleChange = (group, index, valuename, value) => {
 
 // Un objet computed afin de filtrer en fonction d'une options si on ne veut voir que les personnages qui ont été noté comme build
 const filteredCharacters = computed(() => {
-    if (data.Options.onlyShowsDoingCharacter) {
-        return [...data.Characters].filter(el => el.doing === true).sort(sortFunction("name"));
-    } else {
-        return [...data.Characters].sort(sortFunction("name"));
-    }
+    const filter = [...data.Characters].filter((character) => {
+        const doingCharacters = !data.Options.onlyShowsDoingCharacter || character.doing === true;
+        const searchedCharacters = !searchingCharactersQuery.value || character.name.toLowerCase().includes(searchingCharactersQuery.value.toLowerCase());
+
+        return (
+            doingCharacters &&
+            searchedCharacters
+        );
+    });
+    return filter.sort(sortFunction("name"));
 });
 
 // Un objet computed afin de filtrer en fonction d'une option si on ne veut voir que les matériaux de farm dont on a besoin
@@ -415,6 +421,7 @@ const farmingMaterial = computed(() => {
 });
 
 const searchingWeaponQuery = ref("");
+const searchingCharactersQuery = ref("");
 const showResultList = ref(false);
 
 const filteredResults = computed(() => {
@@ -643,6 +650,10 @@ onBeforeMount(() => {
                 </tr>
             </tbody>
         </table>
+        <div style="background-color: #4b453c;">
+            <input v-model="searchingCharactersQuery" for="searching-characters" type="text">
+            <label name="searching-characters">Rechercher un personnage</label>
+        </div>
         <table class="all-character-progress">
             <thead>
                 <tr>
