@@ -237,4 +237,14 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Remaniement de la manière dont sont gérés les filtres de personnages, en rajoutant le filtre par champ de recherche
 -   Rajout d'un champ de recherche un peu à l'arrache pour les personnages
 
+### 1.2.10 `27 août 2023`
+
+-   Suppression du choix "Sélectionne ton serveur" dans la liste des serveurs, je trouverai un moyen de styliser ça correctement
+-   Changement de l'effet qu'à l'option OnlyShowNeededMaterials. Avant, cela ne laissait que les ressources qui étaient nécessaires directement. A présent, cela rajoute également les ressources des groupes qui sont nécessaires, même si l'une d'elle ne l'est pas.
+-   Pour cela, utilisation d'une nouvelle variable pour chaque ressource, require. Activé si besoin et si la ressources se trouve dans un groupe de synthèse nécessaires
+-   La fonction qui gérait le compte à rebourd ne met plus à jour les données en lien avec le serveur si aucun serveur n'a été choisi.
+-   Rajout de class pour les ressources. Si elles sont toutes affichés, celles nécessaires sont surligné. Si seules celles nécessaires sont affichés, alors celles qui sont finies sont surlignées.
+-   Rajout d'une conditions sur l'affichage de la liste de résultat des armes, il faut que la chaîne de caractère de recherche fasse au moins un caractère
+-   Petite amélioration esthétique pour le champ de recherche des armes
+
 </details>

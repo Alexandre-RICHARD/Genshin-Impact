@@ -11,11 +11,8 @@ import { computed, onBeforeMount, reactive, ref } from "vue";
 const lvlList = levelingData.level.map(el => el.id);
 const aptList = levelingData.aptitude.map(el => el.level);
 const weaponNameList = weaponsList.flatMap(el => [el.name, el.eng_name]);
-    
-
-
 // Les différentes options du choix de serveur
-const serverList = ["Sélectionne ton serveur", "Asiatique", "Européen", "Américain"];
+const serverList = ["Asiatique", "Européen", "Américain"];
 
 // Notre gros objet global qui va contenir toutes les informations utiles à sauvegarder pour que l'utilisateur concerve ses données
 const data = reactive({ Characters: [], Weapons: [], Materials: [], Options: {} });
@@ -188,7 +185,7 @@ const filteredCharacters = computed(() => {
 // Un objet computed afin de filtrer en fonction d'une option si on ne veut voir que les matériaux de farm dont on a besoin
 const filteredMaterials = computed(() => {
     if (data.Options.onlyShowsNeededMaterials) {
-        return farmingMaterial.value.filter(el => el.needed > 0);
+        return farmingMaterial.value.filter(el => el.require);
     } else {
         return farmingMaterial.value;
     }
@@ -290,6 +287,7 @@ const farmingMaterial = computed(() => {
                 group_needed: 0,
                 group_resin: 0,
                 synthesis: false,
+                require: false,
             });
             // Si oui, alors on va mettre à jour certaines valeurs. On inscrit la quantité possédé, combien il y a de différence entre besoin/possession et des valeurs par défaut utiles après
         } else {
@@ -301,6 +299,7 @@ const farmingMaterial = computed(() => {
                 group_needed: 0,
                 group_resin: 0,
                 synthesis: false,
+                require: true,
             };
         }
     });
@@ -352,6 +351,7 @@ const farmingMaterial = computed(() => {
             // On initialise les données de besoin de groupe et celles de possession de ce groupe
             let group_have = 0;
             let group_needed = 0;
+
             // On filtre le tableau temporaire avec uniquement les ressources appartenant a notre groupe actuel et on boucle dessus
             computedBuildArray.filter(fi => fi.code.slice(0, 3) === el.code.slice(0, 3)).forEach(ele => {
                 // On initialise le multiplier en faisant 3 puissance (dernier caractère représentant la rareté) - 1. Par exeple, avec les raretés 4, 3, 2 et 1 respectivement
@@ -362,13 +362,20 @@ const farmingMaterial = computed(() => {
                 // On additionne au fur et à mesure que les ressources du même groupe passe
                 group_have += multiplier * have;
                 group_needed += multiplier * needed;
+
             });
+            if (group_needed > 0) {
+                for (let i = 1; i <= parseInt(quality); i++) {
+                    computedBuildArray[computedBuildArray.findIndex(fi => fi.code === el.code.slice(0, 3) + i)].require = true;
+                }
+            }
+
             // Puis on modifie l'objet concerné pour lui affecter ces nouvelles valeurs
             computedBuildArray[index] = {
                 ...computedBuildArray[index],
                 group_have: group_have,
                 group_needed: group_needed,
-                synthesis: true,
+                synthesis: group_needed > 0 ? true : false,
             };
         }
 
@@ -488,14 +495,16 @@ const handleTime = {
         // Les serveurs se reset à 4h du matin, mais on va vouloir simuler que c'est à 00h donc on calcul la valeur de 4 heures en milisecondes
         handleTime.minusTheFourHoursReset = handleTime.oneHour * 4;
 
-        // Heure du serveur = heureLocal + décalage - les 4 heures
-        const serverTime = Date.now() + handleTime.timeZone - handleTime.minusTheFourHoursReset;
         // Heure local avec fonction pour la rendre au format voulu
         currentTime.value = handleTime.renderDate(new Date(Date.now()));
-        // Calcul du compte à rebourd jusqu'à arriver au reset du serveur.
-        coultdownReset.value = handleTime.renderDate(handleTime.coultdownBuilder(new Date(serverTime + 24 * handleTime.oneHour), new Date(serverTime)));
-        // On essaie de savoir à quel jour le serveur est. On prend l'heure server, on prend la date (dimanche 0 et samedi 6) et on adapte ce résultat pour avoir (lundi 1 et dimanche 7)
-        serverDay.value = ((new Date(Date.now() + handleTime.timeZone - handleTime.minusTheFourHoursReset).getDay() + 6) % 7) + 1;
+        if (serverList.indexOf(data.Options.server) >= 0) {
+            // Heure du serveur = heureLocal + décalage - les 4 heures
+            const serverTime = Date.now() + handleTime.timeZone - handleTime.minusTheFourHoursReset;
+            // Calcul du compte à rebourd jusqu'à arriver au reset du serveur.
+            coultdownReset.value = handleTime.renderDate(handleTime.coultdownBuilder(new Date(serverTime + 24 * handleTime.oneHour), new Date(serverTime)));
+            // On essaie de savoir à quel jour le serveur est. On prend l'heure server, on prend la date (dimanche 0 et samedi 6) et on adapte ce résultat pour avoir (lundi 1 et dimanche 7)
+            serverDay.value = ((new Date(Date.now() + handleTime.timeZone - handleTime.minusTheFourHoursReset).getDay() + 6) % 7) + 1;
+        }
 
         // Une fois fait, on relance la boucle
         handleTime.timeRefresh();
@@ -620,7 +629,14 @@ onBeforeMount(() => {
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="material in filteredMaterials" :key="material.id">
+                <tr
+                    v-for="material in filteredMaterials" 
+                    :key="material.id" 
+                    :class="{ 
+                        require: material.require && !data.Options.onlyShowsNeededMaterials,
+                        done: material.needed - material.have < (data.Options.alwaysOneMoreMaterial ? 0 : 1) 
+                    }"
+                >
                     <td>
                         <div class="name_cell">
                             <img
@@ -638,7 +654,7 @@ onBeforeMount(() => {
                     />
                     <td>{{ material.needed }}</td>
                     <td>
-                        {{ material.remain >= (data.Options.alwaysOneMoreMaterial ? 0 : 1) ? material.remain : "Parfait" }}
+                        {{ material.needed - material.have >= (data.Options.alwaysOneMoreMaterial ? 0 : 1) ? material.remain : "Parfait" }}
                     </td>
                     <td>
                         {{ !!serverDay ? (typeof material.farming_days === "number" ?
@@ -759,7 +775,7 @@ onBeforeMount(() => {
                     @focus="showResultList = true"
                     @blur="hideList"
                 >
-                <ul v-if="showResultList" class="list">
+                <ul v-if="showResultList && searchingWeaponQuery.length > 0" class="list">
                     <li
                         v-for="result in filteredResults"
                         :key="result"
@@ -895,6 +911,14 @@ onBeforeMount(() => {
         background-color: #a3a3a3;
     }
 
+    tr.require, tr:nth-child(even).require {
+        background-color: #90b466;
+    }
+
+    tr.done, tr:nth-child(even).done {
+        background-color: #5dda5d;
+    }
+
     td {
         color: #000000;
         font-weight: 300;
@@ -953,9 +977,13 @@ onBeforeMount(() => {
     color: #f5f5f5;
     background-color: #4650ac;
     margin: 10px;
+    padding: 4px;
+    z-index: 2;
 
     .input {
-        padding: 5px;
+        background-color: #555fb6;
+        width: 100%;
+        padding: 3px;
 
         &::placeholder {
             color: #c9c9c9;
