@@ -1,12 +1,12 @@
 <script setup>
-import GenshinNavigation from "@parts/GenshinNavigation.vue";
+import FooterContainer from "@parts/FooterContainer.vue";
 </script>
 
 <template>
-    <GenshinNavigation />
     <main>
         <router-view name="mainRouter" />
     </main>
+    <FooterContainer />
 </template>
 
 <style lang="scss">

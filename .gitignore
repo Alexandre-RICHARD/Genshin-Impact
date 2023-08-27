@@ -1,3 +1,4 @@
+.temp/
 .build/
 .vscode/
 node_modules/

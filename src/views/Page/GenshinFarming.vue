@@ -17,7 +17,7 @@ const serverList = ["Asiatique", "Européen", "Américain"];
 // Notre gros objet global qui va contenir toutes les informations utiles à sauvegarder pour que l'utilisateur concerve ses données
 const data = reactive({ Characters: [], Weapons: [], Materials: [], Options: {} });
 
-// Une fonction appelé en théorie uniquement lors du chargement de la page (ou lors du clean du localStorage)
+// Une fonction appelé lors du chargement de la page (ou lors du clean du localStorage). Elle récupère, traite et vérifie les données du localStorage
 const dataInit = () => {
     // On récupère dans le localStorage la chaine de caractère correspondant à nos données de personnages
     const lsCharacter = localStorage.getItem("genshinCharactersData");
@@ -45,6 +45,9 @@ const dataInit = () => {
                 if (aptList.indexOf(currentChar.wAp2) < 0) data.Characters[i].wAp2 = 10;
                 if (aptList.indexOf(currentChar.cAp3) < 0) data.Characters[i].cAp3 = 1;
                 if (aptList.indexOf(currentChar.wAp3) < 0) data.Characters[i].wAp3 = 10;
+
+                // Rajout d'une condition, au chargement, on vérifie les données. On en profite pour checker si tous les persos ont leur valeurs doing ou pas. Si oui, on change la variable correspondante en true
+                if (currentChar.only) isOnlyCharacters.value = true;
             } else {
                 // Sinon, on va simplement créer ce personnage avec son nom et les valeurs par défaut à l'aide de la fonction filler
                 data.Characters.push(filler("Characters", name));
@@ -120,8 +123,8 @@ const dataInit = () => {
     updateLocalStorage("Options");
 };
 
+// La fonction filler, utilisée pour complété les données de l'array data quand les données présente dans le localStorage ne sont pas bonnes
 const filler = (type, name) => {
-    // La fonction filler, utilisée pour complété les données de l'array data quand les données présente dans le localStorage ne sont pas bonnes
     // Prise en compte du type de données pour différencier les propriétés à renvoyer et le nom.
     switch (type) {
     case "Characters":
@@ -157,7 +160,7 @@ const cleanLocalStorage = () => {
     dataInit();
 };
 
-// La fonction utilisée pour sauvegarder dans le navigateur au sein du localStorage les différentes données. En fonction 
+// La fonction utilisée pour sauvegarder dans le navigateur au sein du localStorage les différentes données.
 const updateLocalStorage = (type) => {
     localStorage.setItem(`genshin${type}Data`, JSON.stringify(data[type]));
 };
@@ -166,7 +169,15 @@ const updateLocalStorage = (type) => {
 const handleChange = (group, index, valuename, value) => {
     data[group][index][valuename] = value;
     updateLocalStorage(group);
+    if (valuename === "only") isOnlyCharacters.value = value;
 };
+
+// Chaine de caractère pour la recherche d'une arme
+const searchingWeaponQuery = ref("");
+// Chaine de caractère pour la recherche d'un personnage
+const searchingCharactersQuery = ref("");
+// Boolean indiquand si oui ou non on affiche la liste de recherche
+const showResultList = ref(false);
 
 // Un objet computed afin de filtrer en fonction d'une options si on ne veut voir que les personnages qui ont été noté comme build
 const filteredCharacters = computed(() => {
@@ -185,13 +196,58 @@ const filteredCharacters = computed(() => {
 // Un objet computed afin de filtrer en fonction d'une option si on ne veut voir que les matériaux de farm dont on a besoin
 const filteredMaterials = computed(() => {
     if (data.Options.onlyShowsNeededMaterials) {
-        return farmingMaterial.value.filter(el => el.require);
+        return farmingMaterial.value.filter(el => el.farm_require);
     } else {
         return farmingMaterial.value;
     }
 });
 
-// Une fonction de triage non fléché, la seule afin d'accueillir des arguments autres que les a et b habituels.
+// Fonction de filtre pour les armes en fonction de la recherche effectuée
+const filteredWeaponsResults = computed(() => {
+    let temporaryArray = [];
+    if (searchingWeaponQuery.value.length >= 1) {
+        temporaryArray = weaponNameList.filter(name =>
+            name.toLowerCase().includes(searchingWeaponQuery.value.toLowerCase())
+        ).slice(0, 5);
+    }
+    return temporaryArray;
+});
+
+// En cas d'ajout d'une arme ou de sortie du focus de l'input, on ferme la liste
+const hideList = () => {
+    setTimeout(() => {
+        showResultList.value = false;
+    }, 100);
+};
+
+// Fonction pour rajouter une arme à la liste.
+// On procède ainsi car il y a trop d'armes donc les afficher toutes seraient imbuvables, et on peut aussi imaginer le cas d'avoir deux fois la même
+const addWeaponToDo = (name) => {
+    const currentWeapon = weaponsList.find(el => el.eng_name === name || el.name === name);
+    data.Weapons.push({
+        name: currentWeapon.name,
+        rarity: currentWeapon.rarity,
+        cLvl: 1,
+        // En fonction de la rareté de l'arme, elle ne peut pas être amélioré au même niveau maximum
+        wLvl: currentWeapon.rarity < 3 ? 74 : 96,
+    });
+    // On vide le champ de recherche
+    searchingWeaponQuery.value = "";
+    // On ferme la liste
+    hideList();
+    // On sauvegarde le tableau d'armes actualisée
+    updateLocalStorage("Weapons");
+};
+
+// Action déclenché par un bouton près de chaque arme afin de la supprimer de la liste
+const deletingWeaponToDo = (index) => {
+    // Ayant récupéré l'index de l'arme dans le tableau en v-for, on l'envoi et l'utilise dans cette fonction
+    data.Weapons.splice(index, 1);
+    // On sauvegarde le tableau des armes actualisé
+    updateLocalStorage("Weapons");
+};
+
+// Une fonction de triage non fléché (la seule) afin d'accueillir des arguments autres que les a et b habituels.
 function sortFunction(...args) {
     return function (a, b) {
         if (a[args[0]] < b[args[0]]) return -1;
@@ -200,6 +256,8 @@ function sortFunction(...args) {
     };
 }
 
+// Variable pour indiquer à l'objet computed ci dessous ainsi qu'au tableau ce qu'ils doivent faire dans le cas ou un personnage a été indiqué comme étant le seul
+let isOnlyCharacters = ref(false);
 // Le gros morceaux, le gros objet computed farmingMaterial qui va avoir pour but de prendre nos données rentrées par l'utilisateur sur les personnages et les matériaux de farm et de calculer combien il en faut, combien il en a, la différence, la somme de points pour chaque groupe qui est possible de faire avec la synthèse ainsi que la résine nécessaire estimée.
 const farmingMaterial = computed(() => {
     // Notre array qui va être utilisé et retourné pour créer l'array farmingMaterial
@@ -247,7 +305,8 @@ const farmingMaterial = computed(() => {
 
     // La logique est donc :
     // POur chaque personnage, on ne va prendre en compte que ceux qui ont été noté comme étant à faire, à monter. On boucle sur ceux qui restent.
-    data.Characters.filter(char => char.doing === true).forEach(char => {
+    // Cependant, si on a un personnages qui a été coché comme only, alors on ne va cherche que cette propriété donc que ce perso
+    data.Characters.filter(char => !isOnlyCharacters.value ? char.doing === true : char.only === true).forEach(char => {
         // Dans la données de persos, on récupère celles du personnage actuel.
         const currentElement = charactersList.find(find => find.name === char.name);
         // On boucle de 0 à 3 car on va surveiller 4 choses, le lvl, l'aptitude 1, la 2 et la 3.
@@ -262,13 +321,16 @@ const farmingMaterial = computed(() => {
     });
 
     // La logique pour les armes est exactement la même
-    data.Weapons.forEach(weap => {
-        const currentElement = weaponsList.find(find => find.name === weap.name);
-        const progressStep = levelingData[`weapon_${currentElement.rarity}`].filter(step => step.id > weap.cLvl && step.id <= weap.wLvl);
-        if (progressStep.length > 0) {
-            materialsAttributor(progressStep, currentElement);
-        }
-    });
+    // On rajoute juste une condition au cas-où un personnage a été marqué comme "only", dans ce cas on ne traite aucun autre élément
+    if (!isOnlyCharacters.value) {
+        data.Weapons.forEach(weap => {
+            const currentElement = weaponsList.find(find => find.name === weap.name);
+            const progressStep = levelingData[`weapon_${currentElement.rarity}`].filter(step => step.id > weap.cLvl && step.id <= weap.wLvl);
+            if (progressStep.length > 0) {
+                materialsAttributor(progressStep, currentElement);
+            }
+        });
+    }
 
     // Ce code va servir a tout de même crée un objet pour chaque ressources, même s'il n'est pas demandé pour le farm des persos choisis
     materialsList.forEach(material => {
@@ -287,7 +349,7 @@ const farmingMaterial = computed(() => {
                 group_needed: 0,
                 group_resin: 0,
                 synthesis: false,
-                require: false,
+                farm_require: false,
             });
             // Si oui, alors on va mettre à jour certaines valeurs. On inscrit la quantité possédé, combien il y a de différence entre besoin/possession et des valeurs par défaut utiles après
         } else {
@@ -299,44 +361,58 @@ const farmingMaterial = computed(() => {
                 group_needed: 0,
                 group_resin: 0,
                 synthesis: false,
-                require: true,
+                farm_require: true,
             };
         }
     });
 
+    // Bloc de code spécifique pour les cristaux d'expérience d'arme et les livres d'expérience de personnage
+    {
+        // Code spécifique pour les cristaux d'expérience. On récupère l'objet de chaque rareté de cristal d'expérience d'arme.
+        const xp_ore_3 = computedBuildArray.findIndex(fi => fi.code === "g02");
+        const xp_ore_2 = computedBuildArray.findIndex(fi => fi.code === "g03");
+        const xp_ore_1 = computedBuildArray.findIndex(fi => fi.code === "g04");
 
-    // Code spécifique pour les cristaux d'expérience. On récupère l'objet de chaque rareté de cristal d'expérience d'arme.
-    const xp_ore_3 = computedBuildArray.findIndex(fi => fi.code === "g02");
-    const xp_ore_2 = computedBuildArray.findIndex(fi => fi.code === "g03");
-    const xp_ore_1 = computedBuildArray.findIndex(fi => fi.code === "g04");
+        // On va changer l'objet du cristal de raffinement le plus précieux en utilisant la valeur des 2 autres.
+        computedBuildArray[xp_ore_3] = {
+            // On reprend l'objet tel quel
+            ...computedBuildArray[xp_ore_3],
+            // On arrondi les valeurs
+            needed: Math.ceil(computedBuildArray[xp_ore_3].needed),
+            remain: Math.ceil(computedBuildArray[xp_ore_3].remain),
+            // On va inclure une fausse valeur de synthèse mais en reprenant le principe car cela revient au même. Ainsi on multiplie par les bons coefficient les valeurs de besoin/   possession
+            group_have: computedBuildArray[xp_ore_3].have * 25 + computedBuildArray[xp_ore_2].have * 5 + computedBuildArray[xp_ore_1].have,
+            group_needed: Math.ceil(computedBuildArray[xp_ore_3].needed * 25),
+            // On active la synthèse pour que cela soit affiché par la suite
+            synthesis: true,
+        };
 
-    // On va changer l'objet du cristal de raffinement le plus précieux en utilisant la valeur des 2 autres.
-    computedBuildArray[xp_ore_3] = {
-        // On reprend l'objet tel quel
-        ...computedBuildArray[xp_ore_3],
-        // On arrondi les valeurs
-        needed: Math.ceil(computedBuildArray[xp_ore_3].needed),
-        remain: Math.ceil(computedBuildArray[xp_ore_3].remain),
-        // On va inclure une fausse valeur de synthèse mais en reprenant le principe car cela revient au même. Ainsi on multiplie par les bons coefficient les valeurs de besoin/possession
-        group_have: computedBuildArray[xp_ore_3].have * 25 + computedBuildArray[xp_ore_2].have * 5 + computedBuildArray[xp_ore_1].have,
-        group_needed: Math.ceil(computedBuildArray[xp_ore_3].needed * 25),
-        // On active la synthèse pour que cela soit affiché par la suite
-        synthesis: true,
-    };
+        if (computedBuildArray[xp_ore_3].group_needed > 0) {
+            computedBuildArray[xp_ore_3].farm_require = true;
+            computedBuildArray[xp_ore_2].farm_require = true;
+            computedBuildArray[xp_ore_1].farm_require = true;
+        }
 
-    // Code spécifique pour les livres d'expériences. Même principe et code que ci-dessus
-    const xp_book_3 = computedBuildArray.findIndex(fi => fi.code === "g05");
-    const xp_book_2 = computedBuildArray.findIndex(fi => fi.code === "g06");
-    const xp_book_1 = computedBuildArray.findIndex(fi => fi.code === "g07");
+        // Code spécifique pour les livres d'expériences. Même principe et code que ci-dessus
+        const xp_book_3 = computedBuildArray.findIndex(fi => fi.code === "g05");
+        const xp_book_2 = computedBuildArray.findIndex(fi => fi.code === "g06");
+        const xp_book_1 = computedBuildArray.findIndex(fi => fi.code === "g07");
 
-    computedBuildArray[xp_book_3] = {
-        ...computedBuildArray[xp_book_3],
-        needed: Math.ceil(computedBuildArray[xp_book_3].needed),
-        remain: Math.ceil(computedBuildArray[xp_book_3].remain),
-        group_have: computedBuildArray[xp_book_3].have * 20 + computedBuildArray[xp_book_2].have * 5 + computedBuildArray[xp_book_1].have,
-        group_needed: Math.ceil(computedBuildArray[xp_book_3].needed * 20),
-        synthesis: true,
-    };
+        computedBuildArray[xp_book_3] = {
+            ...computedBuildArray[xp_book_3],
+            needed: Math.ceil(computedBuildArray[xp_book_3].needed),
+            remain: Math.ceil(computedBuildArray[xp_book_3].remain),
+            group_have: computedBuildArray[xp_book_3].have * 20 + computedBuildArray[xp_book_2].have * 5 + computedBuildArray[xp_book_1].have,
+            group_needed: Math.ceil(computedBuildArray[xp_book_3].needed * 20),
+            synthesis: true,
+        };
+
+        if (computedBuildArray[xp_book_3].group_needed > 0) {
+            computedBuildArray[xp_book_3].farm_require = true;
+            computedBuildArray[xp_book_2].farm_require = true;
+            computedBuildArray[xp_book_1].farm_require = true;
+        }
+    }
 
 
     // Ce code va avoir pour objectif de générer les données de synthèse des groupes de ressources concernées par celle-ci. Ainsi, on va
@@ -364,9 +440,11 @@ const farmingMaterial = computed(() => {
                 group_needed += multiplier * needed;
 
             });
+
+            // Petit morceau de code ayant pour but que si après application des calculs de points de synthèse, un groupe a un besoin, alors toutes les ressources de son groupe seront considérés comme nécessaires.
             if (group_needed > 0) {
                 for (let i = 1; i <= parseInt(quality); i++) {
-                    computedBuildArray[computedBuildArray.findIndex(fi => fi.code === el.code.slice(0, 3) + i)].require = true;
+                    computedBuildArray[computedBuildArray.findIndex(fi => fi.code === el.code.slice(0, 3) + i)].farm_require = true;
                 }
             }
 
@@ -427,42 +505,44 @@ const farmingMaterial = computed(() => {
     return sorted;
 });
 
-const searchingWeaponQuery = ref("");
-const searchingCharactersQuery = ref("");
-const showResultList = ref(false);
+const fewerFarm = computed(() => {
+    const temporary = {
+        common: {
+            name: "",
+            quantity: 1000000,
+        },
+        rare: {
+            name: "",
+            quantity: 1000000,
+        },
+        local: {
+            name: "",
+            quantity: 1000000,
+        },
+    };
 
-const filteredResults = computed(() => {
-    let temporaryArray = [];
-    if (searchingWeaponQuery.value.length > 0) {
-        temporaryArray = weaponNameList.filter(name =>
-            name.toLowerCase().includes(searchingWeaponQuery.value.toLowerCase())
-        ).slice(0, 5);
-    }
-    return temporaryArray;
-});
-
-const hideList = () => {
-    setTimeout(() => {
-        showResultList.value = false;
-    }, 100);
-};
-
-const addWeaponToDo = (name) => {
-    const currentWeapon = weaponsList.find(el => el.eng_name === name || el.name === name);
-    data.Weapons.push({
-        name: currentWeapon.name,
-        rarity: currentWeapon.rarity,
-        cLvl: 1,
-        wLvl: currentWeapon.rarity < 3 ? 74 : 96,
+    const mobMaterials = farmingMaterial.value.filter(fi => fi.code.slice(0,1) === "m" && fi.code.slice(-1) === "3");
+    mobMaterials.forEach(el => {
+        if (el.group_have < temporary[el.category.split("_")[0]].quantity) {
+            temporary[el.category.split("_")[0]] = {
+                name: el.name,
+                quantity: el.group_have,
+            };
+        }
     });
-    searchingWeaponQuery.value = "";
-    updateLocalStorage("Weapons");
-};
 
-const deletingWeaponToDo = (index) => {
-    data.Weapons.splice(index, 1);
-    updateLocalStorage("Weapons");
-};
+    const localSpeciality = farmingMaterial.value.filter(fi => fi.code.slice(0,1) === "r");
+    localSpeciality.forEach(el => {
+        if (el.have < temporary.local.quantity) {
+            temporary.local = {
+                name: el.name,
+                quantity: el.have,
+            };
+        }
+    });
+
+    return temporary;
+});
 
 // Création de trois valeur en ref qui se chargement d'accueillir les données liées aux heures
 let currentTime = ref("En attente");
@@ -614,6 +694,18 @@ onBeforeMount(() => {
             en avoir certaine et donc de tout décaler
         </p>
     </div>
+    <div>
+        <p>Les trois ressources farmables sans résine que tu as le moins sont par type :</p>
+        <div>
+            <p>- communs : {{ fewerFarm.common.name }} et ses dérivés avec {{ fewerFarm.common.quantity }} points. </p>
+        </div>
+        <div>
+            <p>- rares : {{ fewerFarm.rare.name }} et ses dérivés avec {{ fewerFarm.rare.quantity }} points. </p>
+        </div>
+        <div>
+            <p>- ressources locales : {{ fewerFarm.local.name }} avec {{ fewerFarm.local.quantity }} unités. </p>
+        </div>
+    </div>
     <div class="tabs-contener">
         <table class="all-materials-inventory">
             <thead>
@@ -633,8 +725,9 @@ onBeforeMount(() => {
                     v-for="material in filteredMaterials" 
                     :key="material.id" 
                     :class="{ 
-                        require: material.require && !data.Options.onlyShowsNeededMaterials,
-                        done: material.needed - material.have < (data.Options.alwaysOneMoreMaterial ? 0 : 1) 
+                        'require': material.farm_require && !data.Options.onlyShowsNeededMaterials,
+                        'require-and-done': !data.Options.onlyShowsNeededMaterials && material.farm_require && material.needed - material.have < (data.Options.alwaysOneMoreMaterial ? 0 : 1) && material.needed > 0,
+                        'done': data.Options.onlyShowsNeededMaterials && material.needed - material.have < (data.Options.alwaysOneMoreMaterial ? 0 : 1) 
                     }"
                 >
                     <td>
@@ -705,12 +798,12 @@ onBeforeMount(() => {
                         group="Characters" @update:checked="handleChange"
                     />
                     <InputCreator
-                        v-model:checked="character.doing" type="checkbox" :disabled="character.only"
+                        v-model:checked="character.doing" type="checkbox" :disabled="character.only "
                         :index="data.Characters.findIndex(el => el.name === character.name)" valuename="doing"
                         group="Characters" @update:checked="handleChange"
                     />
                     <InputCreator
-                        v-model:checked="character.only" type="checkbox" :disabled="!character.doing"
+                        v-model:checked="character.only" type="checkbox" :disabled="!character.doing || (!character.only && isOnlyCharacters)"
                         :index="data.Characters.findIndex(el => el.name === character.name)" valuename="only"
                         group="Characters" @update:checked="handleChange"
                     />
@@ -775,9 +868,9 @@ onBeforeMount(() => {
                     @focus="showResultList = true"
                     @blur="hideList"
                 >
-                <ul v-if="showResultList && searchingWeaponQuery.length > 0" class="list">
+                <ul v-if="showResultList && searchingWeaponQuery.length >= 1" class="list">
                     <li
-                        v-for="result in filteredResults"
+                        v-for="result in filteredWeaponsResults"
                         :key="result"
                         class="one-result"
                         @click="addWeaponToDo(result)"
@@ -912,11 +1005,15 @@ onBeforeMount(() => {
     }
 
     tr.require, tr:nth-child(even).require {
-        background-color: #90b466;
+        background-color: #ccd17f;
+    }
+
+    tr.require-and-done, tr:nth-child(even).require-and-done {
+        background-color: #92d17f;
     }
 
     tr.done, tr:nth-child(even).done {
-        background-color: #5dda5d;
+        background-color: #92d17f;
     }
 
     td {

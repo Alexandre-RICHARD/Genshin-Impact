@@ -1,8 +1,6 @@
 // On importe les éléments utiles de Vue Router
 import { createRouter, createWebHistory } from "vue-router";
 
-import GenshinMenu from "@views/Page/GenshinMenu.vue";
-import GenshinStatisfyer from "@views/Page/GenshinStatisfyer.vue";
 import GenshinFarming from "@views/Page/GenshinFarming.vue";
 
 // On importe toutes les vues qui seront utilisées par notre router principal
@@ -10,31 +8,13 @@ import GenshinFarming from "@views/Page/GenshinFarming.vue";
 
 // On liste toutes les routes qui seront gérées par le router principal
 const routes = [
-    //HomePage
-    {
-        path: "/",
-        name: "GenshinHome",
-        components: { mainRouter: GenshinMenu },
-        meta: {
-            documentTitle: "Genshin - Fan Tool Site",
-        },
-    },
-    //Curriculum
-    {
-        path: "/statisfyer",
-        name: "Statisfyer",
-        components: { mainRouter: GenshinStatisfyer },
-        meta: {
-            documentTitle: "Statisfyer",
-        },
-    },
     //Project
     {
-        path: "/farming",
+        path: "/",
         name: "Farming",
         components: { mainRouter: GenshinFarming },
         meta: {
-            documentTitle: "Optimiser son farming",
+            documentTitle: "Genshin - Optimiser son farming",
         },
     },
 ];

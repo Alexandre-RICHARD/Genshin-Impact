@@ -247,4 +247,20 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Rajout d'une conditions sur l'affichage de la liste de résultat des armes, il faut que la chaîne de caractère de recherche fasse au moins un caractère
 -   Petite amélioration esthétique pour le champ de recherche des armes
 
+### 1.2.10 `27 août 2023`
+
+-   Séparation de ce projet avec le précédent dans le but de le proposer à la communauté. Ainsi il doit être présentable
+-   Ainsi, mise en dehors du projet de 3 fichiers composant l'autre projet. Ajout dans le .gitignore
+-   Adaptation de App.vue et du router pour correspondre avec ces changements
+-   Ajout d'un footer, pour le moment stylisée provisoirement. Il permettra aux gens de savoir de quand date la dernière mise à jour
+-   Quelques modifications de commentaires, pour qu'ils soient plus cohérent et mieux placés
+-   Ajout d'une variable isOnlyCharacters. Si un personnage à quelconque moment est mis en only, seul lui est pris en compte dans les calculs et aucun autre personnages ne peut être mis en only pendant ce temps
+-   Changement de nom de la variable require qui devient farm_require
+-   Déplacement de certaines fonctions pour un ordre plus logique
+-   Les armes ne sont également plus prise en compte dans le calcul des ressource si un personnage a été mis en only
+-   Les livres d'expérience de personnage ainsi que les minerai d'expérience d'arme ont été mis en farm_require pour qu'ils soient affichés même si on a besoin d'une version mais pas des autres
+-   Ajout d'un objet computed afin de déterminer les 3 ressources de 3 catégories qui sont en moindre quantité pour fournir un guide à l'utilisateur sur quoi farmer
+-   Ajout de classes au tableau des ressources, dans certaines conditions, certaines sont mises en valeurs (toutes affichés -> Finie et nécessaires / Nécessaires uniquement -> Finie)
+-   Le tableau filtrer de résultat de recherche des armes passe de filteredResults à filteredWeaponsResults
+
 </details>
