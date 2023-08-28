@@ -1,9 +1,9 @@
 <script setup>
 // Importation des différentes données de Genshin stockées en JSON
-const charactersList = require("@middlewares/genshinCharactersData.json");
-const weaponsList = require("@middlewares/genshinWeaponsData.json");
-const materialsList = require("@middlewares/genshinMaterialsData.json");
-const levelingData = require("@middlewares/genshinLevelingData.json");
+const charactersList = require("@data/genshinCharactersData.json");
+const weaponsList = require("@data/genshinWeaponsData.json");
+const materialsList = require("@data/genshinMaterialsData.json");
+const levelingData = require("@data/genshinLevelingData.json");
 import InputCreator from "@parts/InputCreator.vue";
 import { computed, onBeforeMount, reactive, ref } from "vue";
 
@@ -107,6 +107,7 @@ const dataInit = () => {
         if ([false, true].indexOf(data.Options.onlyShowsDoingCharacter) < 0) data.Options.onlyShowsDoingCharacter = false;
         if ([false, true].indexOf(data.Options.onlyShowsNeededMaterials) < 0) data.Options.onlyShowsNeededMaterials = false;
         if ([false, true].indexOf(data.Options.alwaysOneMoreMaterial) < 0) data.Options.alwaysOneMoreMaterial = false;
+        if ([false, true].indexOf(data.Options.leyLineResin) < 0) data.Options.leyLineResin = false;
         if ([false, true].indexOf(data.Options.explaination) < 0) data.Options.explaination = true;
         if ([false, true].indexOf(data.Options.loadIMG) < 0) data.Options.loadIMG = false;
         if (serverList.indexOf(data.Options.server) < 0) data.Options.server = "";
@@ -115,6 +116,7 @@ const dataInit = () => {
             onlyShowsDoingCharacter: false,
             onlyShowsNeededMaterials: false,
             alwaysOneMoreMaterial: false,
+            leyLineResin: false,
             explaination: true,
             loadIMG: false,
             server: "",
@@ -204,13 +206,25 @@ const filteredMaterials = computed(() => {
 
 // Fonction de filtre pour les armes en fonction de la recherche effectuée
 const filteredWeaponsResults = computed(() => {
-    let temporaryArray = [];
+    const temporaryArray = [];
+
     if (searchingWeaponQuery.value.length >= 1) {
-        temporaryArray = weaponNameList.filter(name =>
-            name.toLowerCase().includes(searchingWeaponQuery.value.toLowerCase())
-        ).slice(0, 5);
+        const firstFilter = weaponNameList.filter(name => name.toLowerCase().includes(searchingWeaponQuery.value.toLowerCase()));
+        firstFilter.forEach(el => {
+            if (weaponsList.findIndex(fi => fi.eng_name === el) >= 0) {
+                if (weaponsList.findIndex(fi => fi.name === el) < 0) {
+                    temporaryArray.push(weaponsList.find(fi => fi.eng_name === el).name);
+                }
+            }
+        });
+
+        firstFilter.forEach(el => {
+            if (temporaryArray.indexOf(el) < 0 && weaponsList.findIndex(fi => fi.name === el) >= 0) {
+                temporaryArray.push(el);
+            }
+        });
     }
-    return temporaryArray;
+    return temporaryArray.slice(0, 7);
 });
 
 // En cas d'ajout d'une arme ou de sortie du focus de l'input, on ferme la liste
@@ -414,6 +428,25 @@ const farmingMaterial = computed(() => {
         }
     }
 
+    // On inscrit ici les différents coefficient de drop propre à leur catégorie
+    const coefficientResin = {
+        weekly_boss: 2.38 / 3,
+        mini_boss: 2.55,
+        gem: 0.215325 * 20,
+        talent_book: 10.18,  //10.18 selon un fan tableau, 10.12 selon le wiki 9,8 selon mes propres résultats
+        weapon_material: 17.05,
+        mora: 60000,
+        character_xp: 6.125, // 122500 / 20000, données provenant du Wiki
+    };
+
+    const mora = computedBuildArray.findIndex(fi => fi.code === "g01");
+    const bookXp = computedBuildArray.findIndex(fi => fi.code === "g05");
+
+    // if (computedBuildArray[mora])
+    if (data.Options.leyLineResin) {
+        computedBuildArray[mora].group_resin = Math.ceil(computedBuildArray[mora].remain / coefficientResin.mora) * 20;
+        computedBuildArray[bookXp].group_resin = Math.ceil(computedBuildArray[bookXp].remain / coefficientResin.character_xp) * 20;
+    }
 
     // Ce code va avoir pour objectif de générer les données de synthèse des groupes de ressources concernées par celle-ci. Ainsi, on va
     // Boucler sur les ressources du tableaux temporaires
@@ -458,15 +491,6 @@ const farmingMaterial = computed(() => {
         }
 
         // Nouvelle partie, dernière, le calcul de la quantité estimée de résine nécessaires pour farmer toutes les ressources qui en dépendent
-        // On inscrit ici les différents coefficient de drop propre à leur catégorie
-        const coefficientResin = {
-            weekly_boss: 2.38 / 3,
-            mini_boss: 2.55,
-            gem: 0.215325 * 20,
-            talent_book: 10.18,
-            weapon_material: 17.05,
-        };
-
         // Pour factoriser, on utilise un tableau pour les différentes itérations avec les bonnes valeurs à utiliser
         const processResinVar = [
             { letter: "b", resin: 60, group: "weekly_boss", qualityCheck: false },
@@ -505,20 +529,24 @@ const farmingMaterial = computed(() => {
     return sorted;
 });
 
-const fewerFarm = computed(() => {
+const otherInfo = computed(() => {
     const temporary = {
         common: {
             name: "",
+            code: "",
             quantity: 1000000,
         },
         rare: {
             name: "",
+            code: "",
             quantity: 1000000,
         },
         local: {
             name: "",
+            code: "",
             quantity: 1000000,
         },
+        resin: 0,
     };
 
     const mobMaterials = farmingMaterial.value.filter(fi => fi.code.slice(0,1) === "m" && fi.code.slice(-1) === "3");
@@ -526,6 +554,7 @@ const fewerFarm = computed(() => {
         if (el.group_have < temporary[el.category.split("_")[0]].quantity) {
             temporary[el.category.split("_")[0]] = {
                 name: el.name,
+                code: el.code.slice(0,3),
                 quantity: el.group_have,
             };
         }
@@ -536,10 +565,13 @@ const fewerFarm = computed(() => {
         if (el.have < temporary.local.quantity) {
             temporary.local = {
                 name: el.name,
+                code: el.code,
                 quantity: el.have,
             };
         }
     });
+
+    temporary.resin = farmingMaterial.value.map(el => el.group_resin).reduce((a, b) => a + b);
 
     return temporary;
 });
@@ -646,6 +678,13 @@ onBeforeMount(() => {
         </div>
         <div class="boolean">
             <input
+                id="boolean-ley-line-resin" v-model="data.Options.leyLineResin" class="boolean-checkbox"
+                type="checkbox" name="boolean-ley-line-resin" @change="updateLocalStorage('Options');"
+            >
+            <label class="boolean-label" for="boolean-ley-line-resin">Activer le calcul de la résine pour les lignes énergetiques (Mora et livres d'xp)</label>
+        </div>
+        <div class="boolean">
+            <input
                 id="boolean-explaination" v-model="data.Options.explaination" class="boolean-checkbox" type="checkbox"
                 name="boolean-explaination" @change="updateLocalStorage('Options')"
             >
@@ -697,14 +736,50 @@ onBeforeMount(() => {
     <div>
         <p>Les trois ressources farmables sans résine que tu as le moins sont par type :</p>
         <div>
-            <p>- communs : {{ fewerFarm.common.name }} et ses dérivés avec {{ fewerFarm.common.quantity }} points. </p>
+            <p>- communs : {{ otherInfo.common.name }} et ses dérivés avec {{ otherInfo.common.quantity }} points. </p>
+            <img
+                v-if="data.Options.loadIMG"
+                :src="require(`@static/images/genshin_icon/materials/${otherInfo.common.code}1.png`)"
+                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/1.png`)}')` }"
+            >
+            <img
+                v-if="data.Options.loadIMG"
+                :src="require(`@static/images/genshin_icon/materials/${otherInfo.common.code}2.png`)"
+                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/2.png`)}')` }"
+            >
+            <img
+                v-if="data.Options.loadIMG"
+                :src="require(`@static/images/genshin_icon/materials/${otherInfo.common.code}3.png`)"
+                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/3.png`)}')` }"
+            >
         </div>
         <div>
-            <p>- rares : {{ fewerFarm.rare.name }} et ses dérivés avec {{ fewerFarm.rare.quantity }} points. </p>
+            <p>- rares : {{ otherInfo.rare.name }} et ses dérivés avec {{ otherInfo.rare.quantity }} points. </p>
+            <img
+                v-if="data.Options.loadIMG"
+                :src="require(`@static/images/genshin_icon/materials/${otherInfo.rare.code}1.png`)"
+                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/1.png`)}')` }"
+            >
+            <img
+                v-if="data.Options.loadIMG"
+                :src="require(`@static/images/genshin_icon/materials/${otherInfo.rare.code}2.png`)"
+                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/2.png`)}')` }"
+            >
+            <img
+                v-if="data.Options.loadIMG"
+                :src="require(`@static/images/genshin_icon/materials/${otherInfo.rare.code}3.png`)"
+                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/3.png`)}')` }"
+            >
         </div>
         <div>
-            <p>- ressources locales : {{ fewerFarm.local.name }} avec {{ fewerFarm.local.quantity }} unités. </p>
+            <p>- ressources locales : {{ otherInfo.local.name }} avec {{ otherInfo.local.quantity }} unités. </p>
+            <img
+                v-if="data.Options.loadIMG"
+                :src="require(`@static/images/genshin_icon/materials/${otherInfo.local.code}.png`)"
+                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/1.png`)}')` }"
+            >
         </div>
+        <p>Résine total : {{ otherInfo.resin }} Nombre de jours que cela représente : {{ Math.ceil(otherInfo.resin / 180) }}. </p>
     </div>
     <div class="tabs-contener">
         <table class="all-materials-inventory">

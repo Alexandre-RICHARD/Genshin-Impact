@@ -66,6 +66,7 @@ module.exports = {
     },
     resolve: {
         alias: {
+            "@data": path.resolve(__dirname, "src/data"),
             "@middlewares": path.resolve(__dirname, "src/middlewares"),
             "@parts": path.resolve(__dirname, "src/views/parts"),
             "@root": path.resolve(__dirname, ""),

@@ -247,7 +247,7 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Rajout d'une conditions sur l'affichage de la liste de résultat des armes, il faut que la chaîne de caractère de recherche fasse au moins un caractère
 -   Petite amélioration esthétique pour le champ de recherche des armes
 
-### 1.2.10 `27 août 2023`
+### 1.2.11 `27 août 2023`
 
 -   Séparation de ce projet avec le précédent dans le but de le proposer à la communauté. Ainsi il doit être présentable
 -   Ainsi, mise en dehors du projet de 3 fichiers composant l'autre projet. Ajout dans le .gitignore
@@ -262,5 +262,28 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Ajout d'un objet computed afin de déterminer les 3 ressources de 3 catégories qui sont en moindre quantité pour fournir un guide à l'utilisateur sur quoi farmer
 -   Ajout de classes au tableau des ressources, dans certaines conditions, certaines sont mises en valeurs (toutes affichés -> Finie et nécessaires / Nécessaires uniquement -> Finie)
 -   Le tableau filtrer de résultat de recherche des armes passe de filteredResults à filteredWeaponsResults
+
+### 1.2.12 `28 août 2023`
+
+-   Dans webpack.configu, rajout de l'alias data
+-   Déplacement des 4 gros fichiers json de notre projet de middlewares à un dossier data afin d'éviter la confusion de ce qu'implique un middleware
+-   Adaptation des importations des fichier json déplacés
+-   Rajout du lien de mon portfolio dans le footer
+-   Changement des styles, adaptations des couleurs pour la nouvelle partie initiale chargée de la connexion ainsi que du footer
+-   Rajout d'une option pour calculer ou non la résine des lignes énergétiques de mora et d'expérience et la checkbox qui va avec
+-   Changement dans le filtre des armes. À présent, si on cherche une arme avec son nom anglais, le résultat sera quand même en français et sans duplicat
+-   Déplacement des coefficient de résine pour qu'ils soient utilisé ailleurs
+-   Rajout du calcul de la résine des moras et des livres d'expérience dans un bloc de code dédié
+-   Petite modification sur le calcul des ressources avec le plus faible stock
+-   Rajout d'une ligne de code pour calculer la somme de toutes la résine nécessaires
+-   Affichage des ressources de 3 catégories ayant le plus petit stock
+-   Affichage de la résine totale nécessaires avec le nombre de jours estimé pour farmer tout cela
+-   Le temps des tests, la page de connectionTest est la page principale, donc inversion dans le router
+-   Stockage des données d'erreur ainsi que de la session dans le store
+-   Création d'un middlewares regroupant toutes les requête HTTP dirigés vers le serveur. Ellles font : Obtenir un nouveau UUID, Se connecter avec un Uuid, obtenir une donnée, sauvegarder une donnée
+-   Factorisation des requêtes post dans ce middleware
+-   Mise en place donc de ce nouveau fichier qui servira de point de départ du projet, il sert à gérer le type de connexion/d'utilisation que l'utilisateur veut et le bon accès à son identifiant Uuid s'il en a souhaité un
+-   Utilisation d'une autre chaîne en localStorage pour sauvegarder la session actuelle.
+-   Un design basique mais clair pour bien comprendre les choix qui s'offre à l'utilisateur en premier lieu
 
 </details>

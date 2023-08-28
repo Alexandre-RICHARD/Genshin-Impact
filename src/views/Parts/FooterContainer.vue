@@ -10,6 +10,10 @@ import pjson from "@root/package.json";
                 href="https://github.com/Alexandre-RICHARD/Genshin-Impact"
                 target="blank"
             >&gt; Répertoire Github &lt;</a>
+            <a
+                href="https://alexandre-richard.fr/"
+                target="blank"
+            >&gt; Mon portfolio &lt;</a>
             <p>Hébergé chez O2 Switch</p>
             <p class="versionning">Version {{ pjson.version }} datée du {{ pjson.versiondate }}</p>
         </div>
@@ -20,15 +24,19 @@ import pjson from "@root/package.json";
 @import "@styles/variables.scss";
 
 .footer-container {
+    background-color: transparent;
     position: absolute;
     top: 0;
     right: 0;
 
     .footer-content {
-        background-color: #ffffff;
-        color: $color14;
+        background-color: $color2;
+        color: $color1;
         padding: 3px;
         border-radius: 0 0 0 25px;
+        border: $color3 2px;
+        border-bottom: solid;
+        border-left: solid;
         display: flex;
         flex-direction: column;
         align-items: center;

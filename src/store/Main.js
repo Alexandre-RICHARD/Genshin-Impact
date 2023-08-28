@@ -2,5 +2,18 @@
 import { defineStore } from "pinia";
 
 export const useMainStore = defineStore("Main", {
-    state: () => ({}),
+    state: () => ({
+        error: {
+            uuidNotFound: {
+                bool: false,
+                text: "Aucun identifiant correspondant",
+            },
+        },
+        userSession: {
+            gotSession: false,
+            type: null,
+            uuid: "",
+            step: "start"
+        }
+    }),
 });
