@@ -12,8 +12,6 @@ export const getNewIdentifier = async () => {
 export const loginWithUuid = async (session, uuid) => {
     if (session === false) {
         return await postTemplate("/genshin/login", { "uuid": uuid });
-    } else {
-        console.log("Ceci ne devrait pas être possible");
     }
 };
 

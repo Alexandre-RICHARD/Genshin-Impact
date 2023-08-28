@@ -1,30 +1,20 @@
 // On importe les éléments utiles de Vue Router
 import { createRouter, createWebHistory } from "vue-router";
 
-import ConnectionTest from "@views/Page/ConnectionTest.vue";
-import GenshinFarming from "@views/Page/GenshinFarming.vue";
+import EntryPage from "@views/Page/EntryPage.vue";
 
 // On importe toutes les vues qui seront utilisées par notre router principal
 
 
 // On liste toutes les routes qui seront gérées par le router principal
 const routes = [
-    // Farm calculator
-    {
-        path: "/other",
-        name: "Farming",
-        components: { mainRouter: GenshinFarming },
-        meta: {
-            documentTitle: "Genshin - Optimiser son farming",
-        },
-    },
-    // test de connexion unique
+    // Page principale et unique pour le moment
     {
         path: "/",
         name: "test",
-        components: { mainRouter: ConnectionTest },
+        components: { mainRouter: EntryPage },
         meta: {
-            documentTitle: "test de connexion unique",
+            documentTitle: "Genshin - Calculateur de farm",
         },
     },
 ];

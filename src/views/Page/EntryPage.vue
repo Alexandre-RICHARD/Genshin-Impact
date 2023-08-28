@@ -1,4 +1,5 @@
 <script setup>
+import GenshinFarming from "@views/Page/GenshinFarming.vue";
 import { onBeforeMount, ref } from "vue";
 import { getNewIdentifier, loginWithUuid } from "@middlewares/fetchHandler.js";
 import { useMainStore } from "@store/Main";
@@ -16,7 +17,6 @@ const dataInit = () => {
             userSession.uuid = parse.uuid;
             userSession.step = parse.step;
         }
-
     }
 };
 
@@ -133,6 +133,8 @@ onBeforeMount(() => {
             </button>
         </div>
     </div>
+
+    <GenshinFarming v-if="userSession.step === 'ready'" />
 </template>
 
 <style lang="scss">

@@ -14,6 +14,9 @@ export const useMainStore = defineStore("Main", {
             type: null,
             uuid: "",
             step: "start"
-        }
+        },
+        otherData: {
+            loading: false,
+        } 
     }),
 });

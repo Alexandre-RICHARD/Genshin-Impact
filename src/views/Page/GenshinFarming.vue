@@ -6,6 +6,25 @@ const materialsList = require("@data/genshinMaterialsData.json");
 const levelingData = require("@data/genshinLevelingData.json");
 import InputCreator from "@parts/InputCreator.vue";
 import { computed, onBeforeMount, reactive, ref } from "vue";
+import { getOneData, saveOneData } from "@middlewares/fetchHandler.js";
+import { useMainStore } from "@store/Main";
+const { otherData, userSession } = useMainStore();
+
+const readyToSaveData = async (type) => {
+    if (userSession.type === "identified") {
+        await saveOneData(userSession.uuid, `genshin${type}Data`, JSON.stringify(data[type]));
+    } else if (userSession.type === "guest") {
+        localStorage.setItem(`genshin${type}Data`, JSON.stringify(data[type]));
+    }
+};
+
+const readyToLoadData = async (type) => {
+    if (userSession.type === "identified") {
+        return await (await getOneData(userSession.uuid, `genshin${type}Data`)).json();
+    } else if (userSession.type === "guest") {
+        return localStorage.getItem(`genshin${type}Data`);
+    }
+};
 
 // Dès le début, on stock la liste des Niveaux de personnages et d'aptitudes séparément pour faciliter leurs accès dans le template
 const lvlList = levelingData.level.map(el => el.id);
@@ -18,13 +37,14 @@ const serverList = ["Asiatique", "Européen", "Américain"];
 const data = reactive({ Characters: [], Weapons: [], Materials: [], Options: {} });
 
 // Une fonction appelé lors du chargement de la page (ou lors du clean du localStorage). Elle récupère, traite et vérifie les données du localStorage
-const dataInit = () => {
+const dataInit = async () => {
+    if (userSession.type === "identified") otherData.loading = true;
     // On récupère dans le localStorage la chaine de caractère correspondant à nos données de personnages
-    const lsCharacter = localStorage.getItem("genshinCharactersData");
-    // On vérifie qu'elle exsite
-    if (lsCharacter) {
+    const lsCharacter = await readyToLoadData("Characters");
+    // On vérifie qu'elle existe
+    if (lsCharacter[0]) {
         // Si oui, on la transforme en un tableau utilisable
-        data.Characters = JSON.parse(lsCharacter);
+        data.Characters = JSON.parse(lsCharacter[0].data_string);
         // Boucle initié avec la liste des personnages complètes avec uniquement le nom du personnages servant d'identifiant unique
         charactersList.forEach(({ name }) => {
             // On le cherche dans notre nouveau tableau. 
@@ -61,11 +81,11 @@ const dataInit = () => {
         });
     }
     // Une fois tout cela géré, on va mettre à jour le localStorage avec nos données actualisées et vérifiées
-    updateLocalStorage("Characters");
+    readyToSaveData("Characters");
 
-    const lsWeapons = localStorage.getItem("genshinWeaponsData");
-    if (lsWeapons) {
-        data.Weapons = JSON.parse(lsWeapons);
+    const lsWeapons = await readyToLoadData("Weapons");
+    if (lsWeapons[0]) {
+        data.Weapons = JSON.parse(lsWeapons[0].data_string);
         weaponsList.forEach(({ name }) => {
             const currentChar = data.Weapons.find(fi => name === fi.name);
             if (currentChar) {
@@ -77,12 +97,12 @@ const dataInit = () => {
     } else {
         data.Weapons = [];
     }
-    updateLocalStorage("Weapons");
+    readyToSaveData("Weapons");
 
     // Pour gérer l'inventaire des ressources de farm, même procédé que la fonction ci-dessus, mais compliqué et probablement vilain à factoriser les 2 en 1
-    const lsMaterial = localStorage.getItem("genshinMaterialsData");
-    if (lsMaterial) {
-        data.Materials = JSON.parse(lsMaterial);
+    const lsMaterial = await readyToLoadData("Materials");
+    if (lsMaterial[0]) {
+        data.Materials = JSON.parse(lsMaterial[0].data_string);
         materialsList.forEach(({ code }) => {
             const currentMat = data.Materials.find(fi => code === fi.code);
             if (currentMat) {
@@ -98,12 +118,12 @@ const dataInit = () => {
             data.Materials.push(filler("Materials", code));
         });
     }
-    updateLocalStorage("Materials");
+    readyToSaveData("Materials");
 
     // Pour gérer les options, pratiquement le même procédé mais avec beaucoup moins de valeurs et propriétés donc fait à la main pour chacune
-    const lsOptions = localStorage.getItem("genshinOptionsData");
-    if (lsOptions) {
-        data.Options = JSON.parse(lsOptions);
+    const lsOptions = await readyToLoadData("Options");
+    if (lsOptions[0]) {
+        data.Options = JSON.parse(lsOptions[0].data_string);
         if ([false, true].indexOf(data.Options.onlyShowsDoingCharacter) < 0) data.Options.onlyShowsDoingCharacter = false;
         if ([false, true].indexOf(data.Options.onlyShowsNeededMaterials) < 0) data.Options.onlyShowsNeededMaterials = false;
         if ([false, true].indexOf(data.Options.alwaysOneMoreMaterial) < 0) data.Options.alwaysOneMoreMaterial = false;
@@ -122,7 +142,8 @@ const dataInit = () => {
             server: "",
         };
     }
-    updateLocalStorage("Options");
+    readyToSaveData("Options");
+    if (userSession.type === "identified") otherData.loading = false;
 };
 
 // La fonction filler, utilisée pour complété les données de l'array data quand les données présente dans le localStorage ne sont pas bonnes
@@ -162,15 +183,10 @@ const cleanLocalStorage = () => {
     dataInit();
 };
 
-// La fonction utilisée pour sauvegarder dans le navigateur au sein du localStorage les différentes données.
-const updateLocalStorage = (type) => {
-    localStorage.setItem(`genshin${type}Data`, JSON.stringify(data[type]));
-};
-
 // Quand un input créer avec le composant InputCreator, sa valuer est suivi avec un V-model puis un emit envoyé dans la fonction handleChange qui se charge de changer la bonne valeur dans l'array "data"
 const handleChange = (group, index, valuename, value) => {
     data[group][index][valuename] = value;
-    updateLocalStorage(group);
+    readyToSaveData(group);
     if (valuename === "only") isOnlyCharacters.value = value;
 };
 
@@ -250,7 +266,7 @@ const addWeaponToDo = (name) => {
     // On ferme la liste
     hideList();
     // On sauvegarde le tableau d'armes actualisée
-    updateLocalStorage("Weapons");
+    readyToSaveData("Weapons");
 };
 
 // Action déclenché par un bouton près de chaque arme afin de la supprimer de la liste
@@ -258,7 +274,7 @@ const deletingWeaponToDo = (index) => {
     // Ayant récupéré l'index de l'arme dans le tableau en v-for, on l'envoi et l'utilise dans cette fonction
     data.Weapons.splice(index, 1);
     // On sauvegarde le tableau des armes actualisé
-    updateLocalStorage("Weapons");
+    readyToSaveData("Weapons");
 };
 
 // Une fonction de triage non fléché (la seule) afin d'accueillir des arguments autres que les a et b habituels.
@@ -653,349 +669,351 @@ onBeforeMount(() => {
 </script>
 
 <template>
-    <div class="dev-options">
-        <button class="clean-button" @click="cleanLocalStorage">VIDER LE LOCAL STORAGE</button>
-        <div class="boolean">
-            <input
-                id="boolean-doing" v-model="data.Options.onlyShowsDoingCharacter" class="boolean-checkbox"
-                type="checkbox" name="boolean-doing" @change="updateLocalStorage('Options');"
-            >
-            <label class="boolean-label" for="boolean-doing">Ne montrer que les "doing"</label>
-        </div>
-        <div class="boolean">
-            <input
-                id="boolean-needed" v-model="data.Options.onlyShowsNeededMaterials" class="boolean-checkbox"
-                type="checkbox" name="boolean-needed" @change="updateLocalStorage('Options');"
-            >
-            <label class="boolean-label" for="boolean-needed">Afficher uniquement les ressources nécessaires</label>
-        </div>
-        <div class="boolean">
-            <input
-                id="boolean-one-more" v-model="data.Options.alwaysOneMoreMaterial" class="boolean-checkbox"
-                type="checkbox" name="boolean-one-more" @change="updateLocalStorage('Options');"
-            >
-            <label class="boolean-label" for="boolean-one-more">Toujours avoir 1 de plus</label>
-        </div>
-        <div class="boolean">
-            <input
-                id="boolean-ley-line-resin" v-model="data.Options.leyLineResin" class="boolean-checkbox"
-                type="checkbox" name="boolean-ley-line-resin" @change="updateLocalStorage('Options');"
-            >
-            <label class="boolean-label" for="boolean-ley-line-resin">Activer le calcul de la résine pour les lignes énergetiques (Mora et livres d'xp)</label>
-        </div>
-        <div class="boolean">
-            <input
-                id="boolean-explaination" v-model="data.Options.explaination" class="boolean-checkbox" type="checkbox"
-                name="boolean-explaination" @change="updateLocalStorage('Options')"
-            >
-            <label class="boolean-label" for="boolean-explaination">Montrer les explications</label>
-        </div>
-        <div class="boolean">
-            <input
-                id="boolean-load-image" v-model="data.Options.loadIMG" class="boolean-checkbox" type="checkbox"
-                name="boolean-load-image" @change="updateLocalStorage('Options')"
-            >
-            <label class="boolean-label" for="boolean-load-image">Afficher les images (chargement jusqu'à 5x plus long avec
-                une connexion lente)</label>
-        </div>
-        <select v-model="data.Options.server" style="appearance: menulist-button" @change="updateLocalStorage('Options')">
-            <option v-for="server in serverList" :key="server" :value="server">
-                {{ server }}
-            </option>
-            {{ data.Options.server }}
-        </select>
-        <p>Heure actuelle : {{ currentTime }}</p>
-        <p>Reset serveur dans : {{ coultdownReset }}</p>
-        <p>Jour de la semaine : {{ serverDay }}</p>
-    </div>
-    <div v-if="data.Options.explaination" class="explaination">
-        <p>Nom = nom du personnage</p>
-        <p>J'ai = Je possède ce personnage</p>
-        <p>Build = Je veux monter ce personnage</p>
-        <p>Only = Je veux voir les résultats que pour ce personnage là</p>
-        <p>Lvl-A = Niveau actuel de mon personnage</p>
-        <p>Lvl-V = Le niveau auquel j'aimerai le monter</p>
-        <p>Ap1-A = Le niveau actuelle de son attaque normale</p>
-        <p>Ap1-V = Le niveau auquel je veux améliorer son attaque normale</p>
-        <p>Ap2-A = Le niveau actuelle de sa compétence élémentaire</p>
-        <p>Ap2-V = Le niveau auquel je veux améliorer sa compétence élémentaire</p>
-        <p>Ap3-A = Le niveau actuelle de son déchaînement élémentaire</p>
-        <p>Ap3-V = Le niveau auquel je veux améliorer son déchaînement élémentaire</p>
-        <br>
-        <p>
-            Les niveaux suivis d'un "+" représentent les Ascensions de personnages après les niveaux 20, 40, 50, 60, 70 et
-            80
-        </p>
-        <br>
-        <p>
-            L'option "toujours avoir 1 de plus" est là pour simplifier la rentrée des données. En effet, avoir toujours 1
-            ressources de chaque choses du jeu signifie qu'il suffira de les rentrer dans l'ordre sans se soucier de ne pas
-            en avoir certaine et donc de tout décaler
-        </p>
-    </div>
-    <div>
-        <p>Les trois ressources farmables sans résine que tu as le moins sont par type :</p>
-        <div>
-            <p>- communs : {{ otherInfo.common.name }} et ses dérivés avec {{ otherInfo.common.quantity }} points. </p>
-            <img
-                v-if="data.Options.loadIMG"
-                :src="require(`@static/images/genshin_icon/materials/${otherInfo.common.code}1.png`)"
-                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/1.png`)}')` }"
-            >
-            <img
-                v-if="data.Options.loadIMG"
-                :src="require(`@static/images/genshin_icon/materials/${otherInfo.common.code}2.png`)"
-                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/2.png`)}')` }"
-            >
-            <img
-                v-if="data.Options.loadIMG"
-                :src="require(`@static/images/genshin_icon/materials/${otherInfo.common.code}3.png`)"
-                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/3.png`)}')` }"
-            >
-        </div>
-        <div>
-            <p>- rares : {{ otherInfo.rare.name }} et ses dérivés avec {{ otherInfo.rare.quantity }} points. </p>
-            <img
-                v-if="data.Options.loadIMG"
-                :src="require(`@static/images/genshin_icon/materials/${otherInfo.rare.code}1.png`)"
-                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/1.png`)}')` }"
-            >
-            <img
-                v-if="data.Options.loadIMG"
-                :src="require(`@static/images/genshin_icon/materials/${otherInfo.rare.code}2.png`)"
-                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/2.png`)}')` }"
-            >
-            <img
-                v-if="data.Options.loadIMG"
-                :src="require(`@static/images/genshin_icon/materials/${otherInfo.rare.code}3.png`)"
-                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/3.png`)}')` }"
-            >
-        </div>
-        <div>
-            <p>- ressources locales : {{ otherInfo.local.name }} avec {{ otherInfo.local.quantity }} unités. </p>
-            <img
-                v-if="data.Options.loadIMG"
-                :src="require(`@static/images/genshin_icon/materials/${otherInfo.local.code}.png`)"
-                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/1.png`)}')` }"
-            >
-        </div>
-        <p>Résine total : {{ otherInfo.resin }} Nombre de jours que cela représente : {{ Math.ceil(otherInfo.resin / 180) }}. </p>
-    </div>
-    <div class="tabs-contener">
-        <table class="all-materials-inventory">
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Possédé</th>
-                    <th>Nécessaire</th>
-                    <th>Reste</th>
-                    <th>Farmable</th>
-                    <th>Synthèse : Have</th>
-                    <th>Synthèse : Needed</th>
-                    <th>Résine</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr
-                    v-for="material in filteredMaterials" 
-                    :key="material.id" 
-                    :class="{ 
-                        'require': material.farm_require && !data.Options.onlyShowsNeededMaterials,
-                        'require-and-done': !data.Options.onlyShowsNeededMaterials && material.farm_require && material.needed - material.have < (data.Options.alwaysOneMoreMaterial ? 0 : 1) && material.needed > 0,
-                        'done': data.Options.onlyShowsNeededMaterials && material.needed - material.have < (data.Options.alwaysOneMoreMaterial ? 0 : 1) 
-                    }"
-                >
-                    <td>
-                        <div class="name_cell">
-                            <img
-                                v-if="data.Options.loadIMG"
-                                :src="require(`@static/images/genshin_icon/materials/${material.code}.png`)"
-                                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${materialsList.find(fi => fi.code === material.code).rarity}.png`)}')` }"
-                            >
-                            <p>{{ material.name }}</p>
-                        </div>
-                    </td>
-                    <InputCreator
-                        v-model:value="data.Materials.find(el => el.code === material.code).have" type="number"
-                        :index="data.Materials.findIndex(el => el.code === material.code)" valuename="have"
-                        group="Materials" @update:value="handleChange"
-                    />
-                    <td>{{ material.needed }}</td>
-                    <td>
-                        {{ material.needed - material.have >= (data.Options.alwaysOneMoreMaterial ? 0 : 1) ? material.remain : "Parfait" }}
-                    </td>
-                    <td>
-                        {{ !!serverDay ? (typeof material.farming_days === "number" ?
-                            material.farming_days.toString().includes(serverDay.toString()) : "") : "" }}
-                    </td>
-                    <td>{{ material.synthesis ? material.group_have : "" }}</td>
-                    <td>{{ material.synthesis ? material.group_needed : "" }}</td>
-                    <td>{{ material.group_resin > 0 ? material.group_resin : "" }}</td>
-                </tr>
-            </tbody>
-        </table>
-        <div style="background-color: #4b453c;">
-            <input v-model="searchingCharactersQuery" for="searching-characters" type="text">
-            <label name="searching-characters">Rechercher un personnage</label>
-        </div>
-        <table class="all-character-progress">
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>J'ai</th>
-                    <th>Build</th>
-                    <th>Only</th>
-                    <th>Lvl-A</th>
-                    <th>Lvl-V</th>
-                    <th>Ap1-A</th>
-                    <th>Ap1-V</th>
-                    <th>Ap2-A</th>
-                    <th>Ap2-V</th>
-                    <th>Ap3-A</th>
-                    <th>Ap3-V</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="character in filteredCharacters" :key="character.name">
-                    <td>
-                        <div class="name_cell">
-                            <img
-                                v-if="data.Options.loadIMG"
-                                :src="require(`@static/images/genshin_icon/characters/${character.name}.png`)"
-                                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${charactersList.find(fi => fi.name === character.name).rarity}.png`)}')` }"
-                            >
-                            <p>{{ character.name }}</p>
-                        </div>
-                    </td>
-                    <InputCreator
-                        v-model:checked="character.got" type="checkbox"
-                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="got"
-                        group="Characters" @update:checked="handleChange"
-                    />
-                    <InputCreator
-                        v-model:checked="character.doing" type="checkbox" :disabled="character.only "
-                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="doing"
-                        group="Characters" @update:checked="handleChange"
-                    />
-                    <InputCreator
-                        v-model:checked="character.only" type="checkbox" :disabled="!character.doing || (!character.only && isOnlyCharacters)"
-                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="only"
-                        group="Characters" @update:checked="handleChange"
-                    />
-                    <InputCreator
-                        v-model:value="character.cLvl" type="select-level"
-                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cLvl"
-                        :list="levelingData.level.filter((el) => el.id <= character.wLvl)" group="Characters"
-                        @update:value="handleChange"
-                    />
-                    <InputCreator
-                        v-model:value="character.wLvl" type="select-level"
-                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wLvl"
-                        :list="levelingData.level.filter((el) => el.id >= character.cLvl)" group="Characters"
-                        @update:value="handleChange"
-                    />
-                    <InputCreator
-                        v-model:value="character.cAp1" type="select-aptitude"
-                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cAp1"
-                        :list="aptList.filter((el) => el <= character.wAp1)" group="Characters"
-                        @update:value="handleChange"
-                    />
-                    <InputCreator
-                        v-model:value="character.wAp1" type="select-aptitude"
-                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wAp1"
-                        :list="aptList.filter((el) => el >= character.cAp1)" group="Characters"
-                        @update:value="handleChange"
-                    />
-                    <InputCreator
-                        v-model:value="character.cAp2" type="select-aptitude"
-                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cAp2"
-                        :list="aptList.filter((el) => el <= character.wAp2)" group="Characters"
-                        @update:value="handleChange"
-                    />
-                    <InputCreator
-                        v-model:value="character.wAp2" type="select-aptitude"
-                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wAp2"
-                        :list="aptList.filter((el) => el >= character.cAp2)" group="Characters"
-                        @update:value="handleChange"
-                    />
-                    <InputCreator
-                        v-model:value="character.cAp3" type="select-aptitude"
-                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cAp3"
-                        :list="aptList.filter((el) => el <= character.wAp3)" group="Characters"
-                        @update:value="handleChange"
-                    />
-                    <InputCreator
-                        v-model:value="character.wAp3" type="select-aptitude"
-                        :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wAp3"
-                        :list="aptList.filter((el) => el >= character.cAp3)" group="Characters"
-                        @update:value="handleChange"
-                    />
-                </tr>
-            </tbody>
-        </table>
-        <div>
-            <div class="search-input">
+    <div v-if="!otherData.loading">
+        <div class="dev-options">
+            <button class="clean-button" @click="cleanLocalStorage">VIDER LE LOCAL STORAGE</button>
+            <div class="boolean">
                 <input
-                    v-model="searchingWeaponQuery"
-                    class="input"
-                    type="text"
-                    placeholder="Rechercher une arme"
-                    @focus="showResultList = true"
-                    @blur="hideList"
+                    id="boolean-doing" v-model="data.Options.onlyShowsDoingCharacter" class="boolean-checkbox"
+                    type="checkbox" name="boolean-doing" @change="readyToSaveData('Options');"
                 >
-                <ul v-if="showResultList && searchingWeaponQuery.length >= 1" class="list">
-                    <li
-                        v-for="result in filteredWeaponsResults"
-                        :key="result"
-                        class="one-result"
-                        @click="addWeaponToDo(result)"
-                    >
-                        <img
-                            v-if="data.Options.loadIMG"
-                            class="results-image"
-                            :src="require(`@static/images/genshin_icon/weapons/${weaponsList.find(fi => fi.name === result || fi.eng_name === result).name}.png`)"
-                            :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${weaponsList.find(fi => fi.name === result || fi.eng_name === result).rarity}.png`)}')` }"
-                        >
-                        <p class="result-name">{{ result }}</p>
-                    </li>
-                </ul>
+                <label class="boolean-label" for="boolean-doing">Ne montrer que les "doing"</label>
             </div>
-            <table class="all-weapons-progress">
+            <div class="boolean">
+                <input
+                    id="boolean-needed" v-model="data.Options.onlyShowsNeededMaterials" class="boolean-checkbox"
+                    type="checkbox" name="boolean-needed" @change="readyToSaveData('Options');"
+                >
+                <label class="boolean-label" for="boolean-needed">Afficher uniquement les ressources nécessaires</label>
+            </div>
+            <div class="boolean">
+                <input
+                    id="boolean-one-more" v-model="data.Options.alwaysOneMoreMaterial" class="boolean-checkbox"
+                    type="checkbox" name="boolean-one-more" @change="readyToSaveData('Options');"
+                >
+                <label class="boolean-label" for="boolean-one-more">Toujours avoir 1 de plus</label>
+            </div>
+            <div class="boolean">
+                <input
+                    id="boolean-ley-line-resin" v-model="data.Options.leyLineResin" class="boolean-checkbox"
+                    type="checkbox" name="boolean-ley-line-resin" @change="readyToSaveData('Options');"
+                >
+                <label class="boolean-label" for="boolean-ley-line-resin">Activer le calcul de la résine pour les lignes énergetiques (Mora et livres d'xp)</label>
+            </div>
+            <div class="boolean">
+                <input
+                    id="boolean-explaination" v-model="data.Options.explaination" class="boolean-checkbox" type="checkbox"
+                    name="boolean-explaination" @change="readyToSaveData('Options')"
+                >
+                <label class="boolean-label" for="boolean-explaination">Montrer les explications</label>
+            </div>
+            <div class="boolean">
+                <input
+                    id="boolean-load-image" v-model="data.Options.loadIMG" class="boolean-checkbox" type="checkbox"
+                    name="boolean-load-image" @change="readyToSaveData('Options')"
+                >
+                <label class="boolean-label" for="boolean-load-image">Afficher les images (chargement jusqu'à 5x plus long avec
+                    une connexion lente)</label>
+            </div>
+            <select v-model="data.Options.server" style="appearance: menulist-button" @change="readyToSaveData('Options')">
+                <option v-for="server in serverList" :key="server" :value="server">
+                    {{ server }}
+                </option>
+                {{ data.Options.server }}
+            </select>
+            <p>Heure actuelle : {{ currentTime }}</p>
+            <p>Reset serveur dans : {{ coultdownReset }}</p>
+            <p>Jour de la semaine : {{ serverDay }}</p>
+        </div>
+        <div v-if="data.Options.explaination" class="explaination">
+            <p>Nom = nom du personnage</p>
+            <p>J'ai = Je possède ce personnage</p>
+            <p>Build = Je veux monter ce personnage</p>
+            <p>Only = Je veux voir les résultats que pour ce personnage là</p>
+            <p>Lvl-A = Niveau actuel de mon personnage</p>
+            <p>Lvl-V = Le niveau auquel j'aimerai le monter</p>
+            <p>Ap1-A = Le niveau actuelle de son attaque normale</p>
+            <p>Ap1-V = Le niveau auquel je veux améliorer son attaque normale</p>
+            <p>Ap2-A = Le niveau actuelle de sa compétence élémentaire</p>
+            <p>Ap2-V = Le niveau auquel je veux améliorer sa compétence élémentaire</p>
+            <p>Ap3-A = Le niveau actuelle de son déchaînement élémentaire</p>
+            <p>Ap3-V = Le niveau auquel je veux améliorer son déchaînement élémentaire</p>
+            <br>
+            <p>
+                Les niveaux suivis d'un "+" représentent les Ascensions de personnages après les niveaux 20, 40, 50, 60, 70 et
+                80
+            </p>
+            <br>
+            <p>
+                L'option "toujours avoir 1 de plus" est là pour simplifier la rentrée des données. En effet, avoir toujours 1
+                ressources de chaque choses du jeu signifie qu'il suffira de les rentrer dans l'ordre sans se soucier de ne pas
+                en avoir certaine et donc de tout décaler
+            </p>
+        </div>
+        <div>
+            <p>Les trois ressources farmables sans résine que tu as le moins sont par type :</p>
+            <div>
+                <p>- communs : {{ otherInfo.common.name }} et ses dérivés avec {{ otherInfo.common.quantity }} points. </p>
+                <img
+                    v-if="data.Options.loadIMG"
+                    :src="require(`@static/images/genshin_icon/materials/${otherInfo.common.code}1.png`)"
+                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/1.png`)}')` }"
+                >
+                <img
+                    v-if="data.Options.loadIMG"
+                    :src="require(`@static/images/genshin_icon/materials/${otherInfo.common.code}2.png`)"
+                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/2.png`)}')` }"
+                >
+                <img
+                    v-if="data.Options.loadIMG"
+                    :src="require(`@static/images/genshin_icon/materials/${otherInfo.common.code}3.png`)"
+                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/3.png`)}')` }"
+                >
+            </div>
+            <div>
+                <p>- rares : {{ otherInfo.rare.name }} et ses dérivés avec {{ otherInfo.rare.quantity }} points. </p>
+                <img
+                    v-if="data.Options.loadIMG"
+                    :src="require(`@static/images/genshin_icon/materials/${otherInfo.rare.code}1.png`)"
+                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/1.png`)}')` }"
+                >
+                <img
+                    v-if="data.Options.loadIMG"
+                    :src="require(`@static/images/genshin_icon/materials/${otherInfo.rare.code}2.png`)"
+                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/2.png`)}')` }"
+                >
+                <img
+                    v-if="data.Options.loadIMG"
+                    :src="require(`@static/images/genshin_icon/materials/${otherInfo.rare.code}3.png`)"
+                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/3.png`)}')` }"
+                >
+            </div>
+            <div>
+                <p>- ressources locales : {{ otherInfo.local.name }} avec {{ otherInfo.local.quantity }} unités. </p>
+                <img
+                    v-if="data.Options.loadIMG"
+                    :src="require(`@static/images/genshin_icon/materials/${otherInfo.local.code}.png`)"
+                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/1.png`)}')` }"
+                >
+            </div>
+            <p>Résine total : {{ otherInfo.resin }} Nombre de jours que cela représente : {{ Math.ceil(otherInfo.resin / 180) }}. </p>
+        </div>
+        <div class="tabs-contener">
+            <table class="all-materials-inventory">
                 <thead>
                     <tr>
-                        <th>Nom de l'arme</th>
-                        <th>Niveau actuel</th>
-                        <th>Niveau voulu</th>
+                        <th>Nom</th>
+                        <th>Possédé</th>
+                        <th>Nécessaire</th>
+                        <th>Reste</th>
+                        <th>Farmable</th>
+                        <th>Synthèse : Have</th>
+                        <th>Synthèse : Needed</th>
+                        <th>Résine</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(weapon, index) in data.Weapons" :key="index">
+                    <tr
+                        v-for="material in filteredMaterials" 
+                        :key="material.id" 
+                        :class="{ 
+                            'require': material.farm_require && !data.Options.onlyShowsNeededMaterials,
+                            'require-and-done': !data.Options.onlyShowsNeededMaterials && material.farm_require && material.needed - material.have < (data.Options.alwaysOneMoreMaterial ? 0 : 1) && material.needed > 0,
+                            'done': data.Options.onlyShowsNeededMaterials && material.needed - material.have < (data.Options.alwaysOneMoreMaterial ? 0 : 1) 
+                        }"
+                    >
                         <td>
                             <div class="name_cell">
-                                <button class="deleting-weapon" type="button" @click="deletingWeaponToDo(index)">X</button>
                                 <img
                                     v-if="data.Options.loadIMG"
-                                    :src="require(`@static/images/genshin_icon/weapons/${weapon.name}.png`)"
-                                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${weaponsList.find(fi => fi.name === weapon.name).rarity}.png`)}')` }"
+                                    :src="require(`@static/images/genshin_icon/materials/${material.code}.png`)"
+                                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${materialsList.find(fi => fi.code === material.code).rarity}.png`)}')` }"
                                 >
-                                <p>{{ weapon.name }}</p>
+                                <p>{{ material.name }}</p>
                             </div>
                         </td>
                         <InputCreator
-                            v-model:value="weapon.cLvl" type="select-level"
-                            :index="index" valuename="cLvl"
-                            :list="levelingData[`weapon_${weapon.rarity}`].filter((el) => el.id <= weapon.wLvl)" group="Weapons"
+                            v-model:value="data.Materials.find(el => el.code === material.code).have" type="number"
+                            :index="data.Materials.findIndex(el => el.code === material.code)" valuename="have"
+                            group="Materials" @update:value="handleChange"
+                        />
+                        <td>{{ material.needed }}</td>
+                        <td>
+                            {{ material.needed - material.have >= (data.Options.alwaysOneMoreMaterial ? 0 : 1) ? material.remain : "Parfait" }}
+                        </td>
+                        <td>
+                            {{ !!serverDay ? (typeof material.farming_days === "number" ?
+                                material.farming_days.toString().includes(serverDay.toString()) : "") : "" }}
+                        </td>
+                        <td>{{ material.synthesis ? material.group_have : "" }}</td>
+                        <td>{{ material.synthesis ? material.group_needed : "" }}</td>
+                        <td>{{ material.group_resin > 0 ? material.group_resin : "" }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="background-color: #4b453c;">
+                <input v-model="searchingCharactersQuery" for="searching-characters" type="text">
+                <label name="searching-characters">Rechercher un personnage</label>
+            </div>
+            <table class="all-character-progress">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>J'ai</th>
+                        <th>Build</th>
+                        <th>Only</th>
+                        <th>Lvl-A</th>
+                        <th>Lvl-V</th>
+                        <th>Ap1-A</th>
+                        <th>Ap1-V</th>
+                        <th>Ap2-A</th>
+                        <th>Ap2-V</th>
+                        <th>Ap3-A</th>
+                        <th>Ap3-V</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="character in filteredCharacters" :key="character.name">
+                        <td>
+                            <div class="name_cell">
+                                <img
+                                    v-if="data.Options.loadIMG"
+                                    :src="require(`@static/images/genshin_icon/characters/${character.name}.png`)"
+                                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${charactersList.find(fi => fi.name === character.name).rarity}.png`)}')` }"
+                                >
+                                <p>{{ character.name }}</p>
+                            </div>
+                        </td>
+                        <InputCreator
+                            v-model:checked="character.got" type="checkbox"
+                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="got"
+                            group="Characters" @update:checked="handleChange"
+                        />
+                        <InputCreator
+                            v-model:checked="character.doing" type="checkbox" :disabled="character.only "
+                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="doing"
+                            group="Characters" @update:checked="handleChange"
+                        />
+                        <InputCreator
+                            v-model:checked="character.only" type="checkbox" :disabled="!character.doing || (!character.only && isOnlyCharacters)"
+                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="only"
+                            group="Characters" @update:checked="handleChange"
+                        />
+                        <InputCreator
+                            v-model:value="character.cLvl" type="select-level"
+                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cLvl"
+                            :list="levelingData.level.filter((el) => el.id <= character.wLvl)" group="Characters"
                             @update:value="handleChange"
                         />
                         <InputCreator
-                            v-model:value="weapon.wLvl" type="select-level"
-                            :index="index" valuename="wLvl"
-                            :list="levelingData[`weapon_${weapon.rarity}`].filter((el) => el.id >= weapon.cLvl)" group="Weapons"
+                            v-model:value="character.wLvl" type="select-level"
+                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wLvl"
+                            :list="levelingData.level.filter((el) => el.id >= character.cLvl)" group="Characters"
+                            @update:value="handleChange"
+                        />
+                        <InputCreator
+                            v-model:value="character.cAp1" type="select-aptitude"
+                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cAp1"
+                            :list="aptList.filter((el) => el <= character.wAp1)" group="Characters"
+                            @update:value="handleChange"
+                        />
+                        <InputCreator
+                            v-model:value="character.wAp1" type="select-aptitude"
+                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wAp1"
+                            :list="aptList.filter((el) => el >= character.cAp1)" group="Characters"
+                            @update:value="handleChange"
+                        />
+                        <InputCreator
+                            v-model:value="character.cAp2" type="select-aptitude"
+                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cAp2"
+                            :list="aptList.filter((el) => el <= character.wAp2)" group="Characters"
+                            @update:value="handleChange"
+                        />
+                        <InputCreator
+                            v-model:value="character.wAp2" type="select-aptitude"
+                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wAp2"
+                            :list="aptList.filter((el) => el >= character.cAp2)" group="Characters"
+                            @update:value="handleChange"
+                        />
+                        <InputCreator
+                            v-model:value="character.cAp3" type="select-aptitude"
+                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cAp3"
+                            :list="aptList.filter((el) => el <= character.wAp3)" group="Characters"
+                            @update:value="handleChange"
+                        />
+                        <InputCreator
+                            v-model:value="character.wAp3" type="select-aptitude"
+                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wAp3"
+                            :list="aptList.filter((el) => el >= character.cAp3)" group="Characters"
                             @update:value="handleChange"
                         />
                     </tr>
                 </tbody>
             </table>
+            <div>
+                <div class="search-input">
+                    <input
+                        v-model="searchingWeaponQuery"
+                        class="input"
+                        type="text"
+                        placeholder="Rechercher une arme"
+                        @focus="showResultList = true"
+                        @blur="hideList"
+                    >
+                    <ul v-if="showResultList && searchingWeaponQuery.length >= 1" class="list">
+                        <li
+                            v-for="result in filteredWeaponsResults"
+                            :key="result"
+                            class="one-result"
+                            @click="addWeaponToDo(result)"
+                        >
+                            <img
+                                v-if="data.Options.loadIMG"
+                                class="results-image"
+                                :src="require(`@static/images/genshin_icon/weapons/${weaponsList.find(fi => fi.name === result || fi.eng_name === result).name}.png`)"
+                                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${weaponsList.find(fi => fi.name === result || fi.eng_name === result).rarity}.png`)}')` }"
+                            >
+                            <p class="result-name">{{ result }}</p>
+                        </li>
+                    </ul>
+                </div>
+                <table class="all-weapons-progress">
+                    <thead>
+                        <tr>
+                            <th>Nom de l'arme</th>
+                            <th>Niveau actuel</th>
+                            <th>Niveau voulu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(weapon, index) in data.Weapons" :key="index">
+                            <td>
+                                <div class="name_cell">
+                                    <button class="deleting-weapon" type="button" @click="deletingWeaponToDo(index)">X</button>
+                                    <img
+                                        v-if="data.Options.loadIMG"
+                                        :src="require(`@static/images/genshin_icon/weapons/${weapon.name}.png`)"
+                                        :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${weaponsList.find(fi => fi.name === weapon.name).rarity}.png`)}')` }"
+                                    >
+                                    <p>{{ weapon.name }}</p>
+                                </div>
+                            </td>
+                            <InputCreator
+                                v-model:value="weapon.cLvl" type="select-level"
+                                :index="index" valuename="cLvl"
+                                :list="levelingData[`weapon_${weapon.rarity}`].filter((el) => el.id <= weapon.wLvl)" group="Weapons"
+                                @update:value="handleChange"
+                            />
+                            <InputCreator
+                                v-model:value="weapon.wLvl" type="select-level"
+                                :index="index" valuename="wLvl"
+                                :list="levelingData[`weapon_${weapon.rarity}`].filter((el) => el.id >= weapon.cLvl)" group="Weapons"
+                                @update:value="handleChange"
+                            />
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </template>

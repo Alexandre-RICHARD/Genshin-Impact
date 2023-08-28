@@ -265,7 +265,7 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 
 ### 1.2.12 `28 août 2023`
 
--   Dans webpack.configu, rajout de l'alias data
+-   Dans webpack.config, rajout de l'alias data
 -   Déplacement des 4 gros fichiers json de notre projet de middlewares à un dossier data afin d'éviter la confusion de ce qu'implique un middleware
 -   Adaptation des importations des fichier json déplacés
 -   Rajout du lien de mon portfolio dans le footer
@@ -285,5 +285,16 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Mise en place donc de ce nouveau fichier qui servira de point de départ du projet, il sert à gérer le type de connexion/d'utilisation que l'utilisateur veut et le bon accès à son identifiant Uuid s'il en a souhaité un
 -   Utilisation d'une autre chaîne en localStorage pour sauvegarder la session actuelle.
 -   Un design basique mais clair pour bien comprendre les choix qui s'offre à l'utilisateur en premier lieu
+
+### 1.3.0 `28 août 2023`
+
+-   Importation de GesnhinFarming avec conditions que userSession.step soit "ready"
+-   Rajout d'une propriété loading dans GenshinFarming. Tant que la fonction DataInit n'est pas fini avec les async/await, loading est en true, ainsi les composants ne sont chargés qu'après
+-   Suppression de la route GenshinFarming maintenant que le composant est directement lié au premier
+-   Actualisation du favicon, passant du logo d'une primogemmes pour devenir celui d'une resine originelle
+-   Création de deux fonctions ayant pour but de charger/sauvegarder des données. Elles prennent toutes deux une variable qui conditionnent sur cela est fait avec la BDD ou le LocalStorage
+-   Rajout de la condition loading dans tout le template de GenshinFarming
+-   La variable loading n'est utilisé que si le type de session est "identified", en guest, pas besoin
+-   Actualisation de tous les localStorage.get et.set, ainsi que des fonctions UpdateLocalStorage désormais remplacées
 
 </details>
