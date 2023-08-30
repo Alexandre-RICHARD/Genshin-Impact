@@ -6,7 +6,7 @@ const materialsList = require("@data/genshinMaterialsData.json");
 const levelingData = require("@data/genshinLevelingData.json");
 import InputCreator from "@parts/InputCreator.vue";
 import { computed, onBeforeMount, reactive, ref } from "vue";
-import { getOneData, saveOneData } from "@middlewares/fetchHandler.js";
+import { deleteOneData, getOneData, saveOneData } from "@middlewares/fetchHandler.js";
 import { useMainStore } from "@store/Main";
 const { otherData, userSession } = useMainStore();
 
@@ -20,9 +20,21 @@ const readyToSaveData = async (type) => {
 
 const readyToLoadData = async (type) => {
     if (userSession.type === "identified") {
-        return await (await getOneData(userSession.uuid, `genshin${type}Data`)).json();
+        const X = await (await getOneData(userSession.uuid, `genshin${type}Data`)).json();
+        if (X[0]) return X[0].data_string;
+        return undefined;
     } else if (userSession.type === "guest") {
-        return localStorage.getItem(`genshin${type}Data`);
+        const X = localStorage.getItem(`genshin${type}Data`);
+        if (X) return X;
+        return undefined;
+    }
+};
+
+const readyToDestroyData = async (type) => {
+    if (userSession.type === "identified") {
+        await deleteOneData(userSession.uuid, `genshin${type}Data`);
+    } else if (userSession.type === "guest") {
+        localStorage.removeItem(`genshin${type}Data`);
     }
 };
 
@@ -38,13 +50,13 @@ const data = reactive({ Characters: [], Weapons: [], Materials: [], Options: {} 
 
 // Une fonction appelé lors du chargement de la page (ou lors du clean du localStorage). Elle récupère, traite et vérifie les données du localStorage
 const dataInit = async () => {
-    if (userSession.type === "identified") otherData.loading = true;
+    otherData.loading = true;
     // On récupère dans le localStorage la chaine de caractère correspondant à nos données de personnages
     const lsCharacter = await readyToLoadData("Characters");
     // On vérifie qu'elle existe
-    if (lsCharacter[0]) {
+    if (lsCharacter) {
         // Si oui, on la transforme en un tableau utilisable
-        data.Characters = JSON.parse(lsCharacter[0].data_string);
+        data.Characters = JSON.parse(lsCharacter);
         // Boucle initié avec la liste des personnages complètes avec uniquement le nom du personnages servant d'identifiant unique
         charactersList.forEach(({ name }) => {
             // On le cherche dans notre nouveau tableau. 
@@ -84,8 +96,8 @@ const dataInit = async () => {
     readyToSaveData("Characters");
 
     const lsWeapons = await readyToLoadData("Weapons");
-    if (lsWeapons[0]) {
-        data.Weapons = JSON.parse(lsWeapons[0].data_string);
+    if (lsWeapons) {
+        data.Weapons = JSON.parse(lsWeapons);
         weaponsList.forEach(({ name }) => {
             const currentChar = data.Weapons.find(fi => name === fi.name);
             if (currentChar) {
@@ -101,8 +113,8 @@ const dataInit = async () => {
 
     // Pour gérer l'inventaire des ressources de farm, même procédé que la fonction ci-dessus, mais compliqué et probablement vilain à factoriser les 2 en 1
     const lsMaterial = await readyToLoadData("Materials");
-    if (lsMaterial[0]) {
-        data.Materials = JSON.parse(lsMaterial[0].data_string);
+    if (lsMaterial) {
+        data.Materials = JSON.parse(lsMaterial);
         materialsList.forEach(({ code }) => {
             const currentMat = data.Materials.find(fi => code === fi.code);
             if (currentMat) {
@@ -122,8 +134,8 @@ const dataInit = async () => {
 
     // Pour gérer les options, pratiquement le même procédé mais avec beaucoup moins de valeurs et propriétés donc fait à la main pour chacune
     const lsOptions = await readyToLoadData("Options");
-    if (lsOptions[0]) {
-        data.Options = JSON.parse(lsOptions[0].data_string);
+    if (lsOptions) {
+        data.Options = JSON.parse(lsOptions);
         if ([false, true].indexOf(data.Options.onlyShowsDoingCharacter) < 0) data.Options.onlyShowsDoingCharacter = false;
         if ([false, true].indexOf(data.Options.onlyShowsNeededMaterials) < 0) data.Options.onlyShowsNeededMaterials = false;
         if ([false, true].indexOf(data.Options.alwaysOneMoreMaterial) < 0) data.Options.alwaysOneMoreMaterial = false;
@@ -143,7 +155,7 @@ const dataInit = async () => {
         };
     }
     readyToSaveData("Options");
-    if (userSession.type === "identified") otherData.loading = false;
+    otherData.loading = false;
 };
 
 // La fonction filler, utilisée pour complété les données de l'array data quand les données présente dans le localStorage ne sont pas bonnes
@@ -175,11 +187,11 @@ const filler = (type, name) => {
 };
 
 // Relié à un bouton permettant de nettoyer et reset par défaut le localStorage
-const cleanLocalStorage = () => {
-    localStorage.removeItem("genshinCharactersData");
-    localStorage.removeItem("genshinWeaponsData");
-    localStorage.removeItem("genshinMaterialsData");
-    localStorage.removeItem("genshinOptionsData");
+const destroyMyData = async () => {
+    await readyToDestroyData("Characters");
+    await readyToDestroyData("Weapons");
+    await readyToDestroyData("Materials");
+    await readyToDestroyData("Options");
     dataInit();
 };
 
@@ -414,7 +426,7 @@ const farmingMaterial = computed(() => {
             group_have: computedBuildArray[xp_ore_3].have * 25 + computedBuildArray[xp_ore_2].have * 5 + computedBuildArray[xp_ore_1].have,
             group_needed: Math.ceil(computedBuildArray[xp_ore_3].needed * 25),
             // On active la synthèse pour que cela soit affiché par la suite
-            synthesis: true,
+            synthesis: Math.ceil(computedBuildArray[xp_ore_3].needed * 25) > 0 ? true : false,
         };
 
         if (computedBuildArray[xp_ore_3].group_needed > 0) {
@@ -434,7 +446,7 @@ const farmingMaterial = computed(() => {
             remain: Math.ceil(computedBuildArray[xp_book_3].remain),
             group_have: computedBuildArray[xp_book_3].have * 20 + computedBuildArray[xp_book_2].have * 5 + computedBuildArray[xp_book_1].have,
             group_needed: Math.ceil(computedBuildArray[xp_book_3].needed * 20),
-            synthesis: true,
+            synthesis: Math.ceil(computedBuildArray[xp_book_3].needed * 20) > 0 ? true : false,
         };
 
         if (computedBuildArray[xp_book_3].group_needed > 0) {
@@ -452,7 +464,7 @@ const farmingMaterial = computed(() => {
         talent_book: 10.18,  //10.18 selon un fan tableau, 10.12 selon le wiki 9,8 selon mes propres résultats
         weapon_material: 17.05,
         mora: 60000,
-        character_xp: 6.125, // 122500 / 20000, données provenant du Wiki
+        character_xp: 61.25, // 122500 / 20000 * 20, données provenant du Wiki
     };
 
     const mora = computedBuildArray.findIndex(fi => fi.code === "g01");
@@ -461,7 +473,7 @@ const farmingMaterial = computed(() => {
     // if (computedBuildArray[mora])
     if (data.Options.leyLineResin) {
         computedBuildArray[mora].group_resin = Math.ceil(computedBuildArray[mora].remain / coefficientResin.mora) * 20;
-        computedBuildArray[bookXp].group_resin = Math.ceil(computedBuildArray[bookXp].remain / coefficientResin.character_xp) * 20;
+        computedBuildArray[bookXp].group_resin = Math.ceil((computedBuildArray[bookXp].group_needed - computedBuildArray[bookXp].group_have) / coefficientResin.character_xp) * 20;
     }
 
     // Ce code va avoir pour objectif de générer les données de synthèse des groupes de ressources concernées par celle-ci. Ainsi, on va
@@ -671,7 +683,7 @@ onBeforeMount(() => {
 <template>
     <div v-if="!otherData.loading">
         <div class="dev-options">
-            <button class="clean-button" @click="cleanLocalStorage">VIDER LE LOCAL STORAGE</button>
+            <button class="clean-button" @click="destroyMyData">VIDER LE LOCAL STORAGE</button>
             <div class="boolean">
                 <input
                     id="boolean-doing" v-model="data.Options.onlyShowsDoingCharacter" class="boolean-checkbox"

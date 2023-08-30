@@ -297,4 +297,17 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   La variable loading n'est utilisé que si le type de session est "identified", en guest, pas besoin
 -   Actualisation de tous les localStorage.get et.set, ainsi que des fonctions UpdateLocalStorage désormais remplacées
 
+### 1.3.1 `30 août 2023`
+
+-   Mise à jour des packages npm
+-   Détails dans la manière de webpack de traiter les images, tous les fichier assets iront dans static (normalement ça n'en concerne aucun mais on verra)
+-   Les images quand a elle seront traiter comme des ressources par webpack pour éviter la conversion en base 64. Les images gardent leur noms ce qui éviter un transfert à chaque mise en prod.
+-   Changement de nom de la fonction d'envoi de requête, prise en compte de la méthode en variable
+-   Rajout d'une requête delter pour réinitialiser ses données
+-   Amélioration de la fonction permettant de charger les données en fonction de si elle viennent de la BDD ou du localStorage.
+-   Le loading empêchant la page de se construire au départ est fait en tout circonstance maintenant, pas juste si on va chercher en bdd les infos.
+-   Rajout donc de la fonction readyToDestroyData qui a le même rôle que l'ancien cleanLocalStorage mais étendu à l'éventuelle base de donnée
+-   Petite correction dans l'attribution des valeurs de synthèse aux livres et minerai d'expérience.
+-   Correction du coefficient des lignes énergétiques de livres d'expérience. La valeur character_xp était incorrecte et passe 6.125 à 61.25.
+
 </details>

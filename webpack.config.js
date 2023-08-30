@@ -62,7 +62,7 @@ module.exports = {
         path: path.resolve(__dirname, ".build"),
         publicPath: publicPath,
         filename: "js/[name].[contenthash].js",
-        assetModuleFilename: "images/[hash][ext][query]",
+        assetModuleFilename: "static/[hash][ext][query]",
     },
     resolve: {
         alias: {
@@ -165,7 +165,10 @@ module.exports = {
             // Pas de loader pour les images, elles sont traités comme des assets, ce qui change leurs utilisations surtout pour les petites images transformées en base64 sinon
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
-                type: 'asset/resource'
+                type: 'asset/resource',
+                generator: {
+                    filename: 'images/[name][ext]'
+                  }
             },
             // SCSS loader et autres loaders ainsi que l'utilisation du plugin permettant que le css soit dans un fichier indépendant des fichiers js
             {
