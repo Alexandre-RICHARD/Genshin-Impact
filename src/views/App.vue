@@ -3,6 +3,7 @@ import FooterContainer from "@parts/FooterContainer.vue";
 </script>
 
 <template>
+    <header />
     <main>
         <router-view name="mainRouter" />
     </main>
@@ -12,12 +13,18 @@ import FooterContainer from "@parts/FooterContainer.vue";
 <style lang="scss">
 @import "@styles/variables.scss";
 
+body,
 #app {
-    font-family: $kanit;
-    width: 100%;
-    min-width: 200px;
-    min-height: 100vh;
-    background-color: $color1;
-    color: $color3;
+    height: 100vh;
+
+    #app {
+        font-family: $kanit;
+        width: 100%;
+        min-width: 200px;
+        background-color: $color1;
+        color: $color3;
+        display: flex;
+        flex-direction: column;
+    }
 }
 </style>

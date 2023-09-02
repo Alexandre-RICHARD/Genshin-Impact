@@ -310,4 +310,27 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Petite correction dans l'attribution des valeurs de synthèse aux livres et minerai d'expérience.
 -   Correction du coefficient des lignes énergétiques de livres d'expérience. La valeur character_xp était incorrecte et passe 6.125 à 61.25.
 
+### 1.3.2 `2 septembre 2023`
+
+-   Mise à jour des packages npm (suppression de 2 plugins babel remplacés par 2 plus récents)
+-   Rajout d'une image faisant office de bouton de fermeture
+-   Ajout d'une fonction dans le middlewares fetchHandler.js afin d'envoyer un message depuis le formulaire de contact. Factorisé également, il utilise cependant la même logique que le formulaire de contact du portfolio
+-   Ajout de 3 couleurs et d'1 z-index dans les variable CSS
+-   Changement du CSS de App.vue afin d'avoir une page ou peu importe la hauteur de la page, le footer sera toujours en bas du viewport
+-   Dans EntryPage, rajout de UseRoute afin de pouvoir lire les paramètres d'URL. Ainsi, avec la nouvelle features permettant de copier le lien de l'outil avec son uuid en paramètre, utiliser le lien court-circuite totalement le process d'avant et permet de se connecter tout de suite. C'est censé favoriser le changement d'appareil.
+-   Mise en Majuscule des 3 données d'importation pour convenir avec nos variables fréquemment utilisées "Weapons", "Materials", "Characters" dans GenshinFarming.vue
+-   Rajout d'une option pour choisir ou non d'afficher la possibilité d'enlever les ressources après un changement de valeurs approprié.
+-   Rajout d'une fonction pour gérer cette nouvelle fonctionnalité, plutôt semblable à d'autres, elle sera sûrement factorisable.
+-   Rajout d'une modal dynamique pour indiquer ce choix à l'utilisateur
+-   Déplacement de la possibilité de vider le localStorage à GenshinFarming.
+-   Interversion des tableaux pour rendre plus lisible
+-   Simplfication des Appels à InputCreator et gloablement de la passation de données. Suppression du v-model et des envoies des arguments dans le composant fils. Désormais, on envoi juste la valeur et ce qui est nécessaire, au changement, on intercepte la nouvelle valeur et on l'envoi avec les arguments.
+-   Ajout de classes pour les personnages en fonction d'à quel stade on en est avec eux. Pas acquis, en cours, fini etc...
+-   Suppression de 3 props dans Input Creator, car plus envoyés et plus utiles au bon fonctionnement, changement des appels de fonctions également.
+-   Redesign complet du Footer. Repris à la base du portfolio, j'ai essayé de le faire devenir un vrai footer.
+-   Il contient désormais un formulaire de contact en modal, reprenant la même logique que déjà installé dans le portfolio mais avec un tout nouveau design.
+-   Rajout d'un minimum de caractère affichée pour pouvoir envoyer.
+-   Le footer est composé de 5 parties, bouton du formulaire de contact, infos du projet, la politique de confidentitalité, les liens github et celui du portfolio
+-   Première utilisation de transition de Vue.JS. PLutot concluant.
+
 </details>

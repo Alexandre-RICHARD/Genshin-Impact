@@ -1,8 +1,8 @@
 <script setup>
 // Importation des différentes données de Genshin stockées en JSON
-const charactersList = require("@data/genshinCharactersData.json");
-const weaponsList = require("@data/genshinWeaponsData.json");
-const materialsList = require("@data/genshinMaterialsData.json");
+const CharactersList = require("@data/genshinCharactersData.json");
+const WeaponsList = require("@data/genshinWeaponsData.json");
+const MaterialsList = require("@data/genshinMaterialsData.json");
 const levelingData = require("@data/genshinLevelingData.json");
 import InputCreator from "@parts/InputCreator.vue";
 import { computed, onBeforeMount, reactive, ref } from "vue";
@@ -41,7 +41,7 @@ const readyToDestroyData = async (type) => {
 // Dès le début, on stock la liste des Niveaux de personnages et d'aptitudes séparément pour faciliter leurs accès dans le template
 const lvlList = levelingData.level.map(el => el.id);
 const aptList = levelingData.aptitude.map(el => el.level);
-const weaponNameList = weaponsList.flatMap(el => [el.name, el.eng_name]);
+const weaponNameList = WeaponsList.flatMap(el => [el.name, el.eng_name]);
 // Les différentes options du choix de serveur
 const serverList = ["Asiatique", "Européen", "Américain"];
 
@@ -58,7 +58,7 @@ const dataInit = async () => {
         // Si oui, on la transforme en un tableau utilisable
         data.Characters = JSON.parse(lsCharacter);
         // Boucle initié avec la liste des personnages complètes avec uniquement le nom du personnages servant d'identifiant unique
-        charactersList.forEach(({ name }) => {
+        CharactersList.forEach(({ name }) => {
             // On le cherche dans notre nouveau tableau. 
             const currentChar = data.Characters.find(fi => name === fi.name);
             // S'il existe, on va étudier chacune des valeurs que ce personnage contient pour assurer leur validité et les remplacer si besoin
@@ -88,7 +88,7 @@ const dataInit = async () => {
         // Si la chaîne de caractère n'existe pas, alors on va la créer de toute pièce en utilisant la fonction filler pour mettre par défaut chaque personnage
     } else {
         data.Characters = [];
-        charactersList.forEach(({ name }) => {
+        CharactersList.forEach(({ name }) => {
             data.Characters.push(filler("Characters", name));
         });
     }
@@ -98,7 +98,7 @@ const dataInit = async () => {
     const lsWeapons = await readyToLoadData("Weapons");
     if (lsWeapons) {
         data.Weapons = JSON.parse(lsWeapons);
-        weaponsList.forEach(({ name }) => {
+        WeaponsList.forEach(({ name }) => {
             const currentChar = data.Weapons.find(fi => name === fi.name);
             if (currentChar) {
                 const i = data.Weapons.findIndex(fi => name === fi.name);
@@ -115,7 +115,7 @@ const dataInit = async () => {
     const lsMaterial = await readyToLoadData("Materials");
     if (lsMaterial) {
         data.Materials = JSON.parse(lsMaterial);
-        materialsList.forEach(({ code }) => {
+        MaterialsList.forEach(({ code }) => {
             const currentMat = data.Materials.find(fi => code === fi.code);
             if (currentMat) {
                 const i = data.Materials.findIndex(fi => code === fi.code);
@@ -126,7 +126,7 @@ const dataInit = async () => {
         });
     } else {
         data.Materials = [];
-        materialsList.forEach(({ code }) => {
+        MaterialsList.forEach(({ code }) => {
             data.Materials.push(filler("Materials", code));
         });
     }
@@ -141,6 +141,7 @@ const dataInit = async () => {
         if ([false, true].indexOf(data.Options.alwaysOneMoreMaterial) < 0) data.Options.alwaysOneMoreMaterial = false;
         if ([false, true].indexOf(data.Options.leyLineResin) < 0) data.Options.leyLineResin = false;
         if ([false, true].indexOf(data.Options.explaination) < 0) data.Options.explaination = true;
+        if ([false, true].indexOf(data.Options.proposeToRemoveRessources) < 0) data.Options.proposeToRemoveRessources = false;
         if ([false, true].indexOf(data.Options.loadIMG) < 0) data.Options.loadIMG = false;
         if (serverList.indexOf(data.Options.server) < 0) data.Options.server = "";
     } else {
@@ -150,6 +151,7 @@ const dataInit = async () => {
             alwaysOneMoreMaterial: false,
             leyLineResin: false,
             explaination: true,
+            proposeToRemoveRessources: false,
             loadIMG: false,
             server: "",
         };
@@ -196,10 +198,86 @@ const destroyMyData = async () => {
 };
 
 // Quand un input créer avec le composant InputCreator, sa valuer est suivi avec un V-model puis un emit envoyé dans la fonction handleChange qui se charge de changer la bonne valeur dans l'array "data"
+
+const removeResData = reactive({
+    removeRessourcesModal: false,
+    weaponsOrCharactersConcerned: null,
+    levelOrAttribute: null,
+    oldLevel: null,
+    newLevel: null,
+    levelDifference: null,
+    ressorcesConcerned: [],
+    enoughForAll: true,
+});
+
 const handleChange = (group, index, valuename, value) => {
+    if (valuename === "only") isOnlyCharacters.value = value;
+    if (data.Options.proposeToRemoveRessources && ["cLvl", "cAp1", "cAp2", "cAp3"].indexOf(valuename) >= 0) {
+        if (group === "Weapons" ? true : (group === "Characters" && data[group][index].doing === true)) {
+            removeResData.weaponsOrCharactersConcerned = (group === "Characters" ? CharactersList : WeaponsList).find(fi => fi.name === data[group][index].name);
+            removeResData.oldLevel = data[group][index][valuename];
+            removeResData.newLevel = value;
+            removeResData.levelDifference = value - data[group][index][valuename];
+            let searchingString;
+            if (removeResData.levelDifference > 0) {
+                if (removeResData.weaponsOrCharactersConcerned.weapon_material) {
+                    searchingString = `weapon_${removeResData.weaponsOrCharactersConcerned.rarity}`;
+                } else if (valuename === "cLvl") {
+                    searchingString = "level";
+                } else {
+                    searchingString = "aptitude";
+                }
+                const progressStep = levelingData[searchingString].filter(fi => fi.id > removeResData.oldLevel && fi.id <= removeResData.newLevel);
+                removeResData.ressorcesConcerned = [];
+                progressStep.forEach(step => {
+                    for (const [key, value] of Object.entries(step)) {
+                        if (value > 0 && key != "id" && key != "level") {
+                            let materialCode;
+                            if (!isNaN(key.slice(-1))) {
+                                materialCode = removeResData.weaponsOrCharactersConcerned[key.slice(0, -2)] + key.slice(-1);
+                            } else {
+                                materialCode = removeResData.weaponsOrCharactersConcerned[key];
+                            }
+                            if (["g02", "g05"].indexOf(materialCode) < 0) {
+                                const findIndex = removeResData.ressorcesConcerned.findIndex(fi => fi.code === materialCode);
+                                if (findIndex >= 0) {
+                                    removeResData.ressorcesConcerned[findIndex].needed += value;
+                                } else {
+                                    removeResData.ressorcesConcerned.push({
+                                        ...MaterialsList.find(material => material.code === materialCode),
+                                        needed: value,
+                                    });
+                                }
+                            }
+                        }
+                    }
+                });
+                removeResData.enoughForAll = true;
+                removeResData.ressorcesConcerned.forEach(el => {
+                    const inventory = farmingMaterial.value.find(fi => fi.code === el.code);
+                    if (inventory.have - el.needed < 0) removeResData.enoughForAll = false;
+                });
+                removeResData.removeRessourcesModal = true;
+            }
+        }
+    }
     data[group][index][valuename] = value;
     readyToSaveData(group);
-    if (valuename === "only") isOnlyCharacters.value = value;
+};
+
+const removeRessourcesAfterChangeLevel = () => {
+    removeResData.ressorcesConcerned.forEach(el => {
+        const materialIndex = data.Materials.findIndex(fi => el.code === fi.code);
+        data.Materials[materialIndex].have -= el.needed;
+    });
+    removeResData.removeRessourcesModal = false;
+    removeResData.weaponsOrCharactersConcerned = null;
+    removeResData.levelOrAttribute = null;
+    removeResData.oldLevel = null;
+    removeResData.newLevel = null;
+    removeResData.levelDifference = null;
+    removeResData.ressorcesConcerned = [];
+    removeResData.enoughForAll = true;
 };
 
 // Chaine de caractère pour la recherche d'une arme
@@ -239,15 +317,15 @@ const filteredWeaponsResults = computed(() => {
     if (searchingWeaponQuery.value.length >= 1) {
         const firstFilter = weaponNameList.filter(name => name.toLowerCase().includes(searchingWeaponQuery.value.toLowerCase()));
         firstFilter.forEach(el => {
-            if (weaponsList.findIndex(fi => fi.eng_name === el) >= 0) {
-                if (weaponsList.findIndex(fi => fi.name === el) < 0) {
-                    temporaryArray.push(weaponsList.find(fi => fi.eng_name === el).name);
+            if (WeaponsList.findIndex(fi => fi.eng_name === el) >= 0) {
+                if (WeaponsList.findIndex(fi => fi.name === el) < 0) {
+                    temporaryArray.push(WeaponsList.find(fi => fi.eng_name === el).name);
                 }
             }
         });
 
         firstFilter.forEach(el => {
-            if (temporaryArray.indexOf(el) < 0 && weaponsList.findIndex(fi => fi.name === el) >= 0) {
+            if (temporaryArray.indexOf(el) < 0 && WeaponsList.findIndex(fi => fi.name === el) >= 0) {
                 temporaryArray.push(el);
             }
         });
@@ -265,7 +343,7 @@ const hideList = () => {
 // Fonction pour rajouter une arme à la liste.
 // On procède ainsi car il y a trop d'armes donc les afficher toutes seraient imbuvables, et on peut aussi imaginer le cas d'avoir deux fois la même
 const addWeaponToDo = (name) => {
-    const currentWeapon = weaponsList.find(el => el.eng_name === name || el.name === name);
+    const currentWeapon = WeaponsList.find(el => el.eng_name === name || el.name === name);
     data.Weapons.push({
         name: currentWeapon.name,
         rarity: currentWeapon.rarity,
@@ -335,11 +413,10 @@ const farmingMaterial = computed(() => {
                     } else {
                         // Sinon, on créer un nouvel objet reprenant les données des ressources en y ajoutant la quantité nécessaires
                         computedBuildArray.push({
-                            ...materialsList.find(material => material.code === materialCode),
+                            ...MaterialsList.find(material => material.code === materialCode),
                             needed: value,
                         });
                     }
-
                 }
             }
         });
@@ -350,7 +427,7 @@ const farmingMaterial = computed(() => {
     // Cependant, si on a un personnages qui a été coché comme only, alors on ne va cherche que cette propriété donc que ce perso
     data.Characters.filter(char => !isOnlyCharacters.value ? char.doing === true : char.only === true).forEach(char => {
         // Dans la données de persos, on récupère celles du personnage actuel.
-        const currentElement = charactersList.find(find => find.name === char.name);
+        const currentElement = CharactersList.find(find => find.name === char.name);
         // On boucle de 0 à 3 car on va surveiller 4 choses, le lvl, l'aptitude 1, la 2 et la 3.
         for (let i = 0; i <= 3; i++) {
             // On va récupérer la liste des niveaux séparant le niveau actuel du niveau voulu pour ainsi avoir accès à la liste de ce que demande chaque niveau comme matériel
@@ -366,7 +443,7 @@ const farmingMaterial = computed(() => {
     // On rajoute juste une condition au cas-où un personnage a été marqué comme "only", dans ce cas on ne traite aucun autre élément
     if (!isOnlyCharacters.value) {
         data.Weapons.forEach(weap => {
-            const currentElement = weaponsList.find(find => find.name === weap.name);
+            const currentElement = WeaponsList.find(find => find.name === weap.name);
             const progressStep = levelingData[`weapon_${currentElement.rarity}`].filter(step => step.id > weap.cLvl && step.id <= weap.wLvl);
             if (progressStep.length > 0) {
                 materialsAttributor(progressStep, currentElement);
@@ -375,7 +452,7 @@ const farmingMaterial = computed(() => {
     }
 
     // Ce code va servir a tout de même crée un objet pour chaque ressources, même s'il n'est pas demandé pour le farm des persos choisis
-    materialsList.forEach(material => {
+    MaterialsList.forEach(material => {
         // On boucle sur la liste de ressources provenant du json, on récupère la quantité que le joueur a
         const userValue = data.Materials.find(fi => fi.code === material.code).have;
         // On regarde si cette ressources est déjà dans le tableau provisoire
@@ -673,6 +750,10 @@ const handleTime = {
     },
 };
 
+const cleanLocalStorage = () => {
+    localStorage.removeItem("userSessionInfo");
+};
+
 // Fonction appelé avant le montage du composant afin d'initier les tablaux de données et la mise en marche de l'horloge
 onBeforeMount(() => {
     dataInit();
@@ -682,6 +763,7 @@ onBeforeMount(() => {
 
 <template>
     <div v-if="!otherData.loading">
+        <button @click="cleanLocalStorage">VIDER LE LOCAL STORAGE</button>
         <div class="dev-options">
             <button class="clean-button" @click="destroyMyData">VIDER LE LOCAL STORAGE</button>
             <div class="boolean">
@@ -718,6 +800,13 @@ onBeforeMount(() => {
                     name="boolean-explaination" @change="readyToSaveData('Options')"
                 >
                 <label class="boolean-label" for="boolean-explaination">Montrer les explications</label>
+            </div>
+            <div class="boolean">
+                <input
+                    id="boolean-remove-ressorces" v-model="data.Options.proposeToRemoveRessources" class="boolean-checkbox" type="checkbox"
+                    name="boolean-remove-ressorces" @change="readyToSaveData('Options')"
+                >
+                <label class="boolean-label" for="boolean-remove-ressorces">Ouvrir une boite de dialogue si un niveau actuel en cours change, proposant d'enlever les ressources correspondantes (sauf livres/minerai d'expérience et si elles sont toutes en quantités suffisantes)</label>
             </div>
             <div class="boolean">
                 <input
@@ -762,7 +851,7 @@ onBeforeMount(() => {
                 en avoir certaine et donc de tout décaler
             </p>
         </div>
-        <div>
+        <div class="other-info">
             <p>Les trois ressources farmables sans résine que tu as le moins sont par type :</p>
             <div>
                 <p>- communs : {{ otherInfo.common.name }} et ses dérivés avec {{ otherInfo.common.quantity }} points. </p>
@@ -810,7 +899,186 @@ onBeforeMount(() => {
             </div>
             <p>Résine total : {{ otherInfo.resin }} Nombre de jours que cela représente : {{ Math.ceil(otherInfo.resin / 180) }}. </p>
         </div>
+        <div v-if="removeResData.removeRessourcesModal" class="cache">
+            <div class="remove-resources-modal">
+                <button class="close-button" @click="removeResData.removeRessourcesModal = false">X</button>
+                <p>Vous avez fait passé {{ removeResData.weaponsOrCharactersConcerned.name }} du niveau {{ removeResData.oldLevel }} au niveau {{ removeResData.newLevel }}.</p>
+                <div v-if="removeResData.enoughForAll" class="sufficient-ressorces">
+                    <p>Voulez-vous retirer les ressources correspondantes de votre inventaire ?</p>
+                    <div v-for="ressource in removeResData.ressorcesConcerned" :key="ressource.code" class="remove-ressources-list">
+                        {{ ressource.name }}
+                    </div>
+                    <div class="remove-resources-choice">
+                        <button @click="removeRessourcesAfterChangeLevel">Oui, les retirer</button>
+                        <button @click="removeResData.removeRessourcesModal = false">Non, je le ferai manuellement</button>
+                    </div>
+                </div>
+                <div v-if="!removeResData.enoughForAll">
+                    <p>Une ou plusieurs des ressources nécessaires n'est pas en quantité suffisante dans l'inventaire, vous devriez gérer vos ressources manuellement pour éviter les erreurs.</p>
+                </div>
+            </div>
+        </div>
         <div class="tabs-contener">
+            <div>
+                <div style="background-color: #4b453c;">
+                    <input v-model="searchingCharactersQuery" for="searching-characters" type="text">
+                    <label name="searching-characters">Rechercher un personnage</label>
+                </div>
+                <table class="all-character-progress">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>J'ai</th>
+                            <th>Build</th>
+                            <th>Only</th>
+                            <th>Lvl-A</th>
+                            <th>Lvl-V</th>
+                            <th>Ap1-A</th>
+                            <th>Ap1-V</th>
+                            <th>Ap2-A</th>
+                            <th>Ap2-V</th>
+                            <th>Ap3-A</th>
+                            <th>Ap3-V</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr 
+                            v-for="character in filteredCharacters" :key="character.name"
+                            :class="{ 
+                                'have': character.got,
+                                'doing': character.doing,
+                                'doing-havnt': !character.got && character.doing,
+                                'doing-and-done': character.doing && character.got && character.cLvl === character.wLvl && character.cAp1 === character.wAp1 && character.cAp2 === character.wAp2 && character.cAp3 === character.wAp3,
+                            }"
+                        >
+                            <td>
+                                <div class="name_cell">
+                                    <img
+                                        v-if="data.Options.loadIMG"
+                                        :src="require(`@static/images/genshin_icon/characters/${character.name}.png`)"
+                                        :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${CharactersList.find(fi => fi.name === character.name).rarity}.png`)}')` }"
+                                    >
+                                    <p>{{ character.name }}</p>
+                                </div>
+                            </td>
+                            <InputCreator
+                                :checked="character.got" type="checkbox"
+                                @update:checked="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'got', newValue)"
+                            />
+                            <InputCreator
+                                :checked="character.doing" type="checkbox" :disabled="character.only "
+                                @update:checked="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'doing', newValue)"
+                            />
+                            <InputCreator
+                                :checked="character.only" type="checkbox" :disabled="!character.doing || (!character.only && isOnlyCharacters)"
+                                @update:checked="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'only', newValue)"
+                            />
+                            <InputCreator
+                                :value="character.cLvl" type="select-level"
+                                :list="levelingData.level.filter((el) => el.id <= character.wLvl)"
+                                @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'cLvl', newValue)"
+                            />
+                            <InputCreator
+                                :value="character.wLvl" type="select-level"
+                                :list="levelingData.level.filter((el) => el.id >= character.cLvl)"
+                                @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'wLvl', newValue)"
+                            />
+                            <InputCreator
+                                :value="character.cAp1" type="select-aptitude"
+                                :list="aptList.filter((el) => el <= character.wAp1)"
+                                @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'cAp1', newValue)"
+                            />
+                            <InputCreator
+                                :value="character.wAp1" type="select-aptitude"
+                                :list="aptList.filter((el) => el >= character.cAp1)"
+                                @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'wAp1', newValue)"
+                            />
+                            <InputCreator
+                                :value="character.cAp2" type="select-aptitude"
+                                :list="aptList.filter((el) => el <= character.wAp2)"
+                                @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'cAp2', newValue)"
+                            />
+                            <InputCreator
+                                :value="character.wAp2" type="select-aptitude"
+                                :list="aptList.filter((el) => el >= character.cAp2)"
+                                @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'wAp2', newValue)"
+                            />
+                            <InputCreator
+                                :value="character.cAp3" type="select-aptitude"
+                                :list="aptList.filter((el) => el <= character.wAp3)"
+                                @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'cAp3', newValue)"
+                            />
+                            <InputCreator
+                                :value="character.wAp3" type="select-aptitude"
+                                :list="aptList.filter((el) => el >= character.cAp3)"
+                                @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'wAp3', newValue)"
+                            />
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <div class="search-input">
+                    <input
+                        v-model="searchingWeaponQuery"
+                        class="input"
+                        type="text"
+                        placeholder="Rechercher une arme"
+                        @focus="showResultList = true"
+                        @blur="hideList"
+                    >
+                    <ul v-if="showResultList && searchingWeaponQuery.length >= 1" class="list">
+                        <li
+                            v-for="result in filteredWeaponsResults"
+                            :key="result"
+                            class="one-result"
+                            @click="addWeaponToDo(result)"
+                        >
+                            <img
+                                v-if="data.Options.loadIMG"
+                                class="results-image"
+                                :src="require(`@static/images/genshin_icon/weapons/${WeaponsList.find(fi => fi.name === result || fi.eng_name === result).name}.png`)"
+                                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${WeaponsList.find(fi => fi.name === result || fi.eng_name === result).rarity}.png`)}')` }"
+                            >
+                            <p class="result-name">{{ result }}</p>
+                        </li>
+                    </ul>
+                </div>
+                <table class="all-weapons-progress">
+                    <thead>
+                        <tr>
+                            <th>Nom de l'arme</th>
+                            <th>Niveau actuel</th>
+                            <th>Niveau voulu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(weapon, index) in data.Weapons" :key="index">
+                            <td>
+                                <div class="name_cell">
+                                    <button class="deleting-weapon" type="button" @click="deletingWeaponToDo(index)">X</button>
+                                    <img
+                                        v-if="data.Options.loadIMG"
+                                        :src="require(`@static/images/genshin_icon/weapons/${weapon.name}.png`)"
+                                        :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${WeaponsList.find(fi => fi.name === weapon.name).rarity}.png`)}')` }"
+                                    >
+                                    <p>{{ weapon.name }}</p>
+                                </div>
+                            </td>
+                            <InputCreator
+                                :value="weapon.cLvl" type="select-level"
+                                :list="levelingData[`weapon_${weapon.rarity}`].filter((el) => el.id <= weapon.wLvl)"
+                                @update:value="newValue => handleChange('Weapons', index, 'cLvl', newValue)"
+                            />
+                            <InputCreator
+                                :value="weapon.wLvl" type="select-level"
+                                :list="levelingData[`weapon_${weapon.rarity}`].filter((el) => el.id >= weapon.cLvl)"
+                                @update:value="newValue => handleChange('Weapons', index, 'wLvl', newValue)"
+                            />
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <table class="all-materials-inventory">
                 <thead>
                     <tr>
@@ -839,23 +1107,26 @@ onBeforeMount(() => {
                                 <img
                                     v-if="data.Options.loadIMG"
                                     :src="require(`@static/images/genshin_icon/materials/${material.code}.png`)"
-                                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${materialsList.find(fi => fi.code === material.code).rarity}.png`)}')` }"
+                                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${MaterialsList.find(fi => fi.code === material.code).rarity}.png`)}')` }"
                                 >
                                 <p>{{ material.name }}</p>
                             </div>
                         </td>
                         <InputCreator
-                            v-model:value="data.Materials.find(el => el.code === material.code).have" type="number"
-                            :index="data.Materials.findIndex(el => el.code === material.code)" valuename="have"
-                            group="Materials" @update:value="handleChange"
+                            :value="data.Materials.find(el => el.code === material.code).have" type="number"
+                            @update:value="newValue => handleChange('Materials', data.Materials.findIndex(el => el.code === material.code), 'have', newValue)"
                         />
                         <td>{{ material.needed }}</td>
                         <td>
                             {{ material.needed - material.have >= (data.Options.alwaysOneMoreMaterial ? 0 : 1) ? material.remain : "Parfait" }}
                         </td>
                         <td>
-                            {{ !!serverDay ? (typeof material.farming_days === "number" ?
-                                material.farming_days.toString().includes(serverDay.toString()) : "") : "" }}
+                            {{ 
+                                material.needed - material.have >= (data.Options.alwaysOneMoreMaterial ? 0 : 1)
+                                    ? (!!serverDay ? (typeof material.farming_days === "number" ?
+                                        material.farming_days.toString().includes(serverDay.toString()) : "") : "")
+                                    : ""
+                            }}
                         </td>
                         <td>{{ material.synthesis ? material.group_have : "" }}</td>
                         <td>{{ material.synthesis ? material.group_needed : "" }}</td>
@@ -863,169 +1134,6 @@ onBeforeMount(() => {
                     </tr>
                 </tbody>
             </table>
-            <div style="background-color: #4b453c;">
-                <input v-model="searchingCharactersQuery" for="searching-characters" type="text">
-                <label name="searching-characters">Rechercher un personnage</label>
-            </div>
-            <table class="all-character-progress">
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>J'ai</th>
-                        <th>Build</th>
-                        <th>Only</th>
-                        <th>Lvl-A</th>
-                        <th>Lvl-V</th>
-                        <th>Ap1-A</th>
-                        <th>Ap1-V</th>
-                        <th>Ap2-A</th>
-                        <th>Ap2-V</th>
-                        <th>Ap3-A</th>
-                        <th>Ap3-V</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="character in filteredCharacters" :key="character.name">
-                        <td>
-                            <div class="name_cell">
-                                <img
-                                    v-if="data.Options.loadIMG"
-                                    :src="require(`@static/images/genshin_icon/characters/${character.name}.png`)"
-                                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${charactersList.find(fi => fi.name === character.name).rarity}.png`)}')` }"
-                                >
-                                <p>{{ character.name }}</p>
-                            </div>
-                        </td>
-                        <InputCreator
-                            v-model:checked="character.got" type="checkbox"
-                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="got"
-                            group="Characters" @update:checked="handleChange"
-                        />
-                        <InputCreator
-                            v-model:checked="character.doing" type="checkbox" :disabled="character.only "
-                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="doing"
-                            group="Characters" @update:checked="handleChange"
-                        />
-                        <InputCreator
-                            v-model:checked="character.only" type="checkbox" :disabled="!character.doing || (!character.only && isOnlyCharacters)"
-                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="only"
-                            group="Characters" @update:checked="handleChange"
-                        />
-                        <InputCreator
-                            v-model:value="character.cLvl" type="select-level"
-                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cLvl"
-                            :list="levelingData.level.filter((el) => el.id <= character.wLvl)" group="Characters"
-                            @update:value="handleChange"
-                        />
-                        <InputCreator
-                            v-model:value="character.wLvl" type="select-level"
-                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wLvl"
-                            :list="levelingData.level.filter((el) => el.id >= character.cLvl)" group="Characters"
-                            @update:value="handleChange"
-                        />
-                        <InputCreator
-                            v-model:value="character.cAp1" type="select-aptitude"
-                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cAp1"
-                            :list="aptList.filter((el) => el <= character.wAp1)" group="Characters"
-                            @update:value="handleChange"
-                        />
-                        <InputCreator
-                            v-model:value="character.wAp1" type="select-aptitude"
-                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wAp1"
-                            :list="aptList.filter((el) => el >= character.cAp1)" group="Characters"
-                            @update:value="handleChange"
-                        />
-                        <InputCreator
-                            v-model:value="character.cAp2" type="select-aptitude"
-                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cAp2"
-                            :list="aptList.filter((el) => el <= character.wAp2)" group="Characters"
-                            @update:value="handleChange"
-                        />
-                        <InputCreator
-                            v-model:value="character.wAp2" type="select-aptitude"
-                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wAp2"
-                            :list="aptList.filter((el) => el >= character.cAp2)" group="Characters"
-                            @update:value="handleChange"
-                        />
-                        <InputCreator
-                            v-model:value="character.cAp3" type="select-aptitude"
-                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="cAp3"
-                            :list="aptList.filter((el) => el <= character.wAp3)" group="Characters"
-                            @update:value="handleChange"
-                        />
-                        <InputCreator
-                            v-model:value="character.wAp3" type="select-aptitude"
-                            :index="data.Characters.findIndex(el => el.name === character.name)" valuename="wAp3"
-                            :list="aptList.filter((el) => el >= character.cAp3)" group="Characters"
-                            @update:value="handleChange"
-                        />
-                    </tr>
-                </tbody>
-            </table>
-            <div>
-                <div class="search-input">
-                    <input
-                        v-model="searchingWeaponQuery"
-                        class="input"
-                        type="text"
-                        placeholder="Rechercher une arme"
-                        @focus="showResultList = true"
-                        @blur="hideList"
-                    >
-                    <ul v-if="showResultList && searchingWeaponQuery.length >= 1" class="list">
-                        <li
-                            v-for="result in filteredWeaponsResults"
-                            :key="result"
-                            class="one-result"
-                            @click="addWeaponToDo(result)"
-                        >
-                            <img
-                                v-if="data.Options.loadIMG"
-                                class="results-image"
-                                :src="require(`@static/images/genshin_icon/weapons/${weaponsList.find(fi => fi.name === result || fi.eng_name === result).name}.png`)"
-                                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${weaponsList.find(fi => fi.name === result || fi.eng_name === result).rarity}.png`)}')` }"
-                            >
-                            <p class="result-name">{{ result }}</p>
-                        </li>
-                    </ul>
-                </div>
-                <table class="all-weapons-progress">
-                    <thead>
-                        <tr>
-                            <th>Nom de l'arme</th>
-                            <th>Niveau actuel</th>
-                            <th>Niveau voulu</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(weapon, index) in data.Weapons" :key="index">
-                            <td>
-                                <div class="name_cell">
-                                    <button class="deleting-weapon" type="button" @click="deletingWeaponToDo(index)">X</button>
-                                    <img
-                                        v-if="data.Options.loadIMG"
-                                        :src="require(`@static/images/genshin_icon/weapons/${weapon.name}.png`)"
-                                        :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${weaponsList.find(fi => fi.name === weapon.name).rarity}.png`)}')` }"
-                                    >
-                                    <p>{{ weapon.name }}</p>
-                                </div>
-                            </td>
-                            <InputCreator
-                                v-model:value="weapon.cLvl" type="select-level"
-                                :index="index" valuename="cLvl"
-                                :list="levelingData[`weapon_${weapon.rarity}`].filter((el) => el.id <= weapon.wLvl)" group="Weapons"
-                                @update:value="handleChange"
-                            />
-                            <InputCreator
-                                v-model:value="weapon.wLvl" type="select-level"
-                                :index="index" valuename="wLvl"
-                                :list="levelingData[`weapon_${weapon.rarity}`].filter((el) => el.id >= weapon.cLvl)" group="Weapons"
-                                @update:value="handleChange"
-                            />
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
 </template>
@@ -1120,6 +1228,26 @@ onBeforeMount(() => {
     tr.done, tr:nth-child(even).done {
         background-color: #92d17f;
     }
+
+
+
+    tr.have, tr:nth-child(even).have {
+        background-color: #424773;
+    }
+
+    tr.doing, tr:nth-child(even).doing {
+        background-color: #b45f06;
+    }
+
+    tr.doing-havnt, tr:nth-child(even).doing-havnt {
+        background-color: #bf9000;
+    }
+
+    tr.doing-and-done, tr:nth-child(even).doing-and-done {
+        background-color: #1e2d20;
+    }
+
+
 
     td {
         color: #000000;
@@ -1234,5 +1362,24 @@ onBeforeMount(() => {
     padding: 0px 5px;
     border-radius: 20px;
     margin: 0 10px;
+}
+
+.cache {
+    .remove-resources-modal {
+        background-color: #4650ac;
+        padding: 6px;
+        border-radius: 12px;
+        color: #ffffff;
+
+        // .sufficient-ressorces {   
+            // .ressources-list {
+                
+            // }
+            
+            // .remove-resources-choice {
+                
+            // }
+        // }
+    }
 }
 </style>

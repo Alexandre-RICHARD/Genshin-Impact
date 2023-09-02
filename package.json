@@ -1,7 +1,7 @@
 {
     "name": "genshin-farm-calculator",
-    "version": "1.3.1",
-    "versiondate": "30/08/23",
+    "version": "1.3.2",
+    "versiondate": "02/09/23",
     "scripts": {
         "start": "cross-env NODE_ENV=development webpack serve --history-api-fallback",
         "build": "cross-env NODE_ENV=production webpack",
@@ -19,10 +19,10 @@
     "devDependencies": {
         "@babel/core": "^7.22.11",
         "@babel/eslint-parser": "^7.22.11",
-        "@babel/plugin-proposal-class-properties": "^7.18.6",
-        "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
         "@babel/plugin-syntax-jsx": "^7.22.5",
-        "@babel/preset-env": "^7.22.10",
+        "@babel/plugin-transform-class-properties": "^7.22.5",
+        "@babel/plugin-transform-object-rest-spread": "^7.22.11",
+        "@babel/preset-env": "^7.22.14",
         "babel-loader": "^8.3.0",
         "clean-webpack-plugin": "^4.0.0",
         "copy-webpack-plugin": "^11.0.0",
@@ -53,7 +53,7 @@
         "vue-router": "^4.2.4",
         "vue-template-compiler": "^2.7.14",
         "webpack": "^5.88.2",
-        "webpack-bundle-analyzer": "^4.9.0",
+        "webpack-bundle-analyzer": "^4.9.1",
         "webpack-cli": "^4.10.0",
         "webpack-dev-server": "^4.15.1",
         "webpack-merge": "^5.9.0"

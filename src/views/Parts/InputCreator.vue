@@ -4,10 +4,6 @@ defineProps({
         type: String,
         required: true,
     },
-    group: {
-        type: String,
-        required: true,
-    },
     value: {
         type: Number,
         default: 1,
@@ -24,14 +20,6 @@ defineProps({
         type: Array,
         default: () => {},
     },
-    valuename: {
-        type: String,
-        required: true,
-    },
-    index: {
-        type: Number,
-        required: true,
-    }
 });
 defineEmits(["update:checked", "update:value"]);
 </script>
@@ -43,12 +31,12 @@ defineEmits(["update:checked", "update:value"]);
             type="checkbox"
             :checked="checked"
             :disabled="disabled"
-            @change="$emit('update:checked', group, index, valuename, $event.target.checked)"
+            @change="$emit('update:checked', $event.target.checked)"
         >
     </td>
 
     <td v-if="type === 'select-level'">
-        <select :value="value" class="select" @change="$emit('update:value', group, index, valuename, parseInt($event.target.value))">
+        <select :value="value" class="select" @change="$emit('update:value', parseInt($event.target.value))">
             <option v-for="lvl in list" :key="lvl.id" :value="lvl.id">
                 {{ lvl.level }}
             </option>
@@ -57,7 +45,7 @@ defineEmits(["update:checked", "update:value"]);
     </td>
 
     <td v-if="type === 'select-aptitude'">
-        <select :value="value" class="select" @change="$emit('update:value', group, index, valuename, parseInt($event.target.value))">
+        <select :value="value" class="select" @change="$emit('update:value', parseInt($event.target.value))">
             <option v-for="lvl in list" :key="lvl" :value="lvl">
                 {{ lvl }}
             </option>
@@ -69,7 +57,7 @@ defineEmits(["update:checked", "update:value"]);
         <input
             type="number" min="0" step="1" max="1000000000"
             :value="value"
-            class="number" @change="$emit('update:value', group, index, valuename, parseInt($event.target.value))"
+            class="number" @change="$emit('update:value', parseInt($event.target.value))"
         >
     </td>
 </template>
