@@ -333,4 +333,58 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Le footer est composé de 5 parties, bouton du formulaire de contact, infos du projet, la politique de confidentitalité, les liens github et celui du portfolio
 -   Première utilisation de transition de Vue.JS. PLutot concluant.
 
+### 2.0.0 `4 septembre 2023`
+
+-   Mise à jour des packages npm
+-   Remplacement de 2 plugins babels par des versions nouvellement prise en charge
+-   Rajout d'un alias pour les SVGS dans webpack.config.js
+-   Rajout d'un svg symbole warning et transformation en template Vue.JS
+-   Rajout d'un svg pour les paramètres et transformation en template vue.JS
+-   Rajout du style pour les checkbox, les select et les input number uniformisé à tous et tous les tableaux
+-   Transformation de toutes les importation d'images de ressources, de personnages ou d'armes en un composant dédié avec envoi en props de la catégorie, le nom et la rareté pour le fond.
+-   Ajout d'un paragraphe à la politique de confidentialité pour bien préciser que ce n'est pas du tout dans le but que de plagier ou faire concurrence aux autres sites fan de Genshin
+-   Quelques ajustements dans le style du footer. Du à son agrandissement, il est nécessaire de plus le remonter.
+-   Retrait de la majorité de la logique de la fonction copyUuid de EntryPage pour la mettre dans GenshinFarming.
+-   Suppression du cache pour l'entrée sur le site. Il ne servait pas vu qu'il n'y a rien a cacher désormais
+-   Quelques changement de styles dans le composant EntryPage. Notamment, le message d'erreur en cas d'Uuid non trouvé
+-   Réarrangement des variables SCSS. Nouvelles couleurs, changement de celles déjà existantes.
+-   Nouveau système de gestion des Z-index dans les variables SCSS
+-   Nouvelle fonction dans fetchHandler permettant de supprimer un utilisateur et ses données
+-   Toute la suite sera à propos du fichier GenshinFarming.vue. Avec plus de 750 lignes rajoutées (honte à moi)
+-   Importation des 3 nouveaux composants personnalisés que sont GenshinImage, ParamsLogo et WarningLogo.
+-   Importation de la fonction deleteUser de fetchHandler.js
+-   Importation de URL depuis process.env avec le fichier .env
+-   Transfert de la fonction copyUuid depus EntryPage jusqu'à ce composant, en effet les deux boutons liés sont maintenants dans les paramètres de cette page
+-   Cette fonction permet de copier l'uuid, le lien avec l'uuid et déclenche un petit effet visuel indiquant que la copie s'est bien passé.
+-   Suppression de la variables data.Options.explaination. Désormais, les explications sont affichées d'une toute autre manière bien plus logique et ergonomique
+-   Amélioration de la manière dont un utilisateur peut supprimer ou reset ses données. Désormais, le reset supprime les données mais pas l'utilisateur et recharge la page. Alors que la suppression supprime les données et l'utilisateur lié, et renvoi à la page d'accueil.
+-   Dans removeResData, changement du nom de la variable "levelOrAttribute" en "levelOrAptitude"
+-   Dans removeResData, rajout de deux nouvelles variables. Ce sont les niveaux avant après mais pas avec leur id, mais bien avec leur nom pour éviter les niveaux 96 à cause des niveaux d'ascension
+-   Utilisation et affichage de la données levelOrAptitude depuis la fonction handleChange.
+-   Affectation des valeurs des old/newLevelName depuis handleChange
+-   Ajout de ces variables dans le reset effectué de l'objet dans removeRessourcesAfterChangeLevel
+-   Ajout d'une sauvegarde des données de Materials depuis removeRessourcesAfterChangeLevel une fois que les ressources ont été supprimés
+-   Ajout d'un champ de recherche pour les ressources afin de les filtrer plus facilement si on veut en changer une seule
+-   Changement induit de l'objet computed filteredMaterials en reprenant la logique de celle utilisée pour les personnages
+-   Réduction du délai de fermeture de la liste affichée lors d'une recherche d'arme
+-   Changement des valeurs par défaut des variables utilisées pour les heures dans handleTime
+-   Si on reset les données, le compte à rebourd s'affichait encore mais figé. Il est maintenant remis à zéro si ce cas arrive.
+-   Déplacement de la fonction cleanLocalStorage pour la rendre cohérente avec les autres fonctions du même style
+-   Rajout d'une fonction openCloseLeftModal et de deux variables pour gérer la bonne apparition du menu lattéral de gauche avec les options et les explications
+-   Impossible de toute décrire avec exactitude pour ce qui est des modifications qui ont eu lieu dans le template et le style donc on va faire en gros
+-   Rajout d'un panneau latéral à gauche permettant avec des boutons d'ouvrir les explications et les options du site
+-   Réorganisation complète des options, de leur style et pour certaines de leur fonctionnement.
+-   Ajout des Transition proposées par Vue.JS permettant de faire des changements plus fluides et agréables sur la page
+-   Beaucoup de classes rajoutées, de classes renommées et de div servant de container rajoutés pour la mise en forme
+-   Les 2 options permettant de copier l'uuid dans les options n'apparaissent que si on est sur une session de type identifiée
+-   Utilisation du WarningLogo sur les deux boutons de réinitialisation et suppression de données dans les options
+-   Rajout d'un gros pavés explicatifs sur le fonctionnement du site avec des class différentes pour mettre en forme les paragraphes
+-   Reformatage et stylisation du bloc sur les ressources en moins et le petit cadre indiquant l'heure
+-   Stylisation complète de la modal permettant de retirer les ressources automatiquement après un changement supérieure de valeur
+-   Adaptation du texte en fonction de si on parle d'un niveau ou d'une aptitude
+-   Remplacement de toutes les balises images précédentes par le bon composant qui gère ça très bien.
+-   Changement de la condition pour vérifier si un matériel est farmable aujourd'hui. Ajout d'une classe avec cette même condition afin de pouvoir le mettre en valeur
+-   Rajout de quelques animations, d'éléments plus fluides et globalement une meilleure disposition
+-   Ajout des couleurs pour chaque cas pour les characters et matériaux afin de les différencier
+
 </details>

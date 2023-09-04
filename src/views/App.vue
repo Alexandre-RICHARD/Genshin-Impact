@@ -21,8 +21,8 @@ body,
         font-family: $kanit;
         width: 100%;
         min-width: 200px;
-        background-color: $color1;
         color: $color3;
+        background-color: $color17;
         display: flex;
         flex-direction: column;
     }

@@ -27,6 +27,10 @@ export const deleteOneData = async (uuid, data_type) => {
     return await requestTemplate("/genshin/delete", "DELETE", { "uuid": uuid, "data_type": data_type });
 };
 
+export const deleterUser = async (uuid) => {
+    return await requestTemplate("/genshin/delete/user", "DELETE", { "uuid": uuid });
+};
+
 export const sendMessage = async (contactFormValues) => {
     return await requestTemplate("/contact", "POST", contactFormValues);
 };

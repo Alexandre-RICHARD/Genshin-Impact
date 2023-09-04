@@ -4,11 +4,15 @@ const CharactersList = require("@data/genshinCharactersData.json");
 const WeaponsList = require("@data/genshinWeaponsData.json");
 const MaterialsList = require("@data/genshinMaterialsData.json");
 const levelingData = require("@data/genshinLevelingData.json");
+import GenshinImage from "@parts/GenshinImage.vue";
 import InputCreator from "@parts/InputCreator.vue";
+import ParamsLogo from "@svgs/ParamsLogo.vue";
+import WarningLogo from "@svgs/WarningLogo.vue";
 import { computed, onBeforeMount, reactive, ref } from "vue";
-import { deleteOneData, getOneData, saveOneData } from "@middlewares/fetchHandler.js";
+import { deleteOneData, deleterUser, getOneData, saveOneData } from "@middlewares/fetchHandler.js";
 import { useMainStore } from "@store/Main";
 const { otherData, userSession } = useMainStore();
+const URL = process.env.URL;
 
 const readyToSaveData = async (type) => {
     if (userSession.type === "identified") {
@@ -36,6 +40,23 @@ const readyToDestroyData = async (type) => {
     } else if (userSession.type === "guest") {
         localStorage.removeItem(`genshin${type}Data`);
     }
+};
+
+const copyUuid = (type) => {
+    switch (type) {
+    case "uuid":
+        navigator.clipboard.writeText(userSession.uuid);
+        break;
+    case "link-with-uuid":
+        navigator.clipboard.writeText(`${URL}?uuid=${userSession.uuid}`);
+        break;
+    }
+
+    const copyAlert = document.querySelector(`#${type}`);
+    copyAlert.classList.toggle("displayed");
+    setTimeout(() => {
+        copyAlert.classList.toggle("displayed");
+    }, 2000);
 };
 
 // Dès le début, on stock la liste des Niveaux de personnages et d'aptitudes séparément pour faciliter leurs accès dans le template
@@ -140,7 +161,6 @@ const dataInit = async () => {
         if ([false, true].indexOf(data.Options.onlyShowsNeededMaterials) < 0) data.Options.onlyShowsNeededMaterials = false;
         if ([false, true].indexOf(data.Options.alwaysOneMoreMaterial) < 0) data.Options.alwaysOneMoreMaterial = false;
         if ([false, true].indexOf(data.Options.leyLineResin) < 0) data.Options.leyLineResin = false;
-        if ([false, true].indexOf(data.Options.explaination) < 0) data.Options.explaination = true;
         if ([false, true].indexOf(data.Options.proposeToRemoveRessources) < 0) data.Options.proposeToRemoveRessources = false;
         if ([false, true].indexOf(data.Options.loadIMG) < 0) data.Options.loadIMG = false;
         if (serverList.indexOf(data.Options.server) < 0) data.Options.server = "";
@@ -150,7 +170,6 @@ const dataInit = async () => {
             onlyShowsNeededMaterials: false,
             alwaysOneMoreMaterial: false,
             leyLineResin: false,
-            explaination: true,
             proposeToRemoveRessources: false,
             loadIMG: false,
             server: "",
@@ -189,12 +208,23 @@ const filler = (type, name) => {
 };
 
 // Relié à un bouton permettant de nettoyer et reset par défaut le localStorage
-const destroyMyData = async () => {
+const userResetData = async (type) => {
     await readyToDestroyData("Characters");
     await readyToDestroyData("Weapons");
     await readyToDestroyData("Materials");
     await readyToDestroyData("Options");
-    dataInit();
+    if (type === "reset") dataInit();
+};
+
+const deleteUserData = async () => {
+    await userResetData("delete");
+    await deleterUser(userSession.uuid);
+    quitSession();
+};
+
+const quitSession = () => {
+    localStorage.removeItem("userSessionInfo");
+    userSession.step = "start";
 };
 
 // Quand un input créer avec le composant InputCreator, sa valuer est suivi avec un V-model puis un emit envoyé dans la fonction handleChange qui se charge de changer la bonne valeur dans l'array "data"
@@ -202,9 +232,11 @@ const destroyMyData = async () => {
 const removeResData = reactive({
     removeRessourcesModal: false,
     weaponsOrCharactersConcerned: null,
-    levelOrAttribute: null,
+    levelOrAptitude: null,
     oldLevel: null,
     newLevel: null,
+    oldLevelName: null,
+    newLevelName: null,
     levelDifference: null,
     ressorcesConcerned: [],
     enoughForAll: true,
@@ -222,11 +254,16 @@ const handleChange = (group, index, valuename, value) => {
             if (removeResData.levelDifference > 0) {
                 if (removeResData.weaponsOrCharactersConcerned.weapon_material) {
                     searchingString = `weapon_${removeResData.weaponsOrCharactersConcerned.rarity}`;
+                    removeResData.levelOrAptitude = "level";
                 } else if (valuename === "cLvl") {
                     searchingString = "level";
+                    removeResData.levelOrAptitude = "level";
                 } else {
                     searchingString = "aptitude";
+                    removeResData.levelOrAptitude = "aptitude";
                 }
+                removeResData.oldLevelName = levelingData[searchingString].find(fi => fi.id === removeResData.oldLevel).level;
+                removeResData.newLevelName = levelingData[searchingString].find(fi => fi.id === removeResData.newLevel).level;
                 const progressStep = levelingData[searchingString].filter(fi => fi.id > removeResData.oldLevel && fi.id <= removeResData.newLevel);
                 removeResData.ressorcesConcerned = [];
                 progressStep.forEach(step => {
@@ -272,18 +309,23 @@ const removeRessourcesAfterChangeLevel = () => {
     });
     removeResData.removeRessourcesModal = false;
     removeResData.weaponsOrCharactersConcerned = null;
-    removeResData.levelOrAttribute = null;
+    removeResData.levelOrAptitude = null;
     removeResData.oldLevel = null;
     removeResData.newLevel = null;
+    removeResData.oldLevelName = null;
+    removeResData.newLevelName = null;
     removeResData.levelDifference = null;
     removeResData.ressorcesConcerned = [];
     removeResData.enoughForAll = true;
+    readyToSaveData("Materials");
 };
 
 // Chaine de caractère pour la recherche d'une arme
 const searchingWeaponQuery = ref("");
 // Chaine de caractère pour la recherche d'un personnage
 const searchingCharactersQuery = ref("");
+// Chaine de caractère pour la recherche d'une ressource
+const searchingMaterialsQuery = ref("");
 // Boolean indiquand si oui ou non on affiche la liste de recherche
 const showResultList = ref(false);
 
@@ -299,15 +341,6 @@ const filteredCharacters = computed(() => {
         );
     });
     return filter.sort(sortFunction("name"));
-});
-
-// Un objet computed afin de filtrer en fonction d'une option si on ne veut voir que les matériaux de farm dont on a besoin
-const filteredMaterials = computed(() => {
-    if (data.Options.onlyShowsNeededMaterials) {
-        return farmingMaterial.value.filter(el => el.farm_require);
-    } else {
-        return farmingMaterial.value;
-    }
 });
 
 // Fonction de filtre pour les armes en fonction de la recherche effectuée
@@ -333,11 +366,25 @@ const filteredWeaponsResults = computed(() => {
     return temporaryArray.slice(0, 7);
 });
 
+// Un objet computed afin de filtrer en fonction d'une option si on ne veut voir que les matériaux de farm dont on a besoin
+const filteredMaterials = computed(() => {
+    const filter = [...farmingMaterial.value].filter((material) => {
+        const neededMaterial = !data.Options.onlyShowsNeededMaterials || material.farm_require === true;
+        const searchedMaterial = !searchingMaterialsQuery.value || material.name.toLowerCase().includes(searchingMaterialsQuery.value.toLowerCase());
+
+        return (
+            neededMaterial &&
+            searchedMaterial
+        );
+    });
+    return filter;
+});
+
 // En cas d'ajout d'une arme ou de sortie du focus de l'input, on ferme la liste
 const hideList = () => {
     setTimeout(() => {
         showResultList.value = false;
-    }, 100);
+    }, 50);
 };
 
 // Fonction pour rajouter une arme à la liste.
@@ -654,18 +701,18 @@ const otherInfo = computed(() => {
         resin: 0,
     };
 
-    const mobMaterials = farmingMaterial.value.filter(fi => fi.code.slice(0,1) === "m" && fi.code.slice(-1) === "3");
+    const mobMaterials = farmingMaterial.value.filter(fi => fi.code.slice(0, 1) === "m" && fi.code.slice(-1) === "3");
     mobMaterials.forEach(el => {
         if (el.group_have < temporary[el.category.split("_")[0]].quantity) {
             temporary[el.category.split("_")[0]] = {
                 name: el.name,
-                code: el.code.slice(0,3),
+                code: el.code.slice(0, 3),
                 quantity: el.group_have,
             };
         }
     });
 
-    const localSpeciality = farmingMaterial.value.filter(fi => fi.code.slice(0,1) === "r");
+    const localSpeciality = farmingMaterial.value.filter(fi => fi.code.slice(0, 1) === "r");
     localSpeciality.forEach(el => {
         if (el.have < temporary.local.quantity) {
             temporary.local = {
@@ -682,9 +729,9 @@ const otherInfo = computed(() => {
 });
 
 // Création de trois valeur en ref qui se chargement d'accueillir les données liées aux heures
-let currentTime = ref("En attente");
-let coultdownReset = ref("Choisir un serveur");
-let serverDay = ref("Choisir un serveur");
+let currentTime = ref(null);
+let coultdownReset = ref(null);
+let serverDay = ref(null);
 
 // Objet gérant tout ce qui est date et heure
 const handleTime = {
@@ -721,6 +768,9 @@ const handleTime = {
             coultdownReset.value = handleTime.renderDate(handleTime.coultdownBuilder(new Date(serverTime + 24 * handleTime.oneHour), new Date(serverTime)));
             // On essaie de savoir à quel jour le serveur est. On prend l'heure server, on prend la date (dimanche 0 et samedi 6) et on adapte ce résultat pour avoir (lundi 1 et dimanche 7)
             serverDay.value = ((new Date(Date.now() + handleTime.timeZone - handleTime.minusTheFourHoursReset).getDay() + 6) % 7) + 1;
+        } else {
+            coultdownReset.value = null;
+            serverDay.value = null;
         }
 
         // Une fois fait, on relance la boucle
@@ -750,8 +800,17 @@ const handleTime = {
     },
 };
 
-const cleanLocalStorage = () => {
-    localStorage.removeItem("userSessionInfo");
+const paramsOpen = ref(false);
+const explainationOpen = ref(false);
+
+const openCloseLeftModal = (type) => {
+    if (type === "params") {
+        paramsOpen.value = !paramsOpen.value;
+        explainationOpen.value = false;
+    } else if (type === "explaination") {
+        explainationOpen.value = !explainationOpen.value;
+        paramsOpen.value = false;
+    }
 };
 
 // Fonction appelé avant le montage du composant afin d'initier les tablaux de données et la mise en marche de l'horloge
@@ -762,378 +821,601 @@ onBeforeMount(() => {
 </script>
 
 <template>
-    <div v-if="!otherData.loading">
-        <button @click="cleanLocalStorage">VIDER LE LOCAL STORAGE</button>
-        <div class="dev-options">
-            <button class="clean-button" @click="destroyMyData">VIDER LE LOCAL STORAGE</button>
-            <div class="boolean">
-                <input
-                    id="boolean-doing" v-model="data.Options.onlyShowsDoingCharacter" class="boolean-checkbox"
-                    type="checkbox" name="boolean-doing" @change="readyToSaveData('Options');"
-                >
-                <label class="boolean-label" for="boolean-doing">Ne montrer que les "doing"</label>
-            </div>
-            <div class="boolean">
-                <input
-                    id="boolean-needed" v-model="data.Options.onlyShowsNeededMaterials" class="boolean-checkbox"
-                    type="checkbox" name="boolean-needed" @change="readyToSaveData('Options');"
-                >
-                <label class="boolean-label" for="boolean-needed">Afficher uniquement les ressources nécessaires</label>
-            </div>
-            <div class="boolean">
-                <input
-                    id="boolean-one-more" v-model="data.Options.alwaysOneMoreMaterial" class="boolean-checkbox"
-                    type="checkbox" name="boolean-one-more" @change="readyToSaveData('Options');"
-                >
-                <label class="boolean-label" for="boolean-one-more">Toujours avoir 1 de plus</label>
-            </div>
-            <div class="boolean">
-                <input
-                    id="boolean-ley-line-resin" v-model="data.Options.leyLineResin" class="boolean-checkbox"
-                    type="checkbox" name="boolean-ley-line-resin" @change="readyToSaveData('Options');"
-                >
-                <label class="boolean-label" for="boolean-ley-line-resin">Activer le calcul de la résine pour les lignes énergetiques (Mora et livres d'xp)</label>
-            </div>
-            <div class="boolean">
-                <input
-                    id="boolean-explaination" v-model="data.Options.explaination" class="boolean-checkbox" type="checkbox"
-                    name="boolean-explaination" @change="readyToSaveData('Options')"
-                >
-                <label class="boolean-label" for="boolean-explaination">Montrer les explications</label>
-            </div>
-            <div class="boolean">
-                <input
-                    id="boolean-remove-ressorces" v-model="data.Options.proposeToRemoveRessources" class="boolean-checkbox" type="checkbox"
-                    name="boolean-remove-ressorces" @change="readyToSaveData('Options')"
-                >
-                <label class="boolean-label" for="boolean-remove-ressorces">Ouvrir une boite de dialogue si un niveau actuel en cours change, proposant d'enlever les ressources correspondantes (sauf livres/minerai d'expérience et si elles sont toutes en quantités suffisantes)</label>
-            </div>
-            <div class="boolean">
-                <input
-                    id="boolean-load-image" v-model="data.Options.loadIMG" class="boolean-checkbox" type="checkbox"
-                    name="boolean-load-image" @change="readyToSaveData('Options')"
-                >
-                <label class="boolean-label" for="boolean-load-image">Afficher les images (chargement jusqu'à 5x plus long avec
-                    une connexion lente)</label>
-            </div>
-            <select v-model="data.Options.server" style="appearance: menulist-button" @change="readyToSaveData('Options')">
-                <option v-for="server in serverList" :key="server" :value="server">
-                    {{ server }}
-                </option>
-                {{ data.Options.server }}
-            </select>
-            <p>Heure actuelle : {{ currentTime }}</p>
-            <p>Reset serveur dans : {{ coultdownReset }}</p>
-            <p>Jour de la semaine : {{ serverDay }}</p>
-        </div>
-        <div v-if="data.Options.explaination" class="explaination">
-            <p>Nom = nom du personnage</p>
-            <p>J'ai = Je possède ce personnage</p>
-            <p>Build = Je veux monter ce personnage</p>
-            <p>Only = Je veux voir les résultats que pour ce personnage là</p>
-            <p>Lvl-A = Niveau actuel de mon personnage</p>
-            <p>Lvl-V = Le niveau auquel j'aimerai le monter</p>
-            <p>Ap1-A = Le niveau actuelle de son attaque normale</p>
-            <p>Ap1-V = Le niveau auquel je veux améliorer son attaque normale</p>
-            <p>Ap2-A = Le niveau actuelle de sa compétence élémentaire</p>
-            <p>Ap2-V = Le niveau auquel je veux améliorer sa compétence élémentaire</p>
-            <p>Ap3-A = Le niveau actuelle de son déchaînement élémentaire</p>
-            <p>Ap3-V = Le niveau auquel je veux améliorer son déchaînement élémentaire</p>
-            <br>
-            <p>
-                Les niveaux suivis d'un "+" représentent les Ascensions de personnages après les niveaux 20, 40, 50, 60, 70 et
-                80
-            </p>
-            <br>
-            <p>
-                L'option "toujours avoir 1 de plus" est là pour simplifier la rentrée des données. En effet, avoir toujours 1
-                ressources de chaque choses du jeu signifie qu'il suffira de les rentrer dans l'ordre sans se soucier de ne pas
-                en avoir certaine et donc de tout décaler
-            </p>
-        </div>
-        <div class="other-info">
-            <p>Les trois ressources farmables sans résine que tu as le moins sont par type :</p>
-            <div>
-                <p>- communs : {{ otherInfo.common.name }} et ses dérivés avec {{ otherInfo.common.quantity }} points. </p>
-                <img
-                    v-if="data.Options.loadIMG"
-                    :src="require(`@static/images/genshin_icon/materials/${otherInfo.common.code}1.png`)"
-                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/1.png`)}')` }"
-                >
-                <img
-                    v-if="data.Options.loadIMG"
-                    :src="require(`@static/images/genshin_icon/materials/${otherInfo.common.code}2.png`)"
-                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/2.png`)}')` }"
-                >
-                <img
-                    v-if="data.Options.loadIMG"
-                    :src="require(`@static/images/genshin_icon/materials/${otherInfo.common.code}3.png`)"
-                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/3.png`)}')` }"
-                >
-            </div>
-            <div>
-                <p>- rares : {{ otherInfo.rare.name }} et ses dérivés avec {{ otherInfo.rare.quantity }} points. </p>
-                <img
-                    v-if="data.Options.loadIMG"
-                    :src="require(`@static/images/genshin_icon/materials/${otherInfo.rare.code}1.png`)"
-                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/1.png`)}')` }"
-                >
-                <img
-                    v-if="data.Options.loadIMG"
-                    :src="require(`@static/images/genshin_icon/materials/${otherInfo.rare.code}2.png`)"
-                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/2.png`)}')` }"
-                >
-                <img
-                    v-if="data.Options.loadIMG"
-                    :src="require(`@static/images/genshin_icon/materials/${otherInfo.rare.code}3.png`)"
-                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/3.png`)}')` }"
-                >
-            </div>
-            <div>
-                <p>- ressources locales : {{ otherInfo.local.name }} avec {{ otherInfo.local.quantity }} unités. </p>
-                <img
-                    v-if="data.Options.loadIMG"
-                    :src="require(`@static/images/genshin_icon/materials/${otherInfo.local.code}.png`)"
-                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/1.png`)}')` }"
-                >
-            </div>
-            <p>Résine total : {{ otherInfo.resin }} Nombre de jours que cela représente : {{ Math.ceil(otherInfo.resin / 180) }}. </p>
-        </div>
-        <div v-if="removeResData.removeRessourcesModal" class="cache">
-            <div class="remove-resources-modal">
-                <button class="close-button" @click="removeResData.removeRessourcesModal = false">X</button>
-                <p>Vous avez fait passé {{ removeResData.weaponsOrCharactersConcerned.name }} du niveau {{ removeResData.oldLevel }} au niveau {{ removeResData.newLevel }}.</p>
-                <div v-if="removeResData.enoughForAll" class="sufficient-ressorces">
-                    <p>Voulez-vous retirer les ressources correspondantes de votre inventaire ?</p>
-                    <div v-for="ressource in removeResData.ressorcesConcerned" :key="ressource.code" class="remove-ressources-list">
-                        {{ ressource.name }}
+    <div v-if="!otherData.loading" class="project-farming-container">
+        <div :class="{ 'open': paramsOpen || explainationOpen }" class="left-container">
+            <div class="left-content">
+                <Transition mode="out-in" name="vue-transition">
+                    <div v-if="paramsOpen" class="params-box">
+                        <select v-model="data.Options.server" class="server-select" @change="readyToSaveData('Options')">
+                            <option value="" disabled selected hidden>Choisir mon serveur Genshin</option>
+                            <option v-for="server in serverList" :key="server" :value="server">
+                                Serveur {{ server }}
+                            </option>
+                        </select>
+                        <div class="params-checkbox">
+                            <input
+                                id="boolean-doing" v-model="data.Options.onlyShowsDoingCharacter" class="checkbox"
+                                type="checkbox" name="boolean-doing" @change="readyToSaveData('Options');"
+                            >
+                            <label class="checkbox-label" for="boolean-doing">N'afficher que les personnages sélectionné
+                                comme voulant être build</label>
+                        </div>
+                        <div class="params-checkbox">
+                            <input
+                                id="boolean-needed" v-model="data.Options.onlyShowsNeededMaterials" class="checkbox"
+                                type="checkbox" name="boolean-needed" @change="readyToSaveData('Options');"
+                            >
+                            <label class="checkbox-label" for="boolean-needed">N'afficher que les ressources
+                                nécessaires</label>
+                        </div>
+                        <div class="params-checkbox">
+                            <input
+                                id="boolean-one-more" v-model="data.Options.alwaysOneMoreMaterial" class="checkbox"
+                                type="checkbox" name="boolean-one-more" @change="readyToSaveData('Options');"
+                            >
+                            <label class="checkbox-label" for="boolean-one-more">Demander 1 exemplaire de ressources en
+                                plus, utile pour les remplir plus facilement, aucune n'étant à zéro</label>
+                        </div>
+                        <div class="params-checkbox">
+                            <input
+                                id="boolean-ley-line-resin" v-model="data.Options.leyLineResin" class="checkbox"
+                                type="checkbox" name="boolean-ley-line-resin" @change="readyToSaveData('Options');"
+                            >
+                            <label class="checkbox-label" for="boolean-ley-line-resin">Activer le calcul de la résine pour
+                                les lignes
+                                énergetiques (Mora et livres d'xp)</label>
+                        </div>
+                        <div class="params-checkbox">
+                            <input
+                                id="boolean-remove-ressorces" v-model="data.Options.proposeToRemoveRessources"
+                                class="checkbox" type="checkbox" name="boolean-remove-ressorces"
+                                @change="readyToSaveData('Options')"
+                            >
+                            <label class="checkbox-label" for="boolean-remove-ressorces">Ouvrir une boite de dialogue si
+                                j'augmente un niveau actuel, proposant d'enlever les ressources correspondantes (sauf
+                                livres/minerai d'expérience et si elles sont toutes en quantités suffisantes)</label>
+                        </div>
+                        <div class="params-checkbox">
+                            <input
+                                id="boolean-load-image" v-model="data.Options.loadIMG" class="checkbox" type="checkbox"
+                                name="boolean-load-image" @change="readyToSaveData('Options')"
+                            >
+                            <label class="checkbox-label" for="boolean-load-image">Afficher les images (chargement plus
+                                long)</label>
+                        </div>
+                        <div v-if="userSession.type === 'identified'" class="params-button">
+                            <button class="safe" @click="copyUuid('uuid')">
+                                Copier mon identifiant
+                            </button>
+                            <span id="uuid" class="copy-confirm-alert">Copié !</span>
+                        </div>
+                        <div v-if="userSession.type === 'identified'" class="params-button">
+                            <button class="safe" @click="copyUuid('link-with-uuid')">
+                                Copier le lien vers ma session
+                            </button>
+                            <span id="link-with-uuid" class="copy-confirm-alert">Copié !</span>
+                        </div>
+                        <div class="params-button">
+                            <button class="safe" @click="quitSession">Fermer ma session</button>
+                        </div>
+                        <div class="params-button">
+                            <button class="warning" @click="userResetData('reset')">
+                                <WarningLogo class="warning-logo" />Réinitialiser mes données
+                            </button>
+                        </div>
+                        <div class="params-button">
+                            <button class="warning" @click="deleteUserData">
+                                <WarningLogo class="warning-logo" />Supprimer toutes mes données
+                            </button>
+                        </div>
                     </div>
-                    <div class="remove-resources-choice">
-                        <button @click="removeRessourcesAfterChangeLevel">Oui, les retirer</button>
-                        <button @click="removeResData.removeRessourcesModal = false">Non, je le ferai manuellement</button>
+                    <div v-else-if="explainationOpen" class="explaination-box">
+                        <p class="title">Présentation</p>
+                        <p>
+                            Voici mon outil. Il n'a pas véritablement de nom, pas encore, mais est destiné à vous aider à
+                            gérer vos décisions en ce qui concerne le farming dans Genshin Impact. Que ce soit les armes ou
+                            les personnages, sachez où vous en êtes, ce que vous pouvez faire et combien de temps cela va
+                            vous prendre.
+                        </p>
+                        <p>
+                            Il est composé de 4 parties distinctes que je vais vous détailler, j'ai essayé de faire un outil
+                            bien présenté et ergonomique, mais ce n'est peut-être pas parfaitement réussi (toute suggestion
+                            est bonne à prendre, n'hésitez pas à me les envoyer à l'aide du formulaire accessible en bas de
+                            la page).
+                        </p>
+                        <p class="title">Description</p>
+                        <p class="sub-title">Quelques infos</p>
+                        <p>La partie supérieur vous propose en plus des réglages, quelques informations :</p>
+                        <p class="indent-1">L'heure actuelle et dans combien de temps se fait le reset de votre serveur.</p>
+                        <p class="indent-1">
+                            Quelles sont les ressources de farm ne nécessitant pas de résine que vous avez
+                            le moins. Cela concerne les drops de mobs (communs et élites) ainsi que les ressources locales
+                            de chaque région.
+                        </p>
+                        <p class="indent-1">
+                            Et enfin, la somme de résine que le calculateur estime qu'il va être nécessaire
+                            pour finir votre farm. C'est une estimation basée sur des moyennes.
+                        </p>
+                        <p class="sub-title">Le tableau des personnages</p>
+                        <p>Le premier tableau est celui des personnages (sauf le voyageur et ses différents éléments).</p>
+                        <p class="indent-1">Vous pouvez les rechercher par nom.</p>
+                        <p class="indent-1">Pour chaque personnage, vous pouvez indiquer 3 informations primordiales, </p>
+                        <p class="indent-2">- si vous l'avez ou non</p>
+                        <p class="indent-2">
+                            - si vous voulez le monter/le build. Ceci l'ajoutera à la liste des
+                            personnages/armes qui seront comptés dans le calculateur
+                        </p>
+                        <p class="indent-2">
+                            - si vous ne voulez voir les résultats que pour ce personnage (colonne Only).
+                            Ainsi, seul ce personnage sera pris en compte dans le calcul. (option absente pour les armes
+                            cependant)
+                        </p>
+                        <p class="indent-1">
+                            Les 8 colonnes suivantes, ou plutôt les 4 groupes de 2 colonnes représentent le
+                            Niveau (Lvl) et les 3 Aptitudes (Ap1, 2 et 3). La première colonne est votre niveau actuelle
+                            (noté A et par défaut 1) et la
+                            deuxième le niveau que vous visez (noté V par défaut 90 ou 10 pour les aptitudes). À noter que
+                            les 6
+                            niveaux d'ascensions sont présent, donc si vous vous mettez niveau 20, les matériaux de
+                            l'Ascension 1 seront calculés. Mais pas si vous vous mettez Ascension 1 (il en est de même pour
+                            les armes).
+                        </p>
+                        <p class="sub-title">Le tableau des armes</p>
+                        <p>Le deuxième tableau est celui des armes, un peu différent.</p>
+                        <p class="indent-1">
+                            J'ai décide de ne pas les afficher car il y en à plus de 160, ça serait trop
+                            grand et aussi car cela forcerait les joueurs à n'avoir qu'une arme de chaque. Le cas serait
+                            rare, mais je veux laisser la liberté à qui le veut de pouvoir monter deux fois la même arme.
+                        </p>
+                        <p class="indent-1">
+                            Ainsi, il suffit de taper son nom (anglais ou français) dans la barre de
+                            recherche pour la trouver
+                        </p>
+                        <p class="indent-1">
+                            Le système est ensuite le même que pour les personnage mais avec juste le
+                            niveau. Pas de déclaration comme quoi "j'ai cette arme" ou "je veux la build" car c'est induit
+                            par le fait de la rajouter à sa liste de farming.
+                        </p>
+                        <p class="sub-title">Le tableau des ressources</p>
+                        <p>Le troisième tableau est celui des ressources directement :</p>
+                        <p class="indent-1">Il est composé de 8 colonnes que je vais expliquer en détails :</p>
+                        <p class="indent-2">Nom de la ressources (simple ^^)</p>
+                        <p class="indent-2">
+                            Possédé : Il s'agit d'un input où vous pouvez indiquer combien vous en avez. On
+                            peut passer d'une ligne à l'autre avec tab sur PC ou la flèche suivante sur mobile. Les
+                            ressources sont dans le même ordre que l'inventaire du jeu. 1ère page : minerai de renforcement
+                            d'arme -> 3ème page : Quasi toutes les ressources -> 5ème page : Les ressources locales
+                        </p>
+                        <p class="indent-2">Nécessaire : Combien il en faut pour tout le farm que vous avez indiqué.</p>
+                        <p class="indent-2">
+                            Reste, la soustraction simple de combien il en faut par combien vous en avez. Si
+                            vous en avez plus, cela indique "parfait". Aussi, une option permet de toujours en avoir 1 de
+                            plus. Cela est utile quand il s'agit de rentrer la quantité de ressources qu'on a depuis le jeu.
+                            Avoir toutes les ressources en au moins 1 exemplaire permet de pouvoir aller plus vite sans
+                            vérifier quelles ressources ils manquent.
+                        </p>
+                        <p class="indent-2">
+                            Farmable : Si vous avez indiqué sur quel serveur vous jouez, il sera
+                            automatiquement mis pour les livres d'aptitudes et les matériaux d'armes s'ils sont farmables
+                            aujourd'hui.
+                        </p>
+                        <p class="indent-2">Pour les deux colonnes de synthèses, je dois expliquer un point.</p>
+                        <p class="indent-2">
+                            Pas mal de ressources du jeu sont synthétisables. Les drops de monstres, les
+                            pierres, les livres et matériaux d'armes permettent de prendre 3 ressources et de les combiner
+                            en une ressource de qualité supérieure. Ainsi, je considère dans mon calculateur que 1 ressource
+                            de qualité 4 vaut 27 points (1x3x3x3), 1 ressource de qualité 3 vaut 9 (1x3*3), 1 ressource de
+                            qualité 2 vaut 3 (1x3) et enfin une ressource de qualité 1 vaut 1. Ainsi, on obtient une somme
+                            de point pour chaque type de ces ressources qui est utilisée pour la farmer.
+                        </p>
+                        <p class="indent-2">Exemple :</p>
+                        <p class="indent-3">
+                            J'ai besoin pour un perso de 6 pierres et 9 morceaux géo. Cela fait 243 points
+                            (6x27 + 9x9).
+                        </p>
+                        <p class="indent-3">
+                            J'ai 1 pierre, 4 morceaux, 47 fragments et 78 éclats. Cela fait 282 points (1x27
+                            + 4x9 + 47x3 + 78)
+                        </p>
+                        <p class="indent-3">
+                            Donc le calculateur va me le montrer et je saurai qu'avec de la synthèse, j'ai
+                            assez et que je peux arrêter de farm cette ressource.
+                        </p>
+                        <p class="indent-3">
+                            Ainsi, la première colonne montre combien de points vous avez pour un type de
+                            ressources et la deuxième vous montrer combien vous en avez besoin. Si vous dépassez, cela est
+                            indiqué et vous savez que vous pouvez aller synthétiser.
+                        </p>
+                        <p class="indent-2">
+                            La dernière colonne est une estimation de combien de résine vous aurez besoin
+                            pour les ressources qui le demandent.
+                        </p>
+                        <p class="enjoy">En espérant que mon projet vous sera utile. Have Fun</p>
+                    </div>
+                </Transition>
+            </div>
+            <div class="left-navigation">
+                <button
+                    class="left-open-button" :class="{ 'not-open': !paramsOpen && explainationOpen }"
+                    @click="openCloseLeftModal('params')"
+                >
+                    <ParamsLogo class="params-gear-logo" />
+                </button>
+                <button
+                    class="left-open-button" :class="{ 'not-open': !explainationOpen && paramsOpen }"
+                    @click="openCloseLeftModal('explaination')"
+                >
+                    <p class="explaination-logo">?</p>
+                </button>
+            </div>
+        </div>
+        <div class="farming-informations-container">
+            <div class="fewer-resources">
+                <p>Les trois ressources farmables sans résine que tu as le moins sont :</p>
+                <div class="resources-categories">
+                    <div class="image-container">
+                        <GenshinImage
+                            v-if="data.Options.loadIMG" type="materials" :identifier="`${otherInfo.common.code}1`"
+                            rarity="1"
+                        />
+                        <GenshinImage
+                            v-if="data.Options.loadIMG" type="materials" :identifier="`${otherInfo.common.code}2`"
+                            rarity="2"
+                        />
+                        <GenshinImage
+                            v-if="data.Options.loadIMG" type="materials" :identifier="`${otherInfo.common.code}3`"
+                            rarity="3"
+                        />
+                    </div>
+                    <p class="fewer-resources-description">
+                        Drop de mobs communs : {{ otherInfo.common.name }} et ses dérivés
+                        avec {{ otherInfo.common.quantity }} {{ otherInfo.common.quantity > 1 ? 'points' : 'point' }}.
+                    </p>
+                </div>
+                <div class="resources-categories">
+                    <div class="image-container">
+                        <GenshinImage
+                            v-if="data.Options.loadIMG" type="materials" :identifier="`${otherInfo.rare.code}1`"
+                            rarity="1"
+                        />
+                        <GenshinImage
+                            v-if="data.Options.loadIMG" type="materials" :identifier="`${otherInfo.rare.code}2`"
+                            rarity="2"
+                        />
+                        <GenshinImage
+                            v-if="data.Options.loadIMG" type="materials" :identifier="`${otherInfo.rare.code}3`"
+                            rarity="3"
+                        />
+                    </div>
+                    <p class="fewer-resources-description">
+                        Drop de mobs élites : {{ otherInfo.rare.name }} et ses dérivés
+                        avec {{ otherInfo.rare.quantity }} {{ otherInfo.rare.quantity > 1 ? 'points' : 'point' }}.
+                    </p>
+                </div>
+                <div class="resources-categories">
+                    <div class="image-container">
+                        <GenshinImage
+                            v-if="data.Options.loadIMG" type="materials" :identifier="`${otherInfo.local.code}`"
+                            rarity="1"
+                        />
+                    </div>
+                    <p class="fewer-resources-description">
+                        Ressources locales : {{ otherInfo.local.name }} avec {{
+                            otherInfo.local.quantity }} {{ otherInfo.local.quantity > 1 ? 'unités' : 'unité' }}.
+                    </p>
+                </div>
+                <div class="resources-categories">
+                    <p class="resin-description">
+                        Résine totale : <span class="resin-count">{{ otherInfo.resin }}</span>
+                    </p>
+                    <p class="resin-description">
+                        Nombre de jours que cela représente : <span class="resin-count">{{ Math.ceil(otherInfo.resin /
+                            180) }}</span>
+                    </p>
+                </div>
+            </div>
+            <div class="time-box">
+                <p>Heure actuelle : {{ currentTime }}</p>
+                <p v-if="coultdownReset != null">Reset serveur : {{ coultdownReset }}</p>
+                <p v-else-if="coultdownReset === null">Choisir un serveur dans les options</p>
+            </div>
+        </div>
+        <div v-if="removeResData.removeRessourcesModal" class="remove-resources-cache">
+            <div class="remove-resources-modal">
+                <img
+                    class="close-modal" src="@static/images/close.png"
+                    @click="removeResData.removeRessourcesModal = false"
+                >
+                <p class="status" @click="console.log(removeResData)">
+                    Vous avez amélioré {{ removeResData.levelOrAptitude === 'level' ? 'le niveau' : 'une aptitude' }} de
+                    <span class="status-bold">{{ removeResData.weaponsOrCharactersConcerned.name }}</span> de <span
+                        class="status-bold"
+                    >{{
+                        removeResData.oldLevelName }}</span> à <span class="status-bold">{{ removeResData.newLevelName
+                    }}</span>.
+                </p>
+                <div v-if="removeResData.enoughForAll" class="choice-container">
+                    <p class="information information-choice">
+                        Voulez-vous retirer les ressources correspondantes de votre
+                        inventaire ?
+                    </p>
+                    <p class="little-precision">
+                        (Les livres d'expérience et minerai de renforcement ne sont pas pris en
+                        compte, à vous de changer en fonction de ce qui a été utilisé)
+                    </p>
+                    <div class="remove-ressources-list">
+                        <table>
+                            <tbody>
+                                <tr
+                                    v-for="ressource in removeResData.ressorcesConcerned" :key="ressource.code"
+                                    class="one-resource"
+                                >
+                                    <td>
+                                        <GenshinImage
+                                            v-if="data.Options.loadIMG" type="materials"
+                                            :identifier="`${ressource.code}`"
+                                            :rarity="`${MaterialsList.find(fi => fi.code === ressource.code).rarity}`"
+                                        />
+                                    </td>
+                                    <td class="needed-count">{{ ressource.needed }}x </td>
+                                    <td class="resource-name">{{ ressource.name }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="remove-resources-choices">
+                        <button class="confirm-choice" @click="removeRessourcesAfterChangeLevel">Oui, les retirer</button>
+                        <button class="cancel-choice" @click="removeResData.removeRessourcesModal = false">
+                            Non, je le ferai
+                            manuellement
+                        </button>
                     </div>
                 </div>
                 <div v-if="!removeResData.enoughForAll">
-                    <p>Une ou plusieurs des ressources nécessaires n'est pas en quantité suffisante dans l'inventaire, vous devriez gérer vos ressources manuellement pour éviter les erreurs.</p>
+                    <p class="information">
+                        Une ou plusieurs des ressources nécessaires n'est pas en quantité suffisante dans l'inventaire, vous
+                        devriez gérer vos ressources manuellement pour éviter les erreurs.
+                    </p>
                 </div>
             </div>
         </div>
-        <div class="tabs-contener">
-            <div>
-                <div style="background-color: #4b453c;">
-                    <input v-model="searchingCharactersQuery" for="searching-characters" type="text">
-                    <label name="searching-characters">Rechercher un personnage</label>
+        <div class="section-container">
+            <div class="table-section characters-table-section">
+                <div v-if="filteredCharacters.length > 0" class="search-input">
+                    <input
+                        v-model="searchingCharactersQuery" class="input" type="text"
+                        placeholder="Rechercher un personnage"
+                    >
                 </div>
-                <table class="all-character-progress">
-                    <thead>
-                        <tr>
-                            <th>Nom</th>
-                            <th>J'ai</th>
-                            <th>Build</th>
-                            <th>Only</th>
-                            <th>Lvl-A</th>
-                            <th>Lvl-V</th>
-                            <th>Ap1-A</th>
-                            <th>Ap1-V</th>
-                            <th>Ap2-A</th>
-                            <th>Ap2-V</th>
-                            <th>Ap3-A</th>
-                            <th>Ap3-V</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr 
-                            v-for="character in filteredCharacters" :key="character.name"
-                            :class="{ 
-                                'have': character.got,
-                                'doing': character.doing,
-                                'doing-havnt': !character.got && character.doing,
-                                'doing-and-done': character.doing && character.got && character.cLvl === character.wLvl && character.cAp1 === character.wAp1 && character.cAp2 === character.wAp2 && character.cAp3 === character.wAp3,
-                            }"
-                        >
-                            <td>
-                                <div class="name_cell">
-                                    <img
-                                        v-if="data.Options.loadIMG"
-                                        :src="require(`@static/images/genshin_icon/characters/${character.name}.png`)"
-                                        :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${CharactersList.find(fi => fi.name === character.name).rarity}.png`)}')` }"
-                                    >
-                                    <p>{{ character.name }}</p>
-                                </div>
-                            </td>
-                            <InputCreator
-                                :checked="character.got" type="checkbox"
-                                @update:checked="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'got', newValue)"
-                            />
-                            <InputCreator
-                                :checked="character.doing" type="checkbox" :disabled="character.only "
-                                @update:checked="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'doing', newValue)"
-                            />
-                            <InputCreator
-                                :checked="character.only" type="checkbox" :disabled="!character.doing || (!character.only && isOnlyCharacters)"
-                                @update:checked="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'only', newValue)"
-                            />
-                            <InputCreator
-                                :value="character.cLvl" type="select-level"
-                                :list="levelingData.level.filter((el) => el.id <= character.wLvl)"
-                                @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'cLvl', newValue)"
-                            />
-                            <InputCreator
-                                :value="character.wLvl" type="select-level"
-                                :list="levelingData.level.filter((el) => el.id >= character.cLvl)"
-                                @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'wLvl', newValue)"
-                            />
-                            <InputCreator
-                                :value="character.cAp1" type="select-aptitude"
-                                :list="aptList.filter((el) => el <= character.wAp1)"
-                                @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'cAp1', newValue)"
-                            />
-                            <InputCreator
-                                :value="character.wAp1" type="select-aptitude"
-                                :list="aptList.filter((el) => el >= character.cAp1)"
-                                @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'wAp1', newValue)"
-                            />
-                            <InputCreator
-                                :value="character.cAp2" type="select-aptitude"
-                                :list="aptList.filter((el) => el <= character.wAp2)"
-                                @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'cAp2', newValue)"
-                            />
-                            <InputCreator
-                                :value="character.wAp2" type="select-aptitude"
-                                :list="aptList.filter((el) => el >= character.cAp2)"
-                                @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'wAp2', newValue)"
-                            />
-                            <InputCreator
-                                :value="character.cAp3" type="select-aptitude"
-                                :list="aptList.filter((el) => el <= character.wAp3)"
-                                @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'cAp3', newValue)"
-                            />
-                            <InputCreator
-                                :value="character.wAp3" type="select-aptitude"
-                                :list="aptList.filter((el) => el >= character.cAp3)"
-                                @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'wAp3', newValue)"
-                            />
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-box">
+                    <table class="table characters-informations">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>J'ai</th>
+                                <th>Build</th>
+                                <th>Only</th>
+                                <th>Lvl-A</th>
+                                <th>Lvl-V</th>
+                                <th>Ap1-A</th>
+                                <th>Ap1-V</th>
+                                <th>Ap2-A</th>
+                                <th>Ap2-V</th>
+                                <th>Ap3-A</th>
+                                <th>Ap3-V</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                v-for="character in filteredCharacters" :key="character.name" :class="{
+                                    'have': character.got,
+                                    'doing': character.doing,
+                                    'doing-havnt': !character.got && character.doing,
+                                    'have-and-done': character.got && character.cLvl === character.wLvl && character.cAp1 === character.wAp1 && character.cAp2 === character.wAp2 && character.cAp3 === character.wAp3,
+                                }"
+                            >
+                                <td>
+                                    <div class="name-cell">
+                                        <GenshinImage
+                                            v-if="data.Options.loadIMG" type="characters"
+                                            :identifier="`${character.name}`"
+                                            :rarity="`${CharactersList.find(fi => fi.name === character.name).rarity}`"
+                                        />
+                                        <p>{{ character.name }}</p>
+                                    </div>
+                                </td>
+                                <InputCreator
+                                    :checked="character.got" type="checkbox"
+                                    @update:checked="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'got', newValue)"
+                                />
+                                <InputCreator
+                                    :checked="character.doing" type="checkbox" :disabled="character.only"
+                                    @update:checked="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'doing', newValue)"
+                                />
+                                <InputCreator
+                                    :checked="character.only" type="checkbox"
+                                    :disabled="!character.doing || (!character.only && isOnlyCharacters)"
+                                    @update:checked="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'only', newValue)"
+                                />
+                                <InputCreator
+                                    :value="character.cLvl" type="select-level"
+                                    :list="levelingData.level.filter((el) => el.id <= character.wLvl)"
+                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'cLvl', newValue)"
+                                />
+                                <InputCreator
+                                    :value="character.wLvl" type="select-level"
+                                    :list="levelingData.level.filter((el) => el.id >= character.cLvl)"
+                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'wLvl', newValue)"
+                                />
+                                <InputCreator
+                                    :value="character.cAp1" type="select-aptitude"
+                                    :list="aptList.filter((el) => el <= character.wAp1)"
+                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'cAp1', newValue)"
+                                />
+                                <InputCreator
+                                    :value="character.wAp1" type="select-aptitude"
+                                    :list="aptList.filter((el) => el >= character.cAp1)"
+                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'wAp1', newValue)"
+                                />
+                                <InputCreator
+                                    :value="character.cAp2" type="select-aptitude"
+                                    :list="aptList.filter((el) => el <= character.wAp2)"
+                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'cAp2', newValue)"
+                                />
+                                <InputCreator
+                                    :value="character.wAp2" type="select-aptitude"
+                                    :list="aptList.filter((el) => el >= character.cAp2)"
+                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'wAp2', newValue)"
+                                />
+                                <InputCreator
+                                    :value="character.cAp3" type="select-aptitude"
+                                    :list="aptList.filter((el) => el <= character.wAp3)"
+                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'cAp3', newValue)"
+                                />
+                                <InputCreator
+                                    :value="character.wAp3" type="select-aptitude"
+                                    :list="aptList.filter((el) => el >= character.cAp3)"
+                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'wAp3', newValue)"
+                                />
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div>
+            <div class="table-section weapons-table-section">
                 <div class="search-input">
                     <input
-                        v-model="searchingWeaponQuery"
-                        class="input"
-                        type="text"
-                        placeholder="Rechercher une arme"
-                        @focus="showResultList = true"
-                        @blur="hideList"
+                        v-model="searchingWeaponQuery" class="input" type="text" placeholder="Rechercher une arme"
+                        @focus="showResultList = true" @blur="hideList"
                     >
                     <ul v-if="showResultList && searchingWeaponQuery.length >= 1" class="list">
                         <li
-                            v-for="result in filteredWeaponsResults"
-                            :key="result"
-                            class="one-result"
+                            v-for="result in filteredWeaponsResults" :key="result" class="one-result"
                             @click="addWeaponToDo(result)"
                         >
-                            <img
-                                v-if="data.Options.loadIMG"
-                                class="results-image"
-                                :src="require(`@static/images/genshin_icon/weapons/${WeaponsList.find(fi => fi.name === result || fi.eng_name === result).name}.png`)"
-                                :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${WeaponsList.find(fi => fi.name === result || fi.eng_name === result).rarity}.png`)}')` }"
-                            >
+                            <GenshinImage
+                                v-if="data.Options.loadIMG" type="weapons"
+                                :identifier="`${WeaponsList.find(fi => fi.name === result).name}`"
+                                :rarity="`${WeaponsList.find(fi => fi.name === result).rarity}`"
+                            />
                             <p class="result-name">{{ result }}</p>
                         </li>
                     </ul>
                 </div>
-                <table class="all-weapons-progress">
-                    <thead>
-                        <tr>
-                            <th>Nom de l'arme</th>
-                            <th>Niveau actuel</th>
-                            <th>Niveau voulu</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(weapon, index) in data.Weapons" :key="index">
-                            <td>
-                                <div class="name_cell">
-                                    <button class="deleting-weapon" type="button" @click="deletingWeaponToDo(index)">X</button>
-                                    <img
-                                        v-if="data.Options.loadIMG"
-                                        :src="require(`@static/images/genshin_icon/weapons/${weapon.name}.png`)"
-                                        :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${WeaponsList.find(fi => fi.name === weapon.name).rarity}.png`)}')` }"
-                                    >
-                                    <p>{{ weapon.name }}</p>
-                                </div>
-                            </td>
-                            <InputCreator
-                                :value="weapon.cLvl" type="select-level"
-                                :list="levelingData[`weapon_${weapon.rarity}`].filter((el) => el.id <= weapon.wLvl)"
-                                @update:value="newValue => handleChange('Weapons', index, 'cLvl', newValue)"
-                            />
-                            <InputCreator
-                                :value="weapon.wLvl" type="select-level"
-                                :list="levelingData[`weapon_${weapon.rarity}`].filter((el) => el.id >= weapon.cLvl)"
-                                @update:value="newValue => handleChange('Weapons', index, 'wLvl', newValue)"
-                            />
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-box">
+                    <table class="table weapons-informations">
+                        <thead>
+                            <tr>
+                                <th>Nom de l'arme</th>
+                                <th>Niveau actuel</th>
+                                <th>Niveau voulu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(weapon, index) in data.Weapons" :key="index">
+                                <td>
+                                    <div class="name-cell">
+                                        <img
+                                            class="deleting-weapon" src="@static/images/close.png"
+                                            @click="deletingWeaponToDo(index)"
+                                        >
+                                        <GenshinImage
+                                            v-if="data.Options.loadIMG" type="weapons"
+                                            :identifier="`${weapon.name}`"
+                                            :rarity="`${WeaponsList.find(fi => fi.name === weapon.name).rarity}`"
+                                        />
+                                        <p>{{ weapon.name }}</p>
+                                    </div>
+                                </td>
+                                <InputCreator
+                                    :value="weapon.cLvl" type="select-level"
+                                    :list="levelingData[`weapon_${weapon.rarity}`].filter((el) => el.id <= weapon.wLvl)"
+                                    @update:value="newValue => handleChange('Weapons', index, 'cLvl', newValue)"
+                                />
+                                <InputCreator
+                                    :value="weapon.wLvl" type="select-level"
+                                    :list="levelingData[`weapon_${weapon.rarity}`].filter((el) => el.id >= weapon.cLvl)"
+                                    @update:value="newValue => handleChange('Weapons', index, 'wLvl', newValue)"
+                                />
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <table class="all-materials-inventory">
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Possédé</th>
-                        <th>Nécessaire</th>
-                        <th>Reste</th>
-                        <th>Farmable</th>
-                        <th>Synthèse : Have</th>
-                        <th>Synthèse : Needed</th>
-                        <th>Résine</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr
-                        v-for="material in filteredMaterials" 
-                        :key="material.id" 
-                        :class="{ 
-                            'require': material.farm_require && !data.Options.onlyShowsNeededMaterials,
-                            'require-and-done': !data.Options.onlyShowsNeededMaterials && material.farm_require && material.needed - material.have < (data.Options.alwaysOneMoreMaterial ? 0 : 1) && material.needed > 0,
-                            'done': data.Options.onlyShowsNeededMaterials && material.needed - material.have < (data.Options.alwaysOneMoreMaterial ? 0 : 1) 
-                        }"
+            <div class="table-section materials-table-section">
+                <div v-if="filteredMaterials.length > 0" class="search-input">
+                    <input
+                        v-model="searchingMaterialsQuery" class="input" type="text"
+                        placeholder="Rechercher une ressource"
                     >
-                        <td>
-                            <div class="name_cell">
-                                <img
-                                    v-if="data.Options.loadIMG"
-                                    :src="require(`@static/images/genshin_icon/materials/${material.code}.png`)"
-                                    :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${MaterialsList.find(fi => fi.code === material.code).rarity}.png`)}')` }"
+                </div>
+                <div class="table-box">
+                    <table class="table materials-informations">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>J'en ai</th>
+                                <th>Besoin</th>
+                                <th>Reste</th>
+                                <th>Farmable</th>
+                                <th>Synt - J'ai</th>
+                                <th>Synt - Besoin</th>
+                                <th>Résine</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                v-for="material in filteredMaterials" :key="material.id" :class="{
+                                    'require': material.farm_require && !data.Options.onlyShowsNeededMaterials,
+                                    'require-and-done': !data.Options.onlyShowsNeededMaterials && material.farm_require && material.needed - material.have < (data.Options.alwaysOneMoreMaterial ? 0 : 1),
+                                    'done': data.Options.onlyShowsNeededMaterials && material.needed - material.have < (data.Options.alwaysOneMoreMaterial ? 0 : 1)
+                                }"
+                            >
+                                <td>
+                                    <div class="name-cell">
+                                        <GenshinImage
+                                            v-if="data.Options.loadIMG" type="materials"
+                                            :identifier="`${material.code}`"
+                                            :rarity="`${MaterialsList.find(fi => fi.code === material.code).rarity}`"
+                                        />
+                                        <p>{{ material.name }}</p>
+                                    </div>
+                                </td>
+                                <InputCreator
+                                    :value="data.Materials.find(el => el.code === material.code).have"
+                                    type="number"
+                                    @update:value="newValue => handleChange('Materials', data.Materials.findIndex(el => el.code === material.code), 'have', newValue)"
+                                />
+                                <td>{{ material.needed }}</td>
+                                <td>
+                                    {{ material.needed - material.have >= (data.Options.alwaysOneMoreMaterial ? 0 : 1) ?
+                                        material.remain : "Parfait" }}
+                                </td>
+                                <td
+                                    :class="{
+                                        'farm-day': material.needed - material.have >= (data.Options.alwaysOneMoreMaterial ? 0 : 1) &&
+                                            !!serverDay &&
+                                            typeof material.farming_days === 'number' &&
+                                            !!material.farming_days.toString().includes(serverDay.toString())
+                                    }"
                                 >
-                                <p>{{ material.name }}</p>
-                            </div>
-                        </td>
-                        <InputCreator
-                            :value="data.Materials.find(el => el.code === material.code).have" type="number"
-                            @update:value="newValue => handleChange('Materials', data.Materials.findIndex(el => el.code === material.code), 'have', newValue)"
-                        />
-                        <td>{{ material.needed }}</td>
-                        <td>
-                            {{ material.needed - material.have >= (data.Options.alwaysOneMoreMaterial ? 0 : 1) ? material.remain : "Parfait" }}
-                        </td>
-                        <td>
-                            {{ 
-                                material.needed - material.have >= (data.Options.alwaysOneMoreMaterial ? 0 : 1)
-                                    ? (!!serverDay ? (typeof material.farming_days === "number" ?
-                                        material.farming_days.toString().includes(serverDay.toString()) : "") : "")
-                                    : ""
-                            }}
-                        </td>
-                        <td>{{ material.synthesis ? material.group_have : "" }}</td>
-                        <td>{{ material.synthesis ? material.group_needed : "" }}</td>
-                        <td>{{ material.group_resin > 0 ? material.group_resin : "" }}</td>
-                    </tr>
-                </tbody>
-            </table>
+                                    {{
+                                        (material.needed - material.have >= (data.Options.alwaysOneMoreMaterial ? 0 : 1) &&
+                                            !!serverDay &&
+                                            typeof material.farming_days === "number" &&
+                                            !!material.farming_days.toString().includes(serverDay.toString()))
+                                            ? "OUI"
+                                            : ""
+                                    }}
+                                </td>
+                                <td>{{ material.synthesis ? material.group_have : "" }}</td>
+                                <td>{{ material.synthesis ? material.group_needed : "" }}</td>
+                                <td>{{ material.group_resin > 0 ? material.group_resin : "" }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -1141,245 +1423,724 @@ onBeforeMount(() => {
 <style lang="scss">
 @import "@styles/variables.scss";
 
-.dev-options {
-    background-color: #ffffff;
-    border-radius: 20px;
+.project-farming-container {
     padding: 10px;
-    color: #000000;
-    width: fit-content;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
+    width: 100%;
 
-    .clean-button {
-        font-weight: 500;
-
-        &:hover {
-            text-decoration: underline 3px;
-        }
+    .genshin-image {
+        border-radius: 5px;
+        width: 40px;
+        height: 40px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
     }
 
-    .boolean {
+    .left-container {
+        position: fixed;
         display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        gap: 8px;
-        align-items: center;
+        gap: 0;
+        width: 95%;
+        max-width: 420px;
+        min-height: 500px;
+        height: fit-content;
+        max-height: 715px;
+        background-color: transparent;
+        transition: all 0.7s;
+        z-index: $left-container;
+        transform: translateX(calc(-100% + 70px - 10px));
+        pointer-events: none;
 
-        &-checkbox {
-            appearance: checkbox;
-            width: 18px;
-            height: 18px;
+        .left-content {
+            width: calc(100% - 70px);
+            background-color: $color3;
+            border-radius: 0 0 30px 0;
+            padding: 10px;
+            color: $color5;
+            overflow-y: auto;
+            max-height: 95vh;
+            z-index: $left-content-box;
+            pointer-events: visiblePainted;
+
+            .params-box {
+                display: flex;
+                flex-direction: column;
+
+                .server-select {
+                    position: relative;
+                    appearance: menulist-button;
+                    font-weight: 400;
+                }
+
+                .params-checkbox {
+                    padding: 7px 0;
+                    border-top: 1px solid $color10;
+
+                    .checkbox {
+                        float: left;
+                        appearance: none;
+                        color: $color5;
+                        margin-right: 5px;
+                        width: 24px;
+                        height: 24px;
+                        border: 2px solid $color5;
+                        border-radius: 4px;
+                        transform: translateY(1px);
+                        display: grid;
+                        place-content: center;
+
+                        &:checked {
+                            border-color: transparent;
+                            background-color: $color6;
+                        }
+                    }
+
+                    .checkbox::before {
+                        content: "";
+                        width: 18px;
+                        height: 18px;
+                        clip-path: polygon(0 50%, 15% 47%, 27% 43%, 36% 36%, 43% 26%, 46% 14%, 50% 0, 53% 13%, 56% 25%, 64% 36%, 75% 43%, 85% 45%, 100% 50%, 85% 54%, 75% 58%, 64% 64%, 57% 74%, 53% 85%, 50% 100%, 46% 85%, 43% 74%, 36% 64%, 27% 58%, 15% 54%);
+                        transform: scale(0);
+                        transition: 0.1s transform ease-in-out;
+                        transform-origin: bottom left;
+                        background-color: $color2;
+                    }
+
+                    .checkbox:checked::before {
+                        transform: scale(1);
+                    }
+
+                    .checkbox-label {
+                        font-weight: 400;
+                    }
+                }
+
+                .params-button {
+                    position: relative;
+
+                    button {
+                        font-weight: 400;
+                        margin: 3px;
+                        border: 2px solid $color8;
+                        border-radius: 8px;
+                        color: $color3;
+                        padding: 4px 12px;
+                        width: 100%;
+
+                        &:hover {
+                            letter-spacing: 0.8px;
+                            color: $color2;
+                        }
+                    }
+
+                    .copy-confirm-alert {
+                        position: absolute;
+                        top: -15px;
+                        left: calc(50% - 65px / 2);
+                        width: 65px;
+                        text-align: center;
+                        background-color: $color7;
+                        color: $color3;
+                        padding: 3px 8px;
+                        border-radius: 4px;
+                        display: none;
+
+                        &.displayed {
+                            display: block;
+                            animation: showQuickMessage 2s ease normal;
+                        }
+
+                        @keyframes showQuickMessage {
+                            0% {
+                                opacity: 0;
+                                transform: translateX(-40px);
+                            }
+
+                            20% {
+                                opacity: 1;
+                            }
+
+                            50% {
+                                opacity: 1;
+                                transform: translateX(0px);
+                            }
+
+                            100% {
+                                opacity: 0;
+                                transform: translateX(40px);
+                            }
+                        }
+                    }
+
+                    button.safe {
+                        background-color: $color6;
+                    }
+
+                    button.warning {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: $color15;
+                        gap: 0 10px;
+
+                        .warning-logo {
+                            width: 21px;
+                            height: 21px;
+                        }
+                    }
+                }
+
+            }
+
+            .explaination-box {
+                .title {
+                    font-weight: 700;
+                    font-size: 25px;
+                    color: $color4;
+                }
+
+                .sub-title {
+                    font-weight: 500;
+                    font-size: 20px;
+                    color: $color7;
+                }
+
+                p {
+                    margin: 5px 5px 5px 0;
+                    text-align: justify;
+                }
+
+                .indent-1 {
+                    margin-left: 20PX;
+                    display: list-item;
+                    list-style: disc;
+                }
+
+                .indent-2 {
+                    margin-left: 40PX;
+                    display: list-item;
+                    list-style: square;
+                }
+
+                .indent-3 {
+                    margin-left: 60PX;
+                    display: list-item;
+                    list-style: circle;
+                }
+
+                .enjoy {
+                    text-align: center;
+                    font-weight: 400;
+                    font-style: oblique;
+                    color: $color4;
+                }
+            }
+
+            .vue-transition-enter-from,
+            .vue-transition-leave-to {
+                opacity: 0;
+            }
         }
 
-        &-label {
-            font-weight: 500;
+
+        .left-navigation {
+            display: flex;
+            flex-direction: column;
+            gap: 15px 0;
+            height: fit-content;
+            pointer-events: visiblePainted;
+
+            .left-open-button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 70px;
+                height: 60px;
+                background-color: $color3;
+                border-radius: 0 18px 18px 0;
+                overflow: hidden;
+                z-index: $left-nav-button;
+
+                .params-gear-logo {
+                    width: 52px;
+                    height: 52px;
+                    transition: all 0.7s;
+                    transform: rotate(0deg);
+
+                    path {
+                        fill: none;
+                        stroke: $color5;
+                    }
+                }
+
+                .explaination-logo {
+                    font-size: 52px;
+                    font-weight: 700;
+                    color: $color5;
+                    width: 100%;
+                }
+            }
+
+            .not-open {
+                background-color: $color10;
+                transform: translateX(-15px);
+            }
         }
     }
-}
 
-.tabs-contener {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    padding: 30px;
-    align-items: start;
-    gap: 15px;
+    .left-container.open {
+        transform: translateX(-10px);
 
-}
-
-.all-character-progress,
-.all-materials-inventory,
-.all-weapons-progress {
-    border-collapse: collapse;
-
-    th,
-    td {
-        border: 1px solid #cacaca;
-        padding: 6px 2px;
+        .left-navigation {
+            .left-open-button {
+                .params-gear-logo {
+                    transform: rotate(450deg);
+                }
+            }
+        }
     }
 
-    th {
-        color: #f5f5f5;
-        background-color: #4650ac;
-        width: 54px;
+    .farming-informations-container {
+        margin: 0 50px 20px 85px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 35px 65px;
 
-        &:first-child {
+        .fewer-resources {
+            display: flex;
+            flex-direction: column;
+
+            .resources-categories {
+                padding: 9px;
+                border: 3px solid $color8;
+                background-color: $color18;
+                border-radius: 15px;
+                margin: 10px 0;
+
+                .image-container {
+                    float: left;
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    .genshin-image {
+                        margin: 0 5px;
+                    }
+                }
+
+                .fewer-resources-description {
+                    min-height: 40px;
+                }
+
+                .resin-description {
+                    .resin-count {
+                        font-weight: 500;
+                        font-size: 22px;
+                        color: $color3;
+                    }
+                }
+            }
+        }
+
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: fit-content;
+            background-color: $color8;
+            border-radius: 7px;
+            padding: 9px;
             width: fit-content;
         }
     }
 
-    tr {
-        background-color: #bbbbbb;
-    }
-
-    tr:nth-child(even) {
-        background-color: #a3a3a3;
-    }
-
-    tr.require, tr:nth-child(even).require {
-        background-color: #ccd17f;
-    }
-
-    tr.require-and-done, tr:nth-child(even).require-and-done {
-        background-color: #92d17f;
-    }
-
-    tr.done, tr:nth-child(even).done {
-        background-color: #92d17f;
-    }
-
-
-
-    tr.have, tr:nth-child(even).have {
-        background-color: #424773;
-    }
-
-    tr.doing, tr:nth-child(even).doing {
-        background-color: #b45f06;
-    }
-
-    tr.doing-havnt, tr:nth-child(even).doing-havnt {
-        background-color: #bf9000;
-    }
-
-    tr.doing-and-done, tr:nth-child(even).doing-and-done {
-        background-color: #1e2d20;
-    }
-
-
-
-    td {
-        color: #000000;
-        font-weight: 300;
-        text-align: center;
-
-        .name_cell {
-            display: flex;
-            flex-direction: row;
-            align-items: flex-end;
-            justify-content: flex-start;
-            font-weight: 400;
-
-            img {
-                border-radius: 5px;
-                width: 40px;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: cover;
-            }
-        }
-    }
-}
-
-.all-character-progress {
-    td {
-        .checkbox {
-            appearance: checkbox;
-            width: 20px;
-            height: 20px;
-        }
-
-        .select {
-            appearance: menulist-button;
-            padding: 3px 0 3px 0px;
-            text-align: center;
-            border-radius: 4px;
-            box-shadow: 0px 0px 4px 0px #000000 inset;
-
-            option {
-                color: #000000;
-                background-color: #bbbbbb;
-                margin: 20px;
-            }
-
-            &:hover {
-                cursor: pointer;
-                background-color: #7c7c7c;
-                color: #cacaca;
-            }
-        }
-    }
-}
-
-.search-input {
-    position: relative;
-    color: #f5f5f5;
-    background-color: #4650ac;
-    margin: 10px;
-    padding: 4px;
-    z-index: 2;
-
-    .input {
-        background-color: #555fb6;
-        width: 100%;
-        padding: 3px;
-
-        &::placeholder {
-            color: #c9c9c9;
-            font-style: oblique;
-            font-size: 0.8rem;
-        }
-    }
-
-    .list {
-        z-index: 1;
-        position: absolute;
+    .remove-resources-cache {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
         display: flex;
-        flex-direction: column;
-        gap: 5px;
-        background-color: #24252c;
-        border: 2px solid #24252c;
+        justify-content: center;
+        align-items: center;
+        z-index: $cache-z-index;
+        background-color: $cache;
 
-        .one-result {
-            display: flex;
-            gap: 4px;
-            cursor: pointer;
-            background-color: #3f425e;
-            padding: 4px;
+        .remove-resources-modal {
+            position: relative;
+            background-color: $color3;
+            padding: 15px 30px;
+            border-radius: 25px;
+            color: $color8;
+            width: 95%;
+            max-width: 550px;
+            max-height: 700px;
+            overflow-y: auto;
 
-            .results-image {
-                border-radius: 5px;
-                width: 30px;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: cover;
+            .close-modal {
+                position: absolute;
+                cursor: pointer;
+                right: 9px;
+                top: 9px;
+                width: 26px;
+                height: 26px;
+                padding: 3px;
+                background-color: transparent;
+
+                &:hover {
+                    border-radius: 13px;
+                    background-color: $color11;
+                }
             }
 
-            &:hover {
-                background-color: #b8b9bd;
-                color: #32333a;
+            .status {
+                font-size: 18px;
+                font-weight: 400;
+
+                &-bold {
+                    color: $color17;
+                    font-weight: 600;
+                    letter-spacing: 1px;
+                }
+            }
+
+            .choice-container {
+                .little-precision {
+                    font-size: 14px;
+                    font-weight: 300;
+                    color: $color6;
+                    text-align: center;
+                    margin: 5px;
+                }
+
+                .remove-ressources-list {
+                    table {
+                        border-collapse: separate;
+                        border-spacing: 6px 5px;
+
+                        tbody {
+                            tr {
+                                margin: 6px 0;
+                            }
+
+                            .one-resource {
+
+                                .genshin-image {
+                                    vertical-align: middle;
+                                    width: 30px;
+                                    height: 30px;
+                                }
+
+                                .needed-count {
+                                    vertical-align: middle;
+                                    text-align: right;
+                                }
+
+                                .resource-name {
+                                    vertical-align: middle;
+                                    text-align: left;
+                                    font-weight: 400;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .remove-resources-choices {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-evenly;
+
+                    button {
+                        font-weight: 400;
+                        margin: 3px;
+                        border: 2px solid $color8;
+                        border-radius: 5px;
+                        color: $color3;
+                        padding: 4px 12px;
+
+                        &:hover {
+                            text-decoration: underline 2px;
+                            text-underline-offset: 2px;
+                            color: $color2;
+                        }
+                    }
+
+                    .confirm-choice {
+                        background-color: $color6;
+                    }
+
+                    .cancel-choice {
+                        background-color: $color15;
+                    }
+                }
+            }
+
+            .information {
+                font-weight: 400;
+                font-size: 16px;
+                color: $color5;
+                margin: 8px 0;
+            }
+        }
+    }
+
+    .section-container {
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        gap: 20px;
+
+        .table-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .search-input {
+                position: relative;
+
+                .input {
+                    margin: 10px;
+                    padding: 6px;
+                    width: 100%;
+                    max-width: 300px;
+                    color: $color3;
+                    background-color: $color7;
+
+                    &::placeholder {
+                        color: $color3;
+                        font-style: oblique;
+                        font-size: 14px;
+                        font-weight: 300;
+                        opacity: 0.7;
+                    }
+                }
+
+            }
+
+            .table-box {
+                overflow-y: auto;
+                max-height: 500px;
+                height: fit-content;
+                border: 2px solid $color10;
+
+                .table {
+                    height: fit-content;
+                    border-collapse: collapse;
+
+                    thead {
+                        color: $color2;
+                        position: sticky;
+                        top: 0px;
+                        z-index: $table-head;
+
+                        tr {
+                            background-color: $color7;
+
+                            th {
+                                text-align: center;
+                                vertical-align: middle;
+                                width: fit-content;
+                                padding: 6px 4px;
+                                font-weight: 400;
+                                font-size: 18px;
+                            }
+                        }
+                    }
+
+                    tbody {
+                        color: $color8;
+
+                        tr {
+                            background-color: $color3;
+
+                            &:nth-child(even) {
+                                background-color: $color19;
+                            }
+
+                            td {
+                                text-align: center;
+                                vertical-align: middle;
+                                font-weight: 400;
+                                font-size: 18px;
+                            }
+                        }
+
+                        th,
+                        td {
+                            padding: 3px 4px;
+                            font-size: 16px;
+                            text-align: center;
+
+                            .name-cell {
+                                max-width: 220px;
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                justify-content: flex-start;
+                                gap: 0 5px;
+                                font-weight: 400;
+
+                                p {
+                                    text-align: left;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Uniqement les couleurs spécifiques à certain cas de personnages
+        .characters-table-section {
+            .table-box {
+                .characters-informations {
+                    tbody {
+                        tr.have {
+                            background-color: $characters-have;
+                        }
+
+                        tr:nth-child(even).have {
+                            background-color: $characters-have-even;
+                        }
+
+                        tr.doing {
+                            background-color: $characters-doing;
+                        }
+
+                        tr:nth-child(even).doing {
+                            background-color: $characters-doing-even;
+                        }
+
+                        tr.doing-havnt {
+                            background-color: $characters-doing-havnt;
+                        }
+
+                        tr:nth-child(even).doing-havnt {
+                            background-color: $characters-doing-havnt-even;
+                        }
+
+                        tr.have-and-done {
+                            background-color: $characters-have-and-done;
+                        }
+
+                        tr:nth-child(even).have-and-done {
+                            background-color: $characters-have-and-done-even;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Uniquement le style pour la liste d'arme
+        .weapons-table-section {
+            .search-input {
+                .input {
+                    z-index: $z-index-two;
+                }
+
+                .list {
+                    z-index: $weapons-research-list;
+                    position: absolute;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: stretch;
+                    gap: 2px;
+                    margin: 10px;
+                    margin-top: 0;
+                    transform: translateY(-10px);
+                    width: 100%;
+                    border: 2px solid #24252c;
+
+                    .one-result {
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                        cursor: pointer;
+                        padding: 4px;
+
+                        &:hover {
+                            color: $color8;
+                            background-color: $color14;
+                        }
+                    }
+                }
+            }
+
+            .table-box {
+                .weapons-informations {
+                    tbody {
+                        tr {
+                            td {
+                                .name-cell {
+                                    position: relative;
+
+                                    .deleting-weapon {
+                                        cursor: pointer;
+                                        width: 26px;
+                                        height: 26px;
+                                        padding: 3px;
+
+                                        &:hover {
+                                            border-radius: 13px;
+                                            background-color: $color11;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Uniqement les couleurs spécifiques à certain cas de ressources
+        .materials-table-section {
+            .table-box {
+                .materials-informations {
+                    tbody {
+                        tr.require {
+                            background-color: $material-require;
+                        }
+
+                        tr:nth-child(even).require {
+                            background-color: $material-require-even;
+                        }
+
+                        tr.require-and-done {
+                            background-color: $material-require-and-done;
+                        }
+
+                        tr:nth-child(even).require-and-done {
+                            background-color: $material-require-and-done-even;
+                        }
+
+                        tr.done {
+                            background-color: $material-only-need-and-done;
+                        }
+
+                        tr:nth-child(even).done {
+                            background-color: $material-only-need-and-done-even;
+                        }
+
+                        tr {
+                            td.farm-day {
+                                background-color: $color11;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
 }
 
-.deleting-weapon {
-    font-weight: 500;
-    font-size: 19px;
-    color: #d6d6d6;
-    background-color: #c94b4b;
-    padding: 0px 5px;
-    border-radius: 20px;
-    margin: 0 10px;
-}
-
-.cache {
-    .remove-resources-modal {
-        background-color: #4650ac;
-        padding: 6px;
-        border-radius: 12px;
-        color: #ffffff;
-
-        // .sufficient-ressorces {   
-            // .ressources-list {
-                
-            // }
-            
-            // .remove-resources-choice {
-                
-            // }
-        // }
+@media only screen and (min-width: 950px) {
+    .project-farming-container {
+        .farming-informations-container {
+            flex-direction: row;
+        }
     }
 }
 </style>

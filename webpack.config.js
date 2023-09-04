@@ -73,6 +73,7 @@ module.exports = {
             "@router": path.resolve(__dirname, "src/router"),
             "@src": path.resolve(__dirname, "src"),
             "@static": path.resolve(__dirname, "src/static"),
+            "@svgs": path.resolve(__dirname, "src/views/parts/svgs"),
             "@store": path.resolve(__dirname, "src/store"),
             "@styles": path.resolve(__dirname, "src/styles"),
             "@views": path.resolve(__dirname, "src/views"),

@@ -103,6 +103,10 @@ const privacyPolicyOpen = ref(false);
                     Aucune information personnelle identifiable n'est collectée. Seul un identifiant unique est utilisé pour
                     connecter l'utilisateur à ses données mais ne constitue pas une donnée personnelle sensible.
                 </p>
+                <br>
+                <p>
+                    Aussi, je tiens à préciser que je n'ai pas pour but de faire concurrence à l'excellent site Paimon.moe ni aucun autre d'ailleurs. L'outil que j'avais d'abord créer sur un Google Sheet n'existait nul part ailleurs et je voulais le partager avec la communauté donc le faire sur site web.
+                </p>
             </div>
         </Transition>
         <div class="contact-me-button">
@@ -139,18 +143,16 @@ const privacyPolicyOpen = ref(false);
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 70px;
+    gap: 5px 70px;
     padding: 25px 40px;
     font-size: 14px;
-
-    overflow: visible   ;
 
     .privacy-policy-open {
         padding: 15px;
         position: absolute;
         width: 85%;
         max-width: 600px;
-        top: -57%;
+        top: -180%;
         border: 1px solid $color3;
     }
 
@@ -306,7 +308,7 @@ const privacyPolicyOpen = ref(false);
                 }
 
                 .length.long-enough {
-                    color: $color12;
+                    color: $color11;
                 }
 
                 .input.is-focused label {
@@ -336,7 +338,7 @@ const privacyPolicyOpen = ref(false);
 @media only screen and (min-width: 700px) {
     .footer-container {
         .privacy-policy-open {
-            top: -80%;
+            top: -200%;
         }
     }
 }
@@ -344,7 +346,7 @@ const privacyPolicyOpen = ref(false);
 @media only screen and (min-width: 1100px) {
     .footer-container {
         .privacy-policy-open {
-            top: -130%;
+            top: -280%;
         }
     }
 }

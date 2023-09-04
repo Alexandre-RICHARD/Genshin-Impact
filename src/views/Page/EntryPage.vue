@@ -6,7 +6,6 @@ import { useMainStore } from "@store/Main";
 import { useRoute } from "vue-router";
 const { error, userSession } = useMainStore();
 const route = useRoute();
-const URL = process.env.URL;
 
 const inputUuidValue = ref("");
 
@@ -50,9 +49,9 @@ const confirmChoice = async (choice_type) => {
         changeStep("ready");
         break;
     case "new":
+        userSession.uuid = await getNewIdentifier();
         userSession.gotSession = true;
         userSession.type = "identified";
-        userSession.uuid = await getNewIdentifier();
         changeStep("show-uuid");
         break;
     case "login":
@@ -80,16 +79,9 @@ const login = async () => {
     }
 };
 
-const copyUuid = (type) => {
-    switch (type) {
-    case "uuid":
-        navigator.clipboard.writeText(userSession.uuid);
-        changeStep("ready");
-        break;
-    case "link-with-uuid":
-        navigator.clipboard.writeText(`${URL}?uuid=${userSession.uuid}`);
-        break;
-    }
+const copyUuid = () => {
+    navigator.clipboard.writeText(userSession.uuid);
+    changeStep("ready");
 };
 
 onBeforeMount(() => {
@@ -98,59 +90,59 @@ onBeforeMount(() => {
 </script>
 
 <template>
-    <button v-if="userSession.uuid.length > 0" @click="copyUuid('link-with-uuid')">Copier le lien vers cette session</button>
-    <button v-if="userSession.uuid.length > 0" @click="copyUuid('uuid')">Copier l'Uuid</button>
-    <div v-if="userSession.step === 'start'" class="cache">
-        <button class="choice" @click="confirmChoice('guest')">
-            <p class="first-line">Parcourir en tant qu'</p>
-            <p class="second-line">Invité</p>
-            <p class="third-line">
-                Mes données ne seront sauvegardées que sur mon navigateur. Je ne pourrai y accéder
-                ailleurs
-            </p>
-        </button>
-        <button class="choice" @click="confirmChoice('new')">
-            <p class="first-line">Nouvelle session et </p>
-            <p class="second-line">Obtenir un identifiant</p>
-            <p class="third-line">
-                J'obtiens un identifiant que je pourrai réutiliser sur tous mes appareils ou navigateur et
-                garder mes données
-            </p>
-        </button>
-        <button class="choice" @click="confirmChoice('login')">
-            <p class="first-line">J'ai un identifiant et</p>
-            <p class="second-line">Je m'identifie</p>
-            <p class="third-line">
-                J'ai déjà un identifiant venant d'un autre appareil et je souhaite récupérer mes données
-                avec.
-            </p>
-        </button>
-    </div>
-
-    <div v-if="userSession.step === 'show-uuid'" class="cache">
-        <div class="show-uuid">
-            <button class="close-button" @click="changeStep(ready)">X</button>
-            <p class="first-line">Mon identifiant unique</p>
-            <p class="second-line">{{ userSession.uuid }}</p>
-            <button class="copy-uuid-button" @click="copyUuid('uuid')">Copier</button>
-        </div>
-    </div>
-
-    <div v-if="userSession.step === 'enter-uuid'" class="cache">
-        <div class="enter-uuid">
-            <button class="close-button" @click="changeStep('ready')">X</button>
-            <p class="first-line">Mon identifiant unique</p>
-            <p class="third-line">Au format</p>
-            <p class="uuid-format">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</p>
-            <input v-model="inputUuidValue" type="text" class="input-uuid">
-            <p v-if="error.uuidNotFound.bool" class="error">{{ error.uuidNotFound.text }}</p>
-            <button
-                class="send-uuid-button"
-                :disabled="inputUuidValue.length === 0"
-                @click="login"
-            >
-                Se connecter
+    <div v-if="userSession.step != 'ready'" class="entry-container">
+        <div v-if="userSession.step === 'start'" class="entry-choice">
+            <button class="choice" @click="confirmChoice('guest')">
+                <p class="first-line">Parcourir en tant qu'</p>
+                <p class="second-line">Invité</p>
+                <p class="third-line">
+                    Mes données ne seront sauvegardées que sur mon navigateur. Je ne pourrai y accéder
+                    ailleurs
+                </p>
             </button>
+            <button class="choice" @click="confirmChoice('new')">
+                <p class="first-line">Nouvelle session et </p>
+                <p class="second-line">Obtenir un identifiant</p>
+                <p class="third-line">
+                    J'obtiens un identifiant que je pourrai réutiliser sur tous mes appareils ou navigateur et
+                    garder mes données
+                </p>
+            </button>
+            <button class="choice" @click="confirmChoice('login')">
+                <p class="first-line">J'ai un identifiant et</p>
+                <p class="second-line">Je m'identifie</p>
+                <p class="third-line">
+                    J'ai déjà un identifiant venant d'un autre appareil et je souhaite récupérer mes données
+                    avec.
+                </p>
+            </button>
+        </div>
+
+        <div v-if="userSession.step === 'show-uuid'" class="entry-choice">
+            <div class="show-uuid">
+                <button class="close-button" @click="changeStep('ready')">X</button>
+                <p class="first-line">Mon identifiant unique</p>
+                <p class="second-line">{{ userSession.uuid }}</p>
+                <button class="copy-uuid-button" @click="copyUuid">Copier</button>
+            </div>
+        </div>
+
+        <div v-if="userSession.step === 'enter-uuid'" class="entry-choice">
+            <div class="enter-uuid">
+                <button class="close-button" @click="changeStep('start')">X</button>
+                <p class="first-line">Mon identifiant unique</p>
+                <p class="third-line">Au format</p>
+                <p class="uuid-format">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</p>
+                <input v-model="inputUuidValue" type="text" class="input-uuid">
+                <p v-if="error.uuidNotFound.bool" class="error">{{ error.uuidNotFound.text }}</p>
+                <button
+                    class="send-uuid-button"
+                    :disabled="inputUuidValue.length === 0"
+                    @click="login"
+                >
+                    Se connecter
+                </button>
+            </div>
         </div>
     </div>
 
@@ -160,57 +152,59 @@ onBeforeMount(() => {
 <style lang="scss">
 @import "@styles/variables.scss";
 
-.cache {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+.entry-container {
     height: 100vh;
-    background-color: $cache;
-    color: $color2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 30px;
+    width: 100%;
+    padding: 35px;
 
-    .choice,
-    .show-uuid,
-    .enter-uuid {
-        width: 240px;
-        height: 240px;
-        background-color: $color8;
-        border-radius: 15px;
-        padding: 10px;
+    .entry-choice {
+        height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-direction: column;
-        border: 2px solid $color9;
+        align-content: center;
+        flex-wrap: wrap;
+        gap: 30px;
 
-        .first-line {
-            padding-bottom: 15px;
-            font-weight: 400;
-            font-size: 18px;
-            text-align: center;
+        .choice,
+        .show-uuid,
+        .enter-uuid {
+            width: 240px;
+            height: 240px;
+            background-color: $color8;
+            border-radius: 15px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border: 2px solid $color10;
+    
+            .first-line {
+                padding-bottom: 15px;
+                font-weight: 400;
+                font-size: 18px;
+                text-align: center;
+            }
+    
+            .second-line {
+                font-weight: 500;
+                font-size: 20px;
+                color: $color4;
+                text-align: center;
+            }
+    
+            .third-line {
+                text-align: justify;
+                color: $color3;
+            }
         }
-
-        .second-line {
-            font-weight: 500;
-            font-size: 20px;
-            color: $color4;
-            text-align: center;
-        }
-
-        .third-line {
-            text-align: justify;
-            color: $color3;
+    
+        .choice:hover {
+            border-color: $color2;
         }
     }
 
-    .choice:hover {
-        border-color: $color2;
-    }
 
     .show-uuid,
     .enter-uuid {
@@ -229,8 +223,9 @@ onBeforeMount(() => {
         }
 
         .error {
-            font-size: 12px;
-            color: $color7;
+            font-size: 13px;
+            font-style: oblique;
+            color: $color15;
         }
 
         .copy-uuid-button, 
@@ -248,7 +243,7 @@ onBeforeMount(() => {
             }
 
             &:disabled {
-                background-color: $color9;
+                background-color: $color10;
             }
 
             &:hover:disabled {
