@@ -1273,7 +1273,7 @@
     },
     {
         "id": 160,
-        "name": "Pierre d'émeraude nagadus",
+        "name": "Pierre d'améthyste vajrada",
         "code": "p044",
         "category": "gem",
         "farming_days": null,
@@ -1281,7 +1281,7 @@
     },
     {
         "id": 161,
-        "name": "Morceau d'émeraude nagadus",
+        "name": "Morceau d'améthyste vajrada",
         "code": "p043",
         "category": "gem",
         "farming_days": null,
@@ -1289,7 +1289,7 @@
     },
     {
         "id": 162,
-        "name": "Fragment d'émeraude nagadus",
+        "name": "Fragment d'améthyste vajrada",
         "code": "p042",
         "category": "gem",
         "farming_days": null,
@@ -1297,7 +1297,7 @@
     },
     {
         "id": 163,
-        "name": "Éclat d'émeraude nagadus",
+        "name": "Éclat d'améthyste vajrada",
         "code": "p041",
         "category": "gem",
         "farming_days": null,

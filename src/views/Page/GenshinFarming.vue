@@ -215,7 +215,11 @@ const userResetData = async (type) => {
     await readyToDestroyData("Weapons");
     await readyToDestroyData("Materials");
     await readyToDestroyData("Options");
-    if (type === "reset") dataInit();
+    if (type === "reset") {
+        paramsOpen.value = false;
+        explainationOpen.value = false;
+        dataInit();
+    }
 };
 
 const deleteUserData = async () => {
@@ -930,6 +934,16 @@ onBeforeMount(() => {
                     </div>
                     <div v-else-if="explainationOpen" class="explaination-box">
                         <p class="left-title">Aide et explications</p>
+                        <p class="title">Signification des couleurs</p>
+                        <p class="sub-title">Pour les personnages</p>
+                        <p class="one-color have">Je possède ce personnage</p>
+                        <p class="one-color doing">Je le possède et je veux le monter</p>
+                        <p class="one-color doing-havnt">Je l'ai pas, mais je le prépare en avance</p>
+                        <p class="one-color have-and-done">Je l'ai et je l'ai fini</p>
+                        <p class="sub-title">Pour les ressources</p>
+                        <p class="one-color require">Ressource requise parmi toutes</p>
+                        <p class="one-color require-and-done">Ressource requise parmi toutes et j'en ai assez</p>
+                        <p class="one-color done">Parmi les requises uniquement, celle-ci est bonne</p>
                         <p class="title">Présentation</p>
                         <p>
                             Voici mon outil. Il n'a pas véritablement de nom, pas encore, mais est destiné à vous aider à
@@ -1638,6 +1652,42 @@ onBeforeMount(() => {
                     font-weight: 700;
                     font-size: 25px;
                     color: $color4;
+                }
+
+                .one-color {
+                    padding: 5px;
+                    font-size: 16px;
+                    border-radius: 6px;
+                    padding: 4px;
+                    text-align: center;
+                }
+
+                .one-color.have {
+                    background: linear-gradient(90deg, $characters-have 0%, $characters-have-even 100%);
+                }
+
+                .one-color.doing {
+                    background: linear-gradient(90deg, $characters-doing 0%, $characters-doing-even 100%);
+                }
+
+                .one-color.doing-havnt {
+                    background: linear-gradient(90deg, $characters-doing-havnt 0%,  $characters-doing-havnt-even 100%);
+                }
+
+                .one-color.have-and-done {
+                    background: linear-gradient(90deg, $characters-have-and-done 0%,    $characters-have-and-done-even 100%);
+                }
+
+                .one-color.require {
+                    background: linear-gradient(90deg, $material-require 0%, $material-require-even 100%);
+                }
+
+                .one-color.require-and-done {
+                    background: linear-gradient(90deg, $material-require-and-done 0%,    $material-require-and-done-even 100%);
+                }
+                
+                .one-color.done {
+                    background: linear-gradient(90deg, $material-only-need-and-done 0%,    $material-only-need-and-done-even 100%);
                 }
 
                 .sub-title {

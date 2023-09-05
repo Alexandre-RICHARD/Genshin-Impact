@@ -12,7 +12,7 @@ const inputUuidValue = ref("");
 const dataInit = async () => {
     let uuidSuccess = false;
     if (route.query.uuid) {
-        const response = await loginWithUuid(false, route.query.uuid);
+        const response = await loginWithUuid(route.query.uuid);
         if (response.status === 200) {
             userSession.gotSession = true;
             userSession.type = "identified";

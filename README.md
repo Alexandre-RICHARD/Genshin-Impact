@@ -333,6 +333,12 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Le footer est composé de 5 parties, bouton du formulaire de contact, infos du projet, la politique de confidentitalité, les liens github et celui du portfolio
 -   Première utilisation de transition de Vue.JS. PLutot concluant.
 
+</details>
+
+### Version 2
+
+<details>
+
 ### 2.0.0 `4 septembre 2023`
 
 -   Mise à jour des packages npm
@@ -420,5 +426,15 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Stylisation légère mais indispensable pour bien le marquer de l'input select des serveurs dans les options.
 -   Rajout de quelques cursor:pointer sur les éléments cohérents à l'avoir
 -   Réglages des marges par rapport à l'input de recherches des armes améliorés
+
+### 2.0.2 `5 septembre 2023`
+
+-   Rajout d'une variable dans webpack.config.js afin de gérer l'output du CSS. En prod il sort en [hash].css, et en dev il sort en main.css
+-   Correction de 4 noms de ressources dans le fichier JSON correspondants.
+-   Correction du nom de personnage Rosaria -> Rosalia car version française
+-   Suppression d'un argument dans l'appel de loginWithUuid qui causait un gros problème de requête
+-   Petit bug du header réglé en CSS
+-   Si on réinitialise nos données, cela ferme le menu lattéral de gauche (nécessaire)
+-   Rajout d'un pavé dans les explications afin d'indiquer la signification des couleurs dans les tableaux de personnages et de ressources
 
 </details>

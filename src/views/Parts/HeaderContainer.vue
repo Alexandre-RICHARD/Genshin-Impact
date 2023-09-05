@@ -32,7 +32,7 @@ import GenshinLogoPerso from "@svgs/GenshinLogoPerso.vue";
         padding: 5px;
         background-color: transparent;
         width: 194.85px;
-        height: 100%;
+        height: 80px;
 
         svg {
             position: absolute;

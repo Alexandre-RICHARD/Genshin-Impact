@@ -32,6 +32,7 @@ let performance = {
     maxEntrypointSize: 512000,
     maxAssetSize: 512000,
 };
+let cssOutputMode = "css/[name].css";
 
 // Si on est en production, les variables ci-desosus sont modifiées
 if (process.env.NODE_ENV === "production") {
@@ -41,6 +42,7 @@ if (process.env.NODE_ENV === "production") {
     publicPath = "../";
     devtool = false;
     performance.hints = "warning";
+    cssOutputMode = "css/[hash].css";
 }
 
 module.exports = {
@@ -111,7 +113,7 @@ module.exports = {
         }),
         // Afin que le css soit dans un fichier indépendant des fichiers js
         new MiniCssExtractPlugin({
-            filename: "css/[hash].css",
+            filename: cssOutputMode,
         }),
         // Plugin qui ouvrira un onglet à chaque run/build pour montrer la taille des différents package dans les fichiers compilé et aider à mieux les gérer
         // new BundleAnalyzerPlugin(), //! Pour activer ou désactiver
