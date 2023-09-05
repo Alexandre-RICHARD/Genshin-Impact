@@ -437,4 +437,21 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Si on réinitialise nos données, cela ferme le menu lattéral de gauche (nécessaire)
 -   Rajout d'un pavé dans les explications afin d'indiquer la signification des couleurs dans les tableaux de personnages et de ressources
 
+### 2.1.0 `6 septembre 2023`
+
+-   Rajout du gestionnaire de cookies. Appel d'une fonction permettant de gérer le nombre de visite. Le cookie se supprime au bout de 4 heures, ainsi, plusieurs incréments sont possibles par jour.
+-   Rajout de la fonction de requête liée dans fetchHandler.js
+-   Gros changements dans les données de personnages et d'armes. Rajout de leur dates de sorties respectives, de leur nom anglais et de leur id. Pour éviter des problèmes dans le futur avec le nom des données et la manière dont elles sont enregistrées.
+-   Changement de tous les noms des images d'armes et de personnages pour correspondre.
+-   Dans webpack.config.js, hash devient fullhash pour correspondre aux bonnes normes de webpack
+-   Adaptation du nom des background image dans GenshinImage avec la rareté en ayant rajouté un prefix "r-"
+-   Dans DataInit de GenshinFarming, remplacement des notions de name par id maintenant que la sauvegarde ne se fait plus avec le nom des personnages/armes
+-   Même changement dans quelques autres fonctions
+-   Rajout d'une fonction de tri personnalisé pour trier par ordre alphabétique les personnages dans filteredCharacters
+-   Suppression de la fonction de tri qui était censé être dynamique et modulable, les cas sont trop particuliers
+-   Suppression d'un console.log oublié
+-   Dans le template rajout de préfixe "c-" ou "w-" devant chaque argument identifier des appels de GenshinImage
+-   Remplacement aussi des notions de name par celle d'index
+-   Adaptation pour quand même affichée le nom des armes et des personnages au lieu de leur ID
+
 </details>

@@ -81,38 +81,38 @@ const dataInit = async () => {
         // Si oui, on la transforme en un tableau utilisable
         data.Characters = JSON.parse(lsCharacter);
         // Boucle initié avec la liste des personnages complètes avec uniquement le nom du personnages servant d'identifiant unique
-        CharactersList.forEach(({ name }) => {
+        CharactersList.forEach(({ id }) => {
             // On le cherche dans notre nouveau tableau. 
-            const currentChar = data.Characters.find(fi => name === fi.name);
+            const currentChar = data.Characters.find(fi => id === fi.id);
             // S'il existe, on va étudier chacune des valeurs que ce personnage contient pour assurer leur validité et les remplacer si besoin
             if (currentChar) {
                 // Pour chaque donnée, on va regarder si elle est logique et du bon type auquel cas inverse, cela casserai l'application. Un mauvais type ne pourrait être présent que par maladresse ou volonté de l'utilisateur
                 // On regarde si chaque valeur est contenu dans les tableaux de référence, et sinon, on la remplace par la valeur par défaut
-                const i = data.Characters.findIndex(fi => name === fi.name);
+                const i = data.Characters.findIndex(fi => id === fi.id);
                 if ([false, true].indexOf(currentChar.got) < 0) data.Characters[i].got = false;
                 if ([false, true].indexOf(currentChar.doing) < 0) data.Characters[i].doing = false;
                 if ([false, true].indexOf(currentChar.only) < 0) data.Characters[i].only = false;
                 if (lvlList.indexOf(currentChar.cLvl) < 0) data.Characters[i].cLvl = 1;
                 if (lvlList.indexOf(currentChar.wLvl) < 0) data.Characters[i].wLvl = 96;
                 if (aptList.indexOf(currentChar.cAp1) < 0) data.Characters[i].cAp1 = 1;
-                if (aptList.indexOf(currentChar.wAp1) < 0) data.Characters[i].wAp1 = 10;
+                if (aptList.indexOf(currentChar.wAp1) < 0) data.Characters[i].wAp1 = 9;
                 if (aptList.indexOf(currentChar.cAp2) < 0) data.Characters[i].cAp2 = 1;
-                if (aptList.indexOf(currentChar.wAp2) < 0) data.Characters[i].wAp2 = 10;
+                if (aptList.indexOf(currentChar.wAp2) < 0) data.Characters[i].wAp2 = 9;
                 if (aptList.indexOf(currentChar.cAp3) < 0) data.Characters[i].cAp3 = 1;
-                if (aptList.indexOf(currentChar.wAp3) < 0) data.Characters[i].wAp3 = 10;
+                if (aptList.indexOf(currentChar.wAp3) < 0) data.Characters[i].wAp3 = 9;
 
                 // Rajout d'une condition, au chargement, on vérifie les données. On en profite pour checker si tous les persos ont leur valeurs doing ou pas. Si oui, on change la variable correspondante en true
                 if (currentChar.only) isOnlyCharacters.value = true;
             } else {
                 // Sinon, on va simplement créer ce personnage avec son nom et les valeurs par défaut à l'aide de la fonction filler
-                data.Characters.push(filler("Characters", name));
+                data.Characters.push(filler("Characters", id));
             }
         });
         // Si la chaîne de caractère n'existe pas, alors on va la créer de toute pièce en utilisant la fonction filler pour mettre par défaut chaque personnage
     } else {
         data.Characters = [];
-        CharactersList.forEach(({ name }) => {
-            data.Characters.push(filler("Characters", name));
+        CharactersList.forEach(({ id }) => {
+            data.Characters.push(filler("Characters", id));
         });
     }
     // Une fois tout cela géré, on va mettre à jour le localStorage avec nos données actualisées et vérifiées
@@ -121,10 +121,10 @@ const dataInit = async () => {
     const lsWeapons = await readyToLoadData("Weapons");
     if (lsWeapons) {
         data.Weapons = JSON.parse(lsWeapons);
-        WeaponsList.forEach(({ name }) => {
-            const currentChar = data.Weapons.find(fi => name === fi.name);
+        WeaponsList.forEach(({ id }) => {
+            const currentChar = data.Weapons.find(fi => id === fi.id);
             if (currentChar) {
-                const i = data.Weapons.findIndex(fi => name === fi.name);
+                const i = data.Weapons.findIndex(fi => id === fi.id);
                 if (lvlList.indexOf(currentChar.cLvl) < 0) data.Weapons[i].cLvl = 1;
                 if (lvlList.indexOf(currentChar.wLvl) < 0) data.Weapons[i].wLvl = 96;
             }
@@ -182,27 +182,27 @@ const dataInit = async () => {
 };
 
 // La fonction filler, utilisée pour complété les données de l'array data quand les données présente dans le localStorage ne sont pas bonnes
-const filler = (type, name) => {
+const filler = (type, id) => {
     // Prise en compte du type de données pour différencier les propriétés à renvoyer et le nom.
     switch (type) {
     case "Characters":
         return {
-            name: name,
+            id: id,
             got: false,
             doing: false,
             only: false,
             cLvl: 1,
             wLvl: 96,
             cAp1: 1,
-            wAp1: 10,
+            wAp1: 9,
             cAp2: 1,
-            wAp2: 10,
+            wAp2: 9,
             cAp3: 1,
-            wAp3: 10,
+            wAp3: 9,
         };
     case "Materials":
         return {
-            code: name,
+            code: id,
             have: 0,
         };
     }
@@ -254,7 +254,7 @@ const handleChange = (group, index, valuename, value) => {
     if (valuename === "only") isOnlyCharacters.value = value;
     if (data.Options.proposeToRemoveRessources && ["cLvl", "cAp1", "cAp2", "cAp3"].indexOf(valuename) >= 0) {
         if (group === "Weapons" ? true : (group === "Characters" && data[group][index].doing === true)) {
-            removeResData.weaponsOrCharactersConcerned = (group === "Characters" ? CharactersList : WeaponsList).find(fi => fi.name === data[group][index].name);
+            removeResData.weaponsOrCharactersConcerned = (group === "Characters" ? CharactersList : WeaponsList).find(fi => fi.id === data[group][index].id);
             removeResData.oldLevel = data[group][index][valuename];
             removeResData.newLevel = value;
             removeResData.levelDifference = value - data[group][index][valuename];
@@ -338,15 +338,25 @@ const searchingMaterialsQuery = ref("");
 // Un objet computed afin de filtrer en fonction d'une options si on ne veut voir que les personnages qui ont été noté comme build
 const filteredCharacters = computed(() => {
     const filter = [...data.Characters].filter((character) => {
+        const currentCharacter = CharactersList.find(fi => fi.id === character.id);
         const doingCharacters = !data.Options.onlyShowsDoingCharacter || character.doing === true;
-        const searchedCharacters = !searchingCharactersQuery.value || character.name.toLowerCase().includes(searchingCharactersQuery.value.toLowerCase());
+        const searchedCharacters = !searchingCharactersQuery.value || currentCharacter.name.toLowerCase().includes(searchingCharactersQuery.value.toLowerCase());
 
         return (
             doingCharacters &&
             searchedCharacters
         );
     });
-    return filter.sort(sortFunction("name"));
+
+    const sorted = filter.sort((a, b) => {
+        const aName = CharactersList.find(fi => fi.id === a.id).name;
+        const bName = CharactersList.find(fi => fi.id === b.id).name;
+        if (aName < bName) return -1;
+        if (aName > bName) return 1;
+        return 0;
+    });
+
+    return sorted;
 });
 
 // Fonction de filtre pour les armes en fonction de la recherche effectuée
@@ -406,9 +416,9 @@ const hideList = () => {
 // Fonction pour rajouter une arme à la liste.
 // On procède ainsi car il y a trop d'armes donc les afficher toutes seraient imbuvables, et on peut aussi imaginer le cas d'avoir deux fois la même
 const addWeaponToDo = (name) => {
-    const currentWeapon = WeaponsList.find(el => el.eng_name === name || el.name === name);
+    const currentWeapon = WeaponsList.find(el => el.name === name);
     data.Weapons.push({
-        name: currentWeapon.name,
+        id: currentWeapon.id,
         rarity: currentWeapon.rarity,
         cLvl: 1,
         // En fonction de la rareté de l'arme, elle ne peut pas être amélioré au même niveau maximum
@@ -430,15 +440,6 @@ const deletingWeaponToDo = (index) => {
     // On sauvegarde le tableau des armes actualisé
     readyToSaveData("Weapons");
 };
-
-// Une fonction de triage non fléché (la seule) afin d'accueillir des arguments autres que les a et b habituels.
-function sortFunction(...args) {
-    return function (a, b) {
-        if (a[args[0]] < b[args[0]]) return -1;
-        if (a[args[0]] > b[args[0]]) return 1;
-        return 0;
-    };
-}
 
 // Variable pour indiquer à l'objet computed ci dessous ainsi qu'au tableau ce qu'ils doivent faire dans le cas ou un personnage a été indiqué comme étant le seul
 let isOnlyCharacters = ref(false);
@@ -491,7 +492,7 @@ const farmingMaterial = computed(() => {
     // Cependant, si on a un personnages qui a été coché comme only, alors on ne va cherche que cette propriété donc que ce perso
     data.Characters.filter(char => !isOnlyCharacters.value ? char.doing === true : char.only === true).forEach(char => {
         // Dans la données de persos, on récupère celles du personnage actuel.
-        const currentElement = CharactersList.find(find => find.name === char.name);
+        const currentElement = CharactersList.find(find => find.id === char.id);
         // On boucle de 0 à 3 car on va surveiller 4 choses, le lvl, l'aptitude 1, la 2 et la 3.
         for (let i = 0; i <= 3; i++) {
             // On va récupérer la liste des niveaux séparant le niveau actuel du niveau voulu pour ainsi avoir accès à la liste de ce que demande chaque niveau comme matériel
@@ -507,7 +508,7 @@ const farmingMaterial = computed(() => {
     // On rajoute juste une condition au cas-où un personnage a été marqué comme "only", dans ce cas on ne traite aucun autre élément
     if (!isOnlyCharacters.value) {
         data.Weapons.forEach(weap => {
-            const currentElement = WeaponsList.find(find => find.name === weap.name);
+            const currentElement = WeaponsList.find(find => find.id === weap.id);
             const progressStep = levelingData[`weapon_${currentElement.rarity}`].filter(step => step.id > weap.cLvl && step.id <= weap.wLvl);
             if (progressStep.length > 0) {
                 materialsAttributor(progressStep, currentElement);
@@ -611,7 +612,6 @@ const farmingMaterial = computed(() => {
     const mora = computedBuildArray.findIndex(fi => fi.code === "g01");
     const bookXp = computedBuildArray.findIndex(fi => fi.code === "g05");
 
-    // if (computedBuildArray[mora])
     if (data.Options.leyLineResin) {
         computedBuildArray[mora].group_resin = Math.ceil(computedBuildArray[mora].remain / coefficientResin.mora) * 20;
         computedBuildArray[bookXp].group_resin = Math.ceil((computedBuildArray[bookXp].group_needed - computedBuildArray[bookXp].group_have) / coefficientResin.character_xp) * 20;
@@ -694,7 +694,12 @@ const farmingMaterial = computed(() => {
     });
 
     // Enfin, on renvoie tous notre tableau computed en le triant par Id pour être sûr que les matériaux soient affichés dans le même ordre que l'inventaire du jeu
-    const sorted = computedBuildArray.sort(sortFunction("id"));
+    const sorted = computedBuildArray.sort((a, b) => {
+        if (a.id < b.id) return -1;
+        if (a.id > b.id) return 1;
+        return 0;
+    });
+
     return sorted;
 });
 
@@ -1160,7 +1165,7 @@ onBeforeMount(() => {
                     class="close-modal" src="@static/images/close.png"
                     @click="removeResData.removeRessourcesModal = false"
                 >
-                <p class="status" @click="console.log(removeResData)">
+                <p class="status">
                     Vous avez amélioré {{ removeResData.levelOrAptitude === 'level' ? 'le niveau' : 'une aptitude' }} de
                     <span class="status-bold">{{ removeResData.weaponsOrCharactersConcerned.name }}</span> de <span
                         class="status-bold"
@@ -1241,7 +1246,7 @@ onBeforeMount(() => {
                         </thead>
                         <tbody>
                             <tr
-                                v-for="character in filteredCharacters" :key="character.name" :class="{
+                                v-for="character in filteredCharacters" :key="character.id" :class="{
                                     'have': character.got,
                                     'doing': character.doing,
                                     'doing-havnt': !character.got && character.doing,
@@ -1252,64 +1257,64 @@ onBeforeMount(() => {
                                     <div class="name-cell">
                                         <GenshinImage
                                             v-if="data.Options.loadIMG" type="characters"
-                                            :identifier="`${character.name}`"
-                                            :rarity="`${CharactersList.find(fi => fi.name === character.name).rarity}`"
+                                            :identifier="`c-${character.id}`"
+                                            :rarity="`${CharactersList.find(fi => fi.id === character.id).rarity}`"
                                         />
-                                        <p>{{ character.name }}</p>
+                                        <p>{{ CharactersList.find(fi => fi.id === character.id).name }}</p>
                                     </div>
                                 </td>
                                 <InputCreator
                                     :checked="character.got" type="checkbox"
-                                    @update:checked="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'got', newValue)"
+                                    @update:checked="newValue => handleChange('Characters', data.Characters.findIndex(el => el.id === character.id), 'got', newValue)"
                                 />
                                 <InputCreator
                                     :checked="character.doing" type="checkbox" :disabled="character.only"
-                                    @update:checked="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'doing', newValue)"
+                                    @update:checked="newValue => handleChange('Characters', data.Characters.findIndex(el => el.id === character.id), 'doing', newValue)"
                                 />
                                 <InputCreator
                                     :checked="character.only" type="checkbox"
                                     :disabled="!character.doing || (!character.only && isOnlyCharacters)"
-                                    @update:checked="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'only', newValue)"
+                                    @update:checked="newValue => handleChange('Characters', data.Characters.findIndex(el => el.id === character.id), 'only', newValue)"
                                 />
                                 <InputCreator
                                     :value="character.cLvl" type="select-level"
                                     :list="levelingData.level.filter((el) => el.id <= character.wLvl)"
-                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'cLvl', newValue)"
+                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.id === character.id), 'cLvl', newValue)"
                                 />
                                 <InputCreator
                                     :value="character.wLvl" type="select-level"
                                     :list="levelingData.level.filter((el) => el.id >= character.cLvl)"
-                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'wLvl', newValue)"
+                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.id === character.id), 'wLvl', newValue)"
                                 />
                                 <InputCreator
                                     :value="character.cAp1" type="select-aptitude"
                                     :list="aptList.filter((el) => el <= character.wAp1)"
-                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'cAp1', newValue)"
+                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.id === character.id), 'cAp1', newValue)"
                                 />
                                 <InputCreator
                                     :value="character.wAp1" type="select-aptitude"
                                     :list="aptList.filter((el) => el >= character.cAp1)"
-                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'wAp1', newValue)"
+                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.id === character.id), 'wAp1', newValue)"
                                 />
                                 <InputCreator
                                     :value="character.cAp2" type="select-aptitude"
                                     :list="aptList.filter((el) => el <= character.wAp2)"
-                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'cAp2', newValue)"
+                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.id === character.id), 'cAp2', newValue)"
                                 />
                                 <InputCreator
                                     :value="character.wAp2" type="select-aptitude"
                                     :list="aptList.filter((el) => el >= character.cAp2)"
-                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'wAp2', newValue)"
+                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.id === character.id), 'wAp2', newValue)"
                                 />
                                 <InputCreator
                                     :value="character.cAp3" type="select-aptitude"
                                     :list="aptList.filter((el) => el <= character.wAp3)"
-                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'cAp3', newValue)"
+                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.id === character.id), 'cAp3', newValue)"
                                 />
                                 <InputCreator
                                     :value="character.wAp3" type="select-aptitude"
                                     :list="aptList.filter((el) => el >= character.cAp3)"
-                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.name === character.name), 'wAp3', newValue)"
+                                    @update:value="newValue => handleChange('Characters', data.Characters.findIndex(el => el.id === character.id), 'wAp3', newValue)"
                                 />
                             </tr>
                         </tbody>
@@ -1329,7 +1334,7 @@ onBeforeMount(() => {
                         >
                             <GenshinImage
                                 v-if="data.Options.loadIMG" type="weapons"
-                                :identifier="`${WeaponsList.find(fi => fi.name === result).name}`"
+                                :identifier="`w-${WeaponsList.find(fi => fi.name === result).id}`"
                                 :rarity="`${WeaponsList.find(fi => fi.name === result).rarity}`"
                             />
                             <p class="result-name">{{ result }}</p>
@@ -1355,20 +1360,20 @@ onBeforeMount(() => {
                                         >
                                         <GenshinImage
                                             v-if="data.Options.loadIMG" type="weapons"
-                                            :identifier="`${weapon.name}`"
-                                            :rarity="`${WeaponsList.find(fi => fi.name === weapon.name).rarity}`"
+                                            :identifier="`w-${weapon.id}`"
+                                            :rarity="`${WeaponsList.find(fi => fi.id === weapon.id).rarity}`"
                                         />
-                                        <p>{{ weapon.name }}</p>
+                                        <p>{{ WeaponsList.find(fi => fi.id === weapon.id).name }}</p>
                                     </div>
                                 </td>
                                 <InputCreator
                                     :value="weapon.cLvl" type="select-level"
-                                    :list="levelingData[`weapon_${weapon.rarity}`].filter((el) => el.id <= weapon.wLvl)"
+                                    :list="levelingData[`weapon_${weapon.rarity}`].filter(el => el.id <= weapon.wLvl)"
                                     @update:value="newValue => handleChange('Weapons', index, 'cLvl', newValue)"
                                 />
                                 <InputCreator
                                     :value="weapon.wLvl" type="select-level"
-                                    :list="levelingData[`weapon_${weapon.rarity}`].filter((el) => el.id >= weapon.cLvl)"
+                                    :list="levelingData[`weapon_${weapon.rarity}`].filter(el => el.id >= weapon.cLvl)"
                                     @update:value="newValue => handleChange('Weapons', index, 'wLvl', newValue)"
                                 />
                             </tr>

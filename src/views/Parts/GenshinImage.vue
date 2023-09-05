@@ -19,6 +19,6 @@ defineProps({
     <img
         class="genshin-image"
         :src="require(`@static/images/genshin_icon/${type}/${identifier}.png`)"
-        :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/${rarity}.png`)}')` }"
+        :style="{ backgroundImage: `url('${require(`@static/images/genshin_icon/rarity/r-${rarity}.png`)}')` }"
     >
 </template>

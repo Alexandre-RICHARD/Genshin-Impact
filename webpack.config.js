@@ -42,7 +42,7 @@ if (process.env.NODE_ENV === "production") {
     publicPath = "../";
     devtool = false;
     performance.hints = "warning";
-    cssOutputMode = "css/[hash].css";
+    cssOutputMode = "css/[fullhash].css";
 }
 
 module.exports = {
@@ -64,7 +64,7 @@ module.exports = {
         path: path.resolve(__dirname, ".build"),
         publicPath: publicPath,
         filename: "js/[name].[contenthash].js",
-        assetModuleFilename: "static/[hash][ext][query]",
+        assetModuleFilename: "static/[fullhash][ext][query]",
     },
     resolve: {
         alias: {

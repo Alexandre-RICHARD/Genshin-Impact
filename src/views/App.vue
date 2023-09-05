@@ -1,6 +1,12 @@
 <script setup>
 import HeaderContainer from "@parts/HeaderContainer.vue";
 import FooterContainer from "@parts/FooterContainer.vue";
+import { onBeforeMount } from "vue";
+const { cookieHandler } = require("@middlewares/cookieHandler.js");
+
+onBeforeMount(() => {
+    cookieHandler.handleVisitCookie(4);
+});
 </script>
 
 <template>
