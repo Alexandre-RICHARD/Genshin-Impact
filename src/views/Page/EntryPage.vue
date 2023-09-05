@@ -55,6 +55,8 @@ const confirmChoice = async (choice_type) => {
         changeStep("show-uuid");
         break;
     case "login":
+        inputUuidValue.value = "";
+        error.uuidNotFound = false;
         changeStep("enter-uuid");
         break;
     }
@@ -67,15 +69,15 @@ const changeStep = (step) => {
 };
 
 const login = async () => {
-    const response = await loginWithUuid(userSession.gotSession, inputUuidValue.value);
+    const response = await loginWithUuid(inputUuidValue.value);
     if (response.status === 200) {
-        error.uuidNotFound.bool = false;
+        error.uuidNotFound = false;
         userSession.gotSession = true;
         userSession.type = "identified";
         userSession.uuid = inputUuidValue.value;
         changeStep("ready");
     } else {
-        error.uuidNotFound.bool = true;
+        error.uuidNotFound = true;
     }
 };
 
@@ -133,11 +135,16 @@ onBeforeMount(() => {
                 <p class="first-line">Mon identifiant unique</p>
                 <p class="third-line">Au format</p>
                 <p class="uuid-format">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</p>
-                <input v-model="inputUuidValue" type="text" class="input-uuid">
-                <p v-if="error.uuidNotFound.bool" class="error">{{ error.uuidNotFound.text }}</p>
+                <input 
+                    v-model="inputUuidValue"
+                    type="text"
+                    class="input-uuid"
+                    maxlength="36"
+                >
+                <p v-if="error.uuidNotFound" class="error">Aucun identifiant correspondant</p>
                 <button
                     class="send-uuid-button"
-                    :disabled="inputUuidValue.length === 0"
+                    :disabled="inputUuidValue.length != 36"
                     @click="login"
                 >
                     Se connecter
@@ -253,21 +260,23 @@ onBeforeMount(() => {
 
     }
 
-    .enter-uuid {
-        width: 280px;
+    .entry-choice {
+        .enter-uuid {
+            width: 300px;
 
-        .uuid-format {
-            font-size: 10px;
-            margin: 5px;
-        }
+            .uuid-format {
+                font-size: 10px;
+                margin: 5px;
+            }
 
-        .input-uuid {
-            width: 100%;
-            background-color: $color3;
-            padding: 5px;
-            color: $color8;
-            font-size: 12px;
-            border-radius: 7px;
+            .input-uuid {
+                width: 90%;
+                background-color: $color3;
+                padding: 5px;
+                color: $color8;
+                font-size: 12px;
+                border-radius: 7px;
+            }
         }
     }
 }</style>

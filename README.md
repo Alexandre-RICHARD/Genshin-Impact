@@ -387,4 +387,38 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Rajout de quelques animations, d'éléments plus fluides et globalement une meilleure disposition
 -   Ajout des couleurs pour chaque cas pour les characters et matériaux afin de les différencier
 
+### 2.0.1 `5 septembre 2023`
+
+-   Dans webpack.config, le fichier CSS de sortie est maintenant avec un nom hashé afin de prévenir les problèmes de cache au sein des navigateurs
+-   Dans fetchHandler.js, suppression de la condition if (session === false) dans la fonction de login. En effet, cela causait des problèmes et la solution a rendu cette vérification inutile
+-   Dans le Store, suppression du message d'erreur et ne reste que le boolean indiquant s'il est affiché ou non.
+-   Rajout d'un autre message d'erreur pour le formulaire de contact
+-   Rajout d'un header et donc importation de celui-ci dans App.vue
+-   Passage de height en min-height dans App.vue
+-   Dans EntryPage, dans la div pour se connecter à partir d'un uuid déjà existant, les données sont réinitialisées entre chaque fermeture/ouverture.
+-   Rajout d'un max-lenght pour l'input de l'uuid afin d'indiquer à l'utilisateur le bon format
+-   Dans FooterContainer, importation du store pour gérer correctement l'erreur en cas de tentative d'envoi du message alors que les champ ne sont pas remplis comme il le faut
+-   Création d'une fonction dédiée au fait d'ouvrir la modal de Contact car nécessité de réinitialiser cette erreur lors de la réouverture
+-   Rajout de l'erreur et rajout dans le placeholder le fait d'avoir un minimum de caractères requis pour envoyer
+-   Stylisation différente du bouton submit en cas de disabled
+-   Création d'un header tout simple avec juste le logo de Genshin qui fait un fondu avec un logo personnalisé
+-   Donc importation de ces logo et stylisation de ceux-ci. Ajout d'un fill linear gradient au hover, inutile mais cool car encore un truc appris
+-   Création des deux logos présentés ci-dessus et rajout du même linear gradient dans les deux
+-   Dans les paramètres de la page principale du projet, affichage de l'uuid mais par défaut caché par des "*". Rajout du même icone que le portfolio afin d'afficher/cacher l'uuid
+-   Les images sont maintenant par défaut affichées
+-   Réinitialisation des données de session du store lors du clic sur le bouton de fermeture de session, supprimer celles du localStorage n'était pas suffisant
+-   Changement de la gestion du clic en dehors de la liste des armes recherchées
+-   Désormais, un event écoute tous les clics, et si une modal est ouverte et que le clic est en dehors, alors ça ferme.
+-   Rajout d'un titre pour les deux parties du leftMenu
+-   Réorganisation, changement dans les label des différents paramètres afin de je l'espère, les rendre plus clairs
+-   Ajout de l'affichage de l'Uuid pour ne pas copier à l'aveugle
+-   Suppression de tirets inutiles dans les explications
+-   Les inputs des tableaux de personnages et de ressources ne disparraissent plus si les tableaux sont vides.
+-   Rajout d'une classe spéciale pour l'input d'arme afin de pouvoir cherche si le clic évoqué plus tot est contenu dans cette classe.
+-   Désormais, l'input number des ressources ne peut plus renvoyer de fausses valeurs. En cas de NaN ou de nombres négatifs, 0 est renvoyé
+-   Augmentation de la largeur maximale du menu latéral de gauche et rajout d'une bordure
+-   Stylisation légère mais indispensable pour bien le marquer de l'input select des serveurs dans les options.
+-   Rajout de quelques cursor:pointer sur les éléments cohérents à l'avoir
+-   Réglages des marges par rapport à l'input de recherches des armes améliorés
+
 </details>

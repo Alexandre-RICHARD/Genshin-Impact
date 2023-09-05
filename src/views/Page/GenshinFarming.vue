@@ -7,6 +7,8 @@ const levelingData = require("@data/genshinLevelingData.json");
 import GenshinImage from "@parts/GenshinImage.vue";
 import InputCreator from "@parts/InputCreator.vue";
 import ParamsLogo from "@svgs/ParamsLogo.vue";
+import HideText from "@svgs/HideText.vue";
+import ShowText from "@svgs/ShowText.vue";
 import WarningLogo from "@svgs/WarningLogo.vue";
 import { computed, onBeforeMount, reactive, ref } from "vue";
 import { deleteOneData, deleterUser, getOneData, saveOneData } from "@middlewares/fetchHandler.js";
@@ -162,7 +164,7 @@ const dataInit = async () => {
         if ([false, true].indexOf(data.Options.alwaysOneMoreMaterial) < 0) data.Options.alwaysOneMoreMaterial = false;
         if ([false, true].indexOf(data.Options.leyLineResin) < 0) data.Options.leyLineResin = false;
         if ([false, true].indexOf(data.Options.proposeToRemoveRessources) < 0) data.Options.proposeToRemoveRessources = false;
-        if ([false, true].indexOf(data.Options.loadIMG) < 0) data.Options.loadIMG = false;
+        if ([false, true].indexOf(data.Options.loadIMG) < 0) data.Options.loadIMG = true;
         if (serverList.indexOf(data.Options.server) < 0) data.Options.server = "";
     } else {
         data.Options = {
@@ -171,7 +173,7 @@ const dataInit = async () => {
             alwaysOneMoreMaterial: false,
             leyLineResin: false,
             proposeToRemoveRessources: false,
-            loadIMG: false,
+            loadIMG: true,
             server: "",
         };
     }
@@ -224,10 +226,11 @@ const deleteUserData = async () => {
 
 const quitSession = () => {
     localStorage.removeItem("userSessionInfo");
+    userSession.gotSession = false;
+    userSession.type = null;
+    userSession.uuid = "";
     userSession.step = "start";
 };
-
-// Quand un input créer avec le composant InputCreator, sa valuer est suivi avec un V-model puis un emit envoyé dans la fonction handleChange qui se charge de changer la bonne valeur dans l'array "data"
 
 const removeResData = reactive({
     removeRessourcesModal: false,
@@ -242,6 +245,7 @@ const removeResData = reactive({
     enoughForAll: true,
 });
 
+// Quand un input créer avec le composant InputCreator, sa valuer est suivi avec un V-model puis un emit envoyé dans la fonction handleChange qui se charge de changer la bonne valeur dans l'array "data"
 const handleChange = (group, index, valuename, value) => {
     if (valuename === "only") isOnlyCharacters.value = value;
     if (data.Options.proposeToRemoveRessources && ["cLvl", "cAp1", "cAp2", "cAp3"].indexOf(valuename) >= 0) {
@@ -326,8 +330,6 @@ const searchingWeaponQuery = ref("");
 const searchingCharactersQuery = ref("");
 // Chaine de caractère pour la recherche d'une ressource
 const searchingMaterialsQuery = ref("");
-// Boolean indiquand si oui ou non on affiche la liste de recherche
-const showResultList = ref(false);
 
 // Un objet computed afin de filtrer en fonction d'une options si on ne veut voir que les personnages qui ont été noté comme build
 const filteredCharacters = computed(() => {
@@ -380,11 +382,21 @@ const filteredMaterials = computed(() => {
     return filter;
 });
 
+// Boolean indiquand si oui ou non on affiche la liste de recherche
+const showResultList = ref(false);
+
+const clickEverywhereHandler = (event) => {
+    if (showResultList.value) {
+        const elementToVerify = [...document.querySelectorAll(".ceh-verify")];
+        if (elementToVerify.every(el => !el.contains(event.target))) {
+            hideList();
+        }
+    }
+};
+
 // En cas d'ajout d'une arme ou de sortie du focus de l'input, on ferme la liste
 const hideList = () => {
-    setTimeout(() => {
-        showResultList.value = false;
-    }, 50);
+    showResultList.value = false;
 };
 
 // Fonction pour rajouter une arme à la liste.
@@ -400,6 +412,7 @@ const addWeaponToDo = (name) => {
     });
     // On vide le champ de recherche
     searchingWeaponQuery.value = "";
+    showResultList.value = false;
     // On ferme la liste
     hideList();
     // On sauvegarde le tableau d'armes actualisée
@@ -802,6 +815,7 @@ const handleTime = {
 
 const paramsOpen = ref(false);
 const explainationOpen = ref(false);
+const showUuid = ref(false);
 
 const openCloseLeftModal = (type) => {
     if (type === "params") {
@@ -821,11 +835,12 @@ onBeforeMount(() => {
 </script>
 
 <template>
-    <div v-if="!otherData.loading" class="project-farming-container">
+    <div v-if="!otherData.loading" class="project-farming-container" @click="clickEverywhereHandler">
         <div :class="{ 'open': paramsOpen || explainationOpen }" class="left-container">
             <div class="left-content">
                 <Transition mode="out-in" name="vue-transition">
                     <div v-if="paramsOpen" class="params-box">
+                        <p class="left-title">Paramètres de l'outil</p>
                         <select v-model="data.Options.server" class="server-select" @change="readyToSaveData('Options')">
                             <option value="" disabled selected hidden>Choisir mon serveur Genshin</option>
                             <option v-for="server in serverList" :key="server" :value="server">
@@ -834,11 +849,18 @@ onBeforeMount(() => {
                         </select>
                         <div class="params-checkbox">
                             <input
+                                id="boolean-load-image" v-model="data.Options.loadIMG" class="checkbox" type="checkbox"
+                                name="boolean-load-image" @change="readyToSaveData('Options')"
+                            >
+                            <label class="checkbox-label" for="boolean-load-image">Afficher les images (chargement plus
+                                long)</label>
+                        </div>
+                        <div class="params-checkbox">
+                            <input
                                 id="boolean-doing" v-model="data.Options.onlyShowsDoingCharacter" class="checkbox"
                                 type="checkbox" name="boolean-doing" @change="readyToSaveData('Options');"
                             >
-                            <label class="checkbox-label" for="boolean-doing">N'afficher que les personnages sélectionné
-                                comme voulant être build</label>
+                            <label class="checkbox-label" for="boolean-doing">N'afficher que les personnages à monter</label>
                         </div>
                         <div class="params-checkbox">
                             <input
@@ -850,20 +872,12 @@ onBeforeMount(() => {
                         </div>
                         <div class="params-checkbox">
                             <input
-                                id="boolean-one-more" v-model="data.Options.alwaysOneMoreMaterial" class="checkbox"
-                                type="checkbox" name="boolean-one-more" @change="readyToSaveData('Options');"
-                            >
-                            <label class="checkbox-label" for="boolean-one-more">Demander 1 exemplaire de ressources en
-                                plus, utile pour les remplir plus facilement, aucune n'étant à zéro</label>
-                        </div>
-                        <div class="params-checkbox">
-                            <input
                                 id="boolean-ley-line-resin" v-model="data.Options.leyLineResin" class="checkbox"
                                 type="checkbox" name="boolean-ley-line-resin" @change="readyToSaveData('Options');"
                             >
-                            <label class="checkbox-label" for="boolean-ley-line-resin">Activer le calcul de la résine pour
+                            <label class="checkbox-label" for="boolean-ley-line-resin">Calculer la résine pour
                                 les lignes
-                                énergetiques (Mora et livres d'xp)</label>
+                                énergétiques (Mora et livres d'xp)</label>
                         </div>
                         <div class="params-checkbox">
                             <input
@@ -871,17 +885,22 @@ onBeforeMount(() => {
                                 class="checkbox" type="checkbox" name="boolean-remove-ressorces"
                                 @change="readyToSaveData('Options')"
                             >
-                            <label class="checkbox-label" for="boolean-remove-ressorces">Ouvrir une boite de dialogue si
-                                j'augmente un niveau actuel, proposant d'enlever les ressources correspondantes (sauf
-                                livres/minerai d'expérience et si elles sont toutes en quantités suffisantes)</label>
+                            <label class="checkbox-label" for="boolean-remove-ressorces">Augmenter le niveau actuel d'un personnage à monter ou d'une arme proposera de retirer automatiquement les ressources de votre inventaire
+                                (sauf livres/minerais d'expérience et uniquement si en quantité suffisante)</label>
                         </div>
                         <div class="params-checkbox">
                             <input
-                                id="boolean-load-image" v-model="data.Options.loadIMG" class="checkbox" type="checkbox"
-                                name="boolean-load-image" @change="readyToSaveData('Options')"
+                                id="boolean-one-more" v-model="data.Options.alwaysOneMoreMaterial" class="checkbox"
+                                type="checkbox" name="boolean-one-more" @change="readyToSaveData('Options');"
                             >
-                            <label class="checkbox-label" for="boolean-load-image">Afficher les images (chargement plus
-                                long)</label>
+                            <label class="checkbox-label" for="boolean-one-more">Toujours avoir 1 exemplaire en plus avant d'être noté "parfait"</label>
+                        </div>
+                        <div v-if="userSession.type === 'identified'" class="uuid-show-box">
+                            <div>
+                                <ShowText v-if="showUuid" class="uuid-logo-hide-show" @click="showUuid = false" />
+                                <HideText v-else-if="!showUuid" class="uuid-logo-hide-show" @click="showUuid = true" />
+                            </div>
+                            <p class="uuid">Uuid : {{ showUuid ? userSession.uuid : '********-****-****-****-************' }}</p>
                         </div>
                         <div v-if="userSession.type === 'identified'" class="params-button">
                             <button class="safe" @click="copyUuid('uuid')">
@@ -910,6 +929,7 @@ onBeforeMount(() => {
                         </div>
                     </div>
                     <div v-else-if="explainationOpen" class="explaination-box">
+                        <p class="left-title">Aide et explications</p>
                         <p class="title">Présentation</p>
                         <p>
                             Voici mon outil. Il n'a pas véritablement de nom, pas encore, mais est destiné à vous aider à
@@ -940,13 +960,13 @@ onBeforeMount(() => {
                         <p>Le premier tableau est celui des personnages (sauf le voyageur et ses différents éléments).</p>
                         <p class="indent-1">Vous pouvez les rechercher par nom.</p>
                         <p class="indent-1">Pour chaque personnage, vous pouvez indiquer 3 informations primordiales, </p>
-                        <p class="indent-2">- si vous l'avez ou non</p>
+                        <p class="indent-2">si vous l'avez ou non</p>
                         <p class="indent-2">
-                            - si vous voulez le monter/le build. Ceci l'ajoutera à la liste des
+                            si vous voulez le monter/le build. Ceci l'ajoutera à la liste des
                             personnages/armes qui seront comptés dans le calculateur
                         </p>
                         <p class="indent-2">
-                            - si vous ne voulez voir les résultats que pour ce personnage (colonne Only).
+                            si vous ne voulez voir les résultats que pour ce personnage (colonne Only).
                             Ainsi, seul ce personnage sera pris en compte dans le calcul. (option absente pour les armes
                             cependant)
                         </p>
@@ -1181,7 +1201,7 @@ onBeforeMount(() => {
         </div>
         <div class="section-container">
             <div class="table-section characters-table-section">
-                <div v-if="filteredCharacters.length > 0" class="search-input">
+                <div class="search-input">
                     <input
                         v-model="searchingCharactersQuery" class="input" type="text"
                         placeholder="Rechercher un personnage"
@@ -1283,10 +1303,10 @@ onBeforeMount(() => {
                 </div>
             </div>
             <div class="table-section weapons-table-section">
-                <div class="search-input">
+                <div class="search-input ceh-verify">
                     <input
                         v-model="searchingWeaponQuery" class="input" type="text" placeholder="Rechercher une arme"
-                        @focus="showResultList = true" @blur="hideList"
+                        @focus="showResultList = true"
                     >
                     <ul v-if="showResultList && searchingWeaponQuery.length >= 1" class="list">
                         <li
@@ -1343,7 +1363,7 @@ onBeforeMount(() => {
                 </div>
             </div>
             <div class="table-section materials-table-section">
-                <div v-if="filteredMaterials.length > 0" class="search-input">
+                <div class="search-input">
                     <input
                         v-model="searchingMaterialsQuery" class="input" type="text"
                         placeholder="Rechercher une ressource"
@@ -1384,7 +1404,7 @@ onBeforeMount(() => {
                                 <InputCreator
                                     :value="data.Materials.find(el => el.code === material.code).have"
                                     type="number"
-                                    @update:value="newValue => handleChange('Materials', data.Materials.findIndex(el => el.code === material.code), 'have', newValue)"
+                                    @update:value="newValue => handleChange('Materials', data.Materials.findIndex(el => el.code === material.code), 'have', !!parseInt(newValue) ? (newValue >= 0 ? newValue : 0) : 0)"
                                 />
                                 <td>{{ material.needed }}</td>
                                 <td>
@@ -1439,10 +1459,9 @@ onBeforeMount(() => {
     .left-container {
         position: fixed;
         display: flex;
-        gap: 0;
         width: 95%;
-        max-width: 420px;
-        min-height: 500px;
+        max-width: 620px;
+        min-height: 300px;
         height: fit-content;
         max-height: 715px;
         background-color: transparent;
@@ -1455,6 +1474,7 @@ onBeforeMount(() => {
             width: calc(100% - 70px);
             background-color: $color3;
             border-radius: 0 0 30px 0;
+            border: 2px solid $color8;
             padding: 10px;
             color: $color5;
             overflow-y: auto;
@@ -1467,9 +1487,14 @@ onBeforeMount(() => {
                 flex-direction: column;
 
                 .server-select {
+                    cursor: pointer;
                     position: relative;
                     appearance: menulist-button;
                     font-weight: 400;
+                    background-color: $color19;
+                    padding: 6px;
+                    margin: 8px 0;
+                    border-radius: 10px;
                 }
 
                 .params-checkbox {
@@ -1477,6 +1502,7 @@ onBeforeMount(() => {
                     border-top: 1px solid $color10;
 
                     .checkbox {
+                        cursor: pointer;
                         float: left;
                         appearance: none;
                         color: $color5;
@@ -1511,7 +1537,22 @@ onBeforeMount(() => {
                     }
 
                     .checkbox-label {
+                        display: block;
                         font-weight: 400;
+                        text-align: justify;
+                    }
+                }
+
+                .uuid-show-box {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 0 5px;
+
+                    .uuid-logo-hide-show {
+                        cursor: pointer;
+                        width: 32px;
+                        height: 32px;
                     }
                 }
 
@@ -1633,6 +1674,21 @@ onBeforeMount(() => {
                     font-weight: 400;
                     font-style: oblique;
                     color: $color4;
+                }
+            }
+
+            .params-box,
+            .explaination-box {
+                .left-title {
+                    text-align: center;
+                    font-size: 22px;
+                    font-weight: 500;
+                    color: $color4;
+                    padding: 9px;
+                    margin: 6px auto;
+                    width: fit-content;
+                    border-radius: 5px;
+                    border: 3px solid $color8;
                 }
             }
 
@@ -1901,7 +1957,7 @@ onBeforeMount(() => {
                 position: relative;
 
                 .input {
-                    margin: 10px;
+                    margin-bottom: 10px;
                     padding: 6px;
                     width: 100%;
                     max-width: 300px;
@@ -2047,8 +2103,6 @@ onBeforeMount(() => {
                     flex-direction: column;
                     align-items: stretch;
                     gap: 2px;
-                    margin: 10px;
-                    margin-top: 0;
                     transform: translateY(-10px);
                     width: 100%;
                     border: 2px solid #24252c;

@@ -1,9 +1,10 @@
 <script setup>
+import HeaderContainer from "@parts/HeaderContainer.vue";
 import FooterContainer from "@parts/FooterContainer.vue";
 </script>
 
 <template>
-    <header />
+    <HeaderContainer />
     <main>
         <router-view name="mainRouter" />
     </main>
@@ -15,7 +16,7 @@ import FooterContainer from "@parts/FooterContainer.vue";
 
 body,
 #app {
-    height: 100vh;
+    min-height: 100vh;
 
     #app {
         font-family: $kanit;

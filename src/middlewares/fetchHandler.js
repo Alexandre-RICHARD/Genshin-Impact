@@ -9,10 +9,8 @@ export const getNewIdentifier = async () => {
     }
 };
 
-export const loginWithUuid = async (session, uuid) => {
-    if (session === false) {
-        return await requestTemplate("/genshin/login", "POST", { "uuid": uuid });
-    }
+export const loginWithUuid = async (uuid) => {
+    return await requestTemplate("/genshin/login", "POST", { "uuid": uuid });
 };
 
 export const getOneData = async (uuid, data_type) => {

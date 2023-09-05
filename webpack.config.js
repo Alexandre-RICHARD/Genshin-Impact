@@ -111,7 +111,7 @@ module.exports = {
         }),
         // Afin que le css soit dans un fichier indépendant des fichiers js
         new MiniCssExtractPlugin({
-            filename: "css/[name].css",
+            filename: "css/[hash].css",
         }),
         // Plugin qui ouvrira un onglet à chaque run/build pour montrer la taille des différents package dans les fichiers compilé et aider à mieux les gérer
         // new BundleAnalyzerPlugin(), //! Pour activer ou désactiver

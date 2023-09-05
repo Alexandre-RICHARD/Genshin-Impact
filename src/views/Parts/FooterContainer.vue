@@ -1,6 +1,8 @@
 <script setup>
 import { reactive, ref } from "vue";
 import { sendMessage } from "@middlewares/fetchHandler.js";
+import { useMainStore } from "@store/Main";
+const { error } = useMainStore();
 import pjson from "@root/package.json";
 
 const isContactModalOpen = ref(false);
@@ -15,7 +17,16 @@ const contactFormValues = reactive({
 const submitContactForm = (event) => {
     event.preventDefault();
     isContactModalOpen.value = false;
-    sendMail();
+    if (contactFormValues.message.length >= 40 && contactFormValues.subject.length >= 15) {
+        sendMail();
+    } else {
+        error.notManyCharactersContact = true;
+    }
+};
+
+const openContactModal = () => {
+    error.notManyCharactersContact = false;
+    isContactModalOpen.value = false;
 };
 
 const sendMail = async () => {
@@ -38,7 +49,7 @@ const privacyPolicyOpen = ref(false);
 <template>
     <div v-if="isContactModalOpen" class="opened-contact-modal">
         <div class="contact-me-container">
-            <img class="close-button" src="@static/images/close.png" @click="isContactModalOpen = false">
+            <img class="close-button" src="@static/images/close.png" @click="openContactModal">
             <h1 class="contact-me-title">
                 Envoyer un message (je vous lirai avec attention)
             </h1>
@@ -63,7 +74,7 @@ const privacyPolicyOpen = ref(false);
                 </div>
                 <div class="one-input-container">
                     <div :class="{ 'is-focused': focus[2] || contactFormValues.subject.length > 0 }" class="input">
-                        <label>L'objet du message</label>
+                        <label>L'objet du message (15 caractères ou plus)</label>
                         <input
                             v-model="contactFormValues.subject" type="text" @focus="focus[2] = true"
                             @blur="focus[2] = false"
@@ -75,7 +86,7 @@ const privacyPolicyOpen = ref(false);
                 </div>
                 <div class="one-input-container">
                     <div :class="{ 'is-focused': focus[3] || contactFormValues.message.length > 0 }" class="input">
-                        <label>Votre message</label>
+                        <label>Votre message (40 caractères ou plus)</label>
                         <textarea
                             v-model="contactFormValues.message" type="text" @focus="focus[3] = true"
                             @blur="focus[3] = false"
@@ -85,8 +96,9 @@ const privacyPolicyOpen = ref(false);
                         </span>
                     </div>
                 </div>
+                <p v-if="error.notManyCharactersContact">Données trop courtes à ce qui est demandé</p>
                 <input
-                    v-if="contactFormValues.message.length >= 40 && contactFormValues.subject.length >= 15"
+                    :disabled="contactFormValues.message.length < 40 && contactFormValues.subject.length < 15"
                     class="submit-button" type="submit" value="Envoyer" @click="submitContactForm"
                 >
             </form>
@@ -329,6 +341,16 @@ const privacyPolicyOpen = ref(false);
 
                 &:hover {
                     padding: 3px 50px;
+                }
+
+            }
+
+            .submit-button:disabled {
+                background-color: $color10;
+                cursor: not-allowed;
+
+                &:hover {
+                    padding: 3px 12px;
                 }
             }
         }
