@@ -126,7 +126,7 @@ const dataInit = async () => {
             if (currentChar) {
                 const i = data.Weapons.findIndex(fi => id === fi.id);
                 if (lvlList.indexOf(currentChar.cLvl) < 0) data.Weapons[i].cLvl = 1;
-                if (lvlList.indexOf(currentChar.wLvl) < 0) data.Weapons[i].wLvl = 96;
+                if (lvlList.indexOf(currentChar.wLvl) < 0) data.Weapons[i].wLvl = 74;
             }
         });
     } else {
@@ -609,12 +609,16 @@ const farmingMaterial = computed(() => {
         character_xp: 61.25, // 122500 / 20000 * 20, données provenant du Wiki
     };
 
-    const mora = computedBuildArray.findIndex(fi => fi.code === "g01");
-    const bookXp = computedBuildArray.findIndex(fi => fi.code === "g05");
+    const moraIndex = computedBuildArray.findIndex(fi => fi.code === "g01");
+    const bookXpIndex = computedBuildArray.findIndex(fi => fi.code === "g05");
 
     if (data.Options.leyLineResin) {
-        computedBuildArray[mora].group_resin = Math.ceil(computedBuildArray[mora].remain / coefficientResin.mora) * 20;
-        computedBuildArray[bookXp].group_resin = Math.ceil((computedBuildArray[bookXp].group_needed - computedBuildArray[bookXp].group_have) / coefficientResin.character_xp) * 20;
+        if (computedBuildArray[moraIndex].remain > 0) {
+            computedBuildArray[moraIndex].group_resin = Math.ceil(computedBuildArray[moraIndex].remain / coefficientResin.mora) * 20;
+        }
+        if (computedBuildArray[bookXpIndex].group_needed - computedBuildArray[bookXpIndex].group_have > 0) {
+            computedBuildArray[bookXpIndex].group_resin = Math.ceil((computedBuildArray[bookXpIndex].group_needed - computedBuildArray[bookXpIndex].group_have) / coefficientResin.character_xp) * 20;
+        }
     }
 
     // Ce code va avoir pour objectif de générer les données de synthèse des groupes de ressources concernées par celle-ci. Ainsi, on va
@@ -678,7 +682,11 @@ const farmingMaterial = computed(() => {
                 // Si qualityCheck = true, alors on vérifie que la qualité est égale à la valeur maximale du groupe (3 ou 4), sinon c'est true d'office
                 (!processResinVar[i].qualityCheck ? true : quality === processResinVar[i].qualityValue ? true : false) &&
                 // On vérifie qu'il y a bien un besoin de matériel
-                (computedBuildArray[index].needed - computedBuildArray[index].have > 0)
+                (
+                    processResinVar[i].qualityCheck
+                        ? computedBuildArray[index].group_needed - computedBuildArray[index].group_have > 0
+                        : computedBuildArray[index].needed - computedBuildArray[index].have > 0
+                )
             )) {
                 // On affecte à group resin une nouvelle valeurs
                 computedBuildArray[index].group_resin =
@@ -918,6 +926,7 @@ onBeforeMount(() => {
                             <span id="uuid" class="copy-confirm-alert">Copié !</span>
                         </div>
                         <div v-if="userSession.type === 'identified'" class="params-button">
+                            <p class="copy-uuid-link-detail">Ce lien permet de se connecter facilement depuis n'importe quel appareil/navigateur. À mettre en favoris</p>
                             <button class="safe" @click="copyUuid('link-with-uuid')">
                                 Copier le lien vers ma session
                             </button>
@@ -1220,11 +1229,15 @@ onBeforeMount(() => {
         </div>
         <div class="section-container">
             <div class="table-section characters-table-section">
-                <div class="search-input">
-                    <input
-                        v-model="searchingCharactersQuery" class="input" type="text"
-                        placeholder="Rechercher un personnage"
-                    >
+                <div class="characters-top-table-box">
+                    <p class="characters-informations">{{ data.Characters.filter(fi => fi.got).length }} / {{ data.Characters.length }} personnages possédés</p>
+                    <div class="search-input">
+                        <input
+                            v-model="searchingCharactersQuery" class="input" type="text"
+                            placeholder="Rechercher un personnage"
+                        >
+                    </div>
+                    <p class="characters-informations">{{ data.Characters.filter(fi => fi.got && fi.cLvl === fi.wLvl && fi.cAp1 === fi.wAp1 && fi.cAp2 === fi.wAp2 && fi.cAp3 === fi.wAp3).length }} / {{ data.Characters.length }} personnages finis</p>
                 </div>
                 <div class="table-box">
                     <table class="table characters-informations">
@@ -1447,8 +1460,8 @@ onBeforeMount(() => {
                                             : ""
                                     }}
                                 </td>
-                                <td>{{ material.synthesis ? material.group_have : "" }}</td>
-                                <td>{{ material.synthesis ? material.group_needed : "" }}</td>
+                                <td :class="{ 'synthesis-ok': material.synthesis && material.group_have > material.group_needed }">{{ material.synthesis ? material.group_have : "" }}</td>
+                                <td :class="{ 'synthesis-ok': material.synthesis && material.group_have > material.group_needed }">{{ material.synthesis ? material.group_needed : "" }}</td>
                                 <td>{{ material.group_resin > 0 ? material.group_resin : "" }}</td>
                             </tr>
                         </tbody>
@@ -1479,7 +1492,7 @@ onBeforeMount(() => {
         position: fixed;
         display: flex;
         width: 95%;
-        max-width: 620px;
+        max-width: 750px;
         min-height: 300px;
         height: fit-content;
         max-height: 715px;
@@ -1648,6 +1661,13 @@ onBeforeMount(() => {
                             height: 21px;
                         }
                     }
+
+                    .copy-uuid-link-detail {
+                        margin-top: 8px;
+                        font-style: oblique;
+                        font-size: 14px;
+                        text-align: center;
+                    }
                 }
 
             }
@@ -1657,6 +1677,7 @@ onBeforeMount(() => {
                     font-weight: 700;
                     font-size: 25px;
                     color: $color4;
+                    text-align: center;
                 }
 
                 .one-color {
@@ -2105,6 +2126,18 @@ onBeforeMount(() => {
 
         // Uniqement les couleurs spécifiques à certain cas de personnages
         .characters-table-section {
+            .characters-top-table-box {
+                width: 100%;
+                display: flex;
+                align-items: flex-end;
+                justify-content: space-around;
+
+                .characters-informations {
+                    margin-bottom: 6px;
+                    font-weight: 400;
+                }
+            }
+
             .table-box {
                 .characters-informations {
                     tbody {
@@ -2236,6 +2269,18 @@ onBeforeMount(() => {
                         tr {
                             td.farm-day {
                                 background-color: $color11;
+                            }
+                        }
+
+                        tr {
+                            .synthesis-ok {
+                                background-color: $material-synthesis-ok;
+                            }
+                        }
+
+                        tr:nth-child(even) {
+                            .synthesis-ok {
+                                background-color: $material-synthesis-ok-even;
                             }
                         }
                     }

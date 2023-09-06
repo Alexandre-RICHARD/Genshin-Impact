@@ -454,4 +454,18 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Remplacement aussi des notions de name par celle d'index
 -   Adaptation pour quand même affichée le nom des armes et des personnages au lieu de leur ID
 
+### 2.1.1 `6 septembre 2023`
+
+-   Changement du nom français de Noelle en Noëlle
+-   Rajout de Freminet
+-   Rajout de l'image de Freminet
+-   Changement du nom de la page en "Genshin Farm Calculator"
+-   En cas de données eronnées sur les armes, le niveau par défaut voulu sera 74 et plus 96.
+-   Changement du nom de deux variable (moraIndex bookXpIndex) pour mieux indiquer ce qu'elles sont
+-   Changement de la logique d'attribution de la résine dans quelques cas, en effet des valeurs négatives pouvaient être calculées.
+-   Rajout d'une petite ligne pour indiquer ce que boutton de copiage du lien permet de faire
+-   Rajout de deux lignes d'informations pour savoir combien de personnages on a et combien en on en a fini
+-   Rajout d'une classe pour expliciter visuellement quand la quantité de ressources d'une catégories est suffisante pour finir avec la synthèse
+-   Augmentation de la largeur maximale du menu
+
 </details>

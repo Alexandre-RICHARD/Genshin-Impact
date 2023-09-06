@@ -302,7 +302,7 @@
         "eng_name": "Noelle",
         "release_date": "28/09/2020",
         "id": 14,
-        "name": "Noelle",
+        "name": "Noëlle",
         "rarity": 4,
         "element": "geo",
         "weapon": "claymore",
@@ -1585,5 +1585,28 @@
         "common_material": "m10",
         "talent_book": "l51",
         "local_speciality": "r504"
+    },
+    {
+        "eng_name": "Freminet",
+        "release_date": "06/09/2023",
+        "id": 70,
+        "name": "Fréminet",
+        "rarity": 4,
+        "element": "cryo",
+        "weapon": "claymore",
+        "base_hp": 12071,
+        "base_atk": 254,
+        "base_def": 708,
+        "stat_type": "atk_purcent",
+        "stat_value": "24",
+        "mora": "g01",
+        "experience_book": "g05",
+        "crown": "g08",
+        "gem": "p06",
+        "mini_boss_material": "s502",
+        "weekly_boss_materials": "b081",
+        "common_material": "m27",
+        "talent_book": "l52",
+        "local_speciality": "r502"
     }
 ]

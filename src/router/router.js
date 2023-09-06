@@ -14,7 +14,7 @@ const routes = [
         name: "test",
         components: { mainRouter: EntryPage },
         meta: {
-            documentTitle: "Genshin - Calculateur de farm",
+            documentTitle: "Genshin Farm Calculator",
         },
     },
 ];
