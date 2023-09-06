@@ -472,4 +472,8 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 
 -   Rechangement des variables de synthèse ok, pour pas que ce soit moche
 
+### 2.1.3 `6 septembre 2023`
+
+-   De nombreux changements dans la catégories aide, l'ajout des liens pour mes deux sources et un peu de style. Normalement ce commit signe la sortie du projet.
+
 </details>

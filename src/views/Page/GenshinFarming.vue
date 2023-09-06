@@ -877,7 +877,8 @@ onBeforeMount(() => {
                                 id="boolean-doing" v-model="data.Options.onlyShowsDoingCharacter" class="checkbox"
                                 type="checkbox" name="boolean-doing" @change="readyToSaveData('Options');"
                             >
-                            <label class="checkbox-label" for="boolean-doing">N'afficher que les personnages à monter</label>
+                            <label class="checkbox-label" for="boolean-doing">N'afficher que les personnages à
+                                monter</label>
                         </div>
                         <div class="params-checkbox">
                             <input
@@ -902,7 +903,9 @@ onBeforeMount(() => {
                                 class="checkbox" type="checkbox" name="boolean-remove-ressorces"
                                 @change="readyToSaveData('Options')"
                             >
-                            <label class="checkbox-label" for="boolean-remove-ressorces">Augmenter le niveau actuel d'un personnage à monter ou d'une arme proposera de retirer automatiquement les ressources de votre inventaire
+                            <label class="checkbox-label" for="boolean-remove-ressorces">Augmenter le niveau actuel d'un
+                                personnage à monter ou d'une arme proposera de retirer automatiquement les ressources de
+                                votre inventaire
                                 (sauf livres/minerais d'expérience et uniquement si en quantité suffisante)</label>
                         </div>
                         <div class="params-checkbox">
@@ -910,14 +913,18 @@ onBeforeMount(() => {
                                 id="boolean-one-more" v-model="data.Options.alwaysOneMoreMaterial" class="checkbox"
                                 type="checkbox" name="boolean-one-more" @change="readyToSaveData('Options');"
                             >
-                            <label class="checkbox-label" for="boolean-one-more">Toujours avoir 1 exemplaire en plus avant d'être noté "parfait"</label>
+                            <label class="checkbox-label" for="boolean-one-more">Toujours avoir 1 exemplaire en plus avant
+                                d'être noté "parfait"</label>
                         </div>
                         <div v-if="userSession.type === 'identified'" class="uuid-show-box">
                             <div>
                                 <ShowText v-if="showUuid" class="uuid-logo-hide-show" @click="showUuid = false" />
                                 <HideText v-else-if="!showUuid" class="uuid-logo-hide-show" @click="showUuid = true" />
                             </div>
-                            <p class="uuid">Uuid : {{ showUuid ? userSession.uuid : '********-****-****-****-************' }}</p>
+                            <p class="uuid">
+                                Uuid : {{ showUuid ? userSession.uuid : '********-****-****-****-************'
+                                }}
+                            </p>
                         </div>
                         <div v-if="userSession.type === 'identified'" class="params-button">
                             <button class="safe" @click="copyUuid('uuid')">
@@ -926,7 +933,10 @@ onBeforeMount(() => {
                             <span id="uuid" class="copy-confirm-alert">Copié !</span>
                         </div>
                         <div v-if="userSession.type === 'identified'" class="params-button">
-                            <p class="copy-uuid-link-detail">Ce lien permet de se connecter facilement depuis n'importe quel appareil/navigateur. À mettre en favoris</p>
+                            <p class="copy-uuid-link-detail">
+                                Ce lien permet de se connecter facilement depuis n'importe quel
+                                appareil/navigateur. À mettre en favoris
+                            </p>
                             <button class="safe" @click="copyUuid('link-with-uuid')">
                                 Copier le lien vers ma session
                             </button>
@@ -972,111 +982,127 @@ onBeforeMount(() => {
                             la page).
                         </p>
                         <p class="title">Description</p>
-                        <p class="sub-title">Quelques infos</p>
-                        <p>La partie supérieur vous propose en plus des réglages, quelques informations :</p>
-                        <p class="indent-1">L'heure actuelle et dans combien de temps se fait le reset de votre serveur.</p>
+                        <p class="sub-title">Partie supérieure</p>
+                        <p>Sont proposées quelques informations :</p>
                         <p class="indent-1">
-                            Quelles sont les ressources de farm ne nécessitant pas de résine que vous avez
-                            le moins. Cela concerne les drops de mobs (communs et élites) ainsi que les ressources locales
-                            de chaque région.
+                            L'heure actuelle et dans combien de temps se fait le “reset” de votre serveur
+                            (après l’avoir sélectionné).
                         </p>
                         <p class="indent-1">
-                            Et enfin, la somme de résine que le calculateur estime qu'il va être nécessaire
-                            pour finir votre farm. C'est une estimation basée sur des moyennes.
+                            Quelles sont les ressources de farm ne nécessitant pas de résine que vous avez le moins. Cela
+                            concerne les drops de mobs (communs et élites) ainsi que les ressources locales de chaque
+                            région.
+                        </p>
+                        <p class="indent-1">
+                            Et enfin, la quantité de résine que le calculateur estime qu'il va être nécessaire pour finir
+                            votre farm. C'est une estimation basée sur des moyennes (basé sur les moyennes de drop récoltées
+                            par le <a
+                                class="description-link" target="_blank"
+                                href="https://genshin-impact.fandom.com/wiki/Genshin_Impact"
+                            >wiki</a>, par le <a
+                                class="description-link" target="_blank" href="https://discord.com/invite/ydwdYmr"
+                            >Discord
+                                Genshin Impact Data Gathering</a> et par mes soins).
                         </p>
                         <p class="sub-title">Le tableau des personnages</p>
-                        <p>Le premier tableau est celui des personnages (sauf le voyageur et ses différents éléments).</p>
+                        <p>
+                            Le premier tableau est celui des personnages (tous sauf le voyageur et ses différents éléments).
+                        </p>
                         <p class="indent-1">Vous pouvez les rechercher par nom.</p>
-                        <p class="indent-1">Pour chaque personnage, vous pouvez indiquer 3 informations primordiales, </p>
-                        <p class="indent-2">si vous l'avez ou non</p>
+                        <p class="indent-1">Pour chaque personnage, vous pouvez indiquer 3 informations primordiales,</p>
+                        <p class="indent-2">si vous l'avez ou non.</p>
                         <p class="indent-2">
-                            si vous voulez le monter/le build. Ceci l'ajoutera à la liste des
-                            personnages/armes qui seront comptés dans le calculateur
+                            si vous voulez le monter/le build. Ceci l'ajoutera à la liste des personnages/armes qui seront
+                            comptés dans le calculateur.
                         </p>
                         <p class="indent-2">
-                            si vous ne voulez voir les résultats que pour ce personnage (colonne Only).
-                            Ainsi, seul ce personnage sera pris en compte dans le calcul. (option absente pour les armes
-                            cependant)
+                            si vous ne voulez voir les résultats que pour ce personnage (colonne Only). Ainsi, seul ce
+                            personnage sera pris en compte dans le calcul. (option absente pour les armes cependant).
                         </p>
                         <p class="indent-1">
-                            Les 8 colonnes suivantes, ou plutôt les 4 groupes de 2 colonnes représentent le
-                            Niveau (Lvl) et les 3 Aptitudes (Ap1, 2 et 3). La première colonne est votre niveau actuelle
-                            (noté A et par défaut 1) et la
-                            deuxième le niveau que vous visez (noté V par défaut 90 ou 10 pour les aptitudes). À noter que
-                            les 6
-                            niveaux d'ascensions sont présent, donc si vous vous mettez niveau 20, les matériaux de
-                            l'Ascension 1 seront calculés. Mais pas si vous vous mettez Ascension 1 (il en est de même pour
-                            les armes).
+                            Les 8 colonnes suivantes, ou plutôt les 4 groupes de 2 colonnes représentent le Niveau (Lvl) et
+                            les 3 Aptitudes (Ap1, 2 et 3). La première colonne est votre niveau actuel (noté A et par défaut
+                            1) et la deuxième le niveau que vous visez (noté V et par défaut 90 ou 10 pour les aptitudes). À
+                            noter que les 6 niveaux d'ascensions sont présents, donc si vous mettez votre personnage niveau
+                            20, les matériaux de l'Ascension 1 seront calculés comme étant à farmer. Globalement, les
+                            matériaux du niveau actuel ne seront pas calculés, seulement ceux supérieurs et c’est le même
+                            principe pour les armes.
+                        </p>
+                        <p class="indent-1">
+                            Une option permet de supprimer automatiquement les ressources concernées lors de l’augmentation
+                            d’un level pour une arme ou un personnage.
                         </p>
                         <p class="sub-title">Le tableau des armes</p>
-                        <p>Le deuxième tableau est celui des armes, un peu différent.</p>
+                        <p>Celui-ci fonctionne différement :</p>
                         <p class="indent-1">
-                            J'ai décide de ne pas les afficher car il y en à plus de 160, ça serait trop
-                            grand et aussi car cela forcerait les joueurs à n'avoir qu'une arme de chaque. Le cas serait
-                            rare, mais je veux laisser la liberté à qui le veut de pouvoir monter deux fois la même arme.
+                            J'ai décidé de ne pas les afficher toutes car il y en à plus de 160, ça serait trop grand et
+                            aussi car cela forcerait les joueurs à n'avoir qu'une arme de chaque. Le cas serait rare, mais
+                            je veux laisser la liberté à qui le veut de pouvoir monter deux fois la même arme.
                         </p>
                         <p class="indent-1">
-                            Ainsi, il suffit de taper son nom (anglais ou français) dans la barre de
-                            recherche pour la trouver
+                            Ainsi, il suffit de taper son nom (anglais ou français) dans la barre de recherche pour la
+                            trouver et l’ajouter.
                         </p>
                         <p class="indent-1">
-                            Le système est ensuite le même que pour les personnage mais avec juste le
-                            niveau. Pas de déclaration comme quoi "j'ai cette arme" ou "je veux la build" car c'est induit
-                            par le fait de la rajouter à sa liste de farming.
+                            Le système est ensuite le même que pour les personnages mais avec juste le niveau. Pas de
+                            déclaration comme quoi "j'ai cette arme" ou "je veux la build" car c'est induit par le fait de
+                            l'ajouter à la liste de farming.
                         </p>
                         <p class="sub-title">Le tableau des ressources</p>
                         <p>Le troisième tableau est celui des ressources directement :</p>
-                        <p class="indent-1">Il est composé de 8 colonnes que je vais expliquer en détails :</p>
-                        <p class="indent-2">Nom de la ressources (simple ^^)</p>
+                        <p>Il est composé de 8 colonnes que je vais détailler :</p>
+                        <p class="indent-1">Nom de la ressource</p>
+                        <p class="indent-1">
+                            Possédé : Il s'agit d'une case où vous pouvez indiquer combien vous en avez. On peut passer
+                            d'une ligne à l'autre avec tab sur PC ou la flèche suivante sur mobile. Les ressources sont dans
+                            le même ordre que l'inventaire du jeu :
+                        </p>
+                        <p class="indent-2">Mora</p>
+                        <p class="indent-2">Minerai d’expérience (page 1 des armes)</p>
+                        <p class="indent-2">Objets d’améliorations (page 3)</p>
+                        <p class="indent-2">Ressources locals (page 5 des matériaux)</p>
+                        <p class="indent-1">Nécessaire : Combien il en faut pour tout ce que vous avez indiqué.</p>
+                        <p class="indent-1">
+                            Reste : la soustraction de combien il en faut par combien vous en avez. Si vous en avez plus,
+                            cela indique "parfait". Aussi, une option permet de toujours en avoir 1 de plus. Cela est utile
+                            quand il s'agit de rentrer la quantité de ressources qu'on a depuis le jeu. Avoir toutes les
+                            ressources en au moins 1 exemplaire permet de pouvoir aller plus vite sans vérifier quelles
+                            ressources manquent.
+                        </p>
+                        <p class="indent-1">
+                            Farmable : Si vous avez indiqué sur quel serveur vous jouez, il sera automatiquement indiqué si
+                            les livres d'aptitudes ou les matériaux d'armes sont farmables aujourd'hui.
+                        </p>
+                        <p class="indent-1">
+                            Pour les deux colonnes de synthèses, je dois expliquer un point. Un certain nombre de ressources
+                            du jeu sont synthétisables. Les drops de monstres, les pierres, les livres et matériaux d'armes
+                            permettent de prendre 3 ressources et de les combiner en une ressource de qualité supérieure.
+                            Ainsi, je considère dans mon calculateur que 1 ressource de qualité 4 vaut 27 points (1x3x3x3),
+                            1 ressource de qualité 3 vaut 9 (1x3*3), 1 ressource de qualité 2 vaut 3 (1x3) et enfin une
+                            ressource de qualité 1 vaut 1. Ainsi, on obtient une somme de point pour chaque type de ces
+                            ressources qui est utilisée pour la farmer.
+                        </p>
+                        <p class="indent-1">Exemple :</p>
                         <p class="indent-2">
-                            Possédé : Il s'agit d'un input où vous pouvez indiquer combien vous en avez. On
-                            peut passer d'une ligne à l'autre avec tab sur PC ou la flèche suivante sur mobile. Les
-                            ressources sont dans le même ordre que l'inventaire du jeu. 1ère page : minerai de renforcement
-                            d'arme -> 3ème page : Quasi toutes les ressources -> 5ème page : Les ressources locales
-                        </p>
-                        <p class="indent-2">Nécessaire : Combien il en faut pour tout le farm que vous avez indiqué.</p>
-                        <p class="indent-2">
-                            Reste, la soustraction simple de combien il en faut par combien vous en avez. Si
-                            vous en avez plus, cela indique "parfait". Aussi, une option permet de toujours en avoir 1 de
-                            plus. Cela est utile quand il s'agit de rentrer la quantité de ressources qu'on a depuis le jeu.
-                            Avoir toutes les ressources en au moins 1 exemplaire permet de pouvoir aller plus vite sans
-                            vérifier quelles ressources ils manquent.
-                        </p>
-                        <p class="indent-2">
-                            Farmable : Si vous avez indiqué sur quel serveur vous jouez, il sera
-                            automatiquement mis pour les livres d'aptitudes et les matériaux d'armes s'ils sont farmables
-                            aujourd'hui.
-                        </p>
-                        <p class="indent-2">Pour les deux colonnes de synthèses, je dois expliquer un point.</p>
-                        <p class="indent-2">
-                            Pas mal de ressources du jeu sont synthétisables. Les drops de monstres, les
-                            pierres, les livres et matériaux d'armes permettent de prendre 3 ressources et de les combiner
-                            en une ressource de qualité supérieure. Ainsi, je considère dans mon calculateur que 1 ressource
-                            de qualité 4 vaut 27 points (1x3x3x3), 1 ressource de qualité 3 vaut 9 (1x3*3), 1 ressource de
-                            qualité 2 vaut 3 (1x3) et enfin une ressource de qualité 1 vaut 1. Ainsi, on obtient une somme
-                            de point pour chaque type de ces ressources qui est utilisée pour la farmer.
-                        </p>
-                        <p class="indent-2">Exemple :</p>
-                        <p class="indent-3">
-                            J'ai besoin pour un perso de 6 pierres et 9 morceaux géo. Cela fait 243 points
-                            (6x27 + 9x9).
-                        </p>
-                        <p class="indent-3">
-                            J'ai 1 pierre, 4 morceaux, 47 fragments et 78 éclats. Cela fait 282 points (1x27
-                            + 4x9 + 47x3 + 78)
-                        </p>
-                        <p class="indent-3">
-                            Donc le calculateur va me le montrer et je saurai qu'avec de la synthèse, j'ai
-                            assez et que je peux arrêter de farm cette ressource.
-                        </p>
-                        <p class="indent-3">
-                            Ainsi, la première colonne montre combien de points vous avez pour un type de
-                            ressources et la deuxième vous montrer combien vous en avez besoin. Si vous dépassez, cela est
-                            indiqué et vous savez que vous pouvez aller synthétiser.
+                            Pour monter un perso, j'ai besoin de 6 pierres et 9 morceaux géo. Cela fait 243 points (6x27 +
+                            9x9).
                         </p>
                         <p class="indent-2">
-                            La dernière colonne est une estimation de combien de résine vous aurez besoin
-                            pour les ressources qui le demandent.
+                            J'ai 1 pierre, 4 morceaux, 47 fragments et 78 éclats. Cela fait 282 points (1x27 + 4x9 + 47x3 +
+                            78)
+                        </p>
+                        <p class="indent-2">
+                            Donc le calculateur va me le montrer et je saurai qu'avec de la synthèse, j'ai assez et que je
+                            peux arrêter de farm cette ressource.
+                        </p>
+                        <p class="indent-2">
+                            Ainsi, la première colonne montre combien de points vous avez pour un type de ressources et la
+                            deuxième de combien vous en avez besoin. Si vous dépassez, cela est indiqué et vous savez que
+                            vous pouvez aller synthétiser.
+                        </p>
+                        <p class="indent-1">
+                            La dernière colonne est une estimation de combien de résine vous aurez besoin pour les
+                            ressources qui le demandent.
                         </p>
                         <p class="enjoy">En espérant que mon projet vous sera utile. Have Fun</p>
                     </div>
@@ -1230,14 +1256,21 @@ onBeforeMount(() => {
         <div class="section-container">
             <div class="table-section characters-table-section">
                 <div class="characters-top-table-box">
-                    <p class="characters-informations">{{ data.Characters.filter(fi => fi.got).length }} / {{ data.Characters.length }} personnages possédés</p>
+                    <p class="characters-informations">
+                        {{ data.Characters.filter(fi => fi.got).length }} / {{
+                            data.Characters.length }} personnages possédés
+                    </p>
                     <div class="search-input">
                         <input
                             v-model="searchingCharactersQuery" class="input" type="text"
                             placeholder="Rechercher un personnage"
                         >
                     </div>
-                    <p class="characters-informations">{{ data.Characters.filter(fi => fi.got && fi.cLvl === fi.wLvl && fi.cAp1 === fi.wAp1 && fi.cAp2 === fi.wAp2 && fi.cAp3 === fi.wAp3).length }} / {{ data.Characters.length }} personnages finis</p>
+                    <p class="characters-informations">
+                        {{ data.Characters.filter(fi => fi.got && fi.cLvl === fi.wLvl &&
+                            fi.cAp1 === fi.wAp1 && fi.cAp2 === fi.wAp2 && fi.cAp3 === fi.wAp3).length }} / {{
+                            data.Characters.length }} personnages finis
+                    </p>
                 </div>
                 <div class="table-box">
                     <table class="table characters-informations">
@@ -1460,8 +1493,16 @@ onBeforeMount(() => {
                                             : ""
                                     }}
                                 </td>
-                                <td :class="{ 'synthesis-ok': material.synthesis && material.group_have > material.group_needed }">{{ material.synthesis ? material.group_have : "" }}</td>
-                                <td :class="{ 'synthesis-ok': material.synthesis && material.group_have > material.group_needed }">{{ material.synthesis ? material.group_needed : "" }}</td>
+                                <td
+                                    :class="{ 'synthesis-ok': material.synthesis && material.group_have > material.group_needed }"
+                                >
+                                    {{ material.synthesis ? material.group_have : "" }}
+                                </td>
+                                <td
+                                    :class="{ 'synthesis-ok': material.synthesis && material.group_have > material.group_needed }"
+                                >
+                                    {{ material.synthesis ? material.group_needed : "" }}
+                                </td>
                                 <td>{{ material.group_resin > 0 ? material.group_resin : "" }}</td>
                             </tr>
                         </tbody>
@@ -1697,11 +1738,11 @@ onBeforeMount(() => {
                 }
 
                 .one-color.doing-havnt {
-                    background: linear-gradient(90deg, $characters-doing-havnt 0%,  $characters-doing-havnt-even 100%);
+                    background: linear-gradient(90deg, $characters-doing-havnt 0%, $characters-doing-havnt-even 100%);
                 }
 
                 .one-color.have-and-done {
-                    background: linear-gradient(90deg, $characters-have-and-done 0%,    $characters-have-and-done-even 100%);
+                    background: linear-gradient(90deg, $characters-have-and-done 0%, $characters-have-and-done-even 100%);
                 }
 
                 .one-color.require {
@@ -1709,11 +1750,11 @@ onBeforeMount(() => {
                 }
 
                 .one-color.require-and-done {
-                    background: linear-gradient(90deg, $material-require-and-done 0%,    $material-require-and-done-even 100%);
+                    background: linear-gradient(90deg, $material-require-and-done 0%, $material-require-and-done-even 100%);
                 }
-                
+
                 .one-color.done {
-                    background: linear-gradient(90deg, $material-only-need-and-done 0%,    $material-only-need-and-done-even 100%);
+                    background: linear-gradient(90deg, $material-only-need-and-done 0%, $material-only-need-and-done-even 100%);
                 }
 
                 .sub-title {
@@ -1750,6 +1791,18 @@ onBeforeMount(() => {
                     font-weight: 400;
                     font-style: oblique;
                     color: $color4;
+                }
+
+                .description-link {
+                    cursor: pointer;
+                    color: $color6;
+                    transition: none;
+                    font-weight: 400;
+
+                    &:hover {
+                        text-decoration: underline 2px;
+                        text-underline-offset: 2px;
+                    }
                 }
             }
 
