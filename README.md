@@ -468,4 +468,8 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Rajout d'une classe pour expliciter visuellement quand la quantité de ressources d'une catégories est suffisante pour finir avec la synthèse
 -   Augmentation de la largeur maximale du menu
 
+### 2.1.2 `6 septembre 2023`
+
+-   Rechangement des variables de synthèse ok, pour pas que ce soit moche
+
 </details>
