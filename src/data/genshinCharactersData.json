@@ -923,7 +923,7 @@
         "eng_name": "Thoma",
         "release_date": "02/11/2021",
         "id": 41,
-        "name": "Thoma",
+        "name": "Thomas",
         "rarity": 4,
         "element": "pyro",
         "weapon": "spear",
@@ -1608,5 +1608,28 @@
         "common_material": "m27",
         "talent_book": "l52",
         "local_speciality": "r502"
-    }
+    },
+    {
+        "eng_name": "Neuvillette",
+        "release_date": "27/09/2023",
+        "id": 71,
+        "name": "Neuvillette",
+        "rarity": 5,
+        "element": "hydro",
+        "weapon": "catalyst",
+        "base_hp": 14695,
+        "base_atk": 208,
+        "base_def": 576,
+        "stat_type": "crt_dmg",
+        "stat_value": "38,4",
+        "mora": "g01",
+        "experience_book": "g05",
+        "crown": "g08",
+        "gem": "p02",
+        "mini_boss_material": "s505",
+        "weekly_boss_materials": "b083",
+        "common_material": "m27",
+        "talent_book": "l51",
+        "local_speciality": "r505"
+      }
 ]

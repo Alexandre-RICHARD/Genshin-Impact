@@ -102,7 +102,7 @@ const dataInit = async () => {
                 if (aptList.indexOf(currentChar.wAp3) < 0) data.Characters[i].wAp3 = 9;
 
                 // Rajout d'une condition, au chargement, on vérifie les données. On en profite pour checker si tous les persos ont leur valeurs doing ou pas. Si oui, on change la variable correspondante en true
-                if (currentChar.only) isOnlyCharacters.value = true;
+                if (currentChar.only) isOnlySomething.value = true;
             } else {
                 // Sinon, on va simplement créer ce personnage avec son nom et les valeurs par défaut à l'aide de la fonction filler
                 data.Characters.push(filler("Characters", id));
@@ -122,11 +122,14 @@ const dataInit = async () => {
     if (lsWeapons) {
         data.Weapons = JSON.parse(lsWeapons);
         WeaponsList.forEach(({ id }) => {
-            const currentChar = data.Weapons.find(fi => id === fi.id);
-            if (currentChar) {
+            const currentWeapon = data.Weapons.find(fi => id === fi.id);
+            if (currentWeapon) {
                 const i = data.Weapons.findIndex(fi => id === fi.id);
-                if (lvlList.indexOf(currentChar.cLvl) < 0) data.Weapons[i].cLvl = 1;
-                if (lvlList.indexOf(currentChar.wLvl) < 0) data.Weapons[i].wLvl = 74;
+                if ([false, true].indexOf(currentWeapon.only) < 0) data.Weapons[i].only = false;
+                if (lvlList.indexOf(currentWeapon.cLvl) < 0) data.Weapons[i].cLvl = 1;
+                if (lvlList.indexOf(currentWeapon.wLvl) < 0) data.Weapons[i].wLvl = 74;
+
+                if (currentWeapon.only) isOnlySomething.value = true;
             }
         });
     } else {
@@ -251,7 +254,7 @@ const removeResData = reactive({
 
 // Quand un input créer avec le composant InputCreator, sa valuer est suivi avec un V-model puis un emit envoyé dans la fonction handleChange qui se charge de changer la bonne valeur dans l'array "data"
 const handleChange = (group, index, valuename, value) => {
-    if (valuename === "only") isOnlyCharacters.value = value;
+    if (valuename === "only") isOnlySomething.value = value;
     if (data.Options.proposeToRemoveRessources && ["cLvl", "cAp1", "cAp2", "cAp3"].indexOf(valuename) >= 0) {
         if (group === "Weapons" ? true : (group === "Characters" && data[group][index].doing === true)) {
             removeResData.weaponsOrCharactersConcerned = (group === "Characters" ? CharactersList : WeaponsList).find(fi => fi.id === data[group][index].id);
@@ -441,8 +444,8 @@ const deletingWeaponToDo = (index) => {
     readyToSaveData("Weapons");
 };
 
-// Variable pour indiquer à l'objet computed ci dessous ainsi qu'au tableau ce qu'ils doivent faire dans le cas ou un personnage a été indiqué comme étant le seul
-let isOnlyCharacters = ref(false);
+// Variable pour indiquer à l'objet computed ci dessous ainsi qu'au tableau ce qu'ils doivent faire dans le cas ou un personnage/une arme a été indiqué comme étant le seul à devoir être fait
+let isOnlySomething = ref(false);
 // Le gros morceaux, le gros objet computed farmingMaterial qui va avoir pour but de prendre nos données rentrées par l'utilisateur sur les personnages et les matériaux de farm et de calculer combien il en faut, combien il en a, la différence, la somme de points pour chaque groupe qui est possible de faire avec la synthèse ainsi que la résine nécessaire estimée.
 const farmingMaterial = computed(() => {
     // Notre array qui va être utilisé et retourné pour créer l'array farmingMaterial
@@ -490,7 +493,7 @@ const farmingMaterial = computed(() => {
     // La logique est donc :
     // POur chaque personnage, on ne va prendre en compte que ceux qui ont été noté comme étant à faire, à monter. On boucle sur ceux qui restent.
     // Cependant, si on a un personnages qui a été coché comme only, alors on ne va cherche que cette propriété donc que ce perso
-    data.Characters.filter(char => !isOnlyCharacters.value ? char.doing === true : char.only === true).forEach(char => {
+    data.Characters.filter(char => !isOnlySomething.value ? char.doing === true : char.only === true).forEach(char => {
         // Dans la données de persos, on récupère celles du personnage actuel.
         const currentElement = CharactersList.find(find => find.id === char.id);
         // On boucle de 0 à 3 car on va surveiller 4 choses, le lvl, l'aptitude 1, la 2 et la 3.
@@ -505,16 +508,13 @@ const farmingMaterial = computed(() => {
     });
 
     // La logique pour les armes est exactement la même
-    // On rajoute juste une condition au cas-où un personnage a été marqué comme "only", dans ce cas on ne traite aucun autre élément
-    if (!isOnlyCharacters.value) {
-        data.Weapons.forEach(weap => {
-            const currentElement = WeaponsList.find(find => find.id === weap.id);
-            const progressStep = levelingData[`weapon_${currentElement.rarity}`].filter(step => step.id > weap.cLvl && step.id <= weap.wLvl);
-            if (progressStep.length > 0) {
-                materialsAttributor(progressStep, currentElement);
-            }
-        });
-    }
+    data.Weapons.filter(char => !isOnlySomething.value ? true : char.only === true).forEach(weap => {
+        const currentElement = WeaponsList.find(find => find.id === weap.id);
+        const progressStep = levelingData[`weapon_${currentElement.rarity}`].filter(step => step.id > weap.cLvl && step.id <= weap.wLvl);
+        if (progressStep.length > 0) {
+            materialsAttributor(progressStep, currentElement);
+        }
+    });
 
     // Ce code va servir a tout de même crée un objet pour chaque ressources, même s'il n'est pas demandé pour le farm des persos choisis
     MaterialsList.forEach(material => {
@@ -1078,7 +1078,7 @@ onBeforeMount(() => {
                             du jeu sont synthétisables. Les drops de monstres, les pierres, les livres et matériaux d'armes
                             permettent de prendre 3 ressources et de les combiner en une ressource de qualité supérieure.
                             Ainsi, je considère dans mon calculateur que 1 ressource de qualité 4 vaut 27 points (1x3x3x3),
-                            1 ressource de qualité 3 vaut 9 (1x3*3), 1 ressource de qualité 2 vaut 3 (1x3) et enfin une
+                            1 ressource de qualité 3 vaut 9 (1x3x3), 1 ressource de qualité 2 vaut 3 (1x3) et enfin une
                             ressource de qualité 1 vaut 1. Ainsi, on obtient une somme de point pour chaque type de ces
                             ressources qui est utilisée pour la farmer.
                         </p>
@@ -1150,15 +1150,15 @@ onBeforeMount(() => {
                     <div class="image-container">
                         <GenshinImage
                             v-if="data.Options.loadIMG" type="materials" :identifier="`${otherInfo.rare.code}1`"
-                            rarity="1"
-                        />
-                        <GenshinImage
-                            v-if="data.Options.loadIMG" type="materials" :identifier="`${otherInfo.rare.code}2`"
                             rarity="2"
                         />
                         <GenshinImage
-                            v-if="data.Options.loadIMG" type="materials" :identifier="`${otherInfo.rare.code}3`"
+                            v-if="data.Options.loadIMG" type="materials" :identifier="`${otherInfo.rare.code}2`"
                             rarity="3"
+                        />
+                        <GenshinImage
+                            v-if="data.Options.loadIMG" type="materials" :identifier="`${otherInfo.rare.code}3`"
+                            rarity="4"
                         />
                     </div>
                     <p class="fewer-resources-description">
@@ -1319,7 +1319,7 @@ onBeforeMount(() => {
                                 />
                                 <InputCreator
                                     :checked="character.only" type="checkbox"
-                                    :disabled="!character.doing || (!character.only && isOnlyCharacters)"
+                                    :disabled="!character.doing || (!character.only && isOnlySomething)"
                                     @update:checked="newValue => handleChange('Characters', data.Characters.findIndex(el => el.id === character.id), 'only', newValue)"
                                 />
                                 <InputCreator
@@ -1392,6 +1392,7 @@ onBeforeMount(() => {
                         <thead>
                             <tr>
                                 <th>Nom de l'arme</th>
+                                <th>Only</th>
                                 <th>Niveau actuel</th>
                                 <th>Niveau voulu</th>
                             </tr>
@@ -1412,6 +1413,11 @@ onBeforeMount(() => {
                                         <p>{{ WeaponsList.find(fi => fi.id === weapon.id).name }}</p>
                                     </div>
                                 </td>
+                                <InputCreator
+                                    :checked="weapon.only" type="checkbox"
+                                    :disabled="!weapon.only && isOnlySomething"
+                                    @update:checked="newValue => handleChange('Weapons', data.Weapons.findIndex(el => el.id === weapon.id), 'only', newValue)"
+                                />
                                 <InputCreator
                                     :value="weapon.cLvl" type="select-level"
                                     :list="levelingData[`weapon_${weapon.rarity}`].filter(el => el.id <= weapon.wLvl)"

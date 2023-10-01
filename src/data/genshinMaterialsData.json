@@ -777,6 +777,30 @@
     },
     {
         "id": 98,
+        "name": "Constance d'opérateur",
+        "code": "m313",
+        "category": "rare_material",
+        "farming_days": null,
+        "rarity": 4
+    },
+    {
+        "id": 99,
+        "name": "Montre à gousset d'opérateur",
+        "code": "m312",
+        "category": "rare_material",
+        "farming_days": null,
+        "rarity": 3
+    },
+    {
+        "id": 100,
+        "name": "Vieille montre à gousset d'opérateur",
+        "code": "m311",
+        "category": "rare_material",
+        "farming_days": null,
+        "rarity": 2
+    },
+    {
+        "id": 101,
         "name": "Stormterror - Plume de Stormterror",
         "code": "b011",
         "category": "weekly_boss_materials",
@@ -784,7 +808,7 @@
         "rarity": 5
     },
     {
-        "id": 99,
+        "id": 102,
         "name": "Stormterror - Griffe de Stormterror",
         "code": "b012",
         "category": "weekly_boss_materials",
@@ -792,7 +816,7 @@
         "rarity": 5
     },
     {
-        "id": 100,
+        "id": 103,
         "name": "Stormterror - Souffle de Stormterror",
         "code": "b013",
         "category": "weekly_boss_materials",
@@ -800,7 +824,7 @@
         "rarity": 5
     },
     {
-        "id": 101,
+        "id": 104,
         "name": "Loup du Nord - Queue de Borée",
         "code": "b021",
         "category": "weekly_boss_materials",
@@ -808,7 +832,7 @@
         "rarity": 5
     },
     {
-        "id": 102,
+        "id": 105,
         "name": "Loup du Nord - Vertèbre de Borée",
         "code": "b022",
         "category": "weekly_boss_materials",
@@ -816,7 +840,7 @@
         "rarity": 5
     },
     {
-        "id": 103,
+        "id": 106,
         "name": "Loup du Nord - Esprit de Borée",
         "code": "b023",
         "category": "weekly_boss_materials",
@@ -824,7 +848,7 @@
         "rarity": 5
     },
     {
-        "id": 104,
+        "id": 107,
         "name": "Tartaglia - Corne de Monoceros Caeli",
         "code": "b031",
         "category": "weekly_boss_materials",
@@ -832,7 +856,7 @@
         "rarity": 5
     },
     {
-        "id": 105,
+        "id": 108,
         "name": "Tartaglia - Fragment du démon",
         "code": "b032",
         "category": "weekly_boss_materials",
@@ -840,7 +864,7 @@
         "rarity": 5
     },
     {
-        "id": 106,
+        "id": 109,
         "name": "Tartaglia - Ombre du guerrier",
         "code": "b033",
         "category": "weekly_boss_materials",
@@ -848,7 +872,7 @@
         "rarity": 5
     },
     {
-        "id": 107,
+        "id": 110,
         "name": "Azdaha - Couronne du roi-dragon",
         "code": "b041",
         "category": "weekly_boss_materials",
@@ -856,7 +880,7 @@
         "rarity": 5
     },
     {
-        "id": 108,
+        "id": 111,
         "name": "Azdaha - Branche de jade cramoisi",
         "code": "b042",
         "category": "weekly_boss_materials",
@@ -864,7 +888,7 @@
         "rarity": 5
     },
     {
-        "id": 109,
+        "id": 112,
         "name": "Azdaha - Écaille dorée",
         "code": "b043",
         "category": "weekly_boss_materials",
@@ -872,7 +896,7 @@
         "rarity": 5
     },
     {
-        "id": 110,
+        "id": 113,
         "name": "Signora - Moment en fusion",
         "code": "b051",
         "category": "weekly_boss_materials",
@@ -880,7 +904,7 @@
         "rarity": 5
     },
     {
-        "id": 111,
+        "id": 114,
         "name": "Signora - Papillon infernal",
         "code": "b052",
         "category": "weekly_boss_materials",
@@ -888,7 +912,7 @@
         "rarity": 5
     },
     {
-        "id": 112,
+        "id": 115,
         "name": "Signora - Coeur de cendre",
         "code": "b053",
         "category": "weekly_boss_materials",
@@ -896,7 +920,7 @@
         "rarity": 5
     },
     {
-        "id": 113,
+        "id": 116,
         "name": "Shogun - Mudra du général maléfique",
         "code": "b061",
         "category": "weekly_boss_materials",
@@ -904,7 +928,7 @@
         "rarity": 5
     },
     {
-        "id": 114,
+        "id": 117,
         "name": "Shogun - Larme de la divinité calamiteuse",
         "code": "b062",
         "category": "weekly_boss_materials",
@@ -912,7 +936,7 @@
         "rarity": 5
     },
     {
-        "id": 115,
+        "id": 118,
         "name": "Shogun - Signification d'une éternité",
         "code": "b063",
         "category": "weekly_boss_materials",
@@ -920,7 +944,7 @@
         "rarity": 5
     },
     {
-        "id": 116,
+        "id": 119,
         "name": "Scaramuccia - Fils de marionnette",
         "code": "b071",
         "category": "weekly_boss_materials",
@@ -928,7 +952,7 @@
         "rarity": 5
     },
     {
-        "id": 117,
+        "id": 120,
         "name": "Scaramuccia - Miroir de mushin",
         "code": "b072",
         "category": "weekly_boss_materials",
@@ -936,7 +960,7 @@
         "rarity": 5
     },
     {
-        "id": 118,
+        "id": 121,
         "name": "Scaramuccia - Cloche de daka",
         "code": "b073",
         "category": "weekly_boss_materials",
@@ -944,7 +968,7 @@
         "rarity": 5
     },
     {
-        "id": 119,
+        "id": 122,
         "name": "Apep - Fougère du monde luxuriant",
         "code": "b081",
         "category": "weekly_boss_materials",
@@ -952,7 +976,7 @@
         "rarity": 5
     },
     {
-        "id": 120,
+        "id": 123,
         "name": "Apep - Floraison première de l'oasis",
         "code": "b082",
         "category": "weekly_boss_materials",
@@ -960,7 +984,7 @@
         "rarity": 5
     },
     {
-        "id": 121,
+        "id": 124,
         "name": "Apep - Constambre",
         "code": "b083",
         "category": "weekly_boss_materials",
@@ -968,7 +992,7 @@
         "rarity": 5
     },
     {
-        "id": 122,
+        "id": 125,
         "name": "Graine d'ouragan",
         "code": "s101",
         "category": "mini_boss_material",
@@ -976,7 +1000,7 @@
         "rarity": 4
     },
     {
-        "id": 123,
+        "id": 126,
         "name": "Prisme d'éclair",
         "code": "s102",
         "category": "mini_boss_material",
@@ -984,7 +1008,7 @@
         "rarity": 4
     },
     {
-        "id": 124,
+        "id": 127,
         "name": "Pilier de basalte",
         "code": "s201",
         "category": "mini_boss_material",
@@ -992,7 +1016,7 @@
         "rarity": 4
     },
     {
-        "id": 125,
+        "id": 128,
         "name": "Duramen de glace",
         "code": "s103",
         "category": "mini_boss_material",
@@ -1000,7 +1024,7 @@
         "rarity": 4
     },
     {
-        "id": 126,
+        "id": 129,
         "name": "Graine de feu",
         "code": "s202",
         "category": "mini_boss_material",
@@ -1008,7 +1032,7 @@
         "rarity": 4
     },
     {
-        "id": 127,
+        "id": 130,
         "name": "Cœur d'eau pure",
         "code": "s203",
         "category": "mini_boss_material",
@@ -1016,7 +1040,7 @@
         "rarity": 4
     },
     {
-        "id": 128,
+        "id": 131,
         "name": "Jade juvénile",
         "code": "s204",
         "category": "mini_boss_material",
@@ -1024,7 +1048,7 @@
         "rarity": 4
     },
     {
-        "id": 129,
+        "id": 132,
         "name": "Fleur cristalline",
         "code": "s104",
         "category": "mini_boss_material",
@@ -1032,7 +1056,7 @@
         "rarity": 4
     },
     {
-        "id": 130,
+        "id": 133,
         "name": "Mécanisme oni",
         "code": "s301",
         "category": "mini_boss_material",
@@ -1040,7 +1064,7 @@
         "rarity": 4
     },
     {
-        "id": 131,
+        "id": 134,
         "name": "Cœur perpétuel",
         "code": "s302",
         "category": "mini_boss_material",
@@ -1048,7 +1072,7 @@
         "rarity": 4
     },
     {
-        "id": 132,
+        "id": 135,
         "name": "Perle brûlante",
         "code": "s303",
         "category": "mini_boss_material",
@@ -1056,7 +1080,7 @@
         "rarity": 4
     },
     {
-        "id": 133,
+        "id": 136,
         "name": "Rosée du rejet",
         "code": "s304",
         "category": "mini_boss_material",
@@ -1064,7 +1088,7 @@
         "rarity": 4
     },
     {
-        "id": 134,
+        "id": 137,
         "name": "Perles tempestives",
         "code": "s305",
         "category": "mini_boss_material",
@@ -1072,7 +1096,7 @@
         "rarity": 4
     },
     {
-        "id": 135,
+        "id": 138,
         "name": "Régalia de faille",
         "code": "s306",
         "category": "mini_boss_material",
@@ -1080,7 +1104,7 @@
         "rarity": 4
     },
     {
-        "id": 136,
+        "id": 139,
         "name": "Fausse nageoire de l'héritier du dragon",
         "code": "s307",
         "category": "mini_boss_material",
@@ -1088,7 +1112,7 @@
         "rarity": 4
     },
     {
-        "id": 137,
+        "id": 140,
         "name": "Croc runique",
         "code": "s205",
         "category": "mini_boss_material",
@@ -1096,7 +1120,7 @@
         "rarity": 4
     },
     {
-        "id": 138,
+        "id": 141,
         "name": "Bec crochu majestueux",
         "code": "s401",
         "category": "mini_boss_material",
@@ -1104,7 +1128,7 @@
         "rarity": 4
     },
     {
-        "id": 139,
+        "id": 142,
         "name": "Fruit du tonnerre",
         "code": "s402",
         "category": "mini_boss_material",
@@ -1112,7 +1136,7 @@
         "rarity": 4
     },
     {
-        "id": 140,
+        "id": 143,
         "name": "Calibre perpétuel",
         "code": "s403",
         "category": "mini_boss_material",
@@ -1120,7 +1144,7 @@
         "rarity": 4
     },
     {
-        "id": 141,
+        "id": 144,
         "name": "Tétraèdre de lumière",
         "code": "s404",
         "category": "mini_boss_material",
@@ -1128,7 +1152,7 @@
         "rarity": 4
     },
     {
-        "id": 142,
+        "id": 145,
         "name": "Liane d'oblitération",
         "code": "s405",
         "category": "mini_boss_material",
@@ -1136,7 +1160,7 @@
         "rarity": 4
     },
     {
-        "id": 143,
+        "id": 146,
         "name": "Pseudo-étamines",
         "code": "s406",
         "category": "mini_boss_material",
@@ -1144,7 +1168,7 @@
         "rarity": 4
     },
     {
-        "id": 144,
+        "id": 147,
         "name": "Anneau de sombreur éternelle",
         "code": "s407",
         "category": "mini_boss_material",
@@ -1152,7 +1176,7 @@
         "rarity": 4
     },
     {
-        "id": 145,
+        "id": 148,
         "name": "Engrenage artificié de rechange : Coppelia",
         "code": "s501",
         "category": "mini_boss_material",
@@ -1160,7 +1184,7 @@
         "rarity": 4
     },
     {
-        "id": 146,
+        "id": 149,
         "name": "Engrenage artificié de rechange : Coppelius",
         "code": "s502",
         "category": "mini_boss_material",
@@ -1168,7 +1192,7 @@
         "rarity": 4
     },
     {
-        "id": 147,
+        "id": 150,
         "name": "Résolution de l'empereur",
         "code": "s503",
         "category": "mini_boss_material",
@@ -1176,7 +1200,23 @@
         "rarity": 4
     },
     {
-        "id": 148,
+        "id": 151,
+        "name": "« Appareil Tourbillon »",
+        "code": "s504",
+        "category": "mini_boss_material",
+        "farming_days": null,
+        "rarity": 4
+    },
+    {
+        "id": 152,
+        "name": "Corne fontemarine",
+        "code": "s505",
+        "category": "mini_boss_material",
+        "farming_days": null,
+        "rarity": 4
+    },
+    {
+        "id": 153,
         "name": "Pierre d'Agate agnidus",
         "code": "p014",
         "category": "gem",
@@ -1184,7 +1224,7 @@
         "rarity": 5
     },
     {
-        "id": 149,
+        "id": 154,
         "name": "Morceau d'Agate agnidus",
         "code": "p013",
         "category": "gem",
@@ -1192,7 +1232,7 @@
         "rarity": 4
     },
     {
-        "id": 150,
+        "id": 155,
         "name": "Fragment d'Agate agnidus",
         "code": "p012",
         "category": "gem",
@@ -1200,7 +1240,7 @@
         "rarity": 3
     },
     {
-        "id": 151,
+        "id": 156,
         "name": "Éclat d'Agate agnidus",
         "code": "p011",
         "category": "gem",
@@ -1208,7 +1248,7 @@
         "rarity": 2
     },
     {
-        "id": 152,
+        "id": 157,
         "name": "Pierre de lazurite varunada",
         "code": "p024",
         "category": "gem",
@@ -1216,7 +1256,7 @@
         "rarity": 5
     },
     {
-        "id": 153,
+        "id": 158,
         "name": "Morceau de lazurite varunada",
         "code": "p023",
         "category": "gem",
@@ -1224,7 +1264,7 @@
         "rarity": 4
     },
     {
-        "id": 154,
+        "id": 159,
         "name": "Fragment de lazurite varunada",
         "code": "p022",
         "category": "gem",
@@ -1232,7 +1272,7 @@
         "rarity": 3
     },
     {
-        "id": 155,
+        "id": 160,
         "name": "Éclat de lazurite varunada",
         "code": "p021",
         "category": "gem",
@@ -1240,7 +1280,7 @@
         "rarity": 2
     },
     {
-        "id": 156,
+        "id": 161,
         "name": "Pierre d'émeraude nagadus",
         "code": "p034",
         "category": "gem",
@@ -1248,7 +1288,7 @@
         "rarity": 5
     },
     {
-        "id": 157,
+        "id": 162,
         "name": "Morceau d'émeraude nagadus",
         "code": "p033",
         "category": "gem",
@@ -1256,7 +1296,7 @@
         "rarity": 4
     },
     {
-        "id": 158,
+        "id": 163,
         "name": "Fragment d'émeraude nagadus",
         "code": "p032",
         "category": "gem",
@@ -1264,7 +1304,7 @@
         "rarity": 3
     },
     {
-        "id": 159,
+        "id": 164,
         "name": "Éclat d'émeraude nagadus",
         "code": "p031",
         "category": "gem",
@@ -1272,7 +1312,7 @@
         "rarity": 2
     },
     {
-        "id": 160,
+        "id": 165,
         "name": "Pierre d'améthyste vajrada",
         "code": "p044",
         "category": "gem",
@@ -1280,7 +1320,7 @@
         "rarity": 5
     },
     {
-        "id": 161,
+        "id": 166,
         "name": "Morceau d'améthyste vajrada",
         "code": "p043",
         "category": "gem",
@@ -1288,7 +1328,7 @@
         "rarity": 4
     },
     {
-        "id": 162,
+        "id": 167,
         "name": "Fragment d'améthyste vajrada",
         "code": "p042",
         "category": "gem",
@@ -1296,7 +1336,7 @@
         "rarity": 3
     },
     {
-        "id": 163,
+        "id": 168,
         "name": "Éclat d'améthyste vajrada",
         "code": "p041",
         "category": "gem",
@@ -1304,7 +1344,7 @@
         "rarity": 2
     },
     {
-        "id": 164,
+        "id": 169,
         "name": "Pierre de turquoise vayuda",
         "code": "p054",
         "category": "gem",
@@ -1312,7 +1352,7 @@
         "rarity": 5
     },
     {
-        "id": 165,
+        "id": 170,
         "name": "Morceau de turquoise vayuda",
         "code": "p053",
         "category": "gem",
@@ -1320,7 +1360,7 @@
         "rarity": 4
     },
     {
-        "id": 166,
+        "id": 171,
         "name": "Fragment de turquoise vayuda",
         "code": "p052",
         "category": "gem",
@@ -1328,7 +1368,7 @@
         "rarity": 3
     },
     {
-        "id": 167,
+        "id": 172,
         "name": "Éclat de turquoise vayuda",
         "code": "p051",
         "category": "gem",
@@ -1336,7 +1376,7 @@
         "rarity": 2
     },
     {
-        "id": 168,
+        "id": 173,
         "name": "Pierre de jade shivada",
         "code": "p064",
         "category": "gem",
@@ -1344,7 +1384,7 @@
         "rarity": 5
     },
     {
-        "id": 169,
+        "id": 174,
         "name": "Morceau de jade shivada",
         "code": "p063",
         "category": "gem",
@@ -1352,7 +1392,7 @@
         "rarity": 4
     },
     {
-        "id": 170,
+        "id": 175,
         "name": "Fragment de jade shivada",
         "code": "p062",
         "category": "gem",
@@ -1360,7 +1400,7 @@
         "rarity": 3
     },
     {
-        "id": 171,
+        "id": 176,
         "name": "Éclat de jade shivada",
         "code": "p061",
         "category": "gem",
@@ -1368,7 +1408,7 @@
         "rarity": 2
     },
     {
-        "id": 172,
+        "id": 177,
         "name": "Pierre de topaze prithiva",
         "code": "p074",
         "category": "gem",
@@ -1376,7 +1416,7 @@
         "rarity": 5
     },
     {
-        "id": 173,
+        "id": 178,
         "name": "Morceau de topaze prithiva",
         "code": "p073",
         "category": "gem",
@@ -1384,7 +1424,7 @@
         "rarity": 4
     },
     {
-        "id": 174,
+        "id": 179,
         "name": "Fragment de topaze prithiva",
         "code": "p072",
         "category": "gem",
@@ -1392,7 +1432,7 @@
         "rarity": 3
     },
     {
-        "id": 175,
+        "id": 180,
         "name": "Éclat de topaze prithiva",
         "code": "p071",
         "category": "gem",
@@ -1400,7 +1440,7 @@
         "rarity": 2
     },
     {
-        "id": 176,
+        "id": 181,
         "name": "Philosophie de la Liberté",
         "code": "l113",
         "category": "talent_book",
@@ -1408,7 +1448,7 @@
         "rarity": 4
     },
     {
-        "id": 177,
+        "id": 182,
         "name": "Guide de la Liberté",
         "code": "l112",
         "category": "talent_book",
@@ -1416,7 +1456,7 @@
         "rarity": 3
     },
     {
-        "id": 178,
+        "id": 183,
         "name": "Enseignement de la Liberté",
         "code": "l111",
         "category": "talent_book",
@@ -1424,7 +1464,7 @@
         "rarity": 2
     },
     {
-        "id": 179,
+        "id": 184,
         "name": "Philosophie de la Résistance",
         "code": "l123",
         "category": "talent_book",
@@ -1432,7 +1472,7 @@
         "rarity": 4
     },
     {
-        "id": 180,
+        "id": 185,
         "name": "Guide de la Résistance",
         "code": "l122",
         "category": "talent_book",
@@ -1440,7 +1480,7 @@
         "rarity": 3
     },
     {
-        "id": 181,
+        "id": 186,
         "name": "Enseignement de la Résistance",
         "code": "l121",
         "category": "talent_book",
@@ -1448,7 +1488,7 @@
         "rarity": 2
     },
     {
-        "id": 182,
+        "id": 187,
         "name": "Philosophie de la Poésie",
         "code": "l133",
         "category": "talent_book",
@@ -1456,7 +1496,7 @@
         "rarity": 4
     },
     {
-        "id": 183,
+        "id": 188,
         "name": "Guide de la Poésie",
         "code": "l132",
         "category": "talent_book",
@@ -1464,7 +1504,7 @@
         "rarity": 3
     },
     {
-        "id": 184,
+        "id": 189,
         "name": "Enseignement de la Poésie",
         "code": "l131",
         "category": "talent_book",
@@ -1472,7 +1512,7 @@
         "rarity": 2
     },
     {
-        "id": 185,
+        "id": 190,
         "name": "Philosophie de la Prospérité",
         "code": "l213",
         "category": "talent_book",
@@ -1480,7 +1520,7 @@
         "rarity": 4
     },
     {
-        "id": 186,
+        "id": 191,
         "name": "Guide de la Prospérité",
         "code": "l212",
         "category": "talent_book",
@@ -1488,7 +1528,7 @@
         "rarity": 3
     },
     {
-        "id": 187,
+        "id": 192,
         "name": "Enseignement de la Prospérité",
         "code": "l211",
         "category": "talent_book",
@@ -1496,7 +1536,7 @@
         "rarity": 2
     },
     {
-        "id": 188,
+        "id": 193,
         "name": "Philosophie de la Diligence",
         "code": "l223",
         "category": "talent_book",
@@ -1504,7 +1544,7 @@
         "rarity": 4
     },
     {
-        "id": 189,
+        "id": 194,
         "name": "Guide de la Diligence",
         "code": "l222",
         "category": "talent_book",
@@ -1512,7 +1552,7 @@
         "rarity": 3
     },
     {
-        "id": 190,
+        "id": 195,
         "name": "Enseignement de la Diligence",
         "code": "l221",
         "category": "talent_book",
@@ -1520,7 +1560,7 @@
         "rarity": 2
     },
     {
-        "id": 191,
+        "id": 196,
         "name": "Philosophie de l'or",
         "code": "l233",
         "category": "talent_book",
@@ -1528,7 +1568,7 @@
         "rarity": 4
     },
     {
-        "id": 192,
+        "id": 197,
         "name": "Guide de l'or",
         "code": "l232",
         "category": "talent_book",
@@ -1536,7 +1576,7 @@
         "rarity": 3
     },
     {
-        "id": 193,
+        "id": 198,
         "name": "Enseignement de l'or",
         "code": "l231",
         "category": "talent_book",
@@ -1544,7 +1584,7 @@
         "rarity": 2
     },
     {
-        "id": 194,
+        "id": 199,
         "name": "Philosophie de l'Éphémère",
         "code": "l313",
         "category": "talent_book",
@@ -1552,7 +1592,7 @@
         "rarity": 4
     },
     {
-        "id": 195,
+        "id": 200,
         "name": "Guide de l'Éphémère",
         "code": "l312",
         "category": "talent_book",
@@ -1560,7 +1600,7 @@
         "rarity": 3
     },
     {
-        "id": 196,
+        "id": 201,
         "name": "Enseignement de l'Éphémère",
         "code": "l311",
         "category": "talent_book",
@@ -1568,7 +1608,7 @@
         "rarity": 2
     },
     {
-        "id": 197,
+        "id": 202,
         "name": "Philosophie de l'Élégance",
         "code": "l323",
         "category": "talent_book",
@@ -1576,7 +1616,7 @@
         "rarity": 4
     },
     {
-        "id": 198,
+        "id": 203,
         "name": "Guide de l'Élégance",
         "code": "l322",
         "category": "talent_book",
@@ -1584,7 +1624,7 @@
         "rarity": 3
     },
     {
-        "id": 199,
+        "id": 204,
         "name": "Enseignement de l'Élégance",
         "code": "l321",
         "category": "talent_book",
@@ -1592,7 +1632,7 @@
         "rarity": 2
     },
     {
-        "id": 200,
+        "id": 205,
         "name": "Philosophie de la Lumière",
         "code": "l333",
         "category": "talent_book",
@@ -1600,7 +1640,7 @@
         "rarity": 4
     },
     {
-        "id": 201,
+        "id": 206,
         "name": "Guide de la Lumière",
         "code": "l332",
         "category": "talent_book",
@@ -1608,7 +1648,7 @@
         "rarity": 3
     },
     {
-        "id": 202,
+        "id": 207,
         "name": "Enseignement de la Lumière",
         "code": "l331",
         "category": "talent_book",
@@ -1616,7 +1656,7 @@
         "rarity": 2
     },
     {
-        "id": 203,
+        "id": 208,
         "name": "Philosophie de l'Admonestation",
         "code": "l413",
         "category": "talent_book",
@@ -1624,7 +1664,7 @@
         "rarity": 4
     },
     {
-        "id": 204,
+        "id": 209,
         "name": "Guide de l'Admonestation",
         "code": "l412",
         "category": "talent_book",
@@ -1632,7 +1672,7 @@
         "rarity": 3
     },
     {
-        "id": 205,
+        "id": 210,
         "name": "Enseignement de l'Admonestation",
         "code": "l411",
         "category": "talent_book",
@@ -1640,7 +1680,7 @@
         "rarity": 2
     },
     {
-        "id": 206,
+        "id": 211,
         "name": "Philosophie de l'Ingénuité",
         "code": "l423",
         "category": "talent_book",
@@ -1648,7 +1688,7 @@
         "rarity": 4
     },
     {
-        "id": 207,
+        "id": 212,
         "name": "Guide de l'Ingénuité",
         "code": "l422",
         "category": "talent_book",
@@ -1656,7 +1696,7 @@
         "rarity": 3
     },
     {
-        "id": 208,
+        "id": 213,
         "name": "Enseignement de l'Ingénuité",
         "code": "l421",
         "category": "talent_book",
@@ -1664,7 +1704,7 @@
         "rarity": 2
     },
     {
-        "id": 209,
+        "id": 214,
         "name": "Philosophie de l'Usage",
         "code": "l433",
         "category": "talent_book",
@@ -1672,7 +1712,7 @@
         "rarity": 4
     },
     {
-        "id": 210,
+        "id": 215,
         "name": "Guide de l'Usage",
         "code": "l432",
         "category": "talent_book",
@@ -1680,7 +1720,7 @@
         "rarity": 3
     },
     {
-        "id": 211,
+        "id": 216,
         "name": "Enseignement de l'Usage",
         "code": "l431",
         "category": "talent_book",
@@ -1688,7 +1728,7 @@
         "rarity": 2
     },
     {
-        "id": 212,
+        "id": 217,
         "name": "Philosophie de l'Équité",
         "code": "l513",
         "category": "talent_book",
@@ -1696,7 +1736,7 @@
         "rarity": 4
     },
     {
-        "id": 213,
+        "id": 218,
         "name": "Guide de l'Équité",
         "code": "l512",
         "category": "talent_book",
@@ -1704,7 +1744,7 @@
         "rarity": 3
     },
     {
-        "id": 214,
+        "id": 219,
         "name": "Enseignement de l'Équité",
         "code": "l511",
         "category": "talent_book",
@@ -1712,7 +1752,7 @@
         "rarity": 2
     },
     {
-        "id": 215,
+        "id": 220,
         "name": "Philosophie de la Justice",
         "code": "l523",
         "category": "talent_book",
@@ -1720,7 +1760,7 @@
         "rarity": 4
     },
     {
-        "id": 216,
+        "id": 221,
         "name": "Guide de la Justice",
         "code": "l522",
         "category": "talent_book",
@@ -1728,7 +1768,7 @@
         "rarity": 3
     },
     {
-        "id": 217,
+        "id": 222,
         "name": "Enseignement de la Justice",
         "code": "l521",
         "category": "talent_book",
@@ -1736,7 +1776,7 @@
         "rarity": 2
     },
     {
-        "id": 218,
+        "id": 223,
         "name": "Philosophie de l'Ordre",
         "code": "l533",
         "category": "talent_book",
@@ -1744,7 +1784,7 @@
         "rarity": 4
     },
     {
-        "id": 219,
+        "id": 224,
         "name": "Guide de l'Ordre",
         "code": "l532",
         "category": "talent_book",
@@ -1752,7 +1792,7 @@
         "rarity": 3
     },
     {
-        "id": 220,
+        "id": 225,
         "name": "Enseignement de l'Ordre",
         "code": "l531",
         "category": "talent_book",
@@ -1760,7 +1800,7 @@
         "rarity": 2
     },
     {
-        "id": 221,
+        "id": 226,
         "name": "Couronne de la sagesse",
         "code": "g08",
         "category": "global",
@@ -1768,7 +1808,7 @@
         "rarity": 5
     },
     {
-        "id": 222,
+        "id": 227,
         "name": "Rêve brisé de Décabarian",
         "code": "a114",
         "category": "weapon_material",
@@ -1776,7 +1816,7 @@
         "rarity": 5
     },
     {
-        "id": 223,
+        "id": 228,
         "name": "Fragment dispersé de Décabarian",
         "code": "a113",
         "category": "weapon_material",
@@ -1784,7 +1824,7 @@
         "rarity": 4
     },
     {
-        "id": 224,
+        "id": 229,
         "name": "Mur abattu de Décabarian",
         "code": "a112",
         "category": "weapon_material",
@@ -1792,7 +1832,7 @@
         "rarity": 3
     },
     {
-        "id": 225,
+        "id": 230,
         "name": "Tuile cassée de Décabarian",
         "code": "a111",
         "category": "weapon_material",
@@ -1800,7 +1840,7 @@
         "rarity": 2
     },
     {
-        "id": 226,
+        "id": 231,
         "name": "Nostalgie du Loup boréal",
         "code": "a124",
         "category": "weapon_material",
@@ -1808,7 +1848,7 @@
         "rarity": 5
     },
     {
-        "id": 227,
+        "id": 232,
         "name": "Croc fendu du Loup boréal",
         "code": "a123",
         "category": "weapon_material",
@@ -1816,7 +1856,7 @@
         "rarity": 4
     },
     {
-        "id": 228,
+        "id": 233,
         "name": "Croc brisé du Loup boréal",
         "code": "a122",
         "category": "weapon_material",
@@ -1824,7 +1864,7 @@
         "rarity": 3
     },
     {
-        "id": 229,
+        "id": 234,
         "name": "Dent de lait du Loup boréal",
         "code": "a121",
         "category": "weapon_material",
@@ -1832,7 +1872,7 @@
         "rarity": 2
     },
     {
-        "id": 230,
+        "id": 235,
         "name": "Idéaux du Chevalier du Croc de Lion",
         "code": "a134",
         "category": "weapon_material",
@@ -1840,7 +1880,7 @@
         "rarity": 5
     },
     {
-        "id": 231,
+        "id": 236,
         "name": "Menottes du Chevalier du Croc de Lion",
         "code": "a133",
         "category": "weapon_material",
@@ -1848,7 +1888,7 @@
         "rarity": 4
     },
     {
-        "id": 232,
+        "id": 237,
         "name": "Chaînes du Chevalier du Croc de Lion",
         "code": "a132",
         "category": "weapon_material",
@@ -1856,7 +1896,7 @@
         "rarity": 3
     },
     {
-        "id": 233,
+        "id": 238,
         "name": "Entraves du Chevalier du Croc de Lion",
         "code": "a131",
         "category": "weapon_material",
@@ -1864,7 +1904,7 @@
         "rarity": 2
     },
     {
-        "id": 234,
+        "id": 239,
         "name": "Corps divin de Guyun",
         "code": "a214",
         "category": "weapon_material",
@@ -1872,7 +1912,7 @@
         "rarity": 5
     },
     {
-        "id": 235,
+        "id": 240,
         "name": "Squelette sacré de Guyun",
         "code": "a213",
         "category": "weapon_material",
@@ -1880,7 +1920,7 @@
         "rarity": 4
     },
     {
-        "id": 236,
+        "id": 241,
         "name": "Roche lustrée de Guyun",
         "code": "a212",
         "category": "weapon_material",
@@ -1888,7 +1928,7 @@
         "rarity": 3
     },
     {
-        "id": 237,
+        "id": 242,
         "name": "Sable lumineux de Guyun",
         "code": "a211",
         "category": "weapon_material",
@@ -1896,7 +1936,7 @@
         "rarity": 2
     },
     {
-        "id": 238,
+        "id": 243,
         "name": "Or karstique",
         "code": "a224",
         "category": "weapon_material",
@@ -1904,7 +1944,7 @@
         "rarity": 5
     },
     {
-        "id": 239,
+        "id": 244,
         "name": "Argent karstique",
         "code": "a223",
         "category": "weapon_material",
@@ -1912,7 +1952,7 @@
         "rarity": 4
     },
     {
-        "id": 240,
+        "id": 245,
         "name": "Mercure karstique",
         "code": "a222",
         "category": "weapon_material",
@@ -1920,7 +1960,7 @@
         "rarity": 3
     },
     {
-        "id": 241,
+        "id": 246,
         "name": "Plomb karstique",
         "code": "a221",
         "category": "weapon_material",
@@ -1928,7 +1968,7 @@
         "rarity": 2
     },
     {
-        "id": 242,
+        "id": 247,
         "name": "Morceau d'aérosidérite noire",
         "code": "a234",
         "category": "weapon_material",
@@ -1936,7 +1976,7 @@
         "rarity": 5
     },
     {
-        "id": 243,
+        "id": 248,
         "name": "Fragment d'aérosidérite noire",
         "code": "a233",
         "category": "weapon_material",
@@ -1944,7 +1984,7 @@
         "rarity": 4
     },
     {
-        "id": 244,
+        "id": 249,
         "name": "Éclat d'aérosidérite noire",
         "code": "a232",
         "category": "weapon_material",
@@ -1952,7 +1992,7 @@
         "rarity": 3
     },
     {
-        "id": 245,
+        "id": 250,
         "name": "Grain d'aérosidérite noire",
         "code": "a231",
         "category": "weapon_material",
@@ -1960,7 +2000,7 @@
         "rarity": 2
     },
     {
-        "id": 246,
+        "id": 251,
         "name": "Branche marine d'or",
         "code": "a314",
         "category": "weapon_material",
@@ -1968,7 +2008,7 @@
         "rarity": 5
     },
     {
-        "id": 247,
+        "id": 252,
         "name": "Branche marine de jade",
         "code": "a313",
         "category": "weapon_material",
@@ -1976,7 +2016,7 @@
         "rarity": 4
     },
     {
-        "id": 248,
+        "id": 253,
         "name": "Branche marine de gemme",
         "code": "a312",
         "category": "weapon_material",
@@ -1984,7 +2024,7 @@
         "rarity": 3
     },
     {
-        "id": 249,
+        "id": 254,
         "name": "Branche marine de corail",
         "code": "a311",
         "category": "weapon_material",
@@ -1992,7 +2032,7 @@
         "rarity": 2
     },
     {
-        "id": 250,
+        "id": 255,
         "name": "Vaillance de Narukami",
         "code": "a324",
         "category": "weapon_material",
@@ -2000,7 +2040,7 @@
         "rarity": 5
     },
     {
-        "id": 251,
+        "id": 256,
         "name": "Affection de Narukami",
         "code": "a323",
         "category": "weapon_material",
@@ -2008,7 +2048,7 @@
         "rarity": 4
     },
     {
-        "id": 252,
+        "id": 257,
         "name": "Joie de Narukami",
         "code": "a322",
         "category": "weapon_material",
@@ -2016,7 +2056,7 @@
         "rarity": 3
     },
     {
-        "id": 253,
+        "id": 258,
         "name": "Sagesse de Narukami",
         "code": "a321",
         "category": "weapon_material",
@@ -2024,7 +2064,7 @@
         "rarity": 2
     },
     {
-        "id": 254,
+        "id": 259,
         "name": "Masque du kijin",
         "code": "a334",
         "category": "weapon_material",
@@ -2032,7 +2072,7 @@
         "rarity": 5
     },
     {
-        "id": 255,
+        "id": 260,
         "name": "Masque du cornu",
         "code": "a333",
         "category": "weapon_material",
@@ -2040,7 +2080,7 @@
         "rarity": 4
     },
     {
-        "id": 256,
+        "id": 261,
         "name": "Masque de la morsure du tigre",
         "code": "a332",
         "category": "weapon_material",
@@ -2048,7 +2088,7 @@
         "rarity": 3
     },
     {
-        "id": 257,
+        "id": 262,
         "name": "Masque du lieutenant pernicieux",
         "code": "a331",
         "category": "weapon_material",
@@ -2056,7 +2096,7 @@
         "rarity": 2
     },
     {
-        "id": 258,
+        "id": 263,
         "name": "Talisman en or de la rosée",
         "code": "a414",
         "category": "weapon_material",
@@ -2064,7 +2104,7 @@
         "rarity": 5
     },
     {
-        "id": 259,
+        "id": 264,
         "name": "Talisman en argent de la rosée",
         "code": "a413",
         "category": "weapon_material",
@@ -2072,7 +2112,7 @@
         "rarity": 4
     },
     {
-        "id": 260,
+        "id": 265,
         "name": "Talisman en fer de la rosée",
         "code": "a412",
         "category": "weapon_material",
@@ -2080,7 +2120,7 @@
         "rarity": 3
     },
     {
-        "id": 261,
+        "id": 266,
         "name": "Talisman en cuivre de la rosée",
         "code": "a411",
         "category": "weapon_material",
@@ -2088,7 +2128,7 @@
         "rarity": 2
     },
     {
-        "id": 262,
+        "id": 267,
         "name": "Vérité du jardin d'oasis",
         "code": "a424",
         "category": "weapon_material",
@@ -2096,7 +2136,7 @@
         "rarity": 5
     },
     {
-        "id": 263,
+        "id": 268,
         "name": "Deuil du jardin d'oasis",
         "code": "a423",
         "category": "weapon_material",
@@ -2104,7 +2144,7 @@
         "rarity": 4
     },
     {
-        "id": 264,
+        "id": 269,
         "name": "Gentillesse du jardin d'oasis",
         "code": "a422",
         "category": "weapon_material",
@@ -2112,7 +2152,7 @@
         "rarity": 3
     },
     {
-        "id": 265,
+        "id": 270,
         "name": "Souvenir du jardin d'oasis",
         "code": "a421",
         "category": "weapon_material",
@@ -2120,7 +2160,7 @@
         "rarity": 2
     },
     {
-        "id": 266,
+        "id": 271,
         "name": "Passé glorieux du pouvoir brûlant",
         "code": "a434",
         "category": "weapon_material",
@@ -2128,7 +2168,7 @@
         "rarity": 5
     },
     {
-        "id": 267,
+        "id": 272,
         "name": "Rêve dominant du pouvoir brûlant",
         "code": "a433",
         "category": "weapon_material",
@@ -2136,7 +2176,7 @@
         "rarity": 4
     },
     {
-        "id": 268,
+        "id": 273,
         "name": "Éclat subsistant du pouvoir brûlant",
         "code": "a432",
         "category": "weapon_material",
@@ -2144,7 +2184,7 @@
         "rarity": 3
     },
     {
-        "id": 269,
+        "id": 274,
         "name": "Dernier echo du pouvoir brûlant",
         "code": "a431",
         "category": "weapon_material",
@@ -2152,7 +2192,7 @@
         "rarity": 2
     },
     {
-        "id": 270,
+        "id": 275,
         "name": "Écho d'un accord ancien",
         "code": "a514",
         "category": "weapon_material",
@@ -2160,7 +2200,7 @@
         "rarity": 5
     },
     {
-        "id": 271,
+        "id": 276,
         "name": "Mouvement d'un accord ancien",
         "code": "a513",
         "category": "weapon_material",
@@ -2168,7 +2208,7 @@
         "rarity": 4
     },
     {
-        "id": 272,
+        "id": 277,
         "name": "Chapitre d'un accord ancien",
         "code": "a512",
         "category": "weapon_material",
@@ -2176,7 +2216,7 @@
         "rarity": 3
     },
     {
-        "id": 273,
+        "id": 278,
         "name": "Fragment d'un accord ancien",
         "code": "a511",
         "category": "weapon_material",
@@ -2184,7 +2224,7 @@
         "rarity": 2
     },
     {
-        "id": 274,
+        "id": 279,
         "name": "Essence de rosée sacrée pure",
         "code": "a524",
         "category": "weapon_material",
@@ -2192,7 +2232,7 @@
         "rarity": 5
     },
     {
-        "id": 275,
+        "id": 280,
         "name": "Source de rosée sacrée pure",
         "code": "a523",
         "category": "weapon_material",
@@ -2200,7 +2240,7 @@
         "rarity": 4
     },
     {
-        "id": 276,
+        "id": 281,
         "name": "Sublimation de rosée sacrée pure",
         "code": "a522",
         "category": "weapon_material",
@@ -2208,7 +2248,7 @@
         "rarity": 3
     },
     {
-        "id": 277,
+        "id": 282,
         "name": "Résidu de rosée sacrée pure",
         "code": "a521",
         "category": "weapon_material",
@@ -2216,7 +2256,7 @@
         "rarity": 2
     },
     {
-        "id": 278,
+        "id": 283,
         "name": "Gobelet d'or de la mer immaculée",
         "code": "a534",
         "category": "weapon_material",
@@ -2224,7 +2264,7 @@
         "rarity": 5
     },
     {
-        "id": 279,
+        "id": 284,
         "name": "Gobelet d'argent de la mer immaculée",
         "code": "a533",
         "category": "weapon_material",
@@ -2232,7 +2272,7 @@
         "rarity": 4
     },
     {
-        "id": 280,
+        "id": 285,
         "name": "Gobelet à vin de la mer immaculée",
         "code": "a532",
         "category": "weapon_material",
@@ -2240,7 +2280,7 @@
         "rarity": 3
     },
     {
-        "id": 281,
+        "id": 286,
         "name": "Gobelet brisé de la mer immaculée",
         "code": "a531",
         "category": "weapon_material",
@@ -2248,7 +2288,7 @@
         "rarity": 2
     },
     {
-        "id": 282,
+        "id": 287,
         "name": "Baie à crochet",
         "code": "r101",
         "category": "local_speciality",
@@ -2256,7 +2296,7 @@
         "rarity": 1
     },
     {
-        "id": 283,
+        "id": 288,
         "name": "Tombaie",
         "code": "r102",
         "category": "local_speciality",
@@ -2264,7 +2304,7 @@
         "rarity": 1
     },
     {
-        "id": 284,
+        "id": 289,
         "name": "Cécilia",
         "code": "r103",
         "category": "local_speciality",
@@ -2272,7 +2312,7 @@
         "rarity": 1
     },
     {
-        "id": 285,
+        "id": 290,
         "name": "Chrysanthème à aubes",
         "code": "r104",
         "category": "local_speciality",
@@ -2280,7 +2320,7 @@
         "rarity": 1
     },
     {
-        "id": 286,
+        "id": 291,
         "name": "Champignon anémophile",
         "code": "r105",
         "category": "local_speciality",
@@ -2288,7 +2328,7 @@
         "rarity": 1
     },
     {
-        "id": 287,
+        "id": 292,
         "name": "Herbe à lampe",
         "code": "r106",
         "category": "local_speciality",
@@ -2296,7 +2336,7 @@
         "rarity": 1
     },
     {
-        "id": 288,
+        "id": 293,
         "name": "Lys calla",
         "code": "r107",
         "category": "local_speciality",
@@ -2304,7 +2344,7 @@
         "rarity": 1
     },
     {
-        "id": 289,
+        "id": 294,
         "name": "Graines de pissenlit",
         "code": "r108",
         "category": "local_speciality",
@@ -2312,7 +2352,7 @@
         "rarity": 1
     },
     {
-        "id": 290,
+        "id": 295,
         "name": "Piment de Jueyun",
         "code": "r201",
         "category": "local_speciality",
@@ -2320,7 +2360,7 @@
         "rarity": 1
     },
     {
-        "id": 291,
+        "id": 296,
         "name": "Jade noctiluque",
         "code": "r202",
         "category": "local_speciality",
@@ -2328,7 +2368,7 @@
         "rarity": 1
     },
     {
-        "id": 292,
+        "id": 297,
         "name": "Fleur de soie",
         "code": "r203",
         "category": "local_speciality",
@@ -2336,7 +2376,7 @@
         "rarity": 1
     },
     {
-        "id": 293,
+        "id": 298,
         "name": "Lys verni",
         "code": "r204",
         "category": "local_speciality",
@@ -2344,7 +2384,7 @@
         "rarity": 1
     },
     {
-        "id": 294,
+        "id": 299,
         "name": "Fleur de Qingxin",
         "code": "r205",
         "category": "local_speciality",
@@ -2352,7 +2392,7 @@
         "rarity": 1
     },
     {
-        "id": 295,
+        "id": 300,
         "name": "Conque d'étoile",
         "code": "r206",
         "category": "local_speciality",
@@ -2360,7 +2400,7 @@
         "rarity": 1
     },
     {
-        "id": 296,
+        "id": 301,
         "name": "Muguet bleu",
         "code": "r207",
         "category": "local_speciality",
@@ -2368,7 +2408,7 @@
         "rarity": 1
     },
     {
-        "id": 297,
+        "id": 302,
         "name": "Cœur de lapis",
         "code": "r208",
         "category": "local_speciality",
@@ -2376,7 +2416,7 @@
         "rarity": 1
     },
     {
-        "id": 298,
+        "id": 303,
         "name": "Scarabuto",
         "code": "r301",
         "category": "local_speciality",
@@ -2384,7 +2424,7 @@
         "rarity": 1
     },
     {
-        "id": 299,
+        "id": 304,
         "name": "Fleur de cerisier",
         "code": "r302",
         "category": "local_speciality",
@@ -2392,7 +2432,7 @@
         "rarity": 1
     },
     {
-        "id": 300,
+        "id": 305,
         "name": "Moelle cristalline",
         "code": "r303",
         "category": "local_speciality",
@@ -2400,7 +2440,7 @@
         "rarity": 1
     },
     {
-        "id": 301,
+        "id": 306,
         "name": "Dendrobium sanglant",
         "code": "r304",
         "category": "local_speciality",
@@ -2408,7 +2448,7 @@
         "rarity": 1
     },
     {
-        "id": 302,
+        "id": 307,
         "name": "Herbe à sanglots",
         "code": "r305",
         "category": "local_speciality",
@@ -2416,7 +2456,7 @@
         "rarity": 1
     },
     {
-        "id": 303,
+        "id": 308,
         "name": "Ganoderma marin",
         "code": "r306",
         "category": "local_speciality",
@@ -2424,7 +2464,7 @@
         "rarity": 1
     },
     {
-        "id": 304,
+        "id": 309,
         "name": "Perle de corail",
         "code": "r307",
         "category": "local_speciality",
@@ -2432,7 +2472,7 @@
         "rarity": 1
     },
     {
-        "id": 305,
+        "id": 310,
         "name": "Fruit d'Amakumo",
         "code": "r308",
         "category": "local_speciality",
@@ -2440,7 +2480,7 @@
         "rarity": 1
     },
     {
-        "id": 306,
+        "id": 311,
         "name": "Champignon fluorescent",
         "code": "r309",
         "category": "local_speciality",
@@ -2448,7 +2488,7 @@
         "rarity": 1
     },
     {
-        "id": 307,
+        "id": 312,
         "name": "Champignon sacramental",
         "code": "r401",
         "category": "local_speciality",
@@ -2456,7 +2496,7 @@
         "rarity": 1
     },
     {
-        "id": 308,
+        "id": 313,
         "name": "Padisachidée",
         "code": "r402",
         "category": "local_speciality",
@@ -2464,7 +2504,7 @@
         "rarity": 1
     },
     {
-        "id": 309,
+        "id": 314,
         "name": "Nilotpalotus",
         "code": "r403",
         "category": "local_speciality",
@@ -2472,7 +2512,7 @@
         "rarity": 1
     },
     {
-        "id": 310,
+        "id": 315,
         "name": "Kalpalotus",
         "code": "r404",
         "category": "local_speciality",
@@ -2480,7 +2520,7 @@
         "rarity": 1
     },
     {
-        "id": 311,
+        "id": 316,
         "name": "Quandong",
         "code": "r405",
         "category": "local_speciality",
@@ -2488,7 +2528,7 @@
         "rarity": 1
     },
     {
-        "id": 312,
+        "id": 317,
         "name": "Pupe graisseuse des sables",
         "code": "r406",
         "category": "local_speciality",
@@ -2496,7 +2536,7 @@
         "rarity": 1
     },
     {
-        "id": 313,
+        "id": 318,
         "name": "Fleur funéraire",
         "code": "r407",
         "category": "local_speciality",
@@ -2504,7 +2544,7 @@
         "rarity": 1
     },
     {
-        "id": 314,
+        "id": 319,
         "name": "Trishiraite",
         "code": "r408",
         "category": "local_speciality",
@@ -2512,7 +2552,7 @@
         "rarity": 1
     },
     {
-        "id": 315,
+        "id": 320,
         "name": "Scarabée",
         "code": "r409",
         "category": "local_speciality",
@@ -2520,7 +2560,7 @@
         "rarity": 1
     },
     {
-        "id": 316,
+        "id": 321,
         "name": "Conque de béryl",
         "code": "r501",
         "category": "local_speciality",
@@ -2528,7 +2568,7 @@
         "rarity": 1
     },
     {
-        "id": 317,
+        "id": 322,
         "name": "Fleur romaritime",
         "code": "r502",
         "category": "local_speciality",
@@ -2536,7 +2576,7 @@
         "rarity": 1
     },
     {
-        "id": 318,
+        "id": 323,
         "name": "Clochette de Lumidouce",
         "code": "r503",
         "category": "local_speciality",
@@ -2544,9 +2584,25 @@
         "rarity": 1
     },
     {
-        "id": 319,
+        "id": 324,
         "name": "Rose arc-en-ciel",
         "code": "r504",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 325,
+        "name": "Sombrétoile",
+        "code": "r505",
+        "category": "local_speciality",
+        "farming_days": null,
+        "rarity": 1
+    },
+    {
+        "id": 326,
+        "name": "Unité de sous-détection",
+        "code": "r506",
         "category": "local_speciality",
         "farming_days": null,
         "rarity": 1

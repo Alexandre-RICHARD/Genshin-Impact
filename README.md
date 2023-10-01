@@ -476,4 +476,19 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 
 -   De nombreux changements dans la catégories aide, l'ajout des liens pour mes deux sources et un peu de style. Normalement ce commit signe la sortie du projet.
 
+### 2.1.4 `1er octobre 2023`
+
+-   Mise à jour des packages npm
+-   Rajout des nouveautés de la 4.1. C'est-à-dire 4 armes, 1 personnages et 7 ressources.
+-   Rajout de leurs images respectives.
+-   Le nom français du personnage Thoma est corrigé et prend un S désormais.
+-   Petit changement dans les styles des checkbox créer avec l'Input Creator.vue pour qu'elles soient centrées.
+-   Changement du nom de la variables isOnlyCharacters en isOnlySomething pour prendre en compte que les armes aussi peuvent être mises en only désormais.
+-   Changement de nom de variables dans la fonction dataInit partie Weapon qui était des restes erronnés de copier coller des personnages.
+-   Rajout de la varibles Only aux armes et de la vérification de celle-ci à l'initialisation
+-   Rajout d'un filtre pour les armes comme pour les personnages afin de ne garder que le seul élément placé en only quand c'est le cas
+-   Changement d'un petit détail dans les explications de l'outil (un * devient x)
+-   Changement de l'appel de l'image de background pour les ressources qu'on a le moins. en effet, les ressources de mobs rare était marquées avec les mauvais niveaux de rareté.
+-   Rajout donc de l'input checkbox dans les armes.
+
 </details>

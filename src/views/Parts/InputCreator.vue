@@ -64,7 +64,6 @@ defineEmits(["update:checked", "update:value"]);
 
 td {
     .checkbox {
-        float: left;
         appearance: none;
         width: 22px;
         height: 22px;
@@ -72,6 +71,7 @@ td {
         border-radius: 3px;
         display: grid;
         place-content: center;
+        margin: auto;
     }
     
     .checkbox:checked {
