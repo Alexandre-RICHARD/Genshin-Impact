@@ -493,7 +493,11 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 
 ### 2.1.5 `20 octobre 2023`
 
--   Rajout des nouveautés de la 2ème phase de la 4.1
+-   Rajout des nouveautés de la 2ème phase de la 4.1 (1 personnages, 3 armes)
 -   Mise à jour des packages npm
+
+### 2.1.6 `20 octobre 2023`
+
+-   Rajout des images des nouveautés citées plus haut
 
 </details>
