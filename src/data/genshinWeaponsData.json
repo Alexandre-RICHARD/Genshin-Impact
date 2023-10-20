@@ -2734,5 +2734,53 @@
         "common_material": "m28",
         "rare_material": "m30",
         "weapon_material": "a52"
+    },
+    {
+        "eng_name": "Prospector's Drill",
+        "release_date": "17/10/2023",
+        "id": 172,
+        "name": "Foret de prospecteur",
+        "rarity": 4,
+        "type": "spear",
+        "atk": 565,
+        "stat_type": "atk_purcent",
+        "stat_value": 27.6,
+        "mora": "g01",
+        "experience_ore": "g02",
+        "common_material": "m28",
+        "rare_material": "m31",
+        "weapon_material": "a51"
+    },
+    {
+        "eng_name": "Range Gauge",
+        "release_date": "17/10/2023",
+        "id": 173,
+        "name": "Jauge de portée",
+        "rarity": 4,
+        "type": "bow",
+        "atk": 565,
+        "stat_type": "atk_purcent",
+        "stat_value": 27.6,
+        "mora": "g01",
+        "experience_ore": "g02",
+        "common_material": "m27",
+        "rare_material": "m29",
+        "weapon_material": "a51"
+    },
+    {
+        "eng_name": "Cashflow Supervision",
+        "release_date": "17/10/2023",
+        "id": 174,
+        "name": "Supervision de trésorerie",
+        "rarity": 5,
+        "type": "catalyst",
+        "atk": 674,
+        "stat_type": "crt_rate",
+        "stat_value": 22.1,
+        "mora": "g01",
+        "experience_ore": "g02",
+        "common_material": "m27",
+        "rare_material": "m31",
+        "weapon_material": "a53"
     }
 ]

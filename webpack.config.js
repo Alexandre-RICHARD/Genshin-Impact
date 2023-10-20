@@ -1,4 +1,4 @@
-const webpack = require('webpack');
+const webpack = require("webpack");
 const path = require("path");
 // Pour récupérer nos variables d'environnement en fonction de si on est en prod ou en dev et avoir la bonne adresse d'API
 const Dotenv = require("dotenv-webpack");
@@ -116,7 +116,7 @@ module.exports = {
             filename: cssOutputMode,
         }),
         // Plugin qui ouvrira un onglet à chaque run/build pour montrer la taille des différents package dans les fichiers compilé et aider à mieux les gérer
-        // new BundleAnalyzerPlugin(), //! Pour activer ou désactiver
+        new BundleAnalyzerPlugin(), //!  activer ou désactiver
     ],
     // Des plugins visant à améliorer la vitesse de compilation en plus d'en améliorer l'optimisation et la taille
     optimization: {
@@ -168,10 +168,10 @@ module.exports = {
             // Pas de loader pour les images, elles sont traités comme des assets, ce qui change leurs utilisations surtout pour les petites images transformées en base64 sinon
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
-                type: 'asset/resource',
+                type: "asset/resource",
                 generator: {
-                    filename: 'images/[name][ext]'
-                  }
+                    filename: "images/[name][ext]",
+                },
             },
             // SCSS loader et autres loaders ainsi que l'utilisation du plugin permettant que le css soit dans un fichier indépendant des fichiers js
             {

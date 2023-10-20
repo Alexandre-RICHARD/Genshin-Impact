@@ -491,4 +491,9 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Changement de l'appel de l'image de background pour les ressources qu'on a le moins. en effet, les ressources de mobs rare était marquées avec les mauvais niveaux de rareté.
 -   Rajout donc de l'input checkbox dans les armes.
 
+### 2.1.5 `20 octobre 2023`
+
+-   Rajout des nouveautés de la 2ème phase de la 4.1
+-   Mise à jour des packages npm
+
 </details>
