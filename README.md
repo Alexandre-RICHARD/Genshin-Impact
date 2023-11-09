@@ -500,4 +500,10 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 
 -   Rajout des images des nouveautés citées plus haut
 
+### 2.2.0 `09 novembre 2023`
+
+-   Mise à jour des dépendances
+-   Uniformisation de toutes les images à un format 50x50
+-   Rajout des nouveautés de la 4.2, soit 2 persos, 2 armes et 6 nouvelles ressources et de leurs images
+
 </details>
