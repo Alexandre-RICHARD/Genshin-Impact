@@ -2633,7 +2633,7 @@
     },
     {
         "id": 330,
-        "name": "Unité de sous-détection",
+        "name": "Lys lacmineux",
         "code": "r506",
         "category": "local_speciality",
         "farming_days": null,
@@ -2641,7 +2641,7 @@
     },
     {
         "id": 331,
-        "name": "Lys lacmineux",
+        "name": "Unité de sous-détection",
         "code": "r507",
         "category": "local_speciality",
         "farming_days": null,

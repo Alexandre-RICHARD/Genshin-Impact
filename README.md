@@ -506,4 +506,8 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Uniformisation de toutes les images à un format 50x50
 -   Rajout des nouveautés de la 4.2, soit 2 persos, 2 armes et 6 nouvelles ressources et de leurs images
 
+### 2.2.1 `16 novembre 2023`
+
+-   Interversion de deux ressources pour correspondre à l'ordre du jeu
+
 </details>
