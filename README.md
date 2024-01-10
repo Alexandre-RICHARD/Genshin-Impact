@@ -1,6 +1,12 @@
+# ⚠️⚠️⚠️⚠️⚠️
+
+## Ce projet est à l'arrêt. Bien qu'avancé à un stade quasi fini, il pourrait être amélioré mais je me concentre sur d'autre projet. Il est cependant fonctionnel.
+
+# ⚠️⚠️⚠️⚠️⚠️
+
 # Genshin Impact
 
-Bonjour, bienvenue sur le répo de, je l'espère, mon futur gros projets en lien avec le jeu vidéo : Genshin Impact. J'ai vu des tas d'opportunités de créer des outils à partir de ce jeu et j'ai envie de le transmettrz aux joueurs en le mettant sous forme de site internet. Je m'inspire de mes propres créations antérieurs mais également de certains choses que d'autres joueurs fan ont fait, auquel cas, j'essaierai de ne pas oublier de les citer. 
+Bonjour, bienvenue sur le répo de, je l'espère, mon futur gros projets en lien avec le jeu vidéo : Genshin Impact. J'ai vu des tas d'opportunités de créer des outils à partir de ce jeu et j'ai envie de le transmettrz aux joueurs en le mettant sous forme de site internet. Je m'inspire de mes propres créations antérieurs mais également de certains choses que d'autres joueurs fan ont fait, auquel cas, j'essaierai de ne pas oublier de les citer.
 
 Voici [le site](https://genshin.alexandre-richard.fr/) en question.
 Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
@@ -64,7 +70,7 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 -   Mise à jour des package npm
 -   Rajout de deux lignes de configurations pour webpack et vueJS
 -   Suppression de CookieHandler.js qui ne servait à rien
--   Suppression de l'array contenant  le nom des personnages au profit du fichier json contenant toutes leurs informations
+-   Suppression de l'array contenant le nom des personnages au profit du fichier json contenant toutes leurs informations
 -   L'array reactive charactersData est devenu Data = reactive({character: null}) pour contrer tous les problème de réactivité que cela posait
 -   Déstructuration du nom des perso dans le foreach
 -   Rajout d'une fonction lié à un bouton pour supprimer le localStorage pour les tests
@@ -509,5 +515,10 @@ Et [son répo](https://github.com/Alexandre-RICHARD/Genshin-Impact)
 ### 2.2.1 `16 novembre 2023`
 
 -   Interversion de deux ressources pour correspondre à l'ordre du jeu
+
+### 2.3.0 `10 janvier 2024`
+
+-   Mise à jour des dépendances
+-   Rajout des nouveautés de la 4.2 et de la 4.3 soit 2 persos et 2 armes et de leurs images
 
 </details>

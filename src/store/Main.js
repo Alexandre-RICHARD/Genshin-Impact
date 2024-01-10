@@ -15,6 +15,6 @@ export const useMainStore = defineStore("Main", {
         },
         otherData: {
             loading: false,
-        } 
+        }
     }),
 });

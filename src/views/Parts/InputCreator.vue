@@ -73,7 +73,7 @@ td {
         place-content: center;
         margin: auto;
     }
-    
+
     .checkbox:checked {
         background-color: $color2;
     }
@@ -133,7 +133,7 @@ td {
     .checkbox {
         opacity: 0.6;
     }
-    
+
     .checkbox:checked {
         background-color: $color10;
     }

@@ -82,7 +82,7 @@ const dataInit = async () => {
         data.Characters = JSON.parse(lsCharacter);
         // Boucle initié avec la liste des personnages complètes avec uniquement le nom du personnages servant d'identifiant unique
         CharactersList.forEach(({ id }) => {
-            // On le cherche dans notre nouveau tableau. 
+            // On le cherche dans notre nouveau tableau.
             const currentChar = data.Characters.find(fi => id === fi.id);
             // S'il existe, on va étudier chacune des valeurs que ce personnage contient pour assurer leur validité et les remplacer si besoin
             if (currentChar) {
@@ -564,7 +564,7 @@ const farmingMaterial = computed(() => {
             // On arrondi les valeurs
             needed: Math.ceil(computedBuildArray[xp_ore_3].needed),
             remain: Math.ceil(computedBuildArray[xp_ore_3].remain),
-            // On va inclure une fausse valeur de synthèse mais en reprenant le principe car cela revient au même. Ainsi on multiplie par les bons coefficient les valeurs de besoin/   possession
+            // On va inclure une fausse valeur de synthèse mais en reprenant le principe car cela revient au même. Ainsi on multiplie par les bons coefficient les valeurs de besoin/possession
             group_have: computedBuildArray[xp_ore_3].have * 25 + computedBuildArray[xp_ore_2].have * 5 + computedBuildArray[xp_ore_1].have,
             group_needed: Math.ceil(computedBuildArray[xp_ore_3].needed * 25),
             // On active la synthèse pour que cela soit affiché par la suite
@@ -603,7 +603,7 @@ const farmingMaterial = computed(() => {
         weekly_boss: 2.38 / 3,
         mini_boss: 2.55,
         gem: 0.215325 * 20,
-        talent_book: 10.18,  //10.18 selon un fan tableau, 10.12 selon le wiki 9,8 selon mes propres résultats
+        talent_book: 10.18, //10.18 selon un fan tableau, 10.12 selon le wiki 9,8 selon mes propres résultats
         weapon_material: 17.05,
         mora: 60000,
         character_xp: 61.25, // 122500 / 20000 * 20, données provenant du Wiki
@@ -690,7 +690,7 @@ const farmingMaterial = computed(() => {
             )) {
                 // On affecte à group resin une nouvelle valeurs
                 computedBuildArray[index].group_resin =
-                    // Arrondi sup (( need - have ) / coef ) * resin. Ou  (( group_need - group_have ) / coef ) * resin
+                    // Arrondi sup (( need - have ) / coef ) * resin. Ou (( group_need - group_have ) / coef ) * resin
                     Math.ceil(
                         (
                             computedBuildArray[index][`${processResinVar[i].qualityCheck ? "group_" : ""}needed`] -

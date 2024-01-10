@@ -135,7 +135,7 @@ onBeforeMount(() => {
                 <p class="first-line">Mon identifiant unique</p>
                 <p class="third-line">Au format</p>
                 <p class="uuid-format">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</p>
-                <input 
+                <input
                     v-model="inputUuidValue"
                     type="text"
                     class="input-uuid"
@@ -186,27 +186,27 @@ onBeforeMount(() => {
             justify-content: center;
             flex-direction: column;
             border: 2px solid $color10;
-    
+
             .first-line {
                 padding-bottom: 15px;
                 font-weight: 400;
                 font-size: 18px;
                 text-align: center;
             }
-    
+
             .second-line {
                 font-weight: 500;
                 font-size: 20px;
                 color: $color4;
                 text-align: center;
             }
-    
+
             .third-line {
                 text-align: justify;
                 color: $color3;
             }
         }
-    
+
         .choice:hover {
             border-color: $color2;
         }
@@ -235,7 +235,7 @@ onBeforeMount(() => {
             color: $color15;
         }
 
-        .copy-uuid-button, 
+        .copy-uuid-button,
         .send-uuid-button {
             margin-top: 20px;
             padding: 5px 15px;

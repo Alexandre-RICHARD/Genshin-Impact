@@ -1653,7 +1653,7 @@
         "weekly_boss_materials": "b082",
         "common_material": "m28",
         "talent_book": "l53",
-        "local_speciality": "r506"
+        "local_speciality": "r507"
     },
     {
         "eng_name": "Charlotte",
@@ -1699,6 +1699,52 @@
         "weekly_boss_materials": "b093",
         "common_material": "m12",
         "talent_book": "l52",
-        "local_speciality": "r507"
+        "local_speciality": "r506"
+    },
+    {
+        "eng_name": "Navia",
+        "release_date": "20/12/2023",
+        "id": 75,
+        "name": "Navia",
+        "rarity": 5,
+        "element": "geo",
+        "weapon": "claymore",
+        "base_hp": 12650,
+        "base_atk": 351,
+        "base_def": 793,
+        "stat_type": "crt_dmg",
+        "stat_value": 38.4,
+        "mora": "g01",
+        "experience_book": "g05",
+        "crown": "g08",
+        "gem": "p07",
+        "mini_boss_material": "s502",
+        "weekly_boss_materials": "b091",
+        "common_material": "m27",
+        "talent_book": "l51",
+        "local_speciality": "r508"
+    },
+    {
+        "eng_name": "Chevreuse",
+        "release_date": "09/01/2024",
+        "id": 76,
+        "name": "Chevreuse",
+        "rarity": 4,
+        "element": "pyro",
+        "weapon": "spear",
+        "base_hp": 12105,
+        "base_atk": 253,
+        "base_def": 710,
+        "stat_type": "hp_purcent",
+        "stat_value": 24,
+        "mora": "g01",
+        "experience_book": "g05",
+        "crown": "g08",
+        "gem": "p01",
+        "mini_boss_material": "s505",
+        "weekly_boss_materials": "b092",
+        "common_material": "m28",
+        "talent_book": "l53",
+        "local_speciality": "r503"
     }
 ]
