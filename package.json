@@ -5,11 +5,11 @@
     "scripts": {
         "start": "cross-env NODE_ENV=development webpack serve --history-api-fallback",
         "build": "cross-env NODE_ENV=production webpack",
-        "update": "pnpm up",
+        "update": "pnpm update || yarn upgrade || npm update",
         "lint": "eslint src/**/*.{js,vue}",
         "lint:fix": "eslint --fix src/**/*.{js,vue}",
-        "clean": "rd /s /q build",
-        "clean:all": "rd /s /q node_modules build & rd /s /q build & del /q package-lock.json & del /q pnpm-lock.yaml"
+        "clean": "rd /s /q build 2> nul || rm -rf build",
+        "clean:all": "rd /s /q build node_modules 2> nul || rm -rf build node_modules"
     },
     "repository": {
         "type": "git",
@@ -36,10 +36,10 @@
         "eslint": "^8.56.0",
         "eslint-import-resolver-alias": "^1.1.2",
         "eslint-plugin-import": "^2.29.1",
-        "eslint-plugin-vue": "^9.19.2",
+        "eslint-plugin-vue": "^9.20.1",
         "file-loader": "^6.2.0",
         "html-webpack-plugin": "^5.6.0",
-        "mini-css-extract-plugin": "^2.7.6",
+        "mini-css-extract-plugin": "^2.7.7",
         "pinia": "^2.1.7",
         "postcss": "^8.4.33",
         "postcss-loader": "^7.3.4",
@@ -47,7 +47,7 @@
         "sass-loader": "^13.3.3",
         "style-loader": "^3.3.4",
         "terser-webpack-plugin": "^5.3.10",
-        "vue": "^3.4.7",
+        "vue": "^3.4.13",
         "vue-eslint-parser": "^9.4.0",
         "vue-loader": "^17.4.2",
         "vue-router": "^4.2.5",
