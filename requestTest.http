@@ -1,11 +1,10 @@
-@baseUrl = http://localhost:3000
-# @baseUrl = http://server.rial7539.odns.fr
+@baseUrl = {{$dotenv API_URL}}
 
-### Génération d'Uuid
+### * * Génération d'Uuid
 GET {{baseUrl}}/genshin/generate-uuid HTTP/1.1
 Content-Type: application/json
 
-### Récupération d'une données en BDD
+### * Récupération d'une données en BDD
 
 GET {{baseUrl}}/genshin/getData HTTP/1.1
 content-type: application/json
@@ -15,7 +14,7 @@ content-type: application/json
     "data_type": "test"
 }
 
-### Sauvegarde d'une données en BDD - 1
+### * Sauvegarde d'une données en BDD - 1
 
 POST {{baseUrl}}/genshin/saveData HTTP/1.1
 content-type: application/json
@@ -26,7 +25,7 @@ content-type: application/json
     "data_string": "On remplace"
 }
 
-### Sauvegarde d'une données en BDD - 2
+### * Sauvegarde d'une données en BDD - 2
 
 POST {{baseUrl}}/genshin/saveData HTTP/1.1
 content-type: application/json
@@ -37,7 +36,7 @@ content-type: application/json
     "data_string": "ecalpmer nO"
 }
 
-### Connexion avec son uuid
+### * Connexion avec son uuid
 
 GET {{baseUrl}}/genshin/login HTTP/1.1
 content-type: application/json
@@ -46,7 +45,7 @@ content-type: application/json
     "uuid": "a258572f-f67c-49d8-a953-5616a2431f32"
 }
 
-### Connexion avec son uuid
+### * Connexion avec son uuid
 
 POST {{baseUrl}}/genshin/getData HTTP/1.1
 content-type: application/json

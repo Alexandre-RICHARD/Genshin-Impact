@@ -19,7 +19,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 // Plugin qui ouvrira un onglet à chaque run/build pour montrer la taille des différents package dans les fichiers compilé et aider à mieux les gérer
 const BundleAnalyzerPlugin =
     require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-const port = 8004;
+const port = 8005;
 
 // Ici on créé les variables défini pour le développement mais qui seront changés si on est en production
 let mode = "development";
