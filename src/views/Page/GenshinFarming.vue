@@ -221,6 +221,7 @@ const userResetData = async (type) => {
     if (type === "reset") {
         paramsOpen.value = false;
         explainationOpen.value = false;
+        // userSession.step = "start"
         dataInit();
     }
 };
@@ -1557,7 +1558,7 @@ onBeforeMount(() => {
             padding: 10px;
             color: $color5;
             overflow-y: auto;
-            max-height: 95vh;
+            max-height: 95svh;
             z-index: $left-content-box;
             pointer-events: visiblePainted;
 

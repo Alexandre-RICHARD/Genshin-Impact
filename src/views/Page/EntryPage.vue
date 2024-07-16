@@ -160,7 +160,7 @@ onBeforeMount(() => {
 @import "@styles/variables.scss";
 
 .entry-container {
-    height: 100vh;
+    height: 100svh;
     width: 100%;
     padding: 35px;
 

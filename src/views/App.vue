@@ -1,12 +1,6 @@
 <script setup>
 import HeaderContainer from "@parts/HeaderContainer.vue";
 import FooterContainer from "@parts/FooterContainer.vue";
-import { onBeforeMount } from "vue";
-const { cookieHandler } = require("@middlewares/cookieHandler.js");
-
-onBeforeMount(() => {
-    cookieHandler.handleVisitCookie(4);
-});
 </script>
 
 <template>
@@ -22,7 +16,7 @@ onBeforeMount(() => {
 
 body,
 #app {
-    min-height: 100vh;
+    min-height: 100svh;
 
     #app {
         font-family: $kanit;

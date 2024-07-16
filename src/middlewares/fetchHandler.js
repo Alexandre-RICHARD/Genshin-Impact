@@ -33,10 +33,6 @@ export const sendMessage = async (contactFormValues) => {
     return await requestTemplate("/contact", "POST", contactFormValues);
 };
 
-export const visitCounterAdd = async (target) => {
-    return await requestTemplate("/genshin/visit/counter/add", "POST", { target: target });
-};
-
 const requestTemplate = async (url, method, body) => {
     try {
         const response = await fetch(API_URL + url, {
