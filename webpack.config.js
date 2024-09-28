@@ -116,7 +116,7 @@ module.exports = {
             filename: cssOutputMode,
         }),
         // Plugin qui ouvrira un onglet à chaque run/build pour montrer la taille des différents package dans les fichiers compilé et aider à mieux les gérer
-        new BundleAnalyzerPlugin(), //! activer ou désactiver
+        // new BundleAnalyzerPlugin(), //! activer ou désactiver
     ],
     // Des plugins visant à améliorer la vitesse de compilation en plus d'en améliorer l'optimisation et la taille
     optimization: {
