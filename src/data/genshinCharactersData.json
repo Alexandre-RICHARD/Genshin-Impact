@@ -1999,5 +1999,28 @@
         "common_material": "m34",
         "talent_book": "l62",
         "local_speciality": "r604"
+    },
+    {
+        "eng_name": "Xilonen",
+        "release_date": "09/10/2024",
+        "id": 88,
+        "name": "Xilonen",
+        "rarity": 5,
+        "element": "geo",
+        "weapon": "sword",
+        "base_hp": 12405,
+        "base_atk": 275,
+        "base_def": 930,
+        "stat_type": "def_purcent",
+        "stat_value": 36,
+        "mora": "g01",
+        "experience_book": "g05",
+        "crown": "g08",
+        "gem": "p07",
+        "mini_boss_material": "s603",
+        "weekly_boss_materials": "b072",
+        "common_material": "m35",
+        "talent_book": "l62",
+        "local_speciality": "r602"
     }
 ]

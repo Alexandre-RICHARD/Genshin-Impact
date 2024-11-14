@@ -1,7 +1,7 @@
 {
     "name": "genshin-farm-calculator",
-    "version": "2.3.0",
-    "versiondate": "10/01/24",
+    "version": "2.4.0",
+    "versiondate": "14/11/2024",
     "scripts": {
         "start": "cross-env NODE_ENV=development webpack serve --history-api-fallback",
         "build": "cross-env NODE_ENV=production webpack",
