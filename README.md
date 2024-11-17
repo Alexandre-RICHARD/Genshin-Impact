@@ -1,6 +1,6 @@
 # ⚠️⚠️⚠️⚠️⚠️
 
-## Ce projet est à l'arrêt. Bien qu'avancé à un stade quasi fini, il pourrait être amélioré mais je me concentre sur d'autre projet. Il est cependant fonctionnel.
+## Projet archivé le 17 novembre 2024 car j'ai arrêté de jouer au jeu. À jour de la 5.1
 
 # ⚠️⚠️⚠️⚠️⚠️
 
